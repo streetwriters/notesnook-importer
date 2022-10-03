@@ -1,5 +1,4 @@
 import { ContentType, Note } from "../../models/note";
-import showdown from "showdown";
 import {
   IFileProvider,
   iterate,
@@ -9,8 +8,8 @@ import {
 import { File } from "../../utils/file";
 import { path } from "../../utils/path";
 import parse from "node-html-parser";
+import { markdowntoHTML } from "../../utils/to-html";
 
-const converter = new showdown.Converter();
 export class Markdown implements IFileProvider {
   type: "file" = "file";
   public supportedExtensions = [".md", ".txt"];
@@ -24,7 +23,7 @@ export class Markdown implements IFileProvider {
   ): Promise<ProviderResult> {
     return iterate(this, files, (file, notes) => {
       const data = file.text;
-      const html = converter.makeHtml(data);
+      const html = markdowntoHTML(data);
       const document = parse(html);
 
       const title = document.querySelector("h1,h2")?.textContent;

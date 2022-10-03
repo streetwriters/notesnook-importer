@@ -14,14 +14,12 @@ import {
   NoteTagEntity,
   ResourceEntity,
 } from "./types";
-import showdown from "showdown";
 import { Attachment, attachmentToHTML } from "../../models/attachment";
 import { HTMLRootElement } from "node-html-parser/dist/nodes/html";
 import { IHasher } from "../../utils/hasher";
 import { unserialize } from "./helpers";
 import { ModelType } from "./types";
-
-const converter = new showdown.Converter();
+import { markdowntoHTML } from "../../utils/to-html";
 
 type JoplinData = {
   notes: NoteEntity[];
@@ -78,7 +76,7 @@ export class Joplin implements IFileProvider {
       const parentFolder = data.folders.find((a) => a.id === note.parent_id);
       const notebooks: Notebook[] = [];
 
-      const html = converter.makeHtml(note.body);
+      const html = markdowntoHTML(note.body);
       const document = parse(html);
       const title =
         note.title ||

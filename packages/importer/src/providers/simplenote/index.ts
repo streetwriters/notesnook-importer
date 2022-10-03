@@ -7,9 +7,35 @@ import {
   ProviderSettings,
 } from "../provider";
 import { File } from "../../utils/file";
-import showdown from "showdown";
+import { marked } from "marked";
+import { markdowntoHTML } from "../../utils/to-html";
 
-const converter = new showdown.Converter();
+const webComponent: marked.TokenizerExtension & marked.RendererExtension = {
+  name: "emptyParagraph",
+  level: "block",
+  start(src) {
+    return src.match(/^\n\n\n|^\r\n\r\n\r\n/)?.index;
+  },
+  tokenizer(src, _) {
+    const rule = /^\n\n\n|^\r\n\r\n\r\n/;
+    const match = rule.exec(src);
+    if (match) {
+      const token = {
+        type: "paragraph",
+        raw: match[0],
+        text: match[0],
+        tokens: [{ type: "br", raw: "<br>" } as const],
+      };
+      return token;
+    }
+  },
+  renderer() {
+    return `<p><br></p>`;
+  },
+};
+
+marked.use({ extensions: [webComponent] });
+
 export class Simplenote implements IFileProvider {
   type: "file" = "file";
   public supportedExtensions = [".json"];
@@ -40,9 +66,10 @@ export class Simplenote implements IFileProvider {
           continue;
         }
 
-        const lines = activeNote.content.split("\r\n");
+        const lines = activeNote.content.split(/\r\n|\n/);
         const title = lines.shift();
-        const content = lines.join("\r\n");
+        const content = markdowntoHTML(lines.join("\n"));
+
         let note: Note = {
           title: title || "Untitled note",
           dateCreated: new Date(activeNote.creationDate).getTime(),
@@ -51,7 +78,7 @@ export class Simplenote implements IFileProvider {
           tags: activeNote.tags,
           content: {
             type: ContentType.HTML,
-            data: converter.makeHtml(content),
+            data: content,
           },
         };
 

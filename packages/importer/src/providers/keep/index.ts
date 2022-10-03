@@ -8,11 +8,10 @@ import {
   ProviderSettings,
 } from "../provider";
 import { File } from "../../utils/file";
-import showdown from "showdown";
 import { Attachment, attachmentToHTML } from "../../models/attachment";
 import { path } from "../../utils/path";
+import { markdowntoHTML } from "../../utils/to-html";
 
-const converter = new showdown.Converter();
 const colorMap: Record<string, string | undefined> = {
   default: undefined,
   red: "red",
@@ -100,7 +99,7 @@ export class GoogleKeep implements IFileProvider {
 
   private getContent(keepNote: KeepNote): string {
     return keepNote.textContent
-      ? converter.makeHtml(keepNote.textContent)
+      ? markdowntoHTML(keepNote.textContent)
       : keepNote.listContent
       ? listToHTML(keepNote.listContent)
       : "";

@@ -1,5 +1,3 @@
-import hljs from "highlight.js";
-import showdown from "showdown";
 import { Content, ContentType, Note } from "../../models/note";
 import { File } from "../../utils/file";
 import {
@@ -23,10 +21,10 @@ import {
   CodeEditorComponentData,
   Spreadsheet,
 } from "./types";
-import { buildCodeblock, buildTable, Cell, Row } from "../../utils/domutils";
+import { buildTable, Cell, Row } from "../../utils/domutils";
+import { markdowntoHTML } from "../../utils/to-html";
+import { writeFileSync } from "fs";
 
-const converter = new showdown.Converter();
-converter.setFlavor("github");
 const defaultEditorDescription = (item: SNNote): EditorDescription => {
   const isHtml =
     item.content.text.includes("<") && item.content.text.includes("</");
@@ -82,13 +80,15 @@ export class StandardNotes implements IFileProvider {
 
       for (let item of snnotes) {
         const { createdAt, updatedAt } = this.getTimestamps(item);
+        const content = this.parseContent(item, components);
+        writeFileSync(`./sn/${item.content.title}-sn.html`, content.data);
         let note: Note = {
           title: item.content.title,
           dateCreated: createdAt,
           dateEdited: updatedAt,
           pinned: <boolean>item.content.appData[DefaultAppDomain]?.pinned,
           tags: this.getTags(item, tags),
-          content: this.parseContent(item, components),
+          content,
         };
         notes.push(note);
       }
@@ -156,10 +156,9 @@ export class StandardNotes implements IFileProvider {
         let language = editor.language || "plaintext";
         if (language === "htmlmixed") language = "html";
         else if (language === "markdown")
-          return { type: ContentType.HTML, data: converter.makeHtml(data) };
+          return { type: ContentType.HTML, data: markdowntoHTML(data) };
 
-        let code = hljs.highlightAuto(data, [language]);
-        let html = buildCodeblock(code.value, language);
+        const html = markdowntoHTML(["```" + language, data, "```"].join("\n"));
         return {
           type: ContentType.HTML,
           data: html,
@@ -220,7 +219,7 @@ export class StandardNotes implements IFileProvider {
       case NoteType.Markdown:
       default:
         return {
-          data: converter.makeHtml(data),
+          data: markdowntoHTML(data),
           type: ContentType.HTML,
         };
     }
