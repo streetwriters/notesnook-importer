@@ -1,0 +1,33 @@
+{
+  "name": "importer",
+  "private": true,
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "prepare": "husky install && npm run bootstrap",
+    "bootstrap": "lerna bootstrap -- --no-audit",
+    "start": "nx start @notesnook-importer/web",
+    "test:core": "nx test @notesnook-importer/core",
+    "test:enex": "nx test @notesnook-importer/enex"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.1.1",
+    "@types/node": "^18.7.13",
+    "@typescript-eslint/eslint-plugin": "^5.35.1",
+    "@typescript-eslint/parser": "^5.35.1",
+    "eslint": "^8.22.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-config-react-hooks": "^1.0.0",
+    "eslint-plugin-detox": "^1.0.0",
+    "eslint-plugin-jest": "^26.8.7",
+    "eslint-plugin-license-header": "^0.6.0",
+    "eslint-plugin-react": "^7.31.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-native": "^4.0.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "husky": "^8.0.1",
+    "lerna": "^5.4.0",
+    "nx": "^14.5.4",
+    "prettier": "^2.7.1",
+    "eslint-plugin-header": "^3.1.1"
+  }
+}

@@ -1,3 +1,22 @@
+/*
+This file is part of the Notesnook project (https://notesnook.com/)
+
+Copyright (C) 2022 Streetwriters (Private) Limited
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 import {
   Entity,
   OnenotePage,
@@ -40,7 +59,7 @@ export class OneNoteClient {
   }
 
   async getNotebooks(): Promise<OnenoteNotebook[]> {
-    let notebooks: OnenoteNotebook[] = await this.#getAll(
+    const notebooks: OnenoteNotebook[] = await this.#getAll(
       `/me/onenote/notebooks`,
       "notebook",
       defaultProperties
@@ -65,7 +84,7 @@ export class OneNoteClient {
     parent: OnenoteNotebook | OnenoteSectionGroup,
     parentType: "notebooks" | "sectionGroups"
   ): Promise<OnenoteSection[]> {
-    let sections: OnenoteSection[] = await this.#getAll(
+    const sections: OnenoteSection[] = await this.#getAll(
       `/me/onenote/${parentType}/${parent.id}/sections`,
       "section",
       defaultProperties
@@ -86,7 +105,7 @@ export class OneNoteClient {
     parent: OnenoteNotebook | OnenoteSectionGroup,
     parentType: "notebooks" | "sectionGroups"
   ): Promise<OnenoteSectionGroup[]> {
-    let sectionGroups: OnenoteSectionGroup[] = await this.#getAll(
+    const sectionGroups: OnenoteSectionGroup[] = await this.#getAll(
       `/me/onenote/${parentType}/${parent.id}/sectionGroups`,
       "sectionGroup",
       defaultProperties
@@ -116,7 +135,7 @@ export class OneNoteClient {
   }
 
   async #getPages(section: OnenoteSection): Promise<OnenotePage[]> {
-    let pages: OnenotePage[] = await this.#getAll(
+    const pages: OnenotePage[] = await this.#getAll(
       `/me/onenote/sections/${section.id}/pages`,
       "page",
       [
@@ -160,7 +179,7 @@ export class OneNoteClient {
       const pageRef = page.title || page.id;
       const notebook = page.parentSection?.parentNotebook?.displayName;
       const section = page.parentSection?.displayName;
-      let errorMessage = `Failed to get page content for page "${pageRef}" in ${notebook} > ${section}`;
+      const errorMessage = `Failed to get page content for page "${pageRef}" in ${notebook} > ${section}`;
       this.#handleError(error, errorMessage);
     }
     return null;
@@ -197,11 +216,11 @@ export class OneNoteClient {
     type: ItemType,
     properties: readonly TKeys[]
   ): Promise<T[]> {
-    let items: T[] = [];
+    const items: T[] = [];
 
     let response: GraphAPIResponse<T[]> | undefined = undefined;
     let skip = 0;
-    let limit = 100;
+    const limit = 100;
     while (!response || !!response["@odata.nextLink"]) {
       this.#reporter?.report({
         op: "fetch",
@@ -218,7 +237,7 @@ export class OneNoteClient {
         .get()
         .catch(async (e) => {
           const error = <Error>e;
-          let errorMessage = `Failed to get ${type}`;
+          const errorMessage = `Failed to get ${type}`;
           this.#handleError(error, errorMessage);
           return undefined;
         });
@@ -252,7 +271,7 @@ export class OneNoteClient {
       const pageRef = page.title || page.id;
       const notebook = page.parentSection?.parentNotebook?.displayName;
       const section = page.parentSection?.displayName;
-      let errorMessage = `Failed to resolve attachment in page "${pageRef}" in ${notebook} > ${section}`;
+      const errorMessage = `Failed to resolve attachment in page "${pageRef}" in ${notebook} > ${section}`;
       this.#handleError(error, errorMessage);
     }
     return null;

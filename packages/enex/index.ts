@@ -1,4 +1,23 @@
-import { ISO8601DateTime } from "./src/iso8601datetime";
+/*
+This file is part of the Notesnook project (https://notesnook.com/)
+
+Copyright (C) 2022 Streetwriters (Private) Limited
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+import { ISO8601DateTime } from "./src/iso8601-date-time";
 import { Note } from "./src/note";
 import { IEnexElement } from "./src/types";
 import { parse, HTMLElement } from "node-html-parser";
@@ -44,7 +63,7 @@ export class Enex implements IEnexElement {
     if (noteElements.length <= 0)
       throw new Error("Invalid enex. Enex file contains 0 notes.");
     const notes: Note[] = [];
-    for (let element of noteElements) {
+    for (const element of noteElements) {
       notes.push(new Note(element));
     }
     return notes;
@@ -59,3 +78,10 @@ export class Enex implements IEnexElement {
     this.exportDate && this.application && this.version && this.notes;
   }
 }
+
+export * from "./src/note";
+export * from "./src/reminder";
+export * from "./src/resource";
+export * from "./src/content";
+export * from "./src/task";
+export * from "./src/types";

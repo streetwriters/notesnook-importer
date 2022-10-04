@@ -1,0 +1,23 @@
+# all
+build
+coverage
+node_modules
+dist
+
+# root
+resources/
+.*.*
+
+# mobile
+apps/mobile/native/
+apps/mobile/__tests__/
+apps/mobile/e2e/
+
+# web
+apps/web/public/an.js
+
+# editor
+packages/editor/styles/
+
+# editor mobile
+packages/editor-mobile/build.bundle

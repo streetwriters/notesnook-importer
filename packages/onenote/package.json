@@ -1,5 +1,5 @@
 {
-  "name": "@notesnook/onenote",
+  "name": "@notesnook-importer/onenote",
   "private": false,
   "version": "1.0.2",
   "description": "A fully type-safe OneNote API client for NodeJS & browser to recursively download all OneNote notebooks.",
@@ -10,10 +10,11 @@
     "@types/tap": "^15.0.5",
     "tap": "^15.1.2",
     "ts-node": "^10.4.0",
-    "typescript": "^4.5.2"
+    "typescript": "^4.8.2"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "build:test": "tsc --module commonjs"
   },
   "author": "Abdullah Atta <abdullahatta@streetwriters.co>",
   "license": "MIT",

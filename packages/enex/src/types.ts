@@ -1,30 +1,20 @@
 /*
+This file is part of the Notesnook project (https://notesnook.com/)
 
-  Evernote Note Export Format, 4.0 DTD
+Copyright (C) 2022 Streetwriters (Private) Limited
 
-  This DTD defines the legal structure of Evernote export format.  This
-  defines the permitted placement of each data element, but it does not
-  directly enforce validation of the content of each field.
-  
-  The semantics of each element in the export format is defined in the
-  "Types.thrift" interface specification document for the EDAM API.
-  The permitted value for each field is also defined in the "Limits.thrift"
-  interface specification, which includes permitted lengths and expressions.
-  
-  All date/time values must be encoded using a specific fixed-length profile
-  of ISO 8601, with times translated to UTC/Zulu:
-    yyyymmddThhmmssZ
-  For example, 5:42:09 PM GMT on January 20th, 2007 would be encoded as:
-    20070120T174209Z
-  
-  Please see the comments in this DTD file to indicate the expected format
-  of each data element.
-  
-  This DTD module is identified by the PUBLIC and SYSTEM identifiers:
-  
-  PUBLIC "en-export"
-  SYSTEM "http://xml.evernote.com/pub/evernote-export4.dtd"
-  
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 export interface IEnexElement {

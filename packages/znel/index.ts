@@ -1,3 +1,22 @@
+/*
+This file is part of the Notesnook project (https://notesnook.com/)
+
+Copyright (C) 2022 Streetwriters (Private) Limited
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 import { ZMeta } from "./src/meta";
 import { IZnelElement } from "./src/types";
 import { parse, HTMLElement } from "node-html-parser";
@@ -27,13 +46,13 @@ export class Znel implements IZnelElement {
  get metadata(): ZMeta {
     const metadataElement = this.#znoteElement.querySelector("zmeta");
     if (!metadataElement) throw new Error("Invalid znel. No ZMeta element found");
-    return new ZMeta(metadataElement)
+    return new ZMeta(metadataElement);
   }
 
   get tags() : string[] {
     const tags: string[] = [];
     const tagElements = this.#znoteElement.querySelectorAll("ztag");
-    for (let element of tagElements) {
+    for (const element of tagElements) {
       tags.push(element.textContent);
     }
     return tags;
@@ -42,7 +61,7 @@ export class Znel implements IZnelElement {
   get reminders() : ZReminder[] {
     const reminders: ZReminder[] = [];
     const reminderElements = this.#znoteElement.querySelectorAll("zreminder");
-    for (let element of reminderElements) {
+    for (const element of reminderElements) {
       reminders.push(new ZReminder(element));
     }
     return reminders;

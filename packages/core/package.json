@@ -1,0 +1,46 @@
+{
+  "name": "@notesnook-importer/core",
+  "private": false,
+  "version": "1.3.3",
+  "main": "dist/index.js",
+  "description": "Convert notes from various note taking apps into a simple & standard format.",
+  "scripts": {
+    "test": "TS_NODE_PROJECT=tsconfig.tests.json tap --ts --no-check-coverage --no-coverage __tests__/*.test.ts",
+    "build": "tsc",
+    "build:test": "tsc --module commonjs",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@notesnook-importer/enex": "*",
+    "@notesnook-importer/onenote": "*",
+    "@notesnook-importer/znel": "*",
+    "@standardnotes/common": "1.33.0",
+    "@standardnotes/features": "1.52.1",
+    "@standardnotes/models": "1.22.0",
+    "fflate": "^0.7.4",
+    "marked": "^4.1.0",
+    "node-html-parser": "github:thecodrr/node-html-parser",
+    "spark-md5": "^3.0.2"
+  },
+  "devDependencies": {
+    "@microsoft/microsoft-graph-types-beta": "^0.29.0-preview",
+    "@node-rs/xxhash": "^1.0.1",
+    "@types/kendo-ui": "^2022.1.0",
+    "@types/marked": "^4.0.7",
+    "@types/node": "^12.20.42",
+    "@types/sinon": "^10.0.11",
+    "@types/spark-md5": "^3.0.2",
+    "@types/tap": "^15.0.5",
+    "fdir": "^5.1.0",
+    "sinon": "^13.0.1",
+    "tap": "^15.1.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.2"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetwriters/notesnook.git",
+    "directory": "packages/importer"
+  }
+}
