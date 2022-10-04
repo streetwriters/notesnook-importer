@@ -55,7 +55,7 @@ export function ProviderSelector(props: ProviderSelectorProps) {
       </Flex>
       <Text variant="body" sx={{ color: "fontTertiary", mt: [2, 0] }}>
         Can't find your notes app in the list?{" "}
-        <a href="https://github.com/streetwriters/notesnook/issues/new">
+        <a href="https://github.com/streetwriters/notesnook-importer/issues/new">
           Send us a request.
         </a>
       </Text>

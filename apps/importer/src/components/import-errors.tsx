@@ -26,7 +26,7 @@ export function ImportErrors(props: ImportErrorsProps) {
           sx={{ bg: "error", color: "static", alignSelf: "start", mt: 2 }}
           onClick={() =>
             window.open(
-              "https://github.com/streetwriters/notesnook/issues/new",
+              "https://github.com/streetwriters/notesnook-importer/issues/new",
               "_blank"
             )
           }

@@ -3,8 +3,10 @@
   "useNx": true,
   "useWorkspaces": false,
   "version": "1.4.0",
-  "packages": [
-    "packages/*",
-    "apps/*"
-  ]
+  "packages": ["packages/*", "apps/*"],
+  "command": {
+    "version": {
+      "message": "global: bump version to %s"
+    }
+  }
 }

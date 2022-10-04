@@ -18,10 +18,10 @@
     "build:test": "tsc --module commonjs"
   },
   "author": "Abdullah Atta <abdullahatta@streetwriters.co>",
-  "license": "MIT",
+  "license": "GPL-3.0-or-later",
   "repository": {
     "type": "git",
-    "url": "https://github.com/streetwriters/notesnook.git",
+    "url": "https://github.com/streetwriters/notesnook-importer.git",
     "directory": "packages/znel"
   },
   "dependencies": {
