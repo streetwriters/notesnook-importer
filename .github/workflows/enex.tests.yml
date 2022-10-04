@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: notesnook/enex tests
+name: Test @notesnook-importer/enex
 
 # Controls when the action will run.
 on:
