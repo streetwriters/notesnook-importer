@@ -10,7 +10,7 @@ const authors = readFileSync("AUTHORS", "utf-8");
 const isAuthor = authors.includes(`<${authorEmail}>`);
 
 const SCOPES = [
-  "web",
+  "importer",
   "core",
   "enex",
   "onenote",

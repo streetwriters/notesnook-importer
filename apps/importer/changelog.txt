@@ -1,5 +1,4 @@
-1. 🥳 Added Joplin support! 🥳
-2. Optimize for mobile screens
-3. Add very basic telemetry (only sends the provider used)
-4. Fixed timestamp issues with Standard Notes provider
-5. Fixed issue where importer would always open in dark mode
+1. Add support for single/double lines (affects all importers)
+2. Import of tables, checklists & codeblocks has been fixed
+2. Improve markdown importer
+3. Various fixes to the Joplin, Simplenote & Standard Notes importers
