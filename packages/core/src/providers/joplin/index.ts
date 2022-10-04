@@ -23,7 +23,7 @@ import {
   IFileProvider,
   iterate,
   ProviderResult,
-  ProviderSettings,
+  ProviderSettings
 } from "../provider";
 import { parse } from "node-html-parser";
 import {
@@ -31,7 +31,7 @@ import {
   FolderEntity,
   TagEntity,
   NoteTagEntity,
-  ResourceEntity,
+  ResourceEntity
 } from "./types";
 import { Attachment, attachmentToHTML } from "../../models/attachment";
 import { HTMLRootElement } from "node-html-parser/dist/nodes/html";
@@ -49,7 +49,7 @@ type JoplinData = {
 };
 
 export class Joplin implements IFileProvider {
-  type: "file" = "file";
+  public type = "file" as const;
   public supportedExtensions = [".jex", ".md"];
   public validExtensions = [...this.supportedExtensions];
   public version = "1.0.0";
@@ -64,7 +64,7 @@ export class Joplin implements IFileProvider {
       noteTags: [],
       notes: [],
       resources: [],
-      tags: [],
+      tags: []
     };
     const notes: Note[] = [];
     await iterate(this, files, async (file) => {
@@ -123,8 +123,8 @@ export class Joplin implements IFileProvider {
         notebooks,
         content: {
           data: document.outerHTML,
-          type: ContentType.HTML,
-        },
+          type: ContentType.HTML
+        }
       });
     }
     return { errors: [], notes };
@@ -169,7 +169,7 @@ export class Joplin implements IFileProvider {
         hash: dataHash,
         filename: resource.title || resource.filename || dataHash,
         hashType: hasher.type,
-        mime: resource.mime || "application/octet-stream",
+        mime: resource.mime || "application/octet-stream"
       };
       attachments.push(attachment);
       element.replaceWith(attachmentToHTML(attachment));
@@ -192,7 +192,7 @@ export class Joplin implements IFileProvider {
     if (!topMost) return null;
     return {
       notebook: topMost,
-      topic: path.reverse().join(".") || "All notes",
+      topic: path.reverse().join(".") || "All notes"
     };
   }
 }

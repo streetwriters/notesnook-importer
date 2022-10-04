@@ -40,7 +40,7 @@ type OneNoteSettings = ProviderSettings & {
 };
 
 export class OneNote implements INetworkProvider<OneNoteSettings> {
-  type: "network" = "network";
+  public type = "network" as const;
   public version = "1.0.0";
   public name = "OneNote";
 

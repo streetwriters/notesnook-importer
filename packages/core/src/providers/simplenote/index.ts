@@ -23,7 +23,7 @@ import {
   IFileProvider,
   iterate,
   ProviderResult,
-  ProviderSettings,
+  ProviderSettings
 } from "../provider";
 import { File } from "../../utils/file";
 import { marked } from "marked";
@@ -43,20 +43,20 @@ const webComponent: marked.TokenizerExtension & marked.RendererExtension = {
         type: "paragraph",
         raw: match[0],
         text: match[0],
-        tokens: [{ type: "br", raw: "<br>" } as const],
+        tokens: [{ type: "br", raw: "<br>" } as const]
       };
       return token;
     }
   },
   renderer() {
     return `<p><br></p>`;
-  },
+  }
 };
 
 marked.use({ extensions: [webComponent] });
 
 export class Simplenote implements IFileProvider {
-  type: "file" = "file";
+  public type = "file" as const;
   public supportedExtensions = [".json"];
   public validExtensions = [".txt", ...this.supportedExtensions];
   public version = "1.0.0";
@@ -97,8 +97,8 @@ export class Simplenote implements IFileProvider {
           tags: activeNote.tags,
           content: {
             type: ContentType.HTML,
-            data: content,
-          },
+            data: content
+          }
         };
 
         notes.push(note);

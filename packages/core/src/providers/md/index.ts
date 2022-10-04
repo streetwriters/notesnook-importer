@@ -22,7 +22,7 @@ import {
   IFileProvider,
   iterate,
   ProviderResult,
-  ProviderSettings,
+  ProviderSettings
 } from "../provider";
 import { File } from "../../utils/file";
 import { path } from "../../utils/path";
@@ -30,7 +30,7 @@ import parse from "node-html-parser";
 import { markdowntoHTML } from "../../utils/to-html";
 
 export class Markdown implements IFileProvider {
-  type: "file" = "file";
+  public type = "file" as const;
   public supportedExtensions = [".md", ".txt"];
   public validExtensions = [...this.supportedExtensions];
   public version = "1.0.0";
@@ -50,7 +50,7 @@ export class Markdown implements IFileProvider {
         title: title || path.basename(file.name),
         dateCreated: file.createdAt,
         dateEdited: file.modifiedAt,
-        content: { type: ContentType.HTML, data: html },
+        content: { type: ContentType.HTML, data: html }
       };
       notes.push(note);
 

@@ -30,7 +30,7 @@ import { File } from "../../utils/file";
 import { path } from "../../utils/path";
 
 export class Evernote implements IFileProvider {
-  type: "file" = "file";
+  public type = "file" as const;
   public supportedExtensions = [".enex"];
   public validExtensions = [...this.supportedExtensions];
   public version = "1.0.0";

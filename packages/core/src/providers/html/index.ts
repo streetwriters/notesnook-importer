@@ -23,13 +23,13 @@ import {
   IFileProvider,
   iterate,
   ProviderResult,
-  ProviderSettings,
+  ProviderSettings
 } from "../provider";
 import { parse } from "node-html-parser";
 import { path } from "../../utils/path";
 
 export class HTML implements IFileProvider {
-  type: "file" = "file";
+  public type = "file" as const;
   public supportedExtensions = [".html"];
   public validExtensions = [...this.supportedExtensions];
   public version = "1.0.0";
@@ -52,8 +52,8 @@ export class HTML implements IFileProvider {
         dateEdited: file.modifiedAt,
         content: {
           type: ContentType.HTML,
-          data: document.querySelector("body")?.innerHTML || data,
-        },
+          data: document.querySelector("body")?.innerHTML || data
+        }
       };
       notes.push(note);
 

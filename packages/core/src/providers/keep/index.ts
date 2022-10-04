@@ -24,7 +24,7 @@ import {
   IFileProvider,
   iterate,
   ProviderResult,
-  ProviderSettings,
+  ProviderSettings
 } from "../provider";
 import { File } from "../../utils/file";
 import { Attachment, attachmentToHTML } from "../../models/attachment";
@@ -43,11 +43,11 @@ const colorMap: Record<string, string | undefined> = {
   pink: "purple",
   purple: "purple",
   gray: "gray",
-  brown: "orange",
+  brown: "orange"
 };
 
 export class GoogleKeep implements IFileProvider {
-  type: "file" = "file";
+  public type = "file" as const;
   public supportedExtensions = [".json"];
   public validExtensions = [
     ...this.supportedExtensions,
@@ -57,7 +57,7 @@ export class GoogleKeep implements IFileProvider {
     ".gif",
     ".png",
     ".html",
-    ".txt",
+    ".txt"
   ];
   public version = "1.0.0";
   public name = "Google Keep";
@@ -82,8 +82,8 @@ export class GoogleKeep implements IFileProvider {
         tags: keepNote.labels?.map((label) => label.name),
         content: {
           type: ContentType.HTML,
-          data: this.getContent(keepNote),
-        },
+          data: this.getContent(keepNote)
+        }
       };
 
       if (keepNote.attachments && note.content) {
@@ -103,7 +103,7 @@ export class GoogleKeep implements IFileProvider {
             size: data.byteLength,
             hash: dataHash,
             hashType: settings.hasher.type,
-            mime: keepAttachment.mimetype,
+            mime: keepAttachment.mimetype
           };
           document.appendChild(parse(attachmentToHTML(attachment)));
           note.attachments.push(attachment);
