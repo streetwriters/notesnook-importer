@@ -57,6 +57,7 @@ type ProcessAction = (
   errors: Error[]
 ) => Promise<boolean>;
 
+const GLOBALLY_VALID_FILE_EXTENSIONS = [".zip"];
 /**
  * Iterate over files & perform transformation in an error resistant
  * manner. All errors are collected for later processing.
@@ -71,7 +72,10 @@ export async function iterate(
 
   for (const file of files) {
     if (file.extension) {
-      if (!provider.validExtensions.includes(file.extension)) {
+      if (
+        !provider.validExtensions.includes(file.extension) &&
+        !GLOBALLY_VALID_FILE_EXTENSIONS.includes(file.extension)
+      ) {
         errors.push(new Error(`Invalid file type: ${file.name}`));
         continue;
       } else if (!provider.supportedExtensions.includes(file.extension))
