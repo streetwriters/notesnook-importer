@@ -1,4 +1,5 @@
 1. Add support for single/double lines (affects all importers)
 2. Import of tables, checklists & codeblocks has been fixed
-2. Improve markdown importer
-3. Various fixes to the Joplin, Simplenote & Standard Notes importers
+3. Improve markdown importer
+4. Various fixes to the Joplin, Simplenote & Standard Notes importers
+5. Fixes "Ha is not a function" error during OneNote & Markdown/Text import
