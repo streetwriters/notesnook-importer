@@ -30,7 +30,7 @@ import {
   OnenoteSection,
   OnenotePage
 } from "@microsoft/microsoft-graph-types-beta";
-import parse from "node-html-parser";
+import { parse } from "node-html-parser";
 import { ElementHandler } from "./elementhandlers";
 
 type OneNoteSettings = ProviderSettings & {

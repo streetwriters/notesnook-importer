@@ -26,7 +26,7 @@ import {
 } from "../provider";
 import { File } from "../../utils/file";
 import { path } from "../../utils/path";
-import parse from "node-html-parser";
+import { parse } from "node-html-parser";
 import { markdowntoHTML } from "../../utils/to-html";
 
 export class Markdown implements IFileProvider {
