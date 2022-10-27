@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import { marked } from "marked";
 
-const webComponent: marked.TokenizerExtension & marked.RendererExtension = {
+const emptyParagraph: marked.TokenizerExtension & marked.RendererExtension = {
   name: "emptyParagraph",
   level: "block",
   start(src) {
@@ -33,46 +33,51 @@ const webComponent: marked.TokenizerExtension & marked.RendererExtension = {
         type: "paragraph",
         raw: match[0],
         text: match[0],
-        tokens: [{ type: "br", raw: "<br>" } as const],
+        tokens: [{ type: "br", raw: "<br>" } as const]
       };
       return token;
     }
   },
   renderer() {
     return `<p><br></p>`;
-  },
+  }
 };
 
 const CHECKLIST_ITEM_REGEX = /class="checklist--item/gm;
 marked.use({
-  extensions: [webComponent],
+  extensions: [emptyParagraph],
 
   renderer: {
-    br: function() {
+    text(text) {
+      return text.replace(/( {2,})/gm, (_, whitespace) => {
+        return "&nbsp;".repeat(whitespace.length);
+      });
+    },
+    br: function () {
       return `</p><p data-spacing="single">`;
     },
-    checkbox: function() {
+    checkbox: function () {
       return "";
     },
-    listitem: function(text, task, checked) {
+    listitem: function (text, task, checked) {
       if (task)
         return `<li class="checklist--item${
           checked ? " checked" : ""
         }">${text}</li>`;
       return false;
     },
-    list: function(body) {
+    list: function (body) {
       if (CHECKLIST_ITEM_REGEX.test(body)) {
         return `<ul class="checklist">${body}</ul>`;
       }
       return false;
     },
-    code: function(code, language, isEscaped) {
+    code: function (code, language, _isEscaped) {
       return `<pre class="language-${language?.toLowerCase()}"><code class="language-${language?.toLowerCase()}">${code
         .replace(/(\r\n)+/gm, "<br/>")
         .replace(/\n+/gm, "<br/>")}</code></pre>`;
-    },
-  },
+    }
+  }
 });
 
 export function markdowntoHTML(src: string) {
