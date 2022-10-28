@@ -26,34 +26,7 @@ import {
   ProviderSettings
 } from "../provider";
 import { File } from "../../utils/file";
-import { marked } from "marked";
-import { markdowntoHTML } from "../../utils/to-html";
-
-const webComponent: marked.TokenizerExtension & marked.RendererExtension = {
-  name: "emptyParagraph",
-  level: "block",
-  start(src) {
-    return src.match(/^\n\n\n|^\r\n\r\n\r\n/)?.index;
-  },
-  tokenizer(src, _) {
-    const rule = /^\n\n\n|^\r\n\r\n\r\n/;
-    const match = rule.exec(src);
-    if (match) {
-      const token = {
-        type: "paragraph",
-        raw: match[0],
-        text: match[0],
-        tokens: [{ type: "br", raw: "<br>" } as const]
-      };
-      return token;
-    }
-  },
-  renderer() {
-    return `<p><br></p>`;
-  }
-};
-
-marked.use({ extensions: [webComponent] });
+import { markdowntoHTML, textToHTML } from "../../utils/to-html";
 
 export class Simplenote implements IFileProvider {
   public type = "file" as const;
@@ -64,7 +37,7 @@ export class Simplenote implements IFileProvider {
 
   async process(
     files: File[],
-    settings: ProviderSettings
+    _settings: ProviderSettings
   ): Promise<ProviderResult> {
     return iterate(this, files, async (file, notes, errors) => {
       const data = file.text;
@@ -86,8 +59,10 @@ export class Simplenote implements IFileProvider {
         }
 
         const lines = activeNote.content.split(/\r\n|\n/);
-        const title = lines.shift();
-        const content = markdowntoHTML(lines.join("\n"));
+        const title = lines[0];
+        const content = activeNote.markdown
+          ? markdowntoHTML(lines.join("\n"))
+          : textToHTML(lines.join("\n"));
 
         const note: Note = {
           title: title || "Untitled note",

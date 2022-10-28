@@ -25,9 +25,8 @@ import {
   ProviderSettings
 } from "../provider";
 import { File } from "../../utils/file";
-import { path } from "../../utils/path";
 import { parse } from "node-html-parser";
-import { markdowntoHTML } from "../../utils/to-html";
+import { markdowntoHTML, textToHTML } from "../../utils/to-html";
 
 export class Markdown implements IFileProvider {
   public type = "file" as const;
@@ -38,16 +37,17 @@ export class Markdown implements IFileProvider {
 
   async process(
     files: File[],
-    settings: ProviderSettings
+    _settings: ProviderSettings
   ): Promise<ProviderResult> {
     return iterate(this, files, (file, notes) => {
       const data = file.text;
-      const html = markdowntoHTML(data);
+      const html =
+        file.extension === ".md" ? markdowntoHTML(data) : textToHTML(data);
       const document = parse(html);
 
       const title = document.querySelector("h1,h2")?.textContent;
       const note: Note = {
-        title: title || path.basename(file.name),
+        title: title || file.nameWithoutExtension,
         dateCreated: file.createdAt,
         dateEdited: file.modifiedAt,
         content: { type: ContentType.HTML, data: html }

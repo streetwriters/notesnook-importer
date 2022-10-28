@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import { marked } from "marked";
+import { encodeHTML5 } from "entities";
 
 const emptyParagraph: marked.TokenizerExtension & marked.RendererExtension = {
   name: "emptyParagraph",
