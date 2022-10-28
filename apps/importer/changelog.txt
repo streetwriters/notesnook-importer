@@ -4,3 +4,4 @@
 4. Various fixes to the Joplin, Simplenote & Standard Notes importers
 5. Fixes "Ha is not a function" error during OneNote & Markdown/Text import
 6. Whitespace in the beginning & end of lines are now respected
+7. Improved text & markdown imports
