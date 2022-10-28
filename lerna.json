@@ -2,11 +2,8 @@
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
   "useNx": true,
   "useWorkspaces": false,
-  "version": "1.4.3",
-  "packages": [
-    "packages/*",
-    "apps/*"
-  ],
+  "version": "1.4.4",
+  "packages": ["packages/*", "apps/*"],
   "command": {
     "version": {
       "message": "global: bump version to %s"
