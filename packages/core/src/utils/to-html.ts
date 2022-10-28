@@ -83,3 +83,26 @@ marked.use({
 export function markdowntoHTML(src: string) {
   return marked(src, { gfm: true, breaks: true });
 }
+
+export function textToHTML(src: string) {
+  return src
+    .split("\n")
+    .map((line) =>
+      line
+        ? `<p data-spacing="single">${encodeLine(line)}</p>`
+        : `<p data-spacing="single"><br/></p>`
+    )
+    .join("");
+}
+
+function encodeLine(line: string) {
+  line = encodeHTML5(line);
+  line = line.replace(/(^ +)|( {2,})/g, (sub, ...args) => {
+    const [starting, inline] = args;
+    if (starting) return "&nbsp;".repeat(starting.length);
+    if (inline) return "&nbsp;".repeat(inline.length);
+    return sub;
+  });
+  console.log("LINE:", line);
+  return line;
+}
