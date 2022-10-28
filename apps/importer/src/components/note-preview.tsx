@@ -136,7 +136,22 @@ export function NotePreview(props: NotePreviewProps) {
             </Text>
           ))}
         </Flex>
-        <Text variant="body">
+        <Text
+          variant="body"
+          css={`
+            p {
+              margin-bottom: 0px;
+            }
+
+            p[data-spacing="double"] {
+              margin-top: 1em;
+            }
+
+            p[data-spacing="single"] {
+              margin-top: 0px;
+            }
+          `}
+        >
           <Markup content={content?.data} />
         </Text>
       </Flex>
