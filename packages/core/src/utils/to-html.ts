@@ -49,8 +49,11 @@ marked.use({
 
   renderer: {
     text(text) {
-      return text.replace(/( {2,})/gm, (_, whitespace) => {
-        return "&nbsp;".repeat(whitespace.length);
+      return text.replace(/(^ +)|( {2,})/g, (sub, ...args) => {
+        const [starting, inline] = args;
+        if (starting) return "&nbsp;".repeat(starting.length);
+        if (inline) return "&nbsp;".repeat(inline.length);
+        return sub;
       });
     },
     paragraph: function (text) {
