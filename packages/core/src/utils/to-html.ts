@@ -53,6 +53,9 @@ marked.use({
         return "&nbsp;".repeat(whitespace.length);
       });
     },
+    paragraph: function (text) {
+      return `<p data-spacing="double">${text}</p>`;
+    },
     br: function () {
       return `</p><p data-spacing="single">`;
     },
