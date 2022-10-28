@@ -11,12 +11,13 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@notesnook-importer/enex": "^1.4.1",
-    "@notesnook-importer/onenote": "^1.4.1",
-    "@notesnook-importer/znel": "^1.4.1",
+    "@notesnook-importer/enex": "*",
+    "@notesnook-importer/onenote": "*",
+    "@notesnook-importer/znel": "*",
     "@standardnotes/common": "1.33.0",
     "@standardnotes/features": "1.52.1",
     "@standardnotes/models": "1.22.0",
+    "entities": "^4.4.0",
     "fflate": "^0.7.4",
     "marked": "^4.1.0",
     "node-html-parser": "github:thecodrr/node-html-parser",
