@@ -18,10 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import tap from "tap";
-import { parse, ParsedEnex } from "../index";
+import { parse, Note } from "../index";
 import fs from "fs";
 import path from "path";
 import { fdir } from "fdir";
+import { fromByteArray } from "base64-js";
 
 tap.test("enex should be parsed correctly", async () => {
   const dataDirectoryPath = path.join(__dirname, "data");
@@ -32,55 +33,17 @@ tap.test("enex should be parsed correctly", async () => {
     .withPromise();
   for (const filePath of <string[]>enexFiles) {
     const enexFile = fs.readFileSync(filePath, "utf-8");
-    const enex = await parse(enexFile);
+    const notes: Note[] = [];
+    for await (const note of parse(enexFile)) notes.push(...note);
 
-    tap.matchSnapshot(enexToJSON(enex), path.basename(filePath));
-
-    enex.notes.forEach((note) => {
+    notes.forEach((note) => {
       note.resources?.forEach((res) => {
-        if (!res.attributes || !res.attributes.hash) return;
-
-        tap.ok(res.attributes.hash);
-        tap.ok(note.content.raw.indexOf(res.attributes.hash) > -1);
+        tap.ok(res.hash);
+        tap.ok(note.content!.indexOf(res.hash!) > -1);
+        if (res.data) (res.data as any) = fromByteArray(res.data);
       });
     });
+
+    tap.matchSnapshot(notes, path.basename(filePath));
   }
 });
-
-function enexToJSON(enex: ParsedEnex): Record<string, unknown> {
-  return {
-    ...enex,
-    notes: enex.notes.map((n) => toJSON(n))
-  };
-}
-
-function toJSON<T>(thisArg: T) {
-  const proto = Object.getPrototypeOf(thisArg);
-  const jsonObj: T = { ...thisArg };
-
-  Object.entries(Object.getOwnPropertyDescriptors(proto))
-    .filter(([_key, descriptor]) => typeof descriptor.get === "function")
-    .map(([key, descriptor]) => {
-      if (descriptor && key[0] !== "_") {
-        try {
-          const val = thisArg[key];
-          if (val && Array.isArray(val)) {
-            const array: unknown[] = [];
-            for (const item of val) {
-              if (typeof item === "object") array.push(toJSON(item));
-              else array.push(item);
-            }
-            jsonObj[key] = array;
-          } else if (val && !(val instanceof Date) && typeof val === "object") {
-            jsonObj[key] = toJSON(val);
-          } else {
-            jsonObj[key] = val;
-          }
-        } catch (error) {
-          console.error(`Error calling getter ${key}`, error);
-        }
-      }
-    });
-
-  return jsonObj;
-}

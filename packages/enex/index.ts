@@ -108,7 +108,10 @@ export async function* parse(enex: ReadableStream<string> | string) {
     }
   );
 
-  if (enex instanceof ReadableStream) {
+  if (typeof enex === "string") {
+    parser.end(enex);
+    yield parser.notes;
+  } else {
     const reader = enex.getReader();
     let chunk: ReadableStreamReadResult<string> | undefined;
     while ((chunk = await reader.read())) {
@@ -120,9 +123,6 @@ export async function* parse(enex: ReadableStream<string> | string) {
     }
     parser.notes.length = 0;
     parser.end();
-    yield parser.notes;
-  } else {
-    parser.end(enex);
     yield parser.notes;
   }
 }
