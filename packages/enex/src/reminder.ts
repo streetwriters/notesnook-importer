@@ -17,60 +17,19 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { DateUIOption, IEnexElement } from "./types";
-import {
-  getAsDate,
-  getAsDateRequired,
-  getAsNumber,
-  getAsString,
-  getAsStringRequired,
-} from "./utils";
-import { HTMLElement } from "node-html-parser";
+import { DateUIOption } from "./types";
 
 enum ReminderStatus {
   ACTIVE = "active",
-  MUTED = "muted",
+  MUTED = "muted"
 }
 
-export class Reminder implements IEnexElement {
-  #reminderElement: HTMLElement;
-  constructor(reminderElement: HTMLElement) {
-    this.#reminderElement = reminderElement;
-  }
-
-  get created(): Date {
-    return getAsDateRequired(this.#reminderElement, "created");
-  }
-
-  get updated(): Date {
-    return getAsDateRequired(this.#reminderElement, "updated");
-  }
-
-  get noteLevelID(): string {
-    return getAsStringRequired(this.#reminderElement, "noteLevelID");
-  }
-
-  get reminderDate(): Date | null {
-    return getAsDate(this.#reminderElement, "reminderDate");
-  }
-
-  get reminderDateUIOption(): DateUIOption | null {
-    return <DateUIOption | null>(
-      getAsString(this.#reminderElement, "reminderDateUIOption")
-    );
-  }
-
-  get dueDateOffset(): number | null {
-    return getAsNumber(this.#reminderElement, "dueDateOffset");
-  }
-
-  get reminderStatus(): ReminderStatus | null {
-    return <ReminderStatus | null>(
-      getAsString(this.#reminderElement, "reminderStatus")
-    );
-  }
-
-  validate() {
-    this.created && this.updated && this.noteLevelID;
-  }
-}
+export type Reminder = {
+  created: Date;
+  updated: Date;
+  noteLevelID: string;
+  reminderDate: Date | null;
+  reminderDateUIOption: DateUIOption | null;
+  dueDateOffset: number | null;
+  reminderStatus: ReminderStatus | null;
+};

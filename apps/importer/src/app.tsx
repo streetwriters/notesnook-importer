@@ -9,16 +9,17 @@ import { FileProviderHandler } from "./components/file-provider-handler";
 import { ImportResult } from "./components/import-result";
 import { Hero } from "./components/hero";
 import { Footer } from "./components/footer";
-import { IProvider, ProviderResult } from "@notesnook-importer/core";
+import { IProvider } from "@notesnook-importer/core";
 import { NetworkProviderHandler } from "./components/network-provider-handler";
 import { trackEvent } from "./utils/analytics";
+import { TransformResult } from "./types";
 
 function App() {
   const [selectedProvider, setSelectedProvider] = useState<IProvider>();
-  const [providerResult, setProviderResult] = useState<ProviderResult>();
+  const [transformResult, setTransformResult] = useState<TransformResult>();
 
   useEffect(() => {
-    if (selectedProvider && providerResult) {
+    if (selectedProvider && transformResult) {
       (async () => {
         await trackEvent(
           { name: selectedProvider.name, type: "event" },
@@ -26,7 +27,7 @@ function App() {
         );
       })();
     }
-  }, [providerResult, selectedProvider]);
+  }, [transformResult, selectedProvider]);
 
   return (
     <ThemeProvider theme={ThemeFactory.construct()}>
@@ -41,30 +42,37 @@ function App() {
           <ProviderSelector
             onProviderChanged={(provider) => {
               setSelectedProvider(provider);
-              setProviderResult(undefined);
+              setTransformResult(undefined);
             }}
           />
 
-          {selectedProvider ? (
+          {selectedProvider && !transformResult ? (
             <>
               <StepSeperator />
               {selectedProvider.type === "file" ? (
                 <FileProviderHandler
                   provider={selectedProvider}
-                  onTransformFinished={setProviderResult}
+                  onTransformFinished={setTransformResult}
                 />
               ) : selectedProvider.type === "network" ? (
                 <NetworkProviderHandler
                   provider={selectedProvider}
-                  onTransformFinished={setProviderResult}
+                  onTransformFinished={setTransformResult}
                 />
               ) : null}
             </>
           ) : null}
-          {providerResult ? (
+          {transformResult && selectedProvider ? (
             <>
               <StepSeperator />
-              <ImportResult result={providerResult} />{" "}
+              <ImportResult
+                result={transformResult}
+                provider={selectedProvider}
+                onReset={() => {
+                  setSelectedProvider(undefined);
+                  setTransformResult(undefined);
+                }}
+              />
             </>
           ) : null}
         </Flex>

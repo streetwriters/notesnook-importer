@@ -34,14 +34,18 @@ export enum ModelType {
   Revision = 13,
   Migration = 14,
   SmartFilter = 15,
-  Command = 16,
+  Command = 16
+}
+
+interface BaseEntity<T extends ModelType> {
+  type_: T;
 }
 
 /**
  * All the below types have been extracted from: https://github.com/laurent22/joplin/blob/2acd55eb810d9d6f6e4b2e1c6adff9ce72dde956/packages/lib/services/database/types.ts
  */
 
-export interface FolderEntity {
+export interface FolderEntity extends BaseEntity<ModelType.Folder> {
   id?: string | null;
   title?: string;
   created_time?: number;
@@ -55,10 +59,9 @@ export interface FolderEntity {
   share_id?: string;
   master_key_id?: string;
   icon?: string;
-  type_?: number;
 }
 
-export interface NoteTagEntity {
+export interface NoteTagEntity extends BaseEntity<ModelType.NoteTag> {
   id?: string | null;
   note_id?: string;
   tag_id?: string;
@@ -69,9 +72,8 @@ export interface NoteTagEntity {
   encryption_cipher_text?: string;
   encryption_applied?: number;
   is_shared?: number;
-  type_?: number;
 }
-export interface NoteEntity {
+export interface NoteEntity extends BaseEntity<ModelType.Note> {
   id?: string | null;
   parent_id?: string;
   title?: string;
@@ -100,10 +102,9 @@ export interface NoteEntity {
   share_id?: string;
   conflict_original_id?: string;
   master_key_id?: string;
-  type_?: number;
 }
 
-export interface ResourceEntity {
+export interface ResourceEntity extends BaseEntity<ModelType.Resource> {
   id?: string | null;
   title?: string;
   mime?: string;
@@ -120,10 +121,9 @@ export interface ResourceEntity {
   is_shared?: number;
   share_id?: string;
   master_key_id?: string;
-  type_?: number;
 }
 
-export interface TagEntity {
+export interface TagEntity extends BaseEntity<ModelType.Tag> {
   id?: string | null;
   title?: string;
   created_time?: number;
@@ -134,5 +134,11 @@ export interface TagEntity {
   encryption_applied?: number;
   is_shared?: number;
   parent_id?: string;
-  type_?: number;
 }
+
+export type Entity =
+  | NoteEntity
+  | TagEntity
+  | NoteTagEntity
+  | ResourceEntity
+  | FolderEntity;

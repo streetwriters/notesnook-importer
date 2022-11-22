@@ -38,7 +38,7 @@ type Attribute = {
 const attributeMap: Record<string, Attribute> = {
   filename: {
     key: "data-filename",
-    value: (value) => value,
+    value: (value) => value
   },
   size: {
     key: "data-size",
@@ -46,24 +46,24 @@ const attributeMap: Record<string, Attribute> = {
       const bytes = parseInt(value);
       if (!isNaN(bytes)) return formatBytes(bytes, 1);
       return value;
-    },
+    }
   },
   hash: {
     key: "data-hash",
-    value: (value) => value,
+    value: (value) => value
   },
   mime: {
     key: "data-mime",
-    value: (value) => value,
+    value: (value) => value
   },
   width: {
     key: "width",
-    value: (value) => value,
+    value: (value) => value
   },
   height: {
     key: "height",
-    value: (value) => value,
-  },
+    value: (value) => value
+  }
 };
 
 export function attachmentToHTML(attachment: Attachment): string {

@@ -17,13 +17,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Enex } from "@notesnook-importer/enex";
-import {
-  IFileProvider,
-  iterate,
-  ProviderResult,
-  ProviderSettings
-} from "../provider";
+import { parse, processContent } from "@notesnook-importer/enex";
+import { IFileProvider, ProviderSettings } from "../provider";
 import { ContentType, Note, Notebook } from "../../models/note";
 import { ElementHandler } from "./element-handlers";
 import { File } from "../../utils/file";
@@ -32,47 +27,48 @@ import { path } from "../../utils/path";
 export class Evernote implements IFileProvider {
   public type = "file" as const;
   public supportedExtensions = [".enex"];
-  public validExtensions = [...this.supportedExtensions];
+  public examples = ["First Notebook.enex", "checklist.enex"];
   public version = "1.0.0";
   public name = "Evernote";
 
-  async process(
-    files: File[],
-    settings: ProviderSettings
-  ): Promise<ProviderResult> {
-    return iterate(this, files, async (file, notes) => {
-      const enex = new Enex(file.text);
-      let notebook: Notebook | undefined;
-      if (enex.isNotebook) {
-        notebook = {
-          notebook: path.basename(file.name),
-          topic: "All notes"
-        };
-      }
+  filter(file: File) {
+    return this.supportedExtensions.includes(file.extension);
+  }
 
-      for (const enNote of enex.notes) {
+  async *process(file: File, settings: ProviderSettings) {
+    const notebook: Notebook = {
+      notebook: path.basename(file.name),
+      topic: "All notes"
+    };
+
+    for await (const chunk of parse(
+      file.stream.pipeThrough(new TextDecoderStream())
+    )) {
+      for (const enNote of chunk) {
         const note: Note = {
-          title: enNote.title,
+          title: enNote.title || "",
           tags: enNote.tags,
           dateCreated: enNote.created?.getTime(),
           dateEdited: enNote.updated?.getTime(),
           attachments: [],
-          notebooks: notebook ? [notebook] : []
+          notebooks: [notebook]
         };
+        if (enNote.content) {
+          const elementHandler = new ElementHandler(
+            note,
+            enNote,
+            settings.hasher
+          );
 
-        const elementHandler = new ElementHandler(
-          note,
-          enNote,
-          settings.hasher
-        );
-        const html = await enNote.content.toHtml(elementHandler);
-        note.content = {
-          data: html,
-          type: ContentType.HTML
-        };
-        notes.push(note);
+          const html = await processContent(enNote.content, elementHandler);
+          note.content = {
+            data: html,
+            type: ContentType.HTML
+          };
+        }
+
+        yield note;
       }
-      return true;
-    });
+    }
   }
 }

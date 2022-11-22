@@ -11,18 +11,18 @@ exports[`__tests__/onenote.test.ts TAP > onenote 1`] = `
 
 exports[`__tests__/onenote.test.ts TAP > onenote-packed 1`] = `
 Array [
-  "ec2a830d0caeca108931dc3523e07e40/note.json",
-  "e67ed672e5bfa06c80625da90d4f05b4/note.json",
-  "ac9e071a7492e17ffb160ab52f276916/note.json",
-  "218b03aa5de10f3366320e8c2af51fd7/note.json",
-  "c3bbb18b44f3fc5a805ce5fb1a715655/note.json",
-  "569c448f863968f8616940fabdc1484a/note.json",
-  "b4984928166ef1a19d0fbd2f3ff67a53/note.json",
-  "30b4579ad27288f7817ebbc93d775f30/note.json",
-  "19e9ff96d8ce8c5aa357c693fc5d388c/note.json",
-  "6f6368b911b701c44b4df491a3523a2e/note.json",
-  "ce9ac49c10ed60e3bbba0db1cafcaca4/note.json",
-  "bdc62bfe038bff502faf458928b44ebd/note.json",
+  "/ec2a830d0caeca108931dc3523e07e40/note.json",
+  "/e67ed672e5bfa06c80625da90d4f05b4/note.json",
+  "/ac9e071a7492e17ffb160ab52f276916/note.json",
+  "/218b03aa5de10f3366320e8c2af51fd7/note.json",
+  "/c3bbb18b44f3fc5a805ce5fb1a715655/note.json",
+  "/569c448f863968f8616940fabdc1484a/note.json",
+  "/b4984928166ef1a19d0fbd2f3ff67a53/note.json",
+  "/30b4579ad27288f7817ebbc93d775f30/note.json",
+  "/19e9ff96d8ce8c5aa357c693fc5d388c/note.json",
+  "/6f6368b911b701c44b4df491a3523a2e/note.json",
+  "/ce9ac49c10ed60e3bbba0db1cafcaca4/note.json",
+  "/bdc62bfe038bff502faf458928b44ebd/note.json",
   "metadata.json",
 ]
 `

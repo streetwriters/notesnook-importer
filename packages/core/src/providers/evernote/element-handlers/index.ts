@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import { ENTaskGroup } from "./en-task-group";
 import type { Note as ENNote, IElementHandler } from "@notesnook-importer/enex";
-import type { HTMLElement } from "node-html-parser";
+import { Element } from "domhandler";
 import { Note } from "../../../models/note";
 import { ENMedia } from "./en-media";
 import { IMGDataurl } from "./img-dataurl";
@@ -45,7 +45,7 @@ export class ElementHandler implements IElementHandler {
 
   async process(
     elementType: Keys,
-    element: HTMLElement
+    element: Element
   ): Promise<string | undefined> {
     const elementHandler = elementMap[elementType];
     if (!elementHandler) return;

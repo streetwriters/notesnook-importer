@@ -110,6 +110,5 @@ function encodeLine(line: string) {
     if (inline) return "&nbsp;".repeat(inline.length);
     return sub;
   });
-  console.log("LINE:", line);
   return line;
 }

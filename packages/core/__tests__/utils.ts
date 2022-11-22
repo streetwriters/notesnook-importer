@@ -23,6 +23,8 @@ import { IFile } from "../src/utils/file";
 import { fdir } from "fdir";
 import { IHasher } from "../src/utils/hasher";
 import { xxh64 } from "@node-rs/xxhash";
+// @ts-ignore
+import { toWeb } from "stream-adapters";
 
 export function getFiles(dir: string): IFile[] {
   const output = new fdir()
@@ -34,12 +36,13 @@ export function getFiles(dir: string): IFile[] {
 }
 
 export function pathToFile(filePath: string): IFile {
-  const data = fs.readFileSync(filePath);
+  const data = fs.createReadStream(filePath);
 
   return {
-    data: data,
+    data: toWeb(data),
+    size: fs.statSync(filePath).size,
     name: path.basename(filePath),
-    path: filePath,
+    path: filePath
   };
 }
 
@@ -49,5 +52,5 @@ export const hasher: IHasher = {
       return xxh64(Buffer.from(data.buffer)).toString(16);
     return xxh64(data).toString(16);
   },
-  type: "xxh64",
+  type: "xxh64"
 };

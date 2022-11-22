@@ -17,11 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import {
-  INetworkProvider,
-  ProviderResult,
-  ProviderSettings
-} from "../provider";
+import { INetworkProvider, ProviderSettings } from "../provider";
 import { OneNoteClient } from "@notesnook-importer/onenote";
 import { Content, ProgressPayload } from "@notesnook-importer/onenote";
 import { ContentType, Note, Notebook } from "../../models/note";
@@ -44,8 +40,7 @@ export class OneNote implements INetworkProvider<OneNoteSettings> {
   public version = "1.0.0";
   public name = "OneNote";
 
-  async process(settings: OneNoteSettings): Promise<ProviderResult> {
-    const notes: Note[] = [];
+  async process(settings: OneNoteSettings) {
     const errors: Error[] = [];
 
     const progressCache: Record<string, ProgressPayload> = {};
@@ -87,13 +82,13 @@ export class OneNote implements INetworkProvider<OneNoteSettings> {
           });
           if (!note) continue;
 
-          notes.push(note);
+          await settings.storage.write(note);
         }
       }
     }
 
     if (settings.report) settings.report(`Done!`);
-    return { errors, notes };
+    return errors;
   }
 
   private async pageToNote(

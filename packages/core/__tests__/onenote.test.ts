@@ -17,7 +17,9 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import "./globals";
 import tap from "tap";
+import { Note } from "../index";
 import { ProviderFactory } from "../src/providers/provider-factory";
 import { hasher } from "./utils";
 import sinon from "sinon";
@@ -29,7 +31,8 @@ import fs from "fs";
 import crypto from "crypto";
 import path from "path";
 import { pack } from "../src/utils/archiver";
-import { unzipSync } from "fflate";
+import { MemoryStorage } from "@notesnook-importer/storage/dist/memory";
+import { unzip } from "../src/utils/unzip-stream";
 
 tap.afterEach(() => {
   sinon.reset();
@@ -53,9 +56,12 @@ tap.test(
 tap.test(
   `transform & pack OneNote data to Notesnook importer compatible format`,
   async () => {
-    const output = pack((await importFromOnenote()).notes);
-    const unzipped = unzipSync(output);
-    tap.matchSnapshot(Object.keys(unzipped), `onenote-packed`);
+    const output = pack((await importFromOnenote()).storage);
+    const files = await unzip({ data: output, name: "Test.zip", size: 0 });
+    tap.matchSnapshot(
+      files.map((f) => f.path || f.name),
+      `onenote-packed`
+    );
   }
 );
 
@@ -86,12 +92,15 @@ async function importFromOnenote() {
     return notebooks;
   });
 
+  const storage = new MemoryStorage<Note>();
   const output = await provider.process({
     clientId: "",
     clientType: "node",
-    hasher
+    hasher,
+    reporter() {},
+    storage
   });
-  return output;
+  return { errors: output, notes: Object.values(storage.storage), storage };
 }
 
 function md5(str: string) {

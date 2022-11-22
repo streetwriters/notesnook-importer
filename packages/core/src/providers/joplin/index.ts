@@ -19,12 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import { ContentType, Note, Notebook } from "../../models/note";
 import { File } from "../../utils/file";
-import {
-  IFileProvider,
-  iterate,
-  ProviderResult,
-  ProviderSettings
-} from "../provider";
+import { IFileProvider, ProviderSettings } from "../provider";
 import { parse } from "node-html-parser";
 import {
   NoteEntity,
@@ -48,17 +43,18 @@ type JoplinData = {
   resources: ResourceEntity[];
 };
 
-export class Joplin implements IFileProvider {
+export class Joplin implements IFileProvider<JoplinData> {
   public type = "file" as const;
-  public supportedExtensions = [".jex", ".md"];
-  public validExtensions = [...this.supportedExtensions];
+  public supportedExtensions = [".jex"];
+  public examples = ["3_10_22.jex", "5_12_21.jex"];
   public version = "1.0.0";
   public name = "Joplin";
 
-  async process(
-    files: File[],
-    settings: ProviderSettings
-  ): Promise<ProviderResult> {
+  filter(file: File) {
+    return [".md"].includes(file.extension);
+  }
+
+  async preprocess(files: File[]) {
     const data: JoplinData = {
       folders: [],
       noteTags: [],
@@ -66,9 +62,10 @@ export class Joplin implements IFileProvider {
       resources: [],
       tags: []
     };
-    const notes: Note[] = [];
-    await iterate(this, files, async (file) => {
-      const item = await unserialize(file.text);
+
+    for (const file of files) {
+      if (file.extension !== ".md") continue;
+      const item = unserialize(await file.text());
       switch (item.type_) {
         case ModelType.Note:
           data.notes.push(item);
@@ -86,48 +83,57 @@ export class Joplin implements IFileProvider {
           data.folders.push(item);
           break;
       }
-      return true;
-    });
-
-    for (const note of data.notes) {
-      if (!note.id || !note.body) continue;
-      const tags = this.resolveTags(note.id, data.tags, data.noteTags);
-      const parentFolder = data.folders.find((a) => a.id === note.parent_id);
-      const notebooks: Notebook[] = [];
-
-      const html = markdowntoHTML(note.body);
-      const document = parse(html);
-      const title =
-        note.title ||
-        document.querySelector("h1,h2")?.textContent ||
-        "Untitled note";
-
-      const attachments = await this.resolveResources(
-        data.resources,
-        document,
-        files,
-        settings.hasher
-      );
-
-      if (parentFolder) {
-        const notebook = this.resolveFolders(data.folders, parentFolder);
-        if (notebook) notebooks.push(notebook);
-      }
-
-      notes.push({
-        title,
-        dateCreated: note.user_created_time || note.created_time,
-        dateEdited: note.user_updated_time || note.updated_time,
-        tags,
-        attachments,
-        notebooks,
-        content: {
-          data: document.outerHTML,
-          type: ContentType.HTML
-        }
-      });
     }
-    return { errors: [], notes };
+
+    return data;
+  }
+
+  async *process(
+    file: File,
+    settings: ProviderSettings,
+    files: File[],
+    data?: JoplinData
+  ) {
+    if (!data) return;
+    const note = data.notes.find(
+      (note) => file.nameWithoutExtension === note.id
+    );
+    if (!note) return;
+    if (!note.id || !note.body) return;
+
+    const tags = this.resolveTags(note.id, data.tags, data.noteTags);
+    const parentFolder = data.folders.find((a) => a.id === note.parent_id);
+    const notebooks: Notebook[] = [];
+    const html = markdowntoHTML(note.body);
+    const document = parse(html);
+    const title =
+      note.title ||
+      document.querySelector("h1,h2")?.textContent ||
+      "Untitled note";
+    const attachments = await this.resolveResources(
+      data.resources,
+      document,
+      files,
+      settings.hasher
+    );
+    if (parentFolder) {
+      const notebook = this.resolveFolders(data.folders, parentFolder);
+      if (notebook) notebooks.push(notebook);
+    }
+
+    const _note: Note = {
+      title,
+      dateCreated: note.user_created_time || note.created_time,
+      dateEdited: note.user_updated_time || note.updated_time,
+      tags,
+      attachments,
+      notebooks,
+      content: {
+        data: document.outerHTML,
+        type: ContentType.HTML
+      }
+    };
+    yield _note;
   }
 
   private resolveTags(
@@ -162,10 +168,13 @@ export class Joplin implements IFileProvider {
       );
       if (!resourceFile) continue;
 
-      const dataHash = await hasher.hash(resourceFile.bytes);
+      const data = await resourceFile.bytes();
+      if (!data) continue;
+
+      const dataHash = await hasher.hash(data);
       const attachment: Attachment = {
-        data: resourceFile?.bytes,
-        size: resourceFile?.bytes.length,
+        data,
+        size: data.byteLength,
         hash: dataHash,
         filename: resource.title || resource.filename || dataHash,
         hashType: hasher.type,

@@ -17,7 +17,11 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { HTMLElement } from "node-html-parser";
+import { Element } from "domhandler";
+import { parseDocument } from "htmlparser2";
+import { selectAll } from "css-select";
+import { render } from "dom-serializer";
+import { removeElement, replaceElement, getElementsByTagName } from "domutils";
 
 /**
  * List of invalid attributes we should remove part of our
@@ -39,7 +43,7 @@ const validStyles: string[] = [
   "color",
   "text-align",
   "font-family",
-  "font-size",
+  "font-size"
 ];
 /**
  * This is a list of special elements used by Evernote for different
@@ -54,57 +58,56 @@ const invalidElements: string[] = [
   // do they appear in the exported files (yet). I am adding them
   // here just in case.
   "en-codeblock",
-  "en-task-group",
+  "en-task-group"
 ];
 const cssSelector: string = [
   ...validAttributes.map((attr) => `[${attr}]`),
   ...invalidAttributes.map((attr) => `[${attr}]`),
-  ...invalidElements,
+  ...invalidElements
 ].join(",");
 
 export interface IElementHandler {
-  process(type: string, element: HTMLElement): Promise<string | undefined>;
+  process(type: string, element: Element): Promise<string | undefined>;
 }
 
-export class Content {
-  #contentElement: HTMLElement;
-  constructor(contentElement: HTMLElement) {
-    this.#contentElement = contentElement;
-  }
+export async function processContent(
+  content: string,
+  handler?: IElementHandler
+): Promise<string> {
+  const contentElement = parseDocument(content, { xmlMode: true });
+  const [noteElement] = getElementsByTagName(
+    "en-note",
+    contentElement,
+    true,
+    1
+  );
+  if (!noteElement) throw new Error("Could not find a valid en-note tag.");
 
-  async toHtml(handler?: IElementHandler): Promise<string> {
-    const noteElement = this.#contentElement.querySelector("en-note");
-    if (!noteElement) throw new Error("Invalid content.");
+  const elements = selectAll(cssSelector, noteElement);
+  for (const element of elements) {
+    const elementType =
+      filterAttributes(element) || element.tagName.toLowerCase();
 
-    const elements = noteElement.querySelectorAll(cssSelector);
-    for (const element of elements) {
-      const elementType =
-        filterAttributes(element) || element.tagName.toLowerCase();
-
-      switch (elementType) {
-        case "img-dataurl":
-        case "en-codeblock":
-        case "en-task-group":
-        case "en-crypt":
-        case "en-todo":
-        case "en-media": {
-          if (handler) {
-            const result = await handler.process(elementType, element);
-            if (result) element.replaceWith(result);
-            else element.remove();
-          } else element.remove();
-          break;
-        }
+    switch (elementType) {
+      case "img-dataurl":
+      case "en-codeblock":
+      case "en-task-group":
+      case "en-crypt":
+      case "en-todo":
+      case "en-media": {
+        if (handler) {
+          const result = await handler.process(elementType, element);
+          if (result) {
+            replaceElement(element, parseDocument(result));
+          } else removeElement(element);
+        } else removeElement(element);
+        break;
       }
     }
-    return noteElement.innerHTML;
   }
-
-  get raw(): string {
-    const noteElement = this.#contentElement.querySelector("en-note");
-    if (!noteElement) throw new Error("Invalid content.");
-    return noteElement.innerHTML;
-  }
+  return render(noteElement.childNodes, {
+    xmlMode: true
+  });
 }
 
 function stylesToObject(input: string): Record<string, string> {
@@ -125,18 +128,18 @@ function objectToStyles(input: Record<string, string>): string {
   return output.join(";");
 }
 
-function filterAttributes(element: HTMLElement): string | null {
+function filterAttributes(element: Element): string | null {
   let elementType: string | null = null;
 
   for (const attr of invalidAttributes) {
-    if (element.hasAttribute(attr)) element.removeAttribute(attr);
+    if (element.attribs[attr]) delete element.attribs[attr];
   }
 
   for (const attr of validAttributes) {
-    if (!element.hasAttribute(attr)) continue;
-    const value = element.getAttribute(attr);
+    if (!element.attribs[attr]) continue;
+    const value = element.attribs[attr];
     if (!value) {
-      element.removeAttribute(attr);
+      delete element.attribs[attr];
       continue;
     }
 
@@ -153,18 +156,18 @@ function filterAttributes(element: HTMLElement): string | null {
             case "--en-codeblock":
               elementType = "en-codeblock";
               break;
-            case "--en-task-group":
+            case "--en-task-group": {
               elementType = "en-task-group";
               const taskGroupId = styles["--en-id"];
-              if (taskGroupId)
-                element.setAttribute("task-group-id", taskGroupId);
+              if (taskGroupId) element.attribs["task-group-id"] = taskGroupId;
               break;
+            }
           }
           if (validStyles.indexOf(style) === -1) delete styles[style];
         }
         const newStyle = objectToStyles(styles);
-        if (newStyle) element.setAttribute(attr, newStyle);
-        else element.removeAttribute(attr);
+        if (newStyle) element.attribs[attr] = newStyle;
+        else delete element.attribs[attr];
         break;
       }
     }

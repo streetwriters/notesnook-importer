@@ -18,21 +18,37 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import { BaseHandler } from "./base";
-import type { HTMLElement } from "node-html-parser";
+import { Element, ParentNode, isTag } from "domhandler";
+import { getAttributeValue } from "domutils";
 
 export class ENTodo extends BaseHandler {
-  async process(element: HTMLElement): Promise<string | undefined> {
-    const isChecked = element.getAttribute("checked") === "true";
+  async process(element: Element): Promise<string | undefined> {
+    const isChecked = getAttributeValue(element, "checked") === "true";
 
-    const parentListItem = <HTMLElement | null>element.closest("li");
+    const parentListItem = closest(element, "li");
     if (!parentListItem) return;
 
-    if (isChecked) parentListItem.classList.add("checked");
+    if (isChecked) addClass(parentListItem, "checked");
 
-    const parentList = <HTMLElement | null>element.closest("ul");
+    const parentList = closest(element, "ul");
     if (!parentList) return;
 
-    parentList.classList.add("checklist");
+    addClass(parentList, "checklist");
     return;
   }
+}
+
+function closest(element: Element, tagName: string) {
+  let parent: ParentNode | null = element;
+  while ((parent = parent.parent)) {
+    if (isTag(parent) && parent.tagName === tagName) break;
+  }
+  return parent as Element;
+}
+
+function addClass(element: Element, className: string) {
+  element.attribs.class = element.attribs.class || "";
+  if (element.attribs.class.includes(className)) return;
+  if (!element.attribs.class) element.attribs.class = className;
+  else element.attribs.class += ` ${className}`;
 }

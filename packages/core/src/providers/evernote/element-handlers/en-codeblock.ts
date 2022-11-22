@@ -18,12 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import { BaseHandler } from "./base";
-import type { HTMLElement } from "node-html-parser";
+import { Element } from "domhandler";
+import { textContent } from "domutils";
 
 export class ENCodeblock extends BaseHandler {
-  async process(element: HTMLElement): Promise<string | undefined> {
+  async process(element: Element): Promise<string | undefined> {
     return `<pre>${element.childNodes
-      .map((n) => n.textContent)
+      .map((n) => textContent(n))
       .join("<br/>")}</pre>`;
   }
 }

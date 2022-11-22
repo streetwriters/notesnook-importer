@@ -58,6 +58,7 @@ module.exports = {
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "unused-imports/no-unused-imports": "error",
+    "no-async-promise-executor": "off",
     "unused-imports/no-unused-vars": [
       "warn",
       {

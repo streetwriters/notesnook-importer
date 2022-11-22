@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import type { IElementHandler } from "@notesnook-importer/enex";
+import type { IElementHandler } from "@notesnook-importer/znel";
 import type { HTMLElement } from "node-html-parser";
 import { ZNResource } from "./znresource";
 import { IHasher } from "../../../utils/hasher";

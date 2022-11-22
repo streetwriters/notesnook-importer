@@ -19,12 +19,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import { Task, TaskStatus } from "@notesnook-importer/enex";
 import { BaseHandler } from "./base";
-import type { HTMLElement } from "node-html-parser";
+import { Element } from "domhandler";
+import { getAttributeValue } from "domutils";
 
 export class ENTaskGroup extends BaseHandler {
-  async process(element: HTMLElement): Promise<string | undefined> {
+  async process(element: Element): Promise<string | undefined> {
     if (!this.enNote.tasks) return;
-    const taskGroupId = element.getAttribute("task-group-id");
+    const taskGroupId = getAttributeValue(element, "task-group-id");
     if (!taskGroupId) return;
     const tasks = this.enNote.tasks.filter(
       (t) => t.taskGroupNoteLevelID === taskGroupId

@@ -27,10 +27,10 @@ export function ProviderSelector(props: ProviderSelectorProps) {
             border: "1px solid var(--theme-ui-colors-border)",
             outline: "none",
             ":hover": {
-              borderColor: "hover"
+              bg: "hover"
             },
             ":active": {
-              borderColor: "active"
+              bg: "background"
             },
             fontFamily: "body",
             fontSize: "body",
@@ -38,7 +38,8 @@ export function ProviderSelector(props: ProviderSelectorProps) {
             mt: [2, 0],
             p: [2, 0],
             alignItems: "center",
-            justifyContent: "center"
+            justifyContent: "center",
+            cursor: "pointer"
           }}
           onChange={(e) => {
             const providerName: Providers = e.target.value as Providers;

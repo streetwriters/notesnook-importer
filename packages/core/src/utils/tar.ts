@@ -22,7 +22,7 @@ import { Reader } from "./reader";
 
 enum Type {
   Dir,
-  File,
+  File
 }
 
 export interface TarHeader {
@@ -115,7 +115,7 @@ export class Tar {
     return {
       name: (prefix ? prefix + "/" : "") + reader.jump(0).read(100, "utf8"),
       size: parseInt(reader.jump(124).read(12, "utf8"), 8),
-      type: reader.jump(156).read(1)[0] === 53 ? Type.Dir : Type.File,
+      type: reader.jump(156).read(1)[0] === 53 ? Type.Dir : Type.File
     };
   }
 }

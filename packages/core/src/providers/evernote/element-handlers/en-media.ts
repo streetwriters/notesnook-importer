@@ -19,32 +19,33 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import { Attachment, attachmentToHTML } from "../../../models/attachment";
 import { BaseHandler } from "./base";
-import type { HTMLElement } from "node-html-parser";
-import { getAttribute } from "../../../utils/dom-utils";
+import { Element } from "domhandler";
+import { parseAttributeValue } from "../../../utils/dom-utils";
+import { getAttributeValue } from "domutils";
 
 export class ENMedia extends BaseHandler {
-  async process(element: HTMLElement): Promise<string | undefined> {
+  async process(element: Element): Promise<string | undefined> {
     if (!this.enNote.resources) return;
 
-    const hash = element.getAttribute("hash");
+    const hash = getAttributeValue(element, "hash");
     if (!hash) return;
 
-    const resource = this.enNote.resources?.find(
-      (res) => res.attributes?.hash == hash
-    );
-    if (!resource) return;
+    const resource = this.enNote.resources?.find((res) => res?.hash == hash);
+    if (!resource || !resource.data) return;
 
-    const data = new Uint8Array(Buffer.from(resource.data, "base64"));
-    const dataHash = await this.hasher.hash(data);
+    const dataHash = await this.hasher.hash(resource.data);
     const attachment: Attachment = {
-      data,
-      filename: resource.attributes?.filename || dataHash,
-      size: data.length,
+      data: resource.data,
+      filename: resource?.filename || dataHash,
+      size: resource.data.length,
       hash: dataHash,
       hashType: this.hasher.type,
-      mime: resource.mime,
-      width: getAttribute(element, "width", "number"),
-      height: getAttribute(element, "height", "number")
+      mime: resource.mime || "application/octet-stream",
+      width: parseAttributeValue(getAttributeValue(element, "width"), "number"),
+      height: parseAttributeValue(
+        getAttributeValue(element, "height"),
+        "number"
+      )
     };
     this.note.attachments?.push(attachment);
     return attachmentToHTML(attachment);

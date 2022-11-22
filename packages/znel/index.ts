@@ -43,13 +43,14 @@ export class Znel implements IZnelElement {
     return version;
   }
 
- get metadata(): ZMeta {
+  get metadata(): ZMeta {
     const metadataElement = this.#znoteElement.querySelector("zmeta");
-    if (!metadataElement) throw new Error("Invalid znel. No ZMeta element found");
+    if (!metadataElement)
+      throw new Error("Invalid znel. No ZMeta element found");
     return new ZMeta(metadataElement);
   }
 
-  get tags() : string[] {
+  get tags(): string[] {
     const tags: string[] = [];
     const tagElements = this.#znoteElement.querySelectorAll("ztag");
     for (const element of tagElements) {
@@ -58,7 +59,7 @@ export class Znel implements IZnelElement {
     return tags;
   }
 
-  get reminders() : ZReminder[] {
+  get reminders(): ZReminder[] {
     const reminders: ZReminder[] = [];
     const reminderElements = this.#znoteElement.querySelectorAll("zreminder");
     for (const element of reminderElements) {
@@ -67,13 +68,16 @@ export class Znel implements IZnelElement {
     return reminders;
   }
 
-get content(): ZContent {
-  const zcontentElement = this.#znoteElement.querySelector("zcontent");
-  if (!zcontentElement) throw new Error("Invalid znel. No ZContent element found");
-  return new ZContent(zcontentElement, this.metadata.noteType);
-}
-  
+  get content(): ZContent {
+    const zcontentElement = this.#znoteElement.querySelector("zcontent");
+    if (!zcontentElement)
+      throw new Error("Invalid znel. No ZContent element found");
+    return new ZContent(zcontentElement, this.metadata.noteType);
+  }
+
   validate() {
     this.version && this.content;
   }
 }
+
+export * from "./src/content";

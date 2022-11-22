@@ -20,12 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import { ContentType, Note } from "../../models/note";
 import { KeepNote, listToHTML } from "./types";
 import { parse } from "node-html-parser";
-import {
-  IFileProvider,
-  iterate,
-  ProviderResult,
-  ProviderSettings
-} from "../provider";
+import { IFileProvider, ProviderSettings } from "../provider";
 import { File } from "../../utils/file";
 import { Attachment, attachmentToHTML } from "../../models/attachment";
 import { path } from "../../utils/path";
@@ -48,72 +43,60 @@ const colorMap: Record<string, string | undefined> = {
 
 export class GoogleKeep implements IFileProvider {
   public type = "file" as const;
-  public supportedExtensions = [".json"];
-  public validExtensions = [
-    ...this.supportedExtensions,
-    ".3gp",
-    ".jpeg",
-    ".jpg",
-    ".gif",
-    ".png",
-    ".html",
-    ".txt"
-  ];
+  public supportedExtensions = [".zip"];
+  public examples = ["takeout.zip"];
   public version = "1.0.0";
   public name = "Google Keep";
 
-  async process(
-    files: File[],
-    settings: ProviderSettings
-  ): Promise<ProviderResult> {
-    return iterate(this, files, async (file, notes) => {
-      const data = file.text;
-      const keepNote = <KeepNote>JSON.parse(data);
+  filter(file: File) {
+    return [".json"].includes(file.extension);
+  }
 
-      const dateEdited = this.usToMilliseconds(
-        keepNote.userEditedTimestampUsec
-      );
-      const note: Note = {
-        title: keepNote.title || path.basename(file.name),
-        dateCreated: dateEdited,
-        dateEdited,
-        pinned: keepNote.isPinned,
-        color: colorMap[keepNote.color?.toLowerCase() || "default"],
-        tags: keepNote.labels?.map((label) => label.name),
-        content: {
-          type: ContentType.HTML,
-          data: this.getContent(keepNote)
-        }
-      };
+  async *process(file: File, settings: ProviderSettings, files: File[]) {
+    const data = await file.text();
+    const keepNote = <KeepNote>JSON.parse(data);
 
-      if (keepNote.attachments && note.content) {
-        note.attachments = [];
-        const document = parse(note.content.data);
-        for (const keepAttachment of keepNote.attachments) {
-          const attachmentFile = files.find((f) =>
-            keepAttachment.filePath.includes(f.nameWithoutExtension)
-          );
-          if (!attachmentFile) continue;
-
-          const data = attachmentFile.bytes;
-          const dataHash = await settings.hasher.hash(data);
-          const attachment: Attachment = {
-            data,
-            filename: attachmentFile.name,
-            size: data.byteLength,
-            hash: dataHash,
-            hashType: settings.hasher.type,
-            mime: keepAttachment.mimetype
-          };
-          document.appendChild(parse(attachmentToHTML(attachment)));
-          note.attachments.push(attachment);
-        }
-        note.content.data = document.outerHTML;
+    const dateEdited = this.usToMilliseconds(keepNote.userEditedTimestampUsec);
+    const note: Note = {
+      title: keepNote.title || path.basename(file.name),
+      dateCreated: dateEdited,
+      dateEdited,
+      pinned: keepNote.isPinned,
+      color: colorMap[keepNote.color?.toLowerCase() || "default"],
+      tags: keepNote.labels?.map((label) => label.name),
+      content: {
+        type: ContentType.HTML,
+        data: this.getContent(keepNote)
       }
-      notes.push(note);
+    };
 
-      return true;
-    });
+    if (keepNote.attachments && note.content) {
+      note.attachments = [];
+      const document = parse(note.content.data);
+      for (const keepAttachment of keepNote.attachments) {
+        const attachmentFile = files.find((f) =>
+          keepAttachment.filePath.includes(f.nameWithoutExtension)
+        );
+        if (!attachmentFile) continue;
+
+        const data = await attachmentFile.bytes();
+        if (!data) continue;
+
+        const dataHash = await settings.hasher.hash(data);
+        const attachment: Attachment = {
+          data,
+          filename: attachmentFile.name,
+          size: data.byteLength,
+          hash: dataHash,
+          hashType: settings.hasher.type,
+          mime: keepAttachment.mimetype
+        };
+        document.appendChild(parse(attachmentToHTML(attachment)));
+        note.attachments.push(attachment);
+      }
+      note.content.data = document.outerHTML;
+    }
+    yield note;
   }
 
   private getContent(keepNote: KeepNote): string {

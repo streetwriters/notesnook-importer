@@ -19,12 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import { Content, ContentType, Note } from "../../models/note";
 import { File } from "../../utils/file";
-import {
-  IFileProvider,
-  iterate,
-  ProviderResult,
-  ProviderSettings
-} from "../provider";
+import { IFileProvider, ProviderSettings } from "../provider";
 import {
   SNNote,
   SNComponent,
@@ -54,66 +49,61 @@ const defaultEditorDescription = (item: SNNote): EditorDescription => {
 
 export class StandardNotes implements IFileProvider {
   public type = "file" as const;
-  public supportedExtensions = [".txt", ".zip"];
-  public validExtensions = [...this.supportedExtensions];
+  public supportedExtensions = [".zip"];
   public version = "1.0.0";
   public name = "Standard Notes";
+  public examples = [
+    "Standard Notes Backup - Fri Jan 14 2022 10_31_29 GMT+0500.zip"
+  ];
 
-  async process(
-    files: File[],
-    _settings: ProviderSettings
-  ): Promise<ProviderResult> {
-    return iterate(this, files, async (file, notes, errors) => {
-      if (file.name !== "Standard Notes Backup and Import File.txt")
-        return false;
+  filter(file: File) {
+    return [".txt"].includes(file.extension);
+  }
 
-      const data: SNBackup = <SNBackup>JSON.parse(file.text);
-      if (!data.items) {
-        errors.push(new Error("Invalid backup file."));
-        return false;
+  async *process(file: File, _settings: ProviderSettings, _files: File[]) {
+    if (file.name !== "Standard Notes Backup and Import File.txt") return;
+
+    const data: SNBackup = <SNBackup>JSON.parse(await file.text());
+    if (!data.items) {
+      throw new Error("Invalid backup file.");
+    }
+
+    if (data.version !== ProtocolVersion.V004) {
+      throw new Error(`Unsupported backup file version: ${data.version}.`);
+    }
+
+    const components: SNComponent[] = [];
+    const tags: SNTag[] = [];
+    const snnotes: SNNote[] = [];
+
+    for (const item of data.items) {
+      switch (item.content_type) {
+        case SNItemType.Note:
+          snnotes.push(<SNNote>item);
+          break;
+        case SNItemType.Component:
+          components.push(<SNComponent>item);
+          break;
+        case SNItemType.Tag:
+          tags.push(<SNTag>item);
+          break;
       }
+    }
 
-      if (data.version !== ProtocolVersion.V004) {
-        errors.push(
-          new Error(`Unsupported backup file version: ${data.version}.`)
-        );
-        return false;
-      }
+    for (const item of snnotes) {
+      const { createdAt, updatedAt } = this.getTimestamps(item);
+      const content = this.parseContent(item, components);
+      const note: Note = {
+        title: item.content.title,
+        dateCreated: createdAt,
+        dateEdited: updatedAt,
+        pinned: <boolean>item.content.appData[DefaultAppDomain]?.pinned,
+        tags: this.getTags(item, tags),
+        content
+      };
 
-      const components: SNComponent[] = [];
-      const tags: SNTag[] = [];
-      const snnotes: SNNote[] = [];
-
-      data.items.forEach((item) => {
-        switch (item.content_type) {
-          case SNItemType.Note:
-            snnotes.push(<SNNote>item);
-            break;
-          case SNItemType.Component:
-            components.push(<SNComponent>item);
-            break;
-          case SNItemType.Tag:
-            tags.push(<SNTag>item);
-            break;
-        }
-      });
-
-      for (const item of snnotes) {
-        const { createdAt, updatedAt } = this.getTimestamps(item);
-        const content = this.parseContent(item, components);
-        const note: Note = {
-          title: item.content.title,
-          dateCreated: createdAt,
-          dateEdited: updatedAt,
-          pinned: <boolean>item.content.appData[DefaultAppDomain]?.pinned,
-          tags: this.getTags(item, tags),
-          content
-        };
-        notes.push(note);
-      }
-
-      return true;
-    });
+      yield note;
+    }
   }
 
   getEditor(item: SNNote, components: SNComponent[]): EditorDescription {

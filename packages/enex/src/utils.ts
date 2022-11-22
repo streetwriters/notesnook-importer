@@ -18,70 +18,69 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import { ISO8601DateTime } from "./iso8601-date-time";
-import { HTMLElement, NodeType } from "node-html-parser";
+import { Element, CDATA, isText } from "domhandler";
+import { textContent, findOne } from "domutils";
+import { parseDocument } from "htmlparser2";
 
-export function getAsString(
-  element: HTMLElement,
-  tagName: string
-): string | null {
+export function getAsString(element: Element, tagName: string): string | null {
   const tag = findChild(element, tagName);
   if (!tag) return null;
-  return tag.textContent.trim();
+  return textContent(tag).trim();
 }
 
-export function getAsStringRequired(
-  element: HTMLElement,
-  tagName: string
-): string {
+export function getAsStringRequired(element: Element, tagName: string): string {
   const tag = findChild(element, tagName);
-  if (!tag || !tag.textContent) throw new Error(`${tagName} is required.`);
-  return tag.textContent.trim();
+  if (!tag) throw new Error(`${tagName} is required.`);
+  return textContent(tag).trim();
 }
 
-export function getAsNumber(
-  element: HTMLElement,
-  tagName: string
-): number | null {
+export function getAsNumber(element: Element, tagName: string): number | null {
   const tag = parseFloat(getAsString(element, tagName) || "");
   if (isNaN(tag)) return null;
   return tag;
 }
 
-export function getAsNumberRequired(
-  element: HTMLElement,
-  tagName: string
-): number {
+export function getAsNumberRequired(element: Element, tagName: string): number {
   const tag = parseFloat(getAsStringRequired(element, tagName));
   if (isNaN(tag)) throw new Error(`${tagName} value is an invalid number.`);
   return tag;
 }
 
-export function getAsBoolean(element: HTMLElement, tagName: string): boolean {
+export function getAsBoolean(element: Element, tagName: string): boolean {
   const tag = getAsString(element, tagName);
   return tag === "true";
 }
 
-export function getAsDate(element: HTMLElement, tagName: string): Date | null {
+export function getAsDate(element: Element, tagName: string): Date | null {
   const time = getAsString(element, tagName);
   if (!time) return null;
   return ISO8601DateTime.toDate(time);
 }
 
-export function getAsDateRequired(element: HTMLElement, tagName: string): Date {
+export function getAsDateRequired(element: Element, tagName: string): Date {
   const time = getAsStringRequired(element, tagName);
   const date = ISO8601DateTime.toDate(time);
   if (!date) throw new Error(`${tagName} value is an invalid date.`);
   return date;
 }
 
-function findChild(element: HTMLElement, tagName: string): HTMLElement | null {
+export function findChild(element: Element, tagName: string): Element | null {
+  return findOne(
+    (elem) => elem.tagName.toLowerCase() === tagName.toLowerCase(),
+    element.childNodes,
+    false
+  );
+}
+export function findCDATA(element: Element) {
   for (const child of element.childNodes) {
-    if (
-      child.nodeType === NodeType.ELEMENT_NODE &&
-      (<HTMLElement>child).tagName.toLowerCase() === tagName.toLowerCase()
-    ) {
-      return <HTMLElement>child;
+    if (child.type === "cdata") return child;
+  }
+}
+
+export function parseCDATA(element: CDATA) {
+  for (const child of element.childNodes) {
+    if (isText(child) && child.data.includes(`<en-note`)) {
+      return parseDocument(child.data, { xmlMode: true });
     }
   }
-  return null;
 }

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import tap from "tap";
-import { Enex } from "../index";
+import { parse, ParsedEnex } from "../index";
 import fs from "fs";
 import path from "path";
 import { fdir } from "fdir";
@@ -32,29 +32,40 @@ tap.test("enex should be parsed correctly", async () => {
     .withPromise();
   for (const filePath of <string[]>enexFiles) {
     const enexFile = fs.readFileSync(filePath, "utf-8");
-    const enex = new Enex(enexFile);
-    tap.matchSnapshot(toJSON(enex), path.basename(filePath));
+    const enex = await parse(enexFile);
+
+    tap.matchSnapshot(enexToJSON(enex), path.basename(filePath));
+
     enex.notes.forEach((note) => {
       note.resources?.forEach((res) => {
-        tap.ok(res.attributes?.hash);
-        tap.ok(note.content.raw.indexOf(res.attributes?.hash!) > -1);
+        if (!res.attributes || !res.attributes.hash) return;
+
+        tap.ok(res.attributes.hash);
+        tap.ok(note.content.raw.indexOf(res.attributes.hash) > -1);
       });
     });
   }
 });
 
-function toJSON(thisArg: any) {
+function enexToJSON(enex: ParsedEnex): Record<string, unknown> {
+  return {
+    ...enex,
+    notes: enex.notes.map((n) => toJSON(n))
+  };
+}
+
+function toJSON<T>(thisArg: T) {
   const proto = Object.getPrototypeOf(thisArg);
-  const jsonObj: any = Object.assign({}, thisArg);
+  const jsonObj: T = { ...thisArg };
 
   Object.entries(Object.getOwnPropertyDescriptors(proto))
-    .filter(([key, descriptor]) => typeof descriptor.get === "function")
+    .filter(([_key, descriptor]) => typeof descriptor.get === "function")
     .map(([key, descriptor]) => {
       if (descriptor && key[0] !== "_") {
         try {
-          const val = (thisArg as any)[key];
+          const val = thisArg[key];
           if (val && Array.isArray(val)) {
-            const array = [];
+            const array: unknown[] = [];
             for (const item of val) {
               if (typeof item === "object") array.push(toJSON(item));
               else array.push(item);

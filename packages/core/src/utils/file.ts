@@ -18,9 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import { path } from "./path";
+import { toAsyncIterator } from "./stream";
 
 export interface IFile {
-  data: Uint8Array | ArrayBuffer | Buffer;
+  data: ReadableStream<Uint8Array>;
+  size: number;
   name: string;
   path?: string;
   createdAt?: number;
@@ -28,7 +30,6 @@ export interface IFile {
   parent?: IFile;
 }
 
-const textDecoder = new TextDecoder();
 export class File {
   constructor(private readonly file: IFile) {}
 
@@ -41,7 +42,7 @@ export class File {
   }
 
   get nameWithoutExtension(): string {
-    return path.basename(this.file.name, "");
+    return path.basename(this.file.name, path.extname(this.file.name));
   }
 
   get directory(): string | undefined {
@@ -49,20 +50,41 @@ export class File {
     return path.dirname(this.path);
   }
 
-  get text(): string {
-    return textDecoder.decode(this.bytes);
+  async text(): Promise<string> {
+    const stream = this.stream.pipeThrough(new TextDecoderStream());
+    let string = "";
+    for await (const s of toAsyncIterator(stream)) {
+      string += s;
+    }
+    return string;
   }
 
-  get bytes(): Uint8Array | Buffer {
-    if (this.file.data instanceof ArrayBuffer)
-      return new Uint8Array(this.file.data);
+  get stream(): ReadableStream<Uint8Array> {
     return this.file.data;
   }
 
-  get extension(): string | undefined {
-    return (this.path
-      ? path.extname(this.path)
-      : path.extname(this.name)
+  async bytes(): Promise<Uint8Array | null> {
+    if (this.file.size) {
+      const data = new Uint8Array(this.file.size);
+      let read = 0;
+      for await (const chunk of toAsyncIterator(this.file.data)) {
+        data.set(chunk, read);
+        read += chunk.byteLength;
+      }
+      return data;
+    } else {
+      let data: Uint8Array | null = null;
+      for await (const chunk of toAsyncIterator(this.file.data)) {
+        if (!data) data = chunk;
+        else data = concatTypedArrays(data, chunk);
+      }
+      return data;
+    }
+  }
+
+  get extension(): string {
+    return (
+      this.path ? path.extname(this.path) : path.extname(this.name)
     ).toLowerCase();
   }
 
@@ -83,7 +105,15 @@ export class File {
       name: this.name,
       path: this.path,
       createdAt: this.createdAt,
-      modifiedAt: this.modifiedAt,
+      modifiedAt: this.modifiedAt
     };
   }
+}
+
+function concatTypedArrays(a: Uint8Array, b: Uint8Array) {
+  // a, b TypedArray of same type
+  const c = new Uint8Array(a.length + b.length);
+  c.set(a, 0);
+  c.set(b, a.length);
+  return c;
 }

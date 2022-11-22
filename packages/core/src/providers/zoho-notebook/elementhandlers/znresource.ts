@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import { Attachment, attachmentToHTML } from "../../../models/attachment";
 import { BaseHandler } from "./base";
 import type { HTMLElement } from "node-html-parser";
-import { getAttribute } from "../../../utils/dom-utils";
+import { parseAttributeValue } from "../../../utils/dom-utils";
 
 export class ZNResource extends BaseHandler {
   async process(element: HTMLElement): Promise<string | undefined> {
@@ -30,7 +30,9 @@ export class ZNResource extends BaseHandler {
     const file = this.files.find((file) => file.path?.includes(relativePath));
     if (!file) return;
 
-    const data = file.bytes;
+    const data = await file.bytes();
+    if (!data) return;
+
     const hash = await this.hasher.hash(data);
     const type = element.getAttribute("type");
 
@@ -41,8 +43,8 @@ export class ZNResource extends BaseHandler {
       hash,
       hashType: this.hasher.type,
       mime: type || "application/octet-stream",
-      width: getAttribute(element, "width", "number"),
-      height: getAttribute(element, "height", "number")
+      width: parseAttributeValue(element.getAttribute("width"), "number"),
+      height: parseAttributeValue(element.getAttribute("height"), "number")
     };
     this.note.attachments?.push(attachment);
     return attachmentToHTML(attachment);

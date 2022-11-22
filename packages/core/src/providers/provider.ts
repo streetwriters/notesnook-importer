@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import { Note } from "../models/note";
 import { File } from "../utils/file";
 import { IHasher } from "../utils/hasher";
+import { IStorage } from "@notesnook-importer/storage";
 
 export type ProviderType = "network" | "file";
 
@@ -29,14 +30,22 @@ interface IBaseProvider<T extends ProviderType> {
   name: string;
 }
 
-export interface IFileProvider extends IBaseProvider<"file"> {
+export interface IFileProvider<TPreProcessResult = unknown>
+  extends IBaseProvider<"file"> {
   supportedExtensions: string[];
-  validExtensions: string[];
-  process(files: File[], settings: ProviderSettings): Promise<ProviderResult>;
+  examples?: string[];
+  filter(file: File): boolean;
+  preprocess?: (files: File[]) => Promise<TPreProcessResult>;
+  process(
+    currentFile: File,
+    settings: ProviderSettings,
+    files: File[],
+    data?: TPreProcessResult
+  ): AsyncGenerator<Note, void, unknown>;
 }
 
 export interface INetworkProvider<TSettings> extends IBaseProvider<"network"> {
-  process(settings: TSettings): Promise<ProviderResult>;
+  process(settings: TSettings): Promise<Error[]>;
 }
 
 export type IProvider = IFileProvider | INetworkProvider<unknown>;
@@ -44,50 +53,11 @@ export type IProvider = IFileProvider | INetworkProvider<unknown>;
 export interface ProviderSettings {
   clientType: "browser" | "node";
   hasher: IHasher;
+  storage: IStorage<Note>;
+  reporter: (current: number, total?: number) => void;
 }
 
 export type ProviderResult = {
   errors: Error[];
   notes: Note[];
 };
-
-type ProcessAction = (
-  file: File,
-  notes: Note[],
-  errors: Error[]
-) => Promise<boolean>;
-
-const GLOBALLY_VALID_FILE_EXTENSIONS = [".zip"];
-/**
- * Iterate over files & perform transformation in an error resistant
- * manner. All errors are collected for later processing.
- */
-export async function iterate(
-  provider: IFileProvider,
-  files: File[],
-  process: ProcessAction
-): Promise<ProviderResult> {
-  const notes: Note[] = [];
-  const errors: Error[] = [];
-
-  for (const file of files) {
-    if (file.extension) {
-      if (
-        !provider.validExtensions.includes(file.extension) &&
-        !GLOBALLY_VALID_FILE_EXTENSIONS.includes(file.extension)
-      ) {
-        errors.push(new Error(`Invalid file type: ${file.name}`));
-        continue;
-      } else if (!provider.supportedExtensions.includes(file.extension))
-        continue;
-    }
-
-    try {
-      if (!(await process(file, notes, errors))) continue;
-    } catch (e) {
-      errors.push(<Error>e);
-    }
-  }
-
-  return { notes, errors };
-}

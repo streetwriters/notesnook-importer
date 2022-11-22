@@ -2,21 +2,24 @@ import { Text, Button } from "@theme-ui/components";
 import { StepContainer } from "./step-container";
 import {
   INetworkProvider,
-  ProviderResult,
   ProviderSettings,
   OneNote
 } from "@notesnook-importer/core";
 import { xxhash64 } from "hash-wasm";
 import { useCallback, useState } from "react";
+import { BrowserStorage } from "@notesnook-importer/storage/dist/browser";
+import { TransformResult } from "../types";
 
 type NetworkProviderHandlerProps = {
   provider: INetworkProvider<unknown>;
-  onTransformFinished: (result: ProviderResult) => void;
+  onTransformFinished: (result: TransformResult) => void;
 };
 
 const settings: ProviderSettings = {
   clientType: "browser",
-  hasher: { type: "xxh64", hash: (data) => xxhash64(data) }
+  hasher: { type: "xxh64", hash: (data) => xxhash64(data) },
+  storage: new BrowserStorage("temp"),
+  reporter: () => {}
 };
 
 export function NetworkProviderHandler(props: NetworkProviderHandlerProps) {
@@ -26,11 +29,9 @@ export function NetworkProviderHandler(props: NetworkProviderHandlerProps) {
   const startImport = useCallback(() => {
     (async () => {
       if (!provider) return;
-
-      setProgress(null);
-      let result: ProviderResult = { notes: [], errors: [] };
       if (provider instanceof OneNote) {
-        result = await provider.process({
+        setProgress(null);
+        const errors = await provider.process({
           ...settings,
           clientId: "4952c7cf-9c02-4fb7-b867-b87727bb52d8",
           redirectUri:
@@ -39,10 +40,9 @@ export function NetworkProviderHandler(props: NetworkProviderHandlerProps) {
               : "https://importer.notesnook.com",
           report: setProgress
         });
+        onTransformFinished({ totalNotes: 0, errors });
+        setProgress(null);
       }
-
-      setProgress(null);
-      onTransformFinished(result);
     })();
   }, [onTransformFinished, provider]);
 

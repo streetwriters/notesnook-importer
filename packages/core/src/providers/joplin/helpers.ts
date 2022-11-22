@@ -17,12 +17,12 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { ModelType } from "./types";
+import { Entity, ModelType } from "./types";
 
 // Taken from https://github.com/laurent22/joplin/blob/6f1a806e5c7159a544de5d997b189e0e83a9d8ea/packages/lib/models/BaseItem.ts#L477-L523
-export async function unserialize(content: string) {
+export function unserialize(content: string): Entity {
   const lines = content.split("\n");
-  const output: any = {};
+  const output: Record<string, unknown> = {};
   let state = "readingProps";
   const body: string[] = [];
 
@@ -52,23 +52,23 @@ export async function unserialize(content: string) {
     throw new Error(`Missing required property: type_: ${content}`);
   output.type_ = Number(output.type_);
 
-  if (body.length) {
+  if (body.length && output.type_ !== ModelType.NoteTag) {
     const title = body.splice(0, 2);
     output.title = title[0];
   }
 
   if (output.type_ === ModelType.Note) output.body = body.join("\n");
 
-  for (const n in output) {
-    if (!output.hasOwnProperty(n)) continue;
-    output[n] = await unserialize_format(output.type_, n, output[n]);
+  for (const key in output) {
+    if (!Object.prototype.hasOwnProperty.call(output, key)) continue;
+    output[key] = unserializeFormat(key, output[key as keyof Entity]);
   }
-  return output;
+  return output as unknown as Entity;
 }
 
 // Taken from https://github.com/laurent22/joplin/blob/dev/packages/lib/models/BaseItem.ts#L325-L351
 // slightly modified to remove all database related code
-function unserialize_format(type: ModelType, propName: string, propValue: any) {
+function unserializeFormat(propName: string, propValue: any): string {
   if (propName[propName.length - 1] == "_") return propValue; // Private property
 
   if (["title_diff", "body_diff"].indexOf(propName) >= 0) {
@@ -83,7 +83,7 @@ function unserialize_format(type: ModelType, propName: string, propValue: any) {
         "created_time",
         "updated_time",
         "user_created_time",
-        "user_updated_time",
+        "user_updated_time"
       ].indexOf(propName) >= 0
     ) {
       propValue = !propValue ? "0" : new Date(propValue).getTime();
@@ -100,3 +100,5 @@ function unserialize_format(type: ModelType, propName: string, propValue: any) {
         .replace(/\\\r/g, "\\r")
     : propValue;
 }
+
+// export function getEntityType(content)

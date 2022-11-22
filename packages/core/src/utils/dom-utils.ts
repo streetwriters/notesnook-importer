@@ -27,12 +27,10 @@ export type Cell = {
   value: string;
 };
 
-export function getAttribute<T>(
-  element: HTMLElement,
-  key: string,
+export function parseAttributeValue<T>(
+  value: string | undefined,
   type: "number" | "string" = "string"
 ): T | undefined {
-  const value = element.getAttribute(key);
   if (!value) return;
 
   switch (type) {

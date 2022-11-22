@@ -1,20 +1,23 @@
-import { Flex, Input, Text } from "@theme-ui/components";
-import { useCallback, useEffect, useState } from "react";
+import { Flex, Input, Text, Button } from "@theme-ui/components";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { StepContainer } from "./step-container";
 import { Accordion } from "./accordion";
 import {
   IFileProvider,
   transform,
-  ProviderResult,
   ProviderSettings,
   IFile
 } from "@notesnook-importer/core";
 import { xxhash64 } from "hash-wasm";
+import { BrowserStorage } from "@notesnook-importer/storage/dist/browser";
+import { TransformResult } from "../types";
+import { ProgressStream } from "../utils/progress-stream";
+import { bytesToSize } from "../utils/bytes";
 
 type FileProviderHandlerProps = {
   provider: IFileProvider;
-  onTransformFinished: (result: ProviderResult) => void;
+  onTransformFinished: (result: TransformResult) => void;
 };
 
 type Progress = {
@@ -22,15 +25,13 @@ type Progress = {
   done: number;
 };
 
-const settings: ProviderSettings = {
-  clientType: "browser",
-  hasher: { type: "xxh64", hash: (data) => xxhash64(data) }
-};
-
 export function FileProviderHandler(props: FileProviderHandlerProps) {
   const { provider, onTransformFinished } = props;
   const [files, setFiles] = useState<File[]>([]);
-  const [progress, setProgress] = useState<Progress>({ total: 0, done: 0 });
+  const progress = useRef<Progress>({ total: 0, done: 0 });
+  const [filesProgress, setFilesProgress] = useState<
+    Progress & { percentRead: string }
+  >({ done: 0, percentRead: "", total: 0 });
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     setFiles((files) => {
@@ -48,35 +49,28 @@ export function FileProviderHandler(props: FileProviderHandlerProps) {
     setFiles([]);
   }, [provider]);
 
-  useEffect(() => {
-    (async () => {
-      if (!files.length) return;
-
-      setProgress({ total: 0, done: 0 });
-      let result: ProviderResult = { notes: [], errors: [] };
-      for (let file of files) {
-        const providerFile: IFile = {
-          name: file.name,
-          data: await file.arrayBuffer(),
-          modifiedAt: file.lastModified
-        };
-        const transformResult = await transform(
-          provider,
-          [providerFile],
-          settings
-        );
-        result.notes.push(...transformResult.notes);
-        result.errors.push(...transformResult.errors);
-        setProgress((p) => ({ total: files.length, done: p.done + 1 }));
-      }
-      setProgress({ total: 0, done: 0 });
-      onTransformFinished(result);
-    })();
-
-    // Disabled because we do not want to cause an update when provider changes
-    // which only happens when the user selects a different provider.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [files, onTransformFinished]);
+  if (filesProgress.done) {
+    return (
+      <StepContainer sx={{ flexDirection: "column", alignItems: "stretch" }}>
+        <Text variant="title">
+          Processing {filesProgress.done} of {filesProgress.total} file(s)
+        </Text>
+        <Text variant="body" sx={{ mt: 4, textAlign: "center" }}>
+          Found {progress.current.done}{" "}
+          {progress.current.total ? `of ${progress.current.total}` : ""} notes
+        </Text>
+        <Flex
+          sx={{
+            mt: 2,
+            height: "5px",
+            bg: "primary",
+            width: `${filesProgress.percentRead}%`,
+            borderRadius: 5
+          }}
+        />
+      </StepContainer>
+    );
+  }
 
   return (
     <StepContainer sx={{ flexDirection: "column", alignItems: "stretch" }}>
@@ -90,7 +84,11 @@ export function FileProviderHandler(props: FileProviderHandlerProps) {
           height: 200,
           border: "2px dashed var(--theme-ui-colors-border)",
           borderRadius: "default",
-          mt: 2
+          mt: 2,
+          cursor: "pointer",
+          ":hover": {
+            bg: "bgSecondary"
+          }
         }}
       >
         <Input {...getInputProps()} />
@@ -101,8 +99,16 @@ export function FileProviderHandler(props: FileProviderHandlerProps) {
           <br />
           <Text variant="subBody">
             Only {provider?.supportedExtensions.join(", ")} files are supported.
-            You can also select .zip files containing{" "}
-            {provider?.supportedExtensions.join(", ")} files.
+            {provider?.supportedExtensions.includes(".zip") ? null : (
+              <>
+                You can also select .zip files containing{" "}
+                {provider?.supportedExtensions.join(", ")} files.
+              </>
+            )}
+            <br />
+            {provider.examples ? (
+              <>For example, {provider.examples.join(", ")}</>
+            ) : null}
           </Text>
         </Text>
       </Flex>
@@ -124,9 +130,10 @@ export function FileProviderHandler(props: FileProviderHandlerProps) {
               <Flex
                 key={file.name}
                 sx={{
-                  flexDirection: "column",
                   p: 2,
                   bg: index % 2 ? "transparent" : "bgSecondary",
+                  alignItems: "center",
+                  justifyContent: "space-between",
                   cursor: "pointer",
                   ":hover": {
                     bg: "hover"
@@ -142,16 +149,84 @@ export function FileProviderHandler(props: FileProviderHandlerProps) {
                 title="Click to remove"
               >
                 <Text variant="body">{file.name}</Text>
+                <Text variant="body">{bytesToSize(file.size, " ")}</Text>
               </Flex>
             ))}
           </Flex>
         </Accordion>
       ) : null}
-      {progress.total > 0 ? (
-        <Text variant="body">
-          Processing files ({progress.done}/{progress.total})
-        </Text>
-      ) : null}
+
+      {!!files.length && (
+        <>
+          <Text
+            variant="body"
+            sx={{
+              bg: "text",
+              color: "static",
+              mt: 2,
+              borderRadius: 5,
+              p: 1
+            }}
+          >
+            Please make sure you have at least{" "}
+            {bytesToSize(files.reduce((prev, file) => prev + file.size, 0))} of
+            free space before proceeding.
+          </Text>
+          <Button
+            sx={{ alignSelf: "center", mt: 2, px: 4 }}
+            onClick={async () => {
+              const errors: Error[] = [];
+              const settings: ProviderSettings = {
+                clientType: "browser",
+                hasher: { type: "xxh64", hash: xxhash64 },
+                storage: new BrowserStorage(provider.name),
+                reporter: (current, total) => {
+                  progress.current = { done: current, total: total || 0 };
+                }
+              };
+              await settings.storage.clear();
+
+              progress.current = { total: 0, done: 0 };
+              setFilesProgress({
+                total: files.length,
+                done: 0,
+                percentRead: ""
+              });
+
+              for (let file of files) {
+                setFilesProgress((p) => ({
+                  ...p,
+                  done: p.done + 1
+                }));
+
+                const providerFile: IFile = {
+                  name: file.name,
+                  modifiedAt: file.lastModified,
+                  size: file.size,
+                  data: file.stream().pipeThrough(
+                    new ProgressStream((bytes) => {
+                      setFilesProgress((s) => ({
+                        ...s,
+                        percentRead: ((bytes / file.size) * 100).toFixed(2)
+                      }));
+                    })
+                  )
+                };
+                errors.push(
+                  ...(await transform(provider, [providerFile], settings))
+                );
+              }
+
+              onTransformFinished({
+                totalNotes: progress.current.done,
+                errors
+              });
+            }}
+          >
+            Start processing
+          </Button>
+        </>
+      )}
     </StepContainer>
   );
 }

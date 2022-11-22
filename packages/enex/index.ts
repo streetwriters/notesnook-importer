@@ -19,63 +19,111 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import { ISO8601DateTime } from "./src/iso8601-date-time";
 import { Note } from "./src/note";
-import { IEnexElement } from "./src/types";
-import { parse, HTMLElement } from "node-html-parser";
+import { Parser as HTMLParser2 } from "htmlparser2";
+import { MimeTypes, Resource } from "./src/resource";
+import { toByteArray } from "base64-js";
+import SparkMD5 from "spark-md5";
 
-export class Enex implements IEnexElement {
-  #enexElement: HTMLElement;
-  constructor(enex: string) {
-    const document = parse(enex);
+class Parser extends HTMLParser2 {
+  public notes: Note[] = [];
+}
 
-    const element = document.querySelector("en-export");
-    if (!element)
-      throw new Error("Invalid enex file. Must contain en-export element.");
-    this.#enexElement = element;
+export type ParsedEnex = {
+  exportDate: Date;
+  application: string;
+  version: string;
+  notes: Note[];
+  isNotebook: boolean;
+};
 
-    this.validate();
-  }
+const VALID_TAGS = [
+  "title",
+  "created",
+  "updated",
+  "tag",
+  "content",
+  "data",
+  "mime",
+  "width",
+  "height",
+  "file-name"
+];
 
-  get exportDate(): Date {
-    const exportDate = this.#enexElement.getAttribute("export-date");
-    if (!exportDate)
-      throw new Error("Invalid enex. export-date attribute is required.");
-    const date = ISO8601DateTime.toDate(exportDate);
-    if (!date) throw new Error("export-date value is not a valid date.");
-    return date;
-  }
+const WHITESPACE_REGEX = /\s+/gm;
+export async function* parse(enex: ReadableStream<string> | string) {
+  // const notes = [];
+  const state: ParseState = { attributes: {}, text: "", ignore: true };
+  const parser = new Parser(
+    {
+      onopentagname(name) {
+        reset(state);
 
-  get application(): string {
-    const application = this.#enexElement.getAttribute("application");
-    if (!application)
-      throw new Error("Invalid enex. application attribute is required.");
-    return application;
-  }
+        if (name === "note") state.note = { tags: [], resources: [] };
+        if (name === "resource") state.resource = {};
+        if (VALID_TAGS.includes(name)) state.ignore = false;
+      },
+      onclosetag(name) {
+        if (state.note) {
+          if (name === "title") state.note.title = state.text;
+          if (name === "created")
+            state.note.created = ISO8601DateTime.toDate(state.text);
+          if (name === "updated")
+            state.note.updated = ISO8601DateTime.toDate(state.text);
+          if (name === "tag") state.note.tags.push(state.text);
+          if (name === "content") state.note.content = state.text;
+          if (name === "resource" && state.resource) {
+            state.note.resources.push(state.resource);
+            state.resource = {};
+          }
+        }
 
-  get version(): string {
-    const version = this.#enexElement.getAttribute("version");
-    if (!version)
-      throw new Error("Invalid enex. version attribute is required.");
-    return version;
-  }
+        if (state.resource) {
+          if (name === "data") {
+            const data = toByteArray(state.text.replace(WHITESPACE_REGEX, ""));
+            state.resource.data = data;
+            state.resource.hash = SparkMD5.ArrayBuffer.hash(data);
+          }
+          if (name === "mime") state.resource.mime = state.text as MimeTypes;
+          if (name === "file-name") state.resource.filename = state.text;
+          if (name === "width") state.resource.width = parseInt(state.text);
+          if (name === "height") state.resource.height = parseInt(state.text);
+        }
 
-  get notes(): Note[] {
-    const noteElements = this.#enexElement.querySelectorAll("note");
-    if (noteElements.length <= 0)
-      throw new Error("Invalid enex. Enex file contains 0 notes.");
-    const notes: Note[] = [];
-    for (const element of noteElements) {
-      notes.push(new Note(element));
+        if (name === "note" && state.note) {
+          parser.notes.push(state.note);
+        }
+      },
+      ontext(data) {
+        if (state.ignore) return;
+        state.text += data;
+      }
+    },
+    {
+      xmlMode: false,
+      lowerCaseTags: false,
+      lowerCaseAttributeNames: false,
+      recognizeSelfClosing: true,
+      recognizeCDATA: true,
+      decodeEntities: false
     }
-    return notes;
-  }
+  );
 
-  get isNotebook(): boolean {
-    const noteElements = this.#enexElement.querySelectorAll("note");
-    return noteElements.length > 1;
-  }
-
-  validate() {
-    this.exportDate && this.application && this.version && this.notes;
+  if (enex instanceof ReadableStream) {
+    const reader = enex.getReader();
+    let chunk: ReadableStreamReadResult<string> | undefined;
+    while ((chunk = await reader.read())) {
+      if (chunk.done) break;
+      if (!chunk.value) continue;
+      parser.notes.length = 0;
+      parser.write(chunk.value);
+      yield parser.notes;
+    }
+    parser.notes.length = 0;
+    parser.end();
+    yield parser.notes;
+  } else {
+    parser.end(enex);
+    yield parser.notes;
   }
 }
 
@@ -85,3 +133,118 @@ export * from "./src/resource";
 export * from "./src/content";
 export * from "./src/task";
 export * from "./src/types";
+
+type ParseState = {
+  note?: Note;
+  resource?: Resource;
+  ignore: boolean;
+  text: string;
+  attributes: Record<string, string>;
+};
+
+function reset(state: ParseState) {
+  state.text = "";
+  state.attributes = {};
+  state.ignore = true;
+}
+
+// function parseChunk(state: ParseState, chunk: string): Note[] {
+//   const notes: Note[] = [];
+
+//   parser.write(chunk);
+//   parser.reset();
+//   return notes;
+// }
+// function closeTag(state: ParseState) {
+//   if (state.isTagOpen) {
+//     state.note += ">";
+//     state.isTagOpen = false;
+//   }
+// }
+
+// const state: ParseState = {
+//   note: "",
+//   isTagOpen: false,
+//   write: false
+// };
+
+// const parser = new Parser(
+//   {
+//     onopentagname(name) {
+//       closeTag(state);
+//       if (name === "note") state.write = true;
+//       if (state.write) {
+//         state.note += `<${name}`;
+//         state.isTagOpen = true;
+//       }
+//     },
+//     onattribute(name, value, quote) {
+//       if (!state.write) return;
+
+//       state.note += " ";
+//       state.note += name;
+//       if (!quote) return;
+//       const actualQuote = quote === null ? "" : `${quote}`;
+//       state.note += `=${actualQuote}${value}${actualQuote}`;
+//     },
+//     onclosetag(name, isImplied) {
+//       if (!state.write) return;
+
+//       if (!isImplied) closeTag(state);
+//       state.note += isImplied ? "/>" : `</${name}>`;
+//       state.isTagOpen = false;
+
+//       if (name === "note") {
+//         onNote(toNote(state.note));
+//         state.note = "";
+//         state.write = false;
+//         state.isTagOpen = false;
+//       }
+//     },
+//     ontext(data) {
+//       if (!state.write) return;
+
+//       closeTag(state);
+//       state.note += data;
+//     },
+//     oncdatastart() {
+//       if (!state.write) return;
+
+//       state.note += "<![CDATA[";
+//     },
+//     oncdataend() {
+//       if (!state.write) return;
+
+//       state.note += "]]>";
+//     },
+//     onprocessinginstruction(name, data) {
+//       if (!state.write) return;
+//       state.note += `<${data}>`;
+//     }
+//   },
+//   { recognizeCDATA: true, recognizeSelfClosing: true, xmlMode: true }
+// );
+
+// const parser = createDomStream(
+//   () => {},
+//   { recognizeCDATA: true, recognizeSelfClosing: true, xmlMode: true },
+//   (elem) => {
+//     if (elem.tagName === "en-export") {
+//       const exportDate = elem.attribs["export-date"];
+//       if (!exportDate)
+//         throw new Error("Invalid enex. export-date attribute is required.");
+//       const date = ISO8601DateTime.toDate(exportDate);
+//       if (!date) throw new Error("export-date value is not a valid date.");
+
+//       const application = elem.attribs["application"];
+//       if (!application)
+//         throw new Error("Invalid enex. application attribute is required.");
+
+//       const version = elem.attribs["version"];
+//       if (!version)
+//         throw new Error("Invalid enex. version attribute is required.");
+//     } else if (elem.tagName === "note") {
+//       notes.push(toNote(elem));
+//     }
+//   }
+// );

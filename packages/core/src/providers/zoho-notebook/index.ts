@@ -19,54 +19,50 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import { ContentType, Note, Notebook } from "../../models/note";
 import { File } from "../../utils/file";
-import {
-  IFileProvider,
-  iterate,
-  ProviderResult,
-  ProviderSettings
-} from "../provider";
+import { IFileProvider, ProviderSettings } from "../provider";
 import { path } from "../../utils/path";
 import { ZNotebook } from "./types";
 import { Znel } from "@notesnook-importer/znel";
 import { ElementHandler } from "./elementhandlers";
 
 export class ZohoNotebook implements IFileProvider {
-  public type: "file" = "file";
-  public supportedExtensions = [".znel"];
-  public validExtensions = [...this.supportedExtensions];
+  public type = "file" as const;
+  public supportedExtensions = [".zip"];
   public version = "1.0.0";
   public name = "Zoho Notebook";
+  public examples = ["Notebook_02Mar2022_0441.zip"];
 
-  async process(
-    files: File[],
-    settings: ProviderSettings
-  ): Promise<ProviderResult> {
-    return iterate(this, files, async (file, notes) => {
-      const notebook = this.getNotebook(file, files);
-      const znel = new Znel(file.text);
-
-      const note: Note = {
-        title: znel.metadata.title,
-        tags: znel.tags,
-        dateCreated: znel.metadata.createdDate?.getTime(),
-        dateEdited: znel.metadata.modifiedDate?.getTime(),
-        attachments: [],
-        notebooks: notebook ? [notebook] : []
-      };
-
-      const elementHandler = new ElementHandler(note, files, settings.hasher);
-      const html = await znel.content.toHtml(elementHandler);
-      note.content = {
-        data: html,
-        type: ContentType.HTML
-      };
-      notes.push(note);
-
-      return true;
-    });
+  filter(file: File) {
+    return [".znel"].includes(file.extension);
   }
 
-  private getNotebook(file: File, files: File[]): Notebook | undefined {
+  async *process(file: File, settings: ProviderSettings, files: File[]) {
+    const notebook = await this.getNotebook(file, files);
+    const znel = new Znel(await file.text());
+
+    const note: Note = {
+      title: znel.metadata.title,
+      tags: znel.tags,
+      dateCreated: znel.metadata.createdDate?.getTime(),
+      dateEdited: znel.metadata.modifiedDate?.getTime(),
+      attachments: [],
+      notebooks: notebook ? [notebook] : []
+    };
+
+    const elementHandler = new ElementHandler(note, files, settings.hasher);
+    const html = await znel.content.toHtml(elementHandler);
+    note.content = {
+      data: html,
+      type: ContentType.HTML
+    };
+
+    yield note;
+  }
+
+  private async getNotebook(
+    file: File,
+    files: File[]
+  ): Promise<Notebook | undefined> {
     const rootArchiveName = file.parent?.parent?.name || "";
     const archivePath = file.parent?.path;
 
@@ -81,7 +77,7 @@ export class ZohoNotebook implements IFileProvider {
     const notebookFile = files.find((f) => f.path === notebookPath);
     let notebook: Notebook | undefined;
     if (notebookFile) {
-      const zohoNotebook: ZNotebook = JSON.parse(notebookFile.text);
+      const zohoNotebook: ZNotebook = JSON.parse(await notebookFile.text());
       notebook = { notebook: zohoNotebook.name, topic: "All notes" };
     }
     return notebook;

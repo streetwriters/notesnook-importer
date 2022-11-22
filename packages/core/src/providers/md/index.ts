@@ -18,43 +18,33 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import { ContentType, Note } from "../../models/note";
-import {
-  IFileProvider,
-  iterate,
-  ProviderResult,
-  ProviderSettings
-} from "../provider";
+import { IFileProvider, ProviderSettings } from "../provider";
 import { File } from "../../utils/file";
-import { parse } from "node-html-parser";
 import { markdowntoHTML, textToHTML } from "../../utils/to-html";
 
 export class Markdown implements IFileProvider {
   public type = "file" as const;
   public supportedExtensions = [".md", ".txt"];
-  public validExtensions = [...this.supportedExtensions];
   public version = "1.0.0";
   public name = "Markdown/Text";
+  public examples = ["document.md", "import-help.txt"];
 
-  async process(
-    files: File[],
-    _settings: ProviderSettings
-  ): Promise<ProviderResult> {
-    return iterate(this, files, (file, notes) => {
-      const data = file.text;
-      const html =
-        file.extension === ".md" ? markdowntoHTML(data) : textToHTML(data);
-      const document = parse(html);
+  filter(file: File) {
+    return this.supportedExtensions.includes(file.extension);
+  }
 
-      const title = document.querySelector("h1,h2")?.textContent;
-      const note: Note = {
-        title: title || file.nameWithoutExtension,
-        dateCreated: file.createdAt,
-        dateEdited: file.modifiedAt,
-        content: { type: ContentType.HTML, data: html }
-      };
-      notes.push(note);
+  async *process(file: File, _settings: ProviderSettings, _files: File[]) {
+    const data = await file.text();
+    const html =
+      file.extension === ".md" ? markdowntoHTML(data) : textToHTML(data);
 
-      return Promise.resolve(true);
-    });
+    const note: Note = {
+      title: file.nameWithoutExtension,
+      dateCreated: file.createdAt,
+      dateEdited: file.modifiedAt,
+      content: { type: ContentType.HTML, data: html }
+    };
+
+    yield note;
   }
 }

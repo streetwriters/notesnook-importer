@@ -3,22 +3,22 @@ import { Note } from "@notesnook-importer/core";
 import { Accordion } from "./accordion";
 
 type NotesListProps = {
-  notes: Note[];
+  totalNotes: number;
   onNoteSelected: (note: Note) => void;
 };
 export function NotesList(props: NotesListProps) {
-  const { notes, onNoteSelected } = props;
+  const { totalNotes, onNoteSelected } = props;
 
   return (
     <Accordion
-      title={`${notes.length} notes found`}
+      title={`${totalNotes} notes found`}
       sx={{
         border: "1px solid var(--theme-ui-colors-border)",
         mt: 2,
         borderRadius: "default"
       }}
     >
-      <Flex
+      {/* <Flex
         sx={{
           flexDirection: "column",
           overflowY: "auto",
@@ -54,7 +54,7 @@ export function NotesList(props: NotesListProps) {
             )}
           </Flex>
         ))}
-      </Flex>
+      </Flex> */}
     </Accordion>
   );
 }

@@ -4,6 +4,7 @@
   "private": true,
   "license": "GPL-3.0-or-later",
   "devDependencies": {
+    "@types/streamsaver": "^2.0.1",
     "@types/file-saver": "^2.0.4",
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
@@ -18,9 +19,10 @@
   },
   "dependencies": {
     "@notesnook-importer/core": "*",
+    "@notesnook-importer/storage": "*",
     "buffer": "^6.0.3",
     "colord": "^2.9.2",
-    "file-saver": "^2.0.5",
+    "fflate": "^0.7.4",
     "hash-wasm": "^4.9.0",
     "interweave": "^12.9.0",
     "react": "^17.0.2",
@@ -29,6 +31,7 @@
     "react-icons": "^4.3.1",
     "react-modal": "^3.14.4",
     "react-select": "^5.2.1",
+    "streamsaver": "^2.0.6",
     "theme-ui": "^0.12.1"
   },
   "scripts": {
