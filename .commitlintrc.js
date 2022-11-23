@@ -14,6 +14,7 @@ const SCOPES = [
   "core",
   "enex",
   "onenote",
+  "storage",
   "znel",
   "config",
   "ci",

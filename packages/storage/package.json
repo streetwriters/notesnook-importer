@@ -1,6 +1,6 @@
 {
   "name": "@notesnook-importer/storage",
-  "private": true,
+  "private": false,
   "version": "1.5.0",
   "description": "",
   "main": "dist/index.js",
@@ -14,7 +14,8 @@
   "scripts": {
     "test": "tap --ts --no-check-coverage --no-coverage",
     "build": "tsc",
-    "build:test": "tsc --module commonjs"
+    "build:test": "tsc --module commonjs",
+    "prepublishOnly": "npm run build"
   },
   "author": "Abdullah Atta <abdullahatta@streetwriters.co>",
   "license": "GPL-3.0-or-later",
