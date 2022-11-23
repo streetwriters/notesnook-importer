@@ -14,7 +14,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "build:test": "tsc --module commonjs"
+    "build:test": "tsc --module commonjs",
+    "prepublishOnly": "npm run build"
   },
   "author": "Abdullah Atta <abdullahatta@streetwriters.co>",
   "license": "GPL-3.0-or-later",
