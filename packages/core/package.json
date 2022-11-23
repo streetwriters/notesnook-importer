@@ -1,7 +1,7 @@
 {
   "name": "@notesnook-importer/core",
   "private": false,
-  "version": "1.5.0",
+  "version": "1.5.1",
   "main": "dist/index.js",
   "description": "Convert notes from various note taking apps into a simple & standard format.",
   "scripts": {
@@ -11,10 +11,10 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@notesnook-importer/enex": "*",
-    "@notesnook-importer/onenote": "*",
-    "@notesnook-importer/storage": "*",
-    "@notesnook-importer/znel": "*",
+    "@notesnook-importer/enex": "^1.5.1",
+    "@notesnook-importer/onenote": "^1.5.1",
+    "@notesnook-importer/storage": "^1.5.1",
+    "@notesnook-importer/znel": "^1.5.1",
     "@standardnotes/common": "1.45.0",
     "@standardnotes/features": "1.55.3",
     "@standardnotes/models": "1.37.5",

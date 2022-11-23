@@ -1,6 +1,6 @@
 {
   "name": "@notesnook-importer/web",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "private": true,
   "license": "GPL-3.0-or-later",
   "devDependencies": {
@@ -18,8 +18,8 @@
     "typescript": "^4.8.2"
   },
   "dependencies": {
-    "@notesnook-importer/core": "*",
-    "@notesnook-importer/storage": "*",
+    "@notesnook-importer/core": "^1.5.1",
+    "@notesnook-importer/storage": "^1.5.1",
     "buffer": "^6.0.3",
     "colord": "^2.9.2",
     "fflate": "^0.7.4",
