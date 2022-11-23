@@ -23,17 +23,15 @@ import { Note } from "../models";
 import { path } from "./path";
 import { ZipFile } from "./zip-stream";
 
-const noteDataFilename = "note.json";
-const attachmentsDirectory = "attachments";
-const md5 = new SparkMD5.ArrayBuffer();
-const textEncoder = new TextEncoder();
+export const NOTE_DATA_FILENAME = "note.json";
+export const METADATA_FILENAME = "metadata.json";
+export const ATTACHMENTS_DIRECTORY_NAME = "attachments";
 
-type NoteFiles = {
+export type NoteFiles = {
   files: Record<string, Uint8Array>;
   hash: string;
 };
-const metadataFilename = "metadata.json";
-type PackageMetadata = {
+export type PackageMetadata = {
   version: string;
   notes: string[];
 };
@@ -51,8 +49,8 @@ export class NoteStream extends ReadableStream<ZipFile> {
         const { value: note, done } = await notes.next();
         if (done) {
           controller.enqueue({
-            path: metadataFilename,
-            data: textEncoder.encode(JSON.stringify(metadata))
+            path: METADATA_FILENAME,
+            data: new TextEncoder().encode(JSON.stringify(metadata))
           });
           await storage.clear();
           return controller.close();
@@ -79,14 +77,14 @@ function filefy(note: Note): NoteFiles {
   if (note.attachments) {
     for (const attachment of note.attachments) {
       if (!attachment.data) continue;
-      const filePath = path.join(attachmentsDirectory, attachment.hash);
+      const filePath = path.join(ATTACHMENTS_DIRECTORY_NAME, attachment.hash);
       files[filePath] = attachment.data;
       attachment.data = undefined;
     }
   }
 
-  const noteData = textEncoder.encode(JSON.stringify(note));
-  const noteDataHash = md5.append(noteData).end();
-  files[noteDataFilename] = noteData;
+  const noteData = new TextEncoder().encode(JSON.stringify(note));
+  const noteDataHash = new SparkMD5.ArrayBuffer().append(noteData).end();
+  files[NOTE_DATA_FILENAME] = noteData;
   return { files, hash: noteDataHash };
 }

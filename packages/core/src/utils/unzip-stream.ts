@@ -23,7 +23,7 @@ import { path } from "./path";
 import { toAsyncIterator } from "./stream";
 
 export class UnzipStream extends TransformStream<Uint8Array, IFile> {
-  constructor(parent: IFile) {
+  constructor(parent?: IFile) {
     const unzipper = new Unzip();
     unzipper.register(UnzipInflate);
 
