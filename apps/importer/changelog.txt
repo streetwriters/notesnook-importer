@@ -1,7 +1,3 @@
-1. Add support for single/double lines (affects all importers)
-2. Import of tables, checklists & codeblocks has been fixed
-3. Improve markdown importer
-4. Various fixes to the Joplin, Simplenote & Standard Notes importers
-5. Fixes "Ha is not a function" error during OneNote & Markdown/Text import
-6. Whitespace in the beginning & end of lines are now respected
-7. Improved text & markdown imports
+1. Add support for importing huge amount of notes — expect no issues importing GBs worth of data.
+2. Got rid of previewing notes (it'll be back)
+3. A lot of improvements to import UX: everything now shows progress giving you real time feedback on what is happening
