@@ -23,8 +23,6 @@ import { IFile } from "../src/utils/file";
 import { fdir } from "fdir";
 import { IHasher } from "../src/utils/hasher";
 import { xxh64 } from "@node-rs/xxhash";
-// @ts-ignore
-import { toWeb } from "stream-adapters";
 
 export function getFiles(dir: string): IFile[] {
   const output = new fdir()
@@ -36,10 +34,10 @@ export function getFiles(dir: string): IFile[] {
 }
 
 export function pathToFile(filePath: string): IFile {
-  const data = fs.createReadStream(filePath);
+  const data = fs.readFileSync(filePath);
 
   return {
-    data: toWeb(data),
+    data: new Blob([data]),
     size: fs.statSync(filePath).size,
     name: path.basename(filePath),
     path: filePath

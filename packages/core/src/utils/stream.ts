@@ -34,3 +34,13 @@ export async function* toAsyncIterator<T>(stream: ReadableStream<T>) {
     reader.releaseLock();
   }
 }
+
+export async function toBlob(
+  stream: ReadableStream<Uint8Array>
+): Promise<Blob> {
+  const chunks: Uint8Array[] = [];
+  for await (const chunk of toAsyncIterator(stream)) {
+    chunks.push(chunk);
+  }
+  return new Blob(chunks);
+}

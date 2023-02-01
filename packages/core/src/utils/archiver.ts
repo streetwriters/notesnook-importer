@@ -77,14 +77,7 @@ async function untar(file: IFile): Promise<IFile[]> {
 
   for (const [filePath, tarFile] of entries?.entries() || []) {
     extracted.push({
-      data: new ReadableStream({
-        start() {},
-        pull(controller) {
-          controller.enqueue(tarFile.read());
-          controller.close();
-        },
-        cancel() {}
-      }),
+      data: new Blob([tarFile.read()]),
       name: tarFile.header.name,
       size: tarFile.header.size,
       path: filePath,

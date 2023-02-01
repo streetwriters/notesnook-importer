@@ -33,6 +33,7 @@ import path from "path";
 import { pack } from "../src/utils/archiver";
 import { MemoryStorage } from "@notesnook-importer/storage/dist/memory";
 import { unzip } from "../src/utils/unzip-stream";
+import { toBlob } from "../src/utils/stream";
 
 tap.afterEach(() => {
   sinon.reset();
@@ -56,7 +57,7 @@ tap.test(
 tap.test(
   `transform & pack OneNote data to Notesnook importer compatible format`,
   async () => {
-    const output = pack((await importFromOnenote()).storage);
+    const output = await toBlob(pack((await importFromOnenote()).storage));
     const files = await unzip({ data: output, name: "Test.zip", size: 0 });
     tap.matchSnapshot(
       files.map((f) => f.path || f.name),

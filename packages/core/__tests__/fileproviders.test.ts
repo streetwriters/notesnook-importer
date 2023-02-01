@@ -26,6 +26,7 @@ import { ProviderFactory } from "../src/providers/provider-factory";
 import { ProviderSettings } from "../src/providers/provider";
 import { MemoryStorage } from "@notesnook-importer/storage/dist/memory";
 import { unzip } from "../src/utils/unzip-stream";
+import { toBlob } from "../src/utils/stream";
 
 for (const providerName of ProviderFactory.getAvailableProviders()) {
   const provider = ProviderFactory.getProvider(providerName);
@@ -72,7 +73,7 @@ for (const providerName of ProviderFactory.getAvailableProviders()) {
 
       await transform(provider, files, settings);
 
-      const output = pack(storage);
+      const output = await toBlob(pack(storage));
       const unzippedFiles = await unzip({
         data: output,
         name: "Test.zip",

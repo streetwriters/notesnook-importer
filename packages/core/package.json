@@ -11,10 +11,10 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@notesnook-importer/enex": "^1.5.1",
-    "@notesnook-importer/onenote": "^1.5.1",
-    "@notesnook-importer/storage": "^1.5.1",
-    "@notesnook-importer/znel": "^1.5.1",
+    "@notesnook-importer/enex": "*",
+    "@notesnook-importer/onenote": "*",
+    "@notesnook-importer/storage": "*",
+    "@notesnook-importer/znel": "*",
     "@standardnotes/features": "1.58.0",
     "@standardnotes/models": "1.42.0",
     "@streamparser/json": "^0.0.10",
