@@ -1,3 +1,1 @@
-1. Add support for importing huge amount of notes — expect no issues importing GBs worth of data.
-2. Got rid of previewing notes (it'll be back)
-3. A lot of improvements to import UX: everything now shows progress giving you real time feedback on what is happening
+1. Fix Standard Notes importer
