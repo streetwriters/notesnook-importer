@@ -12,7 +12,6 @@ import {
 import { xxhash64 } from "hash-wasm";
 import { BrowserStorage } from "@notesnook-importer/storage/dist/browser";
 import { TransformResult } from "../types";
-import { ProgressStream } from "../utils/progress-stream";
 import { bytesToSize } from "../utils/bytes";
 
 type FileProviderHandlerProps = {
@@ -29,9 +28,10 @@ export function FileProviderHandler(props: FileProviderHandlerProps) {
   const { provider, onTransformFinished } = props;
   const [files, setFiles] = useState<File[]>([]);
   const progress = useRef<Progress>({ total: 0, done: 0 });
-  const [filesProgress, setFilesProgress] = useState<
-    Progress & { percentRead: string }
-  >({ done: 0, percentRead: "", total: 0 });
+  const [filesProgress, setFilesProgress] = useState<Progress>({
+    done: 0,
+    total: 0
+  });
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     setFiles((files) => {
@@ -59,15 +59,6 @@ export function FileProviderHandler(props: FileProviderHandlerProps) {
           Found {progress.current.done}{" "}
           {progress.current.total ? `of ${progress.current.total}` : ""} notes
         </Text>
-        <Flex
-          sx={{
-            mt: 2,
-            height: "5px",
-            bg: "primary",
-            width: `${filesProgress.percentRead}%`,
-            borderRadius: 5
-          }}
-        />
       </StepContainer>
     );
   }
@@ -189,8 +180,7 @@ export function FileProviderHandler(props: FileProviderHandlerProps) {
               progress.current = { total: 0, done: 0 };
               setFilesProgress({
                 total: files.length,
-                done: 0,
-                percentRead: ""
+                done: 0
               });
 
               for (let file of files) {
@@ -203,14 +193,7 @@ export function FileProviderHandler(props: FileProviderHandlerProps) {
                   name: file.name,
                   modifiedAt: file.lastModified,
                   size: file.size,
-                  data: file.stream().pipeThrough(
-                    new ProgressStream((bytes) => {
-                      setFilesProgress((s) => ({
-                        ...s,
-                        percentRead: ((bytes / file.size) * 100).toFixed(2)
-                      }));
-                    })
-                  )
+                  data: file
                 };
                 errors.push(
                   ...(await transform(provider, [providerFile], settings))

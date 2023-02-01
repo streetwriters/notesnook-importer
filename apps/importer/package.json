@@ -18,8 +18,8 @@
     "typescript": "^4.8.2"
   },
   "dependencies": {
-    "@notesnook-importer/core": "^1.5.2",
-    "@notesnook-importer/storage": "^1.5.1",
+    "@notesnook-importer/core": "*",
+    "@notesnook-importer/storage": "*",
     "buffer": "^6.0.3",
     "colord": "^2.9.2",
     "fflate": "^0.7.4",
