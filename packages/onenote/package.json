@@ -26,11 +26,13 @@
   },
   "dependencies": {
     "@azure/msal-browser": "^2.22.0",
-    "@azure/msal-node": "^1.6.0",
-    "@azure/msal-node-extensions": "^1.0.0-alpha.15",
     "@microsoft/microsoft-graph-client": "^3.0.1",
     "dotenv": "^16.0.0",
     "isomorphic-fetch": "^3.0.0",
     "node-html-parser": "github:thecodrr/node-html-parser"
+  },
+  "optionalDependencies": {
+    "@azure/msal-node": "^1.6.0",
+    "@azure/msal-node-extensions": "^1.0.0-alpha.15"
   }
 }
