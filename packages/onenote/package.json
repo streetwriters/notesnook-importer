@@ -1,7 +1,7 @@
 {
   "name": "@notesnook-importer/onenote",
   "private": false,
-  "version": "1.5.4",
+  "version": "1.6.0",
   "description": "A fully type-safe OneNote API client for NodeJS & browser to recursively download all OneNote notebooks.",
   "main": "dist/index.js",
   "devDependencies": {
@@ -25,13 +25,13 @@
   },
   "dependencies": {
     "@microsoft/microsoft-graph-client": "^3.0.1",
-    "dotenv": "^16.0.0",
-    "isomorphic-fetch": "^3.0.0",
     "css-select": "^5.1.0",
     "dom-serializer": "^2.0.0",
     "domhandler": "^5.0.3",
     "domutils": "^3.0.1",
-    "htmlparser2": "^8.0.1"
+    "dotenv": "^16.0.0",
+    "htmlparser2": "^8.0.1",
+    "isomorphic-fetch": "^3.0.0"
   },
   "optionalDependencies": {
     "@azure/msal-browser": "^2.22.0",
