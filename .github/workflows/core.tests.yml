@@ -28,4 +28,4 @@ jobs:
           node-version: 16.x
       - run: |
           npm i
-          npm run test:core
+          npm run test:core -- --outputDiffMaxLines 10000 --outputDiffLines 10000

@@ -48,7 +48,10 @@ test(`transform OneNote data to Notesnook importer compatible format`, async (t)
       a.data = undefined;
     });
   });
-  t.expect(JSON.stringify(output.notes), "onenote").toMatchSnapshot();
+  t.expect(
+    JSON.stringify(output.notes, undefined, 2),
+    "onenote"
+  ).toMatchSnapshot();
 });
 
 test(`transform & pack OneNote data to Notesnook importer compatible format`, async (t) => {

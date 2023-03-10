@@ -51,7 +51,7 @@ for (const providerName of ProviderFactory.getAvailableProviders()) {
         a.data = undefined;
       });
     });
-    t.expect(JSON.stringify(notes), providerName).toMatchSnapshot();
+    t.expect(chunker(JSON.stringify(notes)), providerName).toMatchSnapshot();
   });
 
   test(`transform & pack ${providerName} files to notesnook importer compatible format`, async (t) => {
@@ -79,4 +79,10 @@ for (const providerName of ProviderFactory.getAvailableProviders()) {
       `${providerName}-packed`
     ).toMatchSnapshot();
   });
+}
+
+const CHUNKER_REGEX = /.{1,79}/gs;
+// we have to chunk the output for better debugging
+function chunker(str: string) {
+  return str.match(CHUNKER_REGEX)?.join("\n") || str;
 }
