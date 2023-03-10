@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import "./globals";
-import { test, expect, afterEach } from "vitest";
+import { test, afterEach } from "vitest";
 import { Note } from "../index";
 import { ProviderFactory } from "../src/providers/provider-factory";
 import { hasher } from "./utils";
@@ -41,20 +41,20 @@ afterEach(() => {
 });
 
 const notebooks: Notebook[] = Data as Notebook[];
-test(`transform OneNote data to Notesnook importer compatible format`, async () => {
+test(`transform OneNote data to Notesnook importer compatible format`, async (t) => {
   const output = await importFromOnenote();
   output.notes.forEach((n) => {
     n.attachments?.forEach((a) => {
       a.data = undefined;
     });
   });
-  expect(JSON.stringify(output.notes), "onenote").toMatchSnapshot();
+  t.expect(JSON.stringify(output.notes), "onenote").toMatchSnapshot();
 });
 
-test(`transform & pack OneNote data to Notesnook importer compatible format`, async () => {
+test(`transform & pack OneNote data to Notesnook importer compatible format`, async (t) => {
   const output = await toBlob(pack((await importFromOnenote()).storage));
   const files = await unzip({ data: output, name: "Test.zip", size: 0 });
-  expect(
+  t.expect(
     files.map((f) => f.path || f.name),
     `onenote-packed`
   ).toMatchSnapshot();

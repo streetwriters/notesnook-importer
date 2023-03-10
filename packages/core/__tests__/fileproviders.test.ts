@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import "./globals";
-import { test, expect } from "vitest";
+import { test } from "vitest";
 import { transform, Note, pack } from "../index";
 import { getFiles, hasher } from "./utils";
 import { ProviderFactory } from "../src/providers/provider-factory";
@@ -32,7 +32,7 @@ for (const providerName of ProviderFactory.getAvailableProviders()) {
   const provider = ProviderFactory.getProvider(providerName);
   if (provider.type === "network") continue;
 
-  test(`transform ${providerName} files to notesnook importer compatible format`, async () => {
+  test(`transform ${providerName} files to notesnook importer compatible format`, async (t) => {
     const files = getFiles(providerName);
     if (files.length <= 0) return;
 
@@ -51,10 +51,10 @@ for (const providerName of ProviderFactory.getAvailableProviders()) {
         a.data = undefined;
       });
     });
-    expect(JSON.stringify(notes), providerName).toMatchSnapshot();
+    t.expect(JSON.stringify(notes), providerName).toMatchSnapshot();
   });
 
-  test(`transform & pack ${providerName} files to notesnook importer compatible format`, async () => {
+  test(`transform & pack ${providerName} files to notesnook importer compatible format`, async (t) => {
     const files = getFiles(providerName);
     if (files.length <= 0) return;
 
@@ -74,7 +74,7 @@ for (const providerName of ProviderFactory.getAvailableProviders()) {
       name: "Test.zip",
       size: 0
     });
-    expect(
+    t.expect(
       unzippedFiles.map((f) => f.path || f.name),
       `${providerName}-packed`
     ).toMatchSnapshot();
