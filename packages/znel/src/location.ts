@@ -18,16 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import { IZnelElement } from "./types";
-import {
-  getAsNumberRequired,
-  getAsStringRequired,
-} from "./utils";
-import { HTMLElement } from "node-html-parser";
-
+import { getAsNumberRequired, getAsStringRequired } from "./utils";
+import { Element } from "domhandler";
 
 export class ZLocation implements IZnelElement {
-  #locationElement: HTMLElement;
-  constructor(locationElement: HTMLElement) {
+  #locationElement: Element;
+  constructor(locationElement: Element) {
     this.#locationElement = locationElement;
   }
 

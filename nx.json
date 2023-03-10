@@ -16,7 +16,7 @@
       "dependsOn": ["^build"]
     },
     "test": {
-      "dependsOn": ["^build:test"]
+      "dependsOn": ["^build"]
     }
   },
   "$schema": "./node_modules/nx/schemas/nx-schema.json"

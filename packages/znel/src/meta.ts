@@ -17,14 +17,15 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import {  ZLocation } from "./location";
+import { ZLocation } from "./location";
 import { IZnelElement } from "./types";
 import {
   getAsDate,
   getAsString,
   getAsStringRequired,
+  getElementByTagName
 } from "./utils";
-import { HTMLElement } from "node-html-parser";
+import { Element } from "domhandler";
 
 export type ZNoteType =
   | "note/image"
@@ -34,8 +35,8 @@ export type ZNoteType =
   | "note/file";
 
 export class ZMeta implements IZnelElement {
-  #metaElement: HTMLElement;
-  constructor(metaElement: HTMLElement) {
+  #metaElement: Element;
+  constructor(metaElement: Element) {
     this.#metaElement = metaElement;
     this.validate();
   }
@@ -53,10 +54,10 @@ export class ZMeta implements IZnelElement {
   }
 
   get location(): ZLocation | null {
-    const locationElement = this.#metaElement.querySelector("zlocation");
+    const locationElement = getElementByTagName(this.#metaElement, "ZLocation");
     if (!locationElement) return null;
-    
-  return new ZLocation(locationElement);
+
+    return new ZLocation(locationElement);
   }
 
   get noteColor(): string | null {
@@ -71,4 +72,3 @@ export class ZMeta implements IZnelElement {
     this.title && this.noteType;
   }
 }
-

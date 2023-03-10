@@ -39,7 +39,6 @@ export class ZohoNotebook implements IFileProvider {
   async *process(file: File, settings: ProviderSettings, files: File[]) {
     const notebook = await this.getNotebook(file, files);
     const znel = new Znel(await file.text());
-
     const note: Note = {
       title: znel.metadata.title,
       tags: znel.tags,
@@ -50,11 +49,15 @@ export class ZohoNotebook implements IFileProvider {
     };
 
     const elementHandler = new ElementHandler(note, files, settings.hasher);
-    const html = await znel.content.toHtml(elementHandler);
-    note.content = {
-      data: html,
-      type: ContentType.HTML
-    };
+    try {
+      const html = await znel.content.toHtml(elementHandler);
+      note.content = {
+        data: html,
+        type: ContentType.HTML
+      };
+    } catch (e) {
+      console.error(e);
+    }
 
     yield note;
   }

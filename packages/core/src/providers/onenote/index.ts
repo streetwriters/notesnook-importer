@@ -26,8 +26,9 @@ import {
   OnenoteSection,
   OnenotePage
 } from "@microsoft/microsoft-graph-types-beta";
-import { parse } from "node-html-parser";
 import { ElementHandler } from "./elementhandlers";
+import { parseDocument } from "htmlparser2";
+import { findOne, textContent } from "domutils";
 
 type OneNoteSettings = ProviderSettings & {
   clientId: string;
@@ -78,6 +79,7 @@ export class OneNote implements INetworkProvider<OneNoteSettings> {
           ).catch((e: Error) => {
             e.message = `${e.message} (page: ${page.title})`;
             errors.push(e);
+            console.error(e);
             return null;
           });
           if (!note) continue;
@@ -113,13 +115,15 @@ export class OneNote implements INetworkProvider<OneNoteSettings> {
 
     const elementHandler = new ElementHandler(note, settings.hasher);
     const data = await page.content.transform(elementHandler);
-    const document = parse(data);
+    const document = parseDocument(data);
 
+    const titleElement = findOne(
+      (e) => ["title", "h1", "h2"].includes(e.tagName),
+      document.childNodes,
+      true
+    );
     note.title =
-      page.title ||
-      document.querySelector("title")?.textContent ||
-      document.querySelector("h1,h2")?.textContent ||
-      note.title;
+      page.title || (titleElement && textContent(titleElement)) || note.title;
 
     note.content = {
       data,

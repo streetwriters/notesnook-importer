@@ -17,13 +17,13 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import tap from "tap";
+import { test, expect } from "vitest";
 import { Znel } from "../index";
 import fs from "fs";
 import path from "path";
 import { fdir } from "fdir";
 
-tap.test("znel should be parsed correctly", async () => {
+test("znel should be parsed correctly", async () => {
   const dataDirectoryPath = path.join(__dirname, "data");
   const znelFiles = await new fdir()
     .withFullPaths()
@@ -33,7 +33,7 @@ tap.test("znel should be parsed correctly", async () => {
   for (const filePath of <string[]>znelFiles) {
     const znelFile = fs.readFileSync(filePath, "utf-8");
     const znel = new Znel(znelFile);
-    tap.matchSnapshot(toJSON(znel), path.basename(filePath));
+    expect(toJSON(znel), path.basename(filePath)).toMatchSnapshot();
   }
 });
 

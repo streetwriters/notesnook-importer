@@ -17,8 +17,11 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { HTMLElement, parse } from "node-html-parser";
-import { HTMLRootElement } from "node-html-parser/dist/nodes/html";
+import { Element, Document } from "domhandler";
+import { selectAll } from "css-select";
+import { removeElement, replaceElement, findOne } from "domutils";
+import { parseDocument } from "htmlparser2";
+import { render } from "dom-serializer";
 
 /**
  * List of invalid attributes we should remove part of our
@@ -40,7 +43,7 @@ const validStyles: string[] = [
   "color",
   "text-align",
   "font-family",
-  "font-size",
+  "font-size"
 ];
 /**
  * This is a list of special elements used by Evernote for different
@@ -50,11 +53,11 @@ const invalidElements: string[] = ["object", "img"];
 const cssSelector: string = [
   ...validAttributes.map((attr) => `[${attr}]`),
   ...invalidAttributes.map((attr) => `[${attr}]`),
-  ...invalidElements,
+  ...invalidElements
 ].join(",");
 
 export interface IElementHandler {
-  process(type: string, element: HTMLElement): Promise<string | undefined>;
+  process(type: string, element: Element): Promise<string | undefined>;
 }
 
 type AttachmentResolver = (url: string) => Promise<Buffer | null>;
@@ -63,46 +66,59 @@ type ContentOptions = {
 };
 
 export class Content {
-  #document: HTMLRootElement;
+  #document: Document;
   constructor(html: string, private readonly options: ContentOptions) {
-    this.#document = parse(html);
+    this.#document = parseDocument(html);
   }
 
   async transform(handler?: IElementHandler): Promise<string> {
-    const body = this.#document.querySelector("body");
-    const elements = body?.querySelectorAll(cssSelector);
+    const body = findOne(
+      (e) => e.tagName === "body",
+      this.#document.childNodes
+    );
+    const elements = selectAll(cssSelector, body);
     if (!body || !elements) return "";
 
-    for (const element of elements) {
+    for (let i = 0; i < elements.length; ++i) {
+      const element = elements[i];
       if (!element) continue;
 
       const elementType =
         filterAttributes(element) || element.tagName.toLowerCase();
 
       switch (elementType) {
-        case "checklist":
-          const siblings: HTMLElement[] = [];
-          const ul = this.#document.createElement("ul");
-          ul.classList.add("checklist");
+        case "checklist": {
+          const siblings: Element[] = [];
+          const ul = [`<ul class="checklist">`];
+          for (; i < elements.length; ++i) {
+            const next = elements[i];
+            if (
+              !next ||
+              !next.attribs ||
+              !next.attribs["data-tag"]?.startsWith("to-do")
+            )
+              break;
 
-          let next = element;
-          while (next && next.getAttribute("data-tag")?.startsWith("to-do")) {
-            const li = this.#document.createElement("li");
-            li.innerHTML = next.innerHTML;
-            if (next.getAttribute("data-tag") === "to-do:completed")
-              li.classList.add("checked");
-            ul.appendChild(li);
-
+            const li = [
+              `<li${
+                next.attribs["data-tag"] === "to-do:completed"
+                  ? ` class="checked"`
+                  : ""
+              }>`,
+              render(next.childNodes),
+              "</li>"
+            ];
+            ul.push(...li);
             if (next !== element) siblings.push(next);
-            next = next.nextElementSibling;
           }
-          element.replaceWith(ul);
+          ul.push("</ul>");
+          replaceElement(element, parseDocument(ul.join("")));
 
           siblings.forEach((elem) => {
-            elem.removeAttribute("data-tag");
-            elem.remove();
+            removeElement(elem);
           });
           break;
+        }
         case "img":
         case "object": {
           const data = await downloadAttachment(
@@ -111,28 +127,30 @@ export class Content {
             this.options.attachmentResolver
           );
           if (!data) {
-            element.remove();
+            removeElement(element);
             break;
           }
-          element.setAttribute("data", data);
+          element.attribs["data"] = data;
 
           if (handler) {
             const result = await handler.process(elementType, element);
-            if (result) element.replaceWith(result);
-            else element.remove();
-          } else element.remove();
+            if (result) replaceElement(element, parseDocument(result));
+            else removeElement(element);
+          } else removeElement(element);
           break;
         }
       }
     }
-    return body.innerHTML;
+    return render(body.childNodes);
   }
 
   get raw(): string {
-    return (
-      this.#document.querySelector("body")?.outerHTML ||
-      this.#document.outerHTML
+    const body = findOne(
+      (e) => e.tagName === "body",
+      this.#document.childNodes
     );
+    if (!body) return render(this.#document);
+    return render(body?.childNodes);
   }
 
   toJSON(): string {
@@ -140,18 +158,18 @@ export class Content {
   }
 }
 
-function filterAttributes(element: HTMLElement): string | null {
+function filterAttributes(element: Element): string | null {
   let elementType: string | null = null;
 
   for (const attr of invalidAttributes) {
-    if (element.hasAttribute(attr)) element.removeAttribute(attr);
+    if (element.attribs[attr]) delete element.attribs[attr];
   }
 
   for (const attr of validAttributes) {
-    if (!element.hasAttribute(attr)) continue;
-    const value = element.getAttribute(attr);
+    if (!element.attribs[attr]) continue;
+    const value = element.attribs[attr];
     if (!value) {
-      element.removeAttribute(attr);
+      delete element.attribs[attr];
       continue;
     }
 
@@ -166,8 +184,8 @@ function filterAttributes(element: HTMLElement): string | null {
           if (validStyles.indexOf(style) === -1) delete styles[style];
         }
         const newStyle = objectToStyles(styles);
-        if (newStyle) element.setAttribute(attr, newStyle);
-        else element.removeAttribute(attr);
+        if (newStyle) element.attribs[attr] = newStyle;
+        else delete element.attribs[attr];
         break;
       }
     }
@@ -194,13 +212,13 @@ function objectToStyles(input: Record<string, string>): string {
 }
 
 async function downloadAttachment(
-  element: HTMLElement,
+  element: Element,
   attributes: string[],
   resolver: AttachmentResolver
 ): Promise<string | false> {
   let src = null;
   for (const attribute of attributes) {
-    src = element.getAttribute(attribute);
+    src = element.attribs[attribute];
     if (src) break;
   }
   if (!src) return false;

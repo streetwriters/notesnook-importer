@@ -18,12 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import type { IElementHandler } from "@notesnook-importer/znel";
-import type { HTMLElement } from "node-html-parser";
 import { ZNResource } from "./znresource";
 import { IHasher } from "../../../utils/hasher";
 import { ZNChecklist } from "./znchecklist";
 import { File } from "../../../utils/file";
 import { Note } from "../../../models/note";
+import { Element } from "domhandler";
 
 const elementMap = {
   znresource: ZNResource,
@@ -40,7 +40,7 @@ export class ElementHandler implements IElementHandler {
 
   async process(
     elementType: Keys,
-    element: HTMLElement
+    element: Element
   ): Promise<string | undefined> {
     const elementHandler = elementMap[elementType];
     if (!elementHandler) return;

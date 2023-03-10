@@ -17,14 +17,14 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import tap from "tap";
+import { test, expect } from "vitest";
 import { parse, Note } from "../index";
 import fs from "fs";
 import path from "path";
 import { fdir } from "fdir";
 import { fromByteArray } from "base64-js";
 
-tap.test("enex should be parsed correctly", async () => {
+test("enex should be parsed correctly", async () => {
   const dataDirectoryPath = path.join(__dirname, "data");
   const enexFiles = await new fdir()
     .withFullPaths()
@@ -38,12 +38,12 @@ tap.test("enex should be parsed correctly", async () => {
 
     notes.forEach((note) => {
       note.resources?.forEach((res) => {
-        tap.ok(res.hash);
-        tap.ok(note.content!.indexOf(res.hash!) > -1);
+        expect(res.hash).toBeTruthy();
+        expect(note.content!.indexOf(res.hash!) > -1).toBeTruthy();
         if (res.data) (res.data as any) = fromByteArray(res.data);
       });
     });
 
-    tap.matchSnapshot(notes, path.basename(filePath));
+    expect(notes, path.basename(filePath)).toMatchSnapshot();
   }
 });

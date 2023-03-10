@@ -19,12 +19,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import { ContentType, Note } from "../../models/note";
 import { KeepNote, listToHTML } from "./types";
-import { parse } from "node-html-parser";
 import { IFileProvider, ProviderSettings } from "../provider";
 import { File } from "../../utils/file";
 import { Attachment, attachmentToHTML } from "../../models/attachment";
 import { path } from "../../utils/path";
 import { markdowntoHTML } from "../../utils/to-html";
+import { parseDocument } from "htmlparser2";
+import { append } from "domutils";
+import { render } from "dom-serializer";
 
 const colorMap: Record<string, string | undefined> = {
   default: undefined,
@@ -72,7 +74,7 @@ export class GoogleKeep implements IFileProvider {
 
     if (keepNote.attachments && note.content) {
       note.attachments = [];
-      const document = parse(note.content.data);
+      const document = parseDocument(note.content.data);
       for (const keepAttachment of keepNote.attachments) {
         const attachmentFile = files.find((f) =>
           keepAttachment.filePath.includes(f.nameWithoutExtension)
@@ -91,10 +93,16 @@ export class GoogleKeep implements IFileProvider {
           hashType: settings.hasher.type,
           mime: keepAttachment.mimetype
         };
-        document.appendChild(parse(attachmentToHTML(attachment)));
+
+        if (document.firstChild)
+          append(
+            document.firstChild,
+            parseDocument(attachmentToHTML(attachment))
+          );
+
         note.attachments.push(attachment);
       }
-      note.content.data = document.outerHTML;
+      note.content.data = render(document.childNodes);
     }
     yield note;
   }

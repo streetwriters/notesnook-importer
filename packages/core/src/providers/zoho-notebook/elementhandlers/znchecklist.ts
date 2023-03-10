@@ -17,35 +17,42 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import { Element } from "domhandler";
+import { findAll, getAttributeValue } from "domutils";
+import { render } from "dom-serializer";
 import { BaseHandler } from "./base";
-import type { HTMLElement } from "node-html-parser";
 
 type Task = {
   checked: boolean;
   text: string;
-}
+};
 
 export class ZNChecklist extends BaseHandler {
-  async process(element: HTMLElement): Promise<string | undefined> {
-    const checkboxes = element.querySelectorAll("checkbox");
+  async process(element: Element): Promise<string | undefined> {
+    const checkboxes = findAll(
+      (e) => e.tagName === "checkbox",
+      element.childNodes
+    );
     const tasks: Task[] = [];
     for (const checkbox of checkboxes) {
-      tasks.push({ text: checkbox.innerHTML, checked: checkbox.getAttribute("checked") === "true" });
+      tasks.push({
+        text: render(checkbox.childNodes),
+        checked: getAttributeValue(checkbox, "checked") === "true"
+      });
     }
 
     return tasksToHTML(tasks);
   }
 }
 
-
 function tasksToHTML(tasks: Task[]) {
   return `<ul class="checklist">
         ${tasks
-      .map((t) =>
-        t.checked
-          ? `<li class="checked">${t.text}</li>`
-          : `<li>${t.text}</li>`
-      )
-      .join("")}
+          .map((t) =>
+            t.checked
+              ? `<li class="checked">${t.text}</li>`
+              : `<li>${t.text}</li>`
+          )
+          .join("")}
       </ul>`;
 }

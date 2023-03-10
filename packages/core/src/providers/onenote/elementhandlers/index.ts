@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import type { IElementHandler } from "@notesnook-importer/onenote";
-import type { HTMLElement } from "node-html-parser";
 import { Note } from "../../../models/note";
 import { AttachmentHandler } from "./attachment";
 import { IHasher } from "../../../utils/hasher";
+import { Element } from "domhandler";
 
 const elementMap = {
   img: AttachmentHandler,
@@ -34,7 +34,7 @@ export class ElementHandler implements IElementHandler {
 
   async process(
     elementType: Keys,
-    element: HTMLElement
+    element: Element
   ): Promise<string | undefined> {
     const elementHandler = elementMap[elementType];
     if (!elementHandler) return;

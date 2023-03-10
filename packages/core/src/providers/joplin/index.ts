@@ -20,7 +20,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import { ContentType, Note, Notebook } from "../../models/note";
 import { File } from "../../utils/file";
 import { IFileProvider, ProviderSettings } from "../provider";
-import { parse } from "node-html-parser";
 import {
   NoteEntity,
   FolderEntity,
@@ -29,11 +28,15 @@ import {
   ResourceEntity
 } from "./types";
 import { Attachment, attachmentToHTML } from "../../models/attachment";
-import { HTMLRootElement } from "node-html-parser/dist/nodes/html";
 import { IHasher } from "../../utils/hasher";
 import { unserialize } from "./helpers";
 import { ModelType } from "./types";
 import { markdowntoHTML } from "../../utils/to-html";
+import { parseDocument } from "htmlparser2";
+import { Document } from "domhandler";
+import { render } from "dom-serializer";
+import { selectAll } from "css-select";
+import { textContent, replaceElement } from "domutils";
 
 type JoplinData = {
   notes: NoteEntity[];
@@ -105,10 +108,11 @@ export class Joplin implements IFileProvider<JoplinData> {
     const parentFolder = data.folders.find((a) => a.id === note.parent_id);
     const notebooks: Notebook[] = [];
     const html = markdowntoHTML(note.body);
-    const document = parse(html);
+    const document = parseDocument(html);
+
     const title =
       note.title ||
-      document.querySelector("h1,h2")?.textContent ||
+      textContent(selectAll("h1,h2", document)[0]) ||
       "Untitled note";
     const attachments = await this.resolveResources(
       data.resources,
@@ -129,7 +133,7 @@ export class Joplin implements IFileProvider<JoplinData> {
       attachments,
       notebooks,
       content: {
-        data: document.outerHTML,
+        data: render(document.childNodes),
         type: ContentType.HTML
       }
     };
@@ -152,16 +156,17 @@ export class Joplin implements IFileProvider<JoplinData> {
 
   private async resolveResources(
     resources: ResourceEntity[],
-    document: HTMLRootElement,
+    document: Document,
     files: File[],
     hasher: IHasher
   ) {
     const attachments: Attachment[] = [];
     for (const resource of resources) {
       if (!resource.id) continue;
-      const element = document.querySelector(
-        `[src=":/${resource.id}"],[href=":/${resource.id}"]`
-      );
+      const element = selectAll(
+        `[src=":/${resource.id}"],[href=":/${resource.id}"]`,
+        document
+      )[0];
       if (!element) continue;
       const resourceFile = files.find((f) =>
         f.path?.includes(`resources/${resource.id!}`)
@@ -181,7 +186,7 @@ export class Joplin implements IFileProvider<JoplinData> {
         mime: resource.mime || "application/octet-stream"
       };
       attachments.push(attachment);
-      element.replaceWith(attachmentToHTML(attachment));
+      replaceElement(element, parseDocument(attachmentToHTML(attachment)));
     }
     return attachments;
   }

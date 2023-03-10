@@ -17,16 +17,13 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import tap from "tap";
+import { test, expect } from "vitest";
 import { ISO8601DateTime } from "../src/iso8601-date-time";
 
-tap.test("input less than 16 characters should return null", async () => {
-  tap.equal(ISO8601DateTime.toDate("hello"), null);
+test("input less than 16 characters should return null", async () => {
+  expect(ISO8601DateTime.toDate("hello")).toBeNull();
 });
 
-tap.test(
-  "input of 16 characters but with an invalid date should return null",
-  async () => {
-    tap.equal(ISO8601DateTime.toDate("01234567891011126"), null);
-  }
-);
+test("input of 16 characters but with an invalid date should return null", async () => {
+  expect(ISO8601DateTime.toDate("01234567891011126")).toBeNull();
+});

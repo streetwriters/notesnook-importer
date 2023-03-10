@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import "./globals";
-import tap from "tap";
+import { test, expect } from "vitest";
 import { transform, Note, pack } from "../index";
 import { getFiles, hasher } from "./utils";
 import { ProviderFactory } from "../src/providers/provider-factory";
@@ -32,57 +32,51 @@ for (const providerName of ProviderFactory.getAvailableProviders()) {
   const provider = ProviderFactory.getProvider(providerName);
   if (provider.type === "network") continue;
 
-  tap.test(
-    `transform ${providerName} files to notesnook importer compatible format`,
-    async () => {
-      const files = getFiles(providerName);
-      if (files.length <= 0) return;
+  test(`transform ${providerName} files to notesnook importer compatible format`, async () => {
+    const files = getFiles(providerName);
+    if (files.length <= 0) return;
 
-      const storage = new MemoryStorage<Note>();
-      const settings: ProviderSettings = {
-        hasher,
-        clientType: "node",
-        reporter() {},
-        storage
-      };
+    const storage = new MemoryStorage<Note>();
+    const settings: ProviderSettings = {
+      hasher,
+      clientType: "node",
+      reporter() {},
+      storage
+    };
 
-      await transform(provider, files, settings);
-      const notes = Object.values(storage.storage);
-      notes.forEach((n) => {
-        n.attachments?.forEach((a) => {
-          a.data = undefined;
-        });
+    await transform(provider, files, settings);
+    const notes = Object.values(storage.storage);
+    notes.forEach((n) => {
+      n.attachments?.forEach((a) => {
+        a.data = undefined;
       });
-      tap.matchSnapshot(JSON.stringify(notes), providerName);
-    }
-  );
+    });
+    expect(JSON.stringify(notes), providerName).toMatchSnapshot();
+  });
 
-  tap.test(
-    `transform & pack ${providerName} files to notesnook importer compatible format`,
-    async () => {
-      const files = getFiles(providerName);
-      if (files.length <= 0) return;
+  test(`transform & pack ${providerName} files to notesnook importer compatible format`, async () => {
+    const files = getFiles(providerName);
+    if (files.length <= 0) return;
 
-      const storage = new MemoryStorage<Note>();
-      const settings: ProviderSettings = {
-        hasher,
-        clientType: "node",
-        reporter() {},
-        storage
-      };
+    const storage = new MemoryStorage<Note>();
+    const settings: ProviderSettings = {
+      hasher,
+      clientType: "node",
+      reporter() {},
+      storage
+    };
 
-      await transform(provider, files, settings);
+    await transform(provider, files, settings);
 
-      const output = await toBlob(pack(storage));
-      const unzippedFiles = await unzip({
-        data: output,
-        name: "Test.zip",
-        size: 0
-      });
-      tap.matchSnapshot(
-        unzippedFiles.map((f) => f.path || f.name),
-        `${providerName}-packed`
-      );
-    }
-  );
+    const output = await toBlob(pack(storage));
+    const unzippedFiles = await unzip({
+      data: output,
+      name: "Test.zip",
+      size: 0
+    });
+    expect(
+      unzippedFiles.map((f) => f.path || f.name),
+      `${providerName}-packed`
+    ).toMatchSnapshot();
+  });
 }

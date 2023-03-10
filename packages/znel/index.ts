@@ -19,16 +19,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import { ZMeta } from "./src/meta";
 import { IZnelElement } from "./src/types";
-import { parse, HTMLElement } from "node-html-parser";
+import { parseDocument } from "htmlparser2";
 import { ZReminder } from "./src/reminder";
 import { ZContent } from "./src/content";
+import { getAttributeValue, findAll, textContent } from "domutils";
+import { Element } from "domhandler";
+import { getElementByTagName } from "./src/utils";
 
 export class Znel implements IZnelElement {
-  #znoteElement: HTMLElement;
+  #znoteElement: Element;
   constructor(znel: string) {
-    const document = parse(znel);
+    const document = parseDocument(znel, {
+      recognizeCDATA: true,
+      xmlMode: true
+    });
 
-    const element = document.querySelector("znote");
+    const element = getElementByTagName(document, "ZNote");
     if (!element)
       throw new Error("Invalid znel file. Must contain ZNote element.");
     this.#znoteElement = element;
@@ -37,14 +43,14 @@ export class Znel implements IZnelElement {
   }
 
   get version(): string {
-    const version = this.#znoteElement.getAttribute("znelVersion");
+    const version = getAttributeValue(this.#znoteElement, "znelVersion");
     if (!version)
       throw new Error("Invalid znel. znelVersion attribute is required.");
     return version;
   }
 
   get metadata(): ZMeta {
-    const metadataElement = this.#znoteElement.querySelector("zmeta");
+    const metadataElement = getElementByTagName(this.#znoteElement, "ZMeta");
     if (!metadataElement)
       throw new Error("Invalid znel. No ZMeta element found");
     return new ZMeta(metadataElement);
@@ -52,16 +58,22 @@ export class Znel implements IZnelElement {
 
   get tags(): string[] {
     const tags: string[] = [];
-    const tagElements = this.#znoteElement.querySelectorAll("ztag");
+    const tagElements = findAll(
+      (e) => e.name === "ZTag",
+      this.#znoteElement.childNodes
+    );
     for (const element of tagElements) {
-      tags.push(element.textContent);
+      tags.push(textContent(element));
     }
     return tags;
   }
 
   get reminders(): ZReminder[] {
     const reminders: ZReminder[] = [];
-    const reminderElements = this.#znoteElement.querySelectorAll("zreminder");
+    const reminderElements = findAll(
+      (e) => e.name === "ZReminder",
+      this.#znoteElement.childNodes
+    );
     for (const element of reminderElements) {
       reminders.push(new ZReminder(element));
     }
@@ -69,7 +81,7 @@ export class Znel implements IZnelElement {
   }
 
   get content(): ZContent {
-    const zcontentElement = this.#znoteElement.querySelector("zcontent");
+    const zcontentElement = getElementByTagName(this.#znoteElement, "ZContent");
     if (!zcontentElement)
       throw new Error("Invalid znel. No ZContent element found");
     return new ZContent(zcontentElement, this.metadata.noteType);

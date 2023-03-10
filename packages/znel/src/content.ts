@@ -17,8 +17,13 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { HTMLElement } from "node-html-parser";
+import { Element, isCDATA, isText } from "domhandler";
 import { ZNoteType } from "./meta";
+import { getElementByTagName } from "./utils";
+import { selectAll } from "css-select";
+import { removeElement, replaceElement } from "domutils";
+import { parseDocument } from "htmlparser2";
+import { render } from "dom-serializer";
 
 /**
  * List of invalid attributes we should remove part of our
@@ -40,38 +45,35 @@ const validStyles: string[] = [
   "color",
   "text-align",
   "font-family",
-  "font-size",
+  "font-size"
 ];
 /**
  * This is a list of special elements used by Evernote for different
  * purposes.
  */
-const invalidElements: string[] = [
-  "znresource",
-  ".checklist",
-];
+const invalidElements: string[] = ["znresource", ".checklist"];
 const cssSelector: string = [
   ...validAttributes.map((attr) => `[${attr}]`),
   ...invalidAttributes.map((attr) => `[${attr}]`),
-  ...invalidElements,
+  ...invalidElements
 ].join(",");
 
 export interface IElementHandler {
-  process(type: string, element: HTMLElement): Promise<string | undefined>;
+  process(type: string, element: Element): Promise<string | undefined>;
 }
 
 export class ZContent {
-  #contentElement: HTMLElement;
+  #contentElement: Element;
   #type: ZNoteType;
-  constructor(contentElement: HTMLElement, type: ZNoteType) {
+  constructor(contentElement: Element, type: ZNoteType) {
     this.#contentElement = contentElement;
     this.#type = type;
   }
 
   async toHtml(handler?: IElementHandler): Promise<string> {
-    const contentElement = this.#contentElement.querySelector("content");
+    const contentElement = this.#getContentElement();
     if (!contentElement) throw new Error("Invalid content.");
-    
+
     // a checklist note directly contains checkboxes so we need to handle
     // this separately.
     if (this.#type === "note/checklist" && handler) {
@@ -79,29 +81,51 @@ export class ZContent {
       if (result) return result;
     }
 
-    const elements = contentElement.querySelectorAll(cssSelector);
+    const elements = selectAll(cssSelector, contentElement);
     for (const element of elements) {
-      const elementType = element.classList.contains("checklist") ?  "znchecklist" : filterAttributes(element) || element.tagName.toLowerCase();
+      const elementType = element.attribs.class?.includes("checklist")
+        ? "znchecklist"
+        : filterAttributes(element) || element.tagName.toLowerCase();
 
       switch (elementType) {
         case "znchecklist":
         case "znresource": {
           if (handler) {
             const result = await handler.process(elementType, element);
-            if (result) element.replaceWith(result);
-            else element.remove();
-          } else element.remove();
+            if (result) {
+              replaceElement(element, parseDocument(result));
+            } else removeElement(element);
+          } else removeElement(element);
           break;
         }
       }
     }
-    return contentElement.innerHTML;
+    return render(contentElement.childNodes, {
+      xmlMode: true
+    });
   }
 
   get raw(): string {
-    const contentElement = this.#contentElement.querySelector("content");
+    const contentElement = this.#getContentElement();
     if (!contentElement) throw new Error("Invalid content.");
-    return contentElement.innerHTML;
+    return render(contentElement.childNodes, {
+      xmlMode: true
+    });
+  }
+
+  #getContentElement() {
+    const contentElement = getElementByTagName(this.#contentElement, "content");
+    if (
+      !contentElement &&
+      this.#contentElement.firstChild &&
+      isCDATA(this.#contentElement.firstChild) &&
+      this.#contentElement.firstChild.firstChild &&
+      isText(this.#contentElement.firstChild.firstChild)
+    ) {
+      return parseDocument(this.#contentElement.firstChild.firstChild.data)
+        .firstChild as Element;
+    }
+    return contentElement;
   }
 }
 
@@ -123,18 +147,18 @@ function objectToStyles(input: Record<string, string>): string {
   return output.join(";");
 }
 
-function filterAttributes(element: HTMLElement): string | null {
+function filterAttributes(element: Element): string | null {
   const elementType: string | null = null;
 
   for (const attr of invalidAttributes) {
-    if (element.hasAttribute(attr)) element.removeAttribute(attr);
+    if (element.attribs[attr]) delete element.attribs[attr];
   }
 
   for (const attr of validAttributes) {
-    if (!element.hasAttribute(attr)) continue;
-    const value = element.getAttribute(attr);
+    if (!element.attribs[attr]) continue;
+    const value = element.attribs[attr];
     if (!value) {
-      element.removeAttribute(attr);
+      delete element.attribs[attr];
       continue;
     }
 
@@ -145,8 +169,8 @@ function filterAttributes(element: HTMLElement): string | null {
           if (validStyles.indexOf(style) === -1) delete styles[style];
         }
         const newStyle = objectToStyles(styles);
-        if (newStyle) element.setAttribute(attr, newStyle);
-        else element.removeAttribute(attr);
+        if (newStyle) element.attribs[attr] = newStyle;
+        else delete element.attribs[attr];
         break;
       }
     }

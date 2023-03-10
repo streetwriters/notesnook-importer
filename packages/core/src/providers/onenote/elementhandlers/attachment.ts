@@ -19,13 +19,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import { Attachment, attachmentToHTML } from "../../../models/attachment";
 import { BaseHandler } from "./base";
-import type { HTMLElement } from "node-html-parser";
 import { parseAttributeValue } from "../../../utils/dom-utils";
 import { toByteArray } from "base64-js";
+import { Element } from "domhandler";
 
 export class AttachmentHandler extends BaseHandler {
-  async process(element: HTMLElement): Promise<string | undefined> {
-    const base64data = element.getAttribute("data");
+  async process(element: Element): Promise<string | undefined> {
+    const base64data = element.attribs.data;
     if (!base64data) return;
 
     const type = getAttributeValue(element, [
@@ -44,8 +44,8 @@ export class AttachmentHandler extends BaseHandler {
       filename: name ?? dataHash,
       hashType: this.hasher.type,
       mime: type ?? "application/octet-stream",
-      width: parseAttributeValue(element.getAttribute("width"), "number"),
-      height: parseAttributeValue(element.getAttribute("height"), "number")
+      width: parseAttributeValue(element.attribs.width, "number"),
+      height: parseAttributeValue(element.attribs.height, "number")
     };
     this.note.attachments?.push(attachment);
     return attachmentToHTML(attachment);
@@ -53,13 +53,13 @@ export class AttachmentHandler extends BaseHandler {
 }
 
 function getAttributeValue(
-  element: HTMLElement,
+  element: Element,
   attributes: string[]
 ): string | null {
   return attributes.reduce((prev: string | null, curr) => {
     if (prev) return prev;
 
-    const value = element.getAttribute(curr);
+    const value = element.attribs[curr];
     if (value) return value;
 
     return prev;

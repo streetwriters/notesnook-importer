@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import "./globals";
-import tap from "tap";
+import { test, expect, afterEach } from "vitest";
 import { Note } from "../index";
 import { ProviderFactory } from "../src/providers/provider-factory";
 import { hasher } from "./utils";
@@ -35,36 +35,30 @@ import { MemoryStorage } from "@notesnook-importer/storage/dist/memory";
 import { unzip } from "../src/utils/unzip-stream";
 import { toBlob } from "../src/utils/stream";
 
-tap.afterEach(() => {
+afterEach(() => {
   sinon.reset();
   sinon.restore();
 });
 
 const notebooks: Notebook[] = Data as Notebook[];
-tap.test(
-  `transform OneNote data to Notesnook importer compatible format`,
-  async () => {
-    const output = await importFromOnenote();
-    output.notes.forEach((n) => {
-      n.attachments?.forEach((a) => {
-        a.data = undefined;
-      });
+test(`transform OneNote data to Notesnook importer compatible format`, async () => {
+  const output = await importFromOnenote();
+  output.notes.forEach((n) => {
+    n.attachments?.forEach((a) => {
+      a.data = undefined;
     });
-    tap.matchSnapshot(JSON.stringify(output.notes), "onenote");
-  }
-);
+  });
+  expect(JSON.stringify(output.notes), "onenote").toMatchSnapshot();
+});
 
-tap.test(
-  `transform & pack OneNote data to Notesnook importer compatible format`,
-  async () => {
-    const output = await toBlob(pack((await importFromOnenote()).storage));
-    const files = await unzip({ data: output, name: "Test.zip", size: 0 });
-    tap.matchSnapshot(
-      files.map((f) => f.path || f.name),
-      `onenote-packed`
-    );
-  }
-);
+test(`transform & pack OneNote data to Notesnook importer compatible format`, async () => {
+  const output = await toBlob(pack((await importFromOnenote()).storage));
+  const files = await unzip({ data: output, name: "Test.zip", size: 0 });
+  expect(
+    files.map((f) => f.path || f.name),
+    `onenote-packed`
+  ).toMatchSnapshot();
+});
 
 async function importFromOnenote() {
   const provider = ProviderFactory.getProvider("onenote");

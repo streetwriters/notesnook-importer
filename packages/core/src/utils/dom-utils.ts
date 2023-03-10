@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { HTMLElement, parse } from "node-html-parser";
+import { encodeHTML5 } from "entities";
 
 export type Row = {
   cells: Cell[];
@@ -45,27 +45,26 @@ export function parseAttributeValue<T>(
 }
 
 export function buildTable(rows: Row[]): string {
-  const document = parse(`<table><tbody></tbody></table>`);
-  const tbody = <HTMLElement>document.querySelector("tbody")!;
+  const table = [`<table>`, `<tbody>`];
 
   for (const row of rows) {
-    const rowElement = document.createElement("tr");
+    const rowElement = [`<tr>`];
     for (const cell of row.cells) {
-      const cellElement = document.createElement(cell.type);
-      cellElement.innerHTML = cell.value;
-      rowElement.appendChild(cellElement);
+      const cellElement = [`<${cell.type}>`, cell.value, `</${cell.type}>`];
+      rowElement.push(...cellElement);
     }
-    tbody.appendChild(rowElement);
+    table.push(...rowElement);
   }
 
-  return document.outerHTML;
+  table.push(`</tbody>`, `</table>`);
+  return table.join("");
 }
 
 export function buildCodeblock(code: string, language: string) {
-  const document = parse(`<pre></pre>`);
-  const pre = <HTMLElement>document.firstChild;
-  pre.classList.add("hljs");
-  pre.classList.add(`language-${language}`);
-  pre.innerHTML = code;
-  return document.outerHTML;
+  const pre = [
+    `<pre class="language-${language}">`,
+    encodeHTML5(code),
+    "</pre>"
+  ];
+  return pre.join("");
 }

@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import { IHasher } from "../../../utils/hasher";
-import type { HTMLElement } from "node-html-parser";
-import {File}from "../../../utils/file";
+import { File } from "../../../utils/file";
 import { Note } from "../../../models/note";
+import { Element } from "domhandler";
 
 export abstract class BaseHandler {
   constructor(
@@ -29,5 +29,5 @@ export abstract class BaseHandler {
     protected readonly hasher: IHasher
   ) {}
 
-  abstract process(element: HTMLElement): Promise<string | undefined>;
+  abstract process(element: Element): Promise<string | undefined>;
 }

@@ -19,12 +19,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import { Attachment, attachmentToHTML } from "../../../models/attachment";
 import { BaseHandler } from "./base";
-import type { HTMLElement } from "node-html-parser";
 import { parseAttributeValue } from "../../../utils/dom-utils";
+import { Element } from "domhandler";
+import { getAttributeValue } from "domutils";
 
 export class ZNResource extends BaseHandler {
-  async process(element: HTMLElement): Promise<string | undefined> {
-    const relativePath = element.getAttribute("relative-path");
+  async process(element: Element): Promise<string | undefined> {
+    const relativePath = getAttributeValue(element, "relative-path");
     if (!relativePath) return;
 
     const file = this.files.find((file) => file.path?.includes(relativePath));
@@ -34,7 +35,7 @@ export class ZNResource extends BaseHandler {
     if (!data) return;
 
     const hash = await this.hasher.hash(data);
-    const type = element.getAttribute("type");
+    const type = getAttributeValue(element, "type");
 
     const attachment: Attachment = {
       data,
@@ -43,8 +44,11 @@ export class ZNResource extends BaseHandler {
       hash,
       hashType: this.hasher.type,
       mime: type || "application/octet-stream",
-      width: parseAttributeValue(element.getAttribute("width"), "number"),
-      height: parseAttributeValue(element.getAttribute("height"), "number")
+      width: parseAttributeValue(getAttributeValue(element, "width"), "number"),
+      height: parseAttributeValue(
+        getAttributeValue(element, "height"),
+        "number"
+      )
     };
     this.note.attachments?.push(attachment);
     return attachmentToHTML(attachment);
