@@ -81,7 +81,7 @@ for (const providerName of ProviderFactory.getAvailableProviders()) {
   });
 }
 
-const CHUNKER_REGEX = /.{1,79}/gs;
+const CHUNKER_REGEX = /.{1,60}/gs;
 // we have to chunk the output for better debugging
 function chunker(str: string) {
   return str.match(CHUNKER_REGEX)?.join("\n") || str;
