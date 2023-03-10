@@ -134,15 +134,13 @@ export class Entry extends Blob {
   get lastModifiedDate() {
     const t = this.dataView.getUint32(12, true);
 
-    return new Date(
-      // Date.UTC(
+    return Date.UTC(
       ((t >> 25) & 0x7f) + 1980, // year
       ((t >> 21) & 0x0f) - 1, // month
       (t >> 16) & 0x1f, // day
       (t >> 11) & 0x1f, // hour
       (t >> 5) & 0x3f, // minute
       (t & 0x1f) << 1
-      // ),
     );
   }
 
