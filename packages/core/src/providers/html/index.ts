@@ -25,7 +25,6 @@ import { textContent, findOne, findAll } from "domutils";
 import { render } from "dom-serializer";
 import { IHasher } from "../../utils/hasher";
 import { Attachment } from "../../models";
-import { fileTypeFromBuffer } from "file-type";
 
 export class HTML implements IFileProvider {
   public type = "file" as const;
@@ -90,10 +89,7 @@ export class HTML implements IFileProvider {
         filename:
           resource.attribs.title || resource.attribs.filename || dataHash,
         hashType: hasher.type,
-        mime:
-          resource.attribs.mime ||
-          (await fileTypeFromBuffer(data))?.mime ||
-          "application/octet-stream"
+        mime: resource.attribs.mime || "application/octet-stream"
       };
       attachments.push(attachment);
     }
