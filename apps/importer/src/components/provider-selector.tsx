@@ -46,7 +46,7 @@ export function ProviderSelector(props: ProviderSelectorProps) {
             props.onProviderChanged(ProviderFactory.getProvider(providerName));
           }}
         >
-          <option value=""></option>
+          <option value="">Select notes app</option>
           {ProviderFactory.getAvailableProviders().map((provider) => (
             <option key={provider} value={provider}>
               {ProviderFactory.getProvider(provider as Providers).name}
