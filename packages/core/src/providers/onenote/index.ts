@@ -135,7 +135,7 @@ export class OneNote implements INetworkProvider<OneNoteSettings> {
 
   private getNotebooks(section: OnenoteSection): Notebook[] {
     const notebooks: Notebook[] = [];
-    const topic = section?.displayName || "Untitled topic";
+    const topic = section?.displayName || undefined;
 
     if (section?.parentNotebook?.displayName) {
       notebooks.push({
@@ -146,10 +146,11 @@ export class OneNote implements INetworkProvider<OneNoteSettings> {
         const flattenedSectionGroupsTitle = this.getFlattenedSectionGroupsTitle(
           section.parentSectionGroup
         );
-        const notebookTitle = `${
-          section.parentNotebook.displayName
-        }: ${flattenedSectionGroupsTitle.reverse().join(">")}`;
-        notebooks.push({ topic, notebook: notebookTitle });
+        const notebookTitle = flattenedSectionGroupsTitle.reverse().join(">");
+        notebooks.push({
+          topic: notebookTitle,
+          notebook: section.parentNotebook.displayName
+        });
       }
     }
 

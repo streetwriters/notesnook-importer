@@ -39,10 +39,10 @@ export type Content = {
 
 export enum ContentType {
   HTML = "html",
-  TEXT = "text",
+  TEXT = "text"
 }
 
 export type Notebook = {
   notebook: string;
-  topic: string;
+  topic?: string;
 };

@@ -37,8 +37,7 @@ export class Evernote implements IFileProvider {
 
   async *process(file: File, settings: ProviderSettings) {
     const notebook: Notebook = {
-      notebook: path.basename(file.name),
-      topic: "All notes"
+      notebook: path.basename(file.name)
     };
 
     for await (const chunk of parse(
