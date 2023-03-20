@@ -21,12 +21,15 @@ import { ContentType, Note } from "../../models/note";
 import { File } from "../../utils/file";
 import { IFileProvider, ProviderSettings } from "../provider";
 import { parseDocument } from "htmlparser2";
-import { textContent, findOne } from "domutils";
+import { textContent, findOne, findAll } from "domutils";
 import { render } from "dom-serializer";
+import { IHasher } from "../../utils/hasher";
+import { Attachment } from "../../models";
+import { fileTypeFromBuffer } from "file-type";
 
 export class HTML implements IFileProvider {
   public type = "file" as const;
-  public supportedExtensions = [".html"];
+  public supportedExtensions = [".html", ".htm"];
   public examples = ["Import.html"];
   public version = "1.0.0";
   public name = "HTML";
@@ -35,9 +38,18 @@ export class HTML implements IFileProvider {
     return this.supportedExtensions.includes(file.extension);
   }
 
-  async *process(file: File, _settings: ProviderSettings, _files: File[]) {
+  async *process(file: File, settings: ProviderSettings, files: File[]) {
     const data = await file.text();
-    const document = parseDocument(data);
+    yield await HTML.processHTML(file, files, settings.hasher, data);
+  }
+
+  static async processHTML(
+    file: File,
+    files: File[],
+    hasher: IHasher,
+    html: string
+  ): Promise<Note> {
+    const document = parseDocument(html);
 
     const body = findOne(
       (e) => e.tagName === "body",
@@ -53,16 +65,50 @@ export class HTML implements IFileProvider {
     const title = titleElement
       ? textContent(titleElement)
       : file.nameWithoutExtension;
+
+    const resources = findAll(
+      (elem) => elem.tagName.toLowerCase() === "img",
+      document.childNodes
+    );
+
+    const attachments: Attachment[] = [];
+    for (const resource of resources) {
+      const src = resource.attribs.src;
+      if (!src) continue;
+
+      const file = files.find((file) => file.path && file.path.endsWith(src));
+      if (!file) continue;
+
+      const data = await file.bytes();
+      if (!data) continue;
+
+      const dataHash = await hasher.hash(data);
+      const attachment: Attachment = {
+        data,
+        size: data.byteLength,
+        hash: dataHash,
+        filename:
+          resource.attribs.title || resource.attribs.filename || dataHash,
+        hashType: hasher.type,
+        mime:
+          resource.attribs.mime ||
+          (await fileTypeFromBuffer(data))?.mime ||
+          "application/octet-stream"
+      };
+      attachments.push(attachment);
+    }
+
     const note: Note = {
       title: title,
       dateCreated: file.createdAt,
       dateEdited: file.modifiedAt,
+      attachments,
       content: {
         type: ContentType.HTML,
-        data: body ? render(body) : data
+        data: body ? render(body.childNodes) : render(document.childNodes)
       }
     };
 
-    yield note;
+    return note;
   }
 }
