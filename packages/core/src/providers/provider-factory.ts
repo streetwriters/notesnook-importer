@@ -26,6 +26,7 @@ import { Simplenote } from "./simplenote";
 import { ZohoNotebook } from "./zoho-notebook";
 import { OneNote } from "./onenote";
 import { Joplin } from "./joplin";
+import { TextBundle } from "./textbundle";
 import { Text } from "./txt";
 
 const providerMap = {
@@ -38,7 +39,8 @@ const providerMap = {
   onenote: OneNote,
   standardnotes: StandardNotes,
   zohonotebook: ZohoNotebook,
-  joplin: Joplin
+  joplin: Joplin,
+  textbundle: TextBundle
 };
 
 type ProvidersMap = typeof providerMap;

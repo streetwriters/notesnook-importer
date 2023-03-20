@@ -62,9 +62,7 @@ export class File {
   }
 
   get extension(): string {
-    return (
-      this.path ? path.extname(this.path) : path.extname(this.name)
-    ).toLowerCase();
+    return path.extname(this.path || this.name).toLowerCase();
   }
 
   get path(): string | undefined {

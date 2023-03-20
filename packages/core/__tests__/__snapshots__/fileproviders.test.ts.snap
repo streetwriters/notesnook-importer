@@ -130,7 +130,7 @@ exports[`transform & pack evernote files to notesnook importer compatible format
 
 exports[`transform & pack html files to notesnook importer compatible format 1`] = `
 [
-  "/df8b40b32478b525eb82b9e3813d28cc/note.json",
+  "/c6a11c2d3666404492239e4edddadc13/note.json",
   "metadata.json",
 ]
 `;
@@ -166,9 +166,9 @@ exports[`transform & pack keep files to notesnook importer compatible format 1`]
 
 exports[`transform & pack md files to notesnook importer compatible format 1`] = `
 [
-  "/b21c531fb5f383a1333fe9aeff8ab991/note.json",
-  "/f9f5ba2fd95b55f539c61f611ccb75bb/note.json",
-  "/d3dfbcd8658f8e30b1b84a3edb44ec83/note.json",
+  "/e58619fd17f7d69ce11476489739abba/note.json",
+  "/d8966d40fe67699e83230506f8561495/note.json",
+  "/5382c8ca1cadb01cc1f3329074c4354c/note.json",
   "metadata.json",
 ]
 `;
@@ -253,6 +253,31 @@ exports[`transform & pack standardnotes files to notesnook importer compatible f
   "/bd462f3d3063c67a34db534639109d90/note.json",
   "/86e670522bb82a3492a9b78948bf9f1d/note.json",
   "/113339a1e36da76c5bef27b688392af8/note.json",
+  "metadata.json",
+]
+`;
+
+exports[`transform & pack textbundle files to notesnook importer compatible format 1`] = `
+[
+  "/3f08670b52588a5312ce1f9088e965c9/attachments/cba0ce7401c5c9bd",
+  "/3f08670b52588a5312ce1f9088e965c9/note.json",
+  "/3f08670b52588a5312ce1f9088e965c9/attachments/cba0ce7401c5c9bd",
+  "/3f08670b52588a5312ce1f9088e965c9/note.json",
+  "metadata.json",
+]
+`;
+
+exports[`transform & pack txt files to notesnook importer compatible format 1`] = `
+[
+  "/f1c810c15307551bbaa005f990ca23be/note.json",
+  "/fc61621ce48973880621701e4f4b5b70/note.json",
+  "/d8cfac831cf3e3d63944a79fbcd1f78b/note.json",
+  "/4db3c3225560b37ea26518672e196f36/note.json",
+  "/3bcd501e2483a0828413c499b9b106a1/note.json",
+  "/f97ab23fbbb501d7bfacd109fb5ea402/note.json",
+  "/48a76f85154851c9ede09f240177878e/note.json",
+  "/a39e32e7ab53661e06b85c559bf57556/note.json",
+  "/704eaa7d93c53eeea4d2ea494c3f2491/note.json",
   "metadata.json",
 ]
 `;
@@ -6716,10 +6741,10 @@ div><div>An international thing would be more powerful.&#xa0
 `;
 
 exports[`transform html files to notesnook importer compatible format 1`] = `
-"[{\\"title\\":\\"test\\",\\"content\\":{\\"type\\":\\"html\\",\\"data\\":\\"<img src=\\\\
-\\"forkit.gif\\\\\\" id=\\\\\\"octocat\\\\\\" alt=\\\\\\"\\\\\\" />\\\\n\\\\n<!-- Feel free t
-o change this text here -->\\\\n<p>Fork me? Fork you, @octocat!
-</p>\\\\n<p>Sean made a change</p>\\\\n\\"}}]"
+"[{\\"title\\":\\"test\\",\\"attachments\\":[],\\"content\\":{\\"type\\":\\"html\\",\\"
+data\\":\\"<img src=\\\\\\"forkit.gif\\\\\\" id=\\\\\\"octocat\\\\\\" alt>\\\\n\\\\n<!-- F
+eel free to change this text here -->\\\\n<p>Fork me? Fork you,
+ @octocat!</p>\\\\n<p>Sean made a change</p>\\\\n\\"}}]"
 `;
 
 exports[`transform joplin files to notesnook importer compatible format 1`] = `
@@ -7122,401 +7147,404 @@ filename\\":\\"1629964295873.139657380.png\\",\\"size\\":41348,\\"hash\\":
 `;
 
 exports[`transform md files to notesnook importer compatible format 1`] = `
-"[{\\"title\\":\\"test\\",\\"content\\":{\\"type\\":\\"html\\",\\"data\\":\\"<h1 id=\\\\\\"a
-n-h1-header\\\\\\">An h1 header</h1>\\\\n<p data-spacing=\\\\\\"double\\\\\\">
-Paragraphs are separated by a blank line.</p><p data-spacing
-=\\\\\\"double\\\\\\">2nd paragraph. <em>Italic</em>, <strong>bold</st
-rong>, and <code>monospace</code>. Itemized lists</p><p data
--spacing=\\\\\\"single\\\\\\">look like:</p><ul>\\\\n<li>this one</li>\\\\n<
-li>that one</li>\\\\n<li>the other one</li>\\\\n</ul>\\\\n<p data-spa
-cing=\\\\\\"double\\\\\\">Note that --- not considering the asterisk -
--- the actual text</p><p data-spacing=\\\\\\"single\\\\\\">content sta
-rts at 4-columns in.</p><blockquote>\\\\n<p data-spacing=\\\\\\"doub
-le\\\\\\">Block quotes are</p><p data-spacing=\\\\\\"single\\\\\\">written 
-like so.</p><p data-spacing=\\\\\\"double\\\\\\">They can span multipl
-e paragraphs,</p><p data-spacing=\\\\\\"single\\\\\\">if you like.</p>
-</blockquote>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Use 3 dashes for a
-n em-dash. Use 2 dashes for ranges (ex., &quot;it&#39;s all<
-/p><p data-spacing=\\\\\\"single\\\\\\">in chapters 12--14&quot;). Thr
-ee dots ... will be converted to an ellipsis.</p><p data-spa
-cing=\\\\\\"single\\\\\\">Unicode is supported. ☺</p><h2 id=\\\\\\"an-h2-he
-ader\\\\\\">An h2 header</h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Here&#3
-9;s a numbered list:</p><ol>\\\\n<li>first item</li>\\\\n<li>secon
-d item</li>\\\\n<li>third item</li>\\\\n</ol>\\\\n<p data-spacing=\\\\\\"d
-ouble\\\\\\">Note again how the actual text starts at 4 columns i
-n (4 characters</p><p data-spacing=\\\\\\"single\\\\\\">from the left 
-side). Here&#39;s a code sample:</p><pre class=\\\\\\"language-un
-defined\\\\\\"><code class=\\\\\\"language-undefined\\\\\\"># Let me re-ite
-rate ...<br/>for i in 1 .. 10 { do-something(i) }</code></pr
-e><p data-spacing=\\\\\\"double\\\\\\">As you probably guessed, indent
-ed 4 spaces. By the way, instead of</p><p data-spacing=\\\\\\"sin
-gle\\\\\\">indenting the block, you can use delimited blocks, if 
-you like:</p><pre class=\\\\\\"language-\\\\\\"><code class=\\\\\\"language
--\\\\\\">define foobar() {<br/>    print \\\\\\"Welcome to flavor coun
-try!\\\\\\";<br/>}</code></pre><p data-spacing=\\\\\\"double\\\\\\">(which 
-makes copying &amp; pasting easier). You can optionally mark
- the</p><p data-spacing=\\\\\\"single\\\\\\">delimited block for Pando
-c to syntax highlight it:</p><pre class=\\\\\\"language-python\\\\\\">
-<code class=\\\\\\"language-python\\\\\\">import time<br/># Quick, cou
-nt to ten!<br/>for i in range(10):<br/>    # (but not *too* 
-quick)<br/>    time.sleep(0.5)<br/>    print i</code></pre><
-h3 id=\\\\\\"an-h3-header\\\\\\">An h3 header</h3>\\\\n<p data-spacing=\\\\\\"
-double\\\\\\">Now a nested list:</p><ol>\\\\n<li><p data-spacing=\\\\\\"d
-ouble\\\\\\">First, get these ingredients:</p><ul>\\\\n<li>carrots</
-li>\\\\n<li>celery</li>\\\\n<li>lentils</li>\\\\n</ul>\\\\n</li>\\\\n<li><p
- data-spacing=\\\\\\"double\\\\\\">Boil some water.</p></li>\\\\n<li><p d
-ata-spacing=\\\\\\"double\\\\\\">Dump everything in the pot and follow
-</p><p data-spacing=\\\\\\"single\\\\\\">this algorithm:</p><pre class
-=\\\\\\"language-undefined\\\\\\"><code class=\\\\\\"language-undefined\\\\\\">f
-ind wooden spoon<br/>uncover pot<br/>stir<br/>cover pot<br/>
-balance wooden spoon precariously on pot handle<br/>wait 10 
-minutes<br/>goto first step (or shut off burner when done)</
-code></pre><p data-spacing=\\\\\\"double\\\\\\">Do not bump wooden spo
-on or it will fall.</p></li>\\\\n</ol>\\\\n<p data-spacing=\\\\\\"doubl
-e\\\\\\">Notice again how text always lines up on 4-space indents
- (including</p><p data-spacing=\\\\\\"single\\\\\\">that last line whi
-ch continues item 3 above).</p><p data-spacing=\\\\\\"double\\\\\\">He
-re&#39;s a link to <a href=\\\\\\"http://foo.bar\\\\\\">a website</a>,
- to a <a href=\\\\\\"local-doc.html\\\\\\">local</p><p data-spacing=\\\\\\"
-single\\\\\\">doc</a>, and to a <a href=\\\\\\"#an-h2-header\\\\\\">section
- heading in the current</p><p data-spacing=\\\\\\"single\\\\\\">doc</a
->. Here&#39;s a footnote [^1].</p><p data-spacing=\\\\\\"double\\\\\\"
->[^1]: Footnote text goes here.</p><p data-spacing=\\\\\\"double\\\\
-\\">Tables can look like this:</p><p data-spacing=\\\\\\"double\\\\\\">s
-ize material color</p><hr>\\\\n<p data-spacing=\\\\\\"double\\\\\\">9 lea
-ther brown</p><p data-spacing=\\\\\\"single\\\\\\">10 hemp canvas natu
-ral</p><p data-spacing=\\\\\\"single\\\\\\">11 glass transparent</p><p
- data-spacing=\\\\\\"double\\\\\\">Table: Shoes, their sizes, and what
- they&#39;re made of</p><p data-spacing=\\\\\\"double\\\\\\">(The abov
-e is the caption for the table.) Pandoc also supports</p><p 
-data-spacing=\\\\\\"single\\\\\\">multi-line tables:</p><hr>\\\\n<p data-
-spacing=\\\\\\"double\\\\\\">keyword text</p><hr>\\\\n<p data-spacing=\\\\\\"d
-ouble\\\\\\">red Sunsets, apples, and</p><p data-spacing=\\\\\\"single
-\\\\\\">other red or reddish</p><p data-spacing=\\\\\\"single\\\\\\">things
-.</p><p data-spacing=\\\\\\"double\\\\\\">green Leaves, grass, frogs</
-p><p data-spacing=\\\\\\"single\\\\\\">and other things it&#39;s</p><p
- data-spacing=\\\\\\"single\\\\\\">not easy being.</p><hr>\\\\n<p data-sp
-acing=\\\\\\"double\\\\\\">A horizontal rule follows.</p><hr>\\\\n<p data
--spacing=\\\\\\"double\\\\\\">Here&#39;s a definition list:</p><p data
--spacing=\\\\\\"double\\\\\\">apples</p><p data-spacing=\\\\\\"single\\\\\\">: G
-ood for making applesauce.</p><p data-spacing=\\\\\\"single\\\\\\">ora
-nges</p><p data-spacing=\\\\\\"single\\\\\\">: Citrus!</p><p data-spac
-ing=\\\\\\"single\\\\\\">tomatoes</p><p data-spacing=\\\\\\"single\\\\\\">: Ther
-e&#39;s no &quot;e&quot; in tomatoe.</p><p data-spacing=\\\\\\"do
-uble\\\\\\">Again, text is indented 4 spaces. (Put a blank line b
-etween each</p><p data-spacing=\\\\\\"single\\\\\\">term/definition pa
-ir to spread things out more.)</p><p data-spacing=\\\\\\"double\\\\\\"
->Here&#39;s a &quot;line block&quot;:</p><p data-spacing=\\\\\\"d
-ouble\\\\\\">| Line one</p><p data-spacing=\\\\\\"single\\\\\\">| Line too<
-/p><p data-spacing=\\\\\\"single\\\\\\">| Line tree</p><p data-spacing
-=\\\\\\"double\\\\\\">and images can be specified like so:</p><p data-
-spacing=\\\\\\"double\\\\\\"><img src=\\\\\\"example-image.jpg\\\\\\" alt=\\\\\\"exam
-ple image\\\\\\" title=\\\\\\"An exemplary image\\\\\\"></p><p data-spacing
-=\\\\\\"double\\\\\\">Inline math equations go in like so: $\\\\\\\\omega = 
-d\\\\\\\\phi / dt$. Display</p><p data-spacing=\\\\\\"single\\\\\\">math sho
-uld get its own line and be put in in double-dollarsigns:</p
-><p data-spacing=\\\\\\"double\\\\\\">$$I = \\\\\\\\int \\\\\\\\rho R^{2} dV$$</p>
-<p data-spacing=\\\\\\"double\\\\\\">And note that you can backslash-e
-scape any punctuation characters</p><p data-spacing=\\\\\\"single
-\\\\\\">which you wish to be displayed literally, ex.: \`foo\`, *ba
-r*, etc.</p>\\"}},{\\"title\\":\\"test2\\",\\"content\\":{\\"type\\":\\"html\\",\\"d
-ata\\":\\"<hr>\\\\n<p data-spacing=\\\\\\"double\\\\\\"><strong>Advertisement
- :)</strong></p><ul>\\\\n<li><strong><a href=\\\\\\"https://nodeca.g
-ithub.io/pica/demo/\\\\\\">pica</a></strong>&nbsp;- high quality 
-and fast image</p><p data-spacing=\\\\\\"single\\\\\\">resize in brows
-er.</li>\\\\n<li><strong><a href=\\\\\\"https://github.com/nodeca/ba
-belfish/\\\\\\">babelfish</a></strong>&nbsp;- developer friendly<
-/p><p data-spacing=\\\\\\"single\\\\\\">i18n with plurals support and 
-easy syntax.</li>\\\\n</ul>\\\\n<h2 id=\\\\\\"you-will-like-those-proje
-cts\\\\\\">You will like those projects!</h2>\\\\n<h1 id=\\\\\\"h1-headin
-g-8-\\\\\\">h1 Heading 8-)</h1>\\\\n<h2 id=\\\\\\"h2-heading\\\\\\">h2 Heading
-</h2>\\\\n<h3 id=\\\\\\"h3-heading\\\\\\">h3 Heading</h3>\\\\n<h4 id=\\\\\\"h4-he
-ading\\\\\\">h4 Heading</h4>\\\\n<h5 id=\\\\\\"h5-heading\\\\\\">h5 Heading</h
-5>\\\\n<h6 id=\\\\\\"h6-heading\\\\\\">h6 Heading</h6>\\\\n<h2 id=\\\\\\"horizont
-al-rules\\\\\\">Horizontal Rules</h2>\\\\n<hr>\\\\n<hr>\\\\n<hr>\\\\n<h2 id=\\\\
-\\"typographic-replacements\\\\\\">Typographic replacements</h2>\\\\n<
-p data-spacing=\\\\\\"double\\\\\\">Enable typographer option to see r
-esult.</p><p data-spacing=\\\\\\"double\\\\\\">(c) (C) (r) (R) (tm) (T
-M) (p) (P) +-</p><p data-spacing=\\\\\\"double\\\\\\">test.. test... t
-est..... test?..... test!....</p><p data-spacing=\\\\\\"double\\\\\\">
-!!!!!! ???? ,, -- ---</p><p data-spacing=\\\\\\"double\\\\\\">&quot;Sm
-artypants, double quotes&quot; and &#39;single quotes&#39;</
-p><h2 id=\\\\\\"emphasis\\\\\\">Emphasis</h2>\\\\n<p data-spacing=\\\\\\"doubl
-e\\\\\\"><strong>This is bold text</strong></p><p data-spacing=\\\\\\"
-double\\\\\\"><strong>This is bold text</strong></p><p data-spaci
-ng=\\\\\\"double\\\\\\"><em>This is italic text</em></p><p data-spacin
-g=\\\\\\"double\\\\\\"><em>This is italic text</em></p><p data-spacing
-=\\\\\\"double\\\\\\"><del>Strikethrough</del></p><h2 id=\\\\\\"blockquotes
-\\\\\\">Blockquotes</h2>\\\\n<blockquote>\\\\n<p data-spacing=\\\\\\"double\\\\
-\\">Blockquotes can also be nested...</p><blockquote>\\\\n<p data
--spacing=\\\\\\"double\\\\\\">...by using additional greater-than sign
-s right next to each other...</p><blockquote>\\\\n<p data-spaci
-ng=\\\\\\"double\\\\\\">...or with spaces between arrows.</p></blockqu
-ote>\\\\n</blockquote>\\\\n</blockquote>\\\\n<h2 id=\\\\\\"lists\\\\\\">Lists</
-h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Unordered</p><ul>\\\\n<li>Creat
-e a list by starting a line with <code>+</code>, <code>-</co
-de>, or <code>*</code></li>\\\\n<li>Sub-lists are made by inden
-ting 2 spaces:<ul>\\\\n<li>Marker character change forces new l
-ist start:<ul>\\\\n<li>Ac tristique libero volutpat at</li>\\\\n</
-ul>\\\\n<ul>\\\\n<li>Facilisis in pretium nisl aliquet</li>\\\\n</ul>
-\\\\n<ul>\\\\n<li>Nulla volutpat aliquam velit</li>\\\\n</ul>\\\\n</li>\\\\
-n</ul>\\\\n</li>\\\\n<li>Very easy!</li>\\\\n</ul>\\\\n<p data-spacing=\\\\
-\\"double\\\\\\">Ordered</p><ol>\\\\n<li><p data-spacing=\\\\\\"double\\\\\\">Lo
-rem ipsum dolor sit amet</p></li>\\\\n<li><p data-spacing=\\\\\\"dou
-ble\\\\\\">Consectetur adipiscing elit</p></li>\\\\n<li><p data-spac
-ing=\\\\\\"double\\\\\\">Integer molestie lorem at massa</p></li>\\\\n<li
-><p data-spacing=\\\\\\"double\\\\\\">You can use sequential numbers..
-.</p></li>\\\\n<li><p data-spacing=\\\\\\"double\\\\\\">...or keep all th
-e numbers as <code>1.</code></p></li>\\\\n</ol>\\\\n<p data-spacin
-g=\\\\\\"double\\\\\\">Start numbering with offset:</p><ol start=\\\\\\"57\\\\
-\\">\\\\n<li>foo</li>\\\\n<li>bar</li>\\\\n</ol>\\\\n<h2 id=\\\\\\"code\\\\\\">Code<
-/h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Inline <code>code</code></p
-><p data-spacing=\\\\\\"double\\\\\\">Indented code</p><pre class=\\\\\\"la
-nguage-undefined\\\\\\"><code class=\\\\\\"language-undefined\\\\\\">// Som
-e comments<br/>line 1 of code<br/>line 2 of code<br/>line 3 
+"[{\\"title\\":\\"An h1 header\\",\\"attachments\\":[],\\"content\\":{\\"type\\":
+\\"html\\",\\"data\\":\\"<h1 id=\\\\\\"an-h1-header\\\\\\">An h1 header</h1>\\\\n<p
+ data-spacing=\\\\\\"double\\\\\\">Paragraphs are separated by a blank
+ line.</p><p data-spacing=\\\\\\"double\\\\\\">2nd paragraph. <em>Ital
+ic</em>, <strong>bold</strong>, and <code>monospace</code>. 
+Itemized lists</p><p data-spacing=\\\\\\"single\\\\\\">look like:</p><
+ul>\\\\n<li>this one</li>\\\\n<li>that one</li>\\\\n<li>the other one
+</li>\\\\n</ul>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Note that --- not c
+onsidering the asterisk --- the actual text</p><p data-spaci
+ng=\\\\\\"single\\\\\\">content starts at 4-columns in.</p><blockquote
+>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Block quotes are</p><p data-sp
+acing=\\\\\\"single\\\\\\">written like so.</p><p data-spacing=\\\\\\"doubl
+e\\\\\\">They can span multiple paragraphs,</p><p data-spacing=\\\\\\"
+single\\\\\\">if you like.</p></blockquote>\\\\n<p data-spacing=\\\\\\"do
+uble\\\\\\">Use 3 dashes for an em-dash. Use 2 dashes for ranges 
+(ex., &quot;it&apos;s all</p><p data-spacing=\\\\\\"single\\\\\\">in c
+hapters 12--14&quot;). Three dots ... will be converted to a
+n ellipsis.</p><p data-spacing=\\\\\\"single\\\\\\">Unicode is support
+ed. &#x263a;</p><h2 id=\\\\\\"an-h2-header\\\\\\">An h2 header</h2>\\\\n<
+p data-spacing=\\\\\\"double\\\\\\">Here&apos;s a numbered list:</p><o
+l>\\\\n<li>first item</li>\\\\n<li>second item</li>\\\\n<li>third ite
+m</li>\\\\n</ol>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Note again how the
+ actual text starts at 4 columns in (4 characters</p><p data
+-spacing=\\\\\\"single\\\\\\">from the left side). Here&apos;s a code 
+sample:</p><pre class=\\\\\\"language-undefined\\\\\\"><code class=\\\\\\"l
+anguage-undefined\\\\\\"># Let me re-iterate ...<br>for i in 1 ..
+ 10 { do-something(i) }</code></pre><p data-spacing=\\\\\\"double
+\\\\\\">As you probably guessed, indented 4 spaces. By the way, i
+nstead of</p><p data-spacing=\\\\\\"single\\\\\\">indenting the block,
+ you can use delimited blocks, if you like:</p><pre class=\\\\\\"
+language-\\\\\\"><code class=\\\\\\"language-\\\\\\">define foobar() {<br> 
+   print &quot;Welcome to flavor country!&quot;;<br>}</code>
+</pre><p data-spacing=\\\\\\"double\\\\\\">(which makes copying &amp; 
+pasting easier). You can optionally mark the</p><p data-spac
+ing=\\\\\\"single\\\\\\">delimited block for Pandoc to syntax highligh
+t it:</p><pre class=\\\\\\"language-python\\\\\\"><code class=\\\\\\"langua
+ge-python\\\\\\">import time<br># Quick, count to ten!<br>for i i
+n range(10):<br>    # (but not *too* quick)<br>    time.slee
+p(0.5)<br>    print i</code></pre><h3 id=\\\\\\"an-h3-header\\\\\\">An
+ h3 header</h3>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Now a nested lis
+t:</p><ol>\\\\n<li><p data-spacing=\\\\\\"double\\\\\\">First, get these 
+ingredients:</p><ul>\\\\n<li>carrots</li>\\\\n<li>celery</li>\\\\n<li
+>lentils</li>\\\\n</ul>\\\\n</li>\\\\n<li><p data-spacing=\\\\\\"double\\\\\\">
+Boil some water.</p></li>\\\\n<li><p data-spacing=\\\\\\"double\\\\\\">Du
+mp everything in the pot and follow</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">this algorithm:</p><pre class=\\\\\\"language-undefined\\\\\\"><
+code class=\\\\\\"language-undefined\\\\\\">find wooden spoon<br>uncov
+er pot<br>stir<br>cover pot<br>balance wooden spoon precario
+usly on pot handle<br>wait 10 minutes<br>goto first step (or
+ shut off burner when done)</code></pre><p data-spacing=\\\\\\"do
+uble\\\\\\">Do not bump wooden spoon or it will fall.</p></li>\\\\n<
+/ol>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Notice again how text alway
+s lines up on 4-space indents (including</p><p data-spacing=
+\\\\\\"single\\\\\\">that last line which continues item 3 above).</p>
+<p data-spacing=\\\\\\"double\\\\\\">Here&apos;s a link to <a href=\\\\\\"h
+ttp://foo.bar\\\\\\">a website</a>, to a <a href=\\\\\\"local-doc.html
+\\\\\\">local</a></p><p data-spacing=\\\\\\"single\\\\\\">doc, and to a <a 
+href=\\\\\\"#an-h2-header\\\\\\">section heading in the current</a></p
+><p data-spacing=\\\\\\"single\\\\\\">doc. Here&apos;s a footnote [^1]
+.</p><p data-spacing=\\\\\\"double\\\\\\">[^1]: Footnote text goes her
+e.</p><p data-spacing=\\\\\\"double\\\\\\">Tables can look like this:<
+/p><p data-spacing=\\\\\\"double\\\\\\">size material color</p><hr>\\\\n<
+p data-spacing=\\\\\\"double\\\\\\">9 leather brown</p><p data-spacing
+=\\\\\\"single\\\\\\">10 hemp canvas natural</p><p data-spacing=\\\\\\"sing
+le\\\\\\">11 glass transparent</p><p data-spacing=\\\\\\"double\\\\\\">Tabl
+e: Shoes, their sizes, and what they&apos;re made of</p><p d
+ata-spacing=\\\\\\"double\\\\\\">(The above is the caption for the tab
+le.) Pandoc also supports</p><p data-spacing=\\\\\\"single\\\\\\">mult
+i-line tables:</p><hr>\\\\n<p data-spacing=\\\\\\"double\\\\\\">keyword t
+ext</p><hr>\\\\n<p data-spacing=\\\\\\"double\\\\\\">red Sunsets, apples,
+ and</p><p data-spacing=\\\\\\"single\\\\\\">other red or reddish</p><
+p data-spacing=\\\\\\"single\\\\\\">things.</p><p data-spacing=\\\\\\"doubl
+e\\\\\\">green Leaves, grass, frogs</p><p data-spacing=\\\\\\"single\\\\\\"
+>and other things it&apos;s</p><p data-spacing=\\\\\\"single\\\\\\">no
+t easy being.</p><hr>\\\\n<p data-spacing=\\\\\\"double\\\\\\">A horizont
+al rule follows.</p><hr>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Here&ap
+os;s a definition list:</p><p data-spacing=\\\\\\"double\\\\\\">apples
+</p><p data-spacing=\\\\\\"single\\\\\\">: Good for making applesauce.
+</p><p data-spacing=\\\\\\"single\\\\\\">oranges</p><p data-spacing=\\\\\\"
+single\\\\\\">: Citrus!</p><p data-spacing=\\\\\\"single\\\\\\">tomatoes</p
+><p data-spacing=\\\\\\"single\\\\\\">: There&apos;s no &quot;e&quot; 
+in tomatoe.</p><p data-spacing=\\\\\\"double\\\\\\">Again, text is ind
+ented 4 spaces. (Put a blank line between each</p><p data-sp
+acing=\\\\\\"single\\\\\\">term/definition pair to spread things out m
+ore.)</p><p data-spacing=\\\\\\"double\\\\\\">Here&apos;s a &quot;line
+ block&quot;:</p><p data-spacing=\\\\\\"double\\\\\\">| Line one</p><p
+ data-spacing=\\\\\\"single\\\\\\">| Line too</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">| Line tree</p><p data-spacing=\\\\\\"double\\\\\\">and images c
+an be specified like so:</p><p data-spacing=\\\\\\"double\\\\\\"><img 
+src=\\\\\\"example-image.jpg\\\\\\" alt=\\\\\\"example image\\\\\\" title=\\\\\\"An e
+xemplary image\\\\\\"></p><p data-spacing=\\\\\\"double\\\\\\">Inline math 
+equations go in like so: &#x24;\\\\\\\\omega = d\\\\\\\\phi / dt&#x24;. 
+Display</p><p data-spacing=\\\\\\"single\\\\\\">math should get its ow
+n line and be put in in double-dollarsigns:</p><p data-spaci
+ng=\\\\\\"double\\\\\\">&#x24;&#x24;I = \\\\\\\\int \\\\\\\\rho R^{2} dV&#x24;&#x2
+4;</p><p data-spacing=\\\\\\"double\\\\\\">And note that you can backs
+lash-escape any punctuation characters</p><p data-spacing=\\\\\\"
+single\\\\\\">which you wish to be displayed literally, ex.: \`foo
+\`, *bar*, etc.</p>\\"}},{\\"title\\":\\"You will like those projects
+!\\",\\"attachments\\":[],\\"content\\":{\\"type\\":\\"html\\",\\"data\\":\\"<hr>\\\\n<
+p data-spacing=\\\\\\"double\\\\\\"><strong>Advertisement :)</strong><
+/p><ul>\\\\n<li><strong><a href=\\\\\\"https://nodeca.github.io/pica
+/demo/\\\\\\">pica</a></strong>&#xa0;- high quality and fast imag
+e<p></p><p data-spacing=\\\\\\"single\\\\\\">resize in browser.</p></l
+i>\\\\n<li><strong><a href=\\\\\\"https://github.com/nodeca/babelfis
+h/\\\\\\">babelfish</a></strong>&#xa0;- developer friendly<p></p>
+<p data-spacing=\\\\\\"single\\\\\\">i18n with plurals support and eas
+y syntax.</p></li>\\\\n</ul>\\\\n<h2 id=\\\\\\"you-will-like-those-proj
+ects\\\\\\">You will like those projects!</h2>\\\\n<h1 id=\\\\\\"h1-headi
+ng-8-\\\\\\">h1 Heading 8-)</h1>\\\\n<h2 id=\\\\\\"h2-heading\\\\\\">h2 Headin
+g</h2>\\\\n<h3 id=\\\\\\"h3-heading\\\\\\">h3 Heading</h3>\\\\n<h4 id=\\\\\\"h4-h
+eading\\\\\\">h4 Heading</h4>\\\\n<h5 id=\\\\\\"h5-heading\\\\\\">h5 Heading</
+h5>\\\\n<h6 id=\\\\\\"h6-heading\\\\\\">h6 Heading</h6>\\\\n<h2 id=\\\\\\"horizon
+tal-rules\\\\\\">Horizontal Rules</h2>\\\\n<hr>\\\\n<hr>\\\\n<hr>\\\\n<h2 id=
+\\\\\\"typographic-replacements\\\\\\">Typographic replacements</h2>\\\\n
+<p data-spacing=\\\\\\"double\\\\\\">Enable typographer option to see 
+result.</p><p data-spacing=\\\\\\"double\\\\\\">(c) (C) (r) (R) (tm) (
+TM) (p) (P) +-</p><p data-spacing=\\\\\\"double\\\\\\">test.. test... 
+test..... test?..... test!....</p><p data-spacing=\\\\\\"double\\\\\\"
+>!!!!!! ???? ,, -- ---</p><p data-spacing=\\\\\\"double\\\\\\">&quot;S
+martypants, double quotes&quot; and &apos;single quotes&apos
+;</p><h2 id=\\\\\\"emphasis\\\\\\">Emphasis</h2>\\\\n<p data-spacing=\\\\\\"do
+uble\\\\\\"><strong>This is bold text</strong></p><p data-spacing
+=\\\\\\"double\\\\\\"><strong>This is bold text</strong></p><p data-sp
+acing=\\\\\\"double\\\\\\"><em>This is italic text</em></p><p data-spa
+cing=\\\\\\"double\\\\\\"><em>This is italic text</em></p><p data-spac
+ing=\\\\\\"double\\\\\\"><del>Strikethrough</del></p><h2 id=\\\\\\"blockquo
+tes\\\\\\">Blockquotes</h2>\\\\n<blockquote>\\\\n<p data-spacing=\\\\\\"doub
+le\\\\\\">Blockquotes can also be nested...</p><blockquote>\\\\n<p d
+ata-spacing=\\\\\\"double\\\\\\">...by using additional greater-than s
+igns right next to each other...</p><blockquote>\\\\n<p data-sp
+acing=\\\\\\"double\\\\\\">...or with spaces between arrows.</p></bloc
+kquote>\\\\n</blockquote>\\\\n</blockquote>\\\\n<h2 id=\\\\\\"lists\\\\\\">List
+s</h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Unordered</p><ul>\\\\n<li>Cr
+eate a list by starting a line with <code>+</code>, <code>-<
+/code>, or <code>*</code></li>\\\\n<li>Sub-lists are made by in
+denting 2 spaces:<ul>\\\\n<li>Marker character change forces ne
+w list start:<ul>\\\\n<li>Ac tristique libero volutpat at</li>\\\\
+n</ul>\\\\n<ul>\\\\n<li>Facilisis in pretium nisl aliquet</li>\\\\n</
+ul>\\\\n<ul>\\\\n<li>Nulla volutpat aliquam velit</li>\\\\n</ul>\\\\n</l
+i>\\\\n</ul>\\\\n</li>\\\\n<li>Very easy!</li>\\\\n</ul>\\\\n<p data-spacin
+g=\\\\\\"double\\\\\\">Ordered</p><ol>\\\\n<li><p data-spacing=\\\\\\"double\\\\\\"
+>Lorem ipsum dolor sit amet</p></li>\\\\n<li><p data-spacing=\\\\\\"
+double\\\\\\">Consectetur adipiscing elit</p></li>\\\\n<li><p data-s
+pacing=\\\\\\"double\\\\\\">Integer molestie lorem at massa</p></li>\\\\n
+<li><p data-spacing=\\\\\\"double\\\\\\">You can use sequential number
+s...</p></li>\\\\n<li><p data-spacing=\\\\\\"double\\\\\\">...or keep all
+ the numbers as <code>1.</code></p></li>\\\\n</ol>\\\\n<p data-spa
+cing=\\\\\\"double\\\\\\">Start numbering with offset:</p><ol start=\\\\\\"
+57\\\\\\">\\\\n<li>foo</li>\\\\n<li>bar</li>\\\\n</ol>\\\\n<h2 id=\\\\\\"code\\\\\\">Co
+de</h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Inline <code>code</code>
+</p><p data-spacing=\\\\\\"double\\\\\\">Indented code</p><pre class=\\\\
+\\"language-undefined\\\\\\"><code class=\\\\\\"language-undefined\\\\\\">// 
+Some comments<br>line 1 of code<br>line 2 of code<br>line 3 
 of code</code></pre><p data-spacing=\\\\\\"double\\\\\\">Block code &q
 uot;fences&quot;</p><pre class=\\\\\\"language-\\\\\\"><code class=\\\\\\"l
 anguage-\\\\\\">Sample text here...</code></pre><p data-spacing=\\\\
 \\"double\\\\\\">Syntax highlighting</p><pre class=\\\\\\"language-js\\\\\\">
-<code class=\\\\\\"language-js\\\\\\">var foo = function (bar) {<br/> 
- return bar++;<br/>};<br/>console.log(foo(5));</code></pre><
-h2 id=\\\\\\"tables\\\\\\">Tables</h2>\\\\n<table>\\\\n<thead>\\\\n<tr>\\\\n<th>Op
-tion</th>\\\\n<th>Description</th>\\\\n</tr>\\\\n</thead>\\\\n<tbody><tr
->\\\\n<td>data</td>\\\\n<td>path to data files to supply the data 
-that will be passed into templates.</td>\\\\n</tr>\\\\n<tr>\\\\n<td>e
-ngine</td>\\\\n<td>engine to be used for processing templates. 
-Handlebars is the default.</td>\\\\n</tr>\\\\n<tr>\\\\n<td>ext</td>\\\\n
-<td>extension to be used for dest files.</td>\\\\n</tr>\\\\n</tbod
-y></table>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Right aligned columns
-</p><table>\\\\n<thead>\\\\n<tr>\\\\n<th align=\\\\\\"right\\\\\\">Option</th>\\\\
-n<th align=\\\\\\"right\\\\\\">Description</th>\\\\n</tr>\\\\n</thead>\\\\n<tbo
-dy><tr>\\\\n<td align=\\\\\\"right\\\\\\">data</td>\\\\n<td align=\\\\\\"right\\\\\\">
-path to data files to supply the data that will be passed in
-to templates.</td>\\\\n</tr>\\\\n<tr>\\\\n<td align=\\\\\\"right\\\\\\">engine<
-/td>\\\\n<td align=\\\\\\"right\\\\\\">engine to be used for processing t
-emplates. Handlebars is the default.</td>\\\\n</tr>\\\\n<tr>\\\\n<td 
-align=\\\\\\"right\\\\\\">ext</td>\\\\n<td align=\\\\\\"right\\\\\\">extension to b
-e used for dest files.</td>\\\\n</tr>\\\\n</tbody></table>\\\\n<h2 id
-=\\\\\\"links\\\\\\">Links</h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\"><a href=\\\\\\"
-http://dev.nodeca.com\\\\\\">link text</a></p><p data-spacing=\\\\\\"d
-ouble\\\\\\"><a href=\\\\\\"http://nodeca.github.io/pica/demo/\\\\\\" title
-=\\\\\\"title text!\\\\\\">link with title</a></p><p data-spacing=\\\\\\"do
-uble\\\\\\">Autoconverted link <a href=\\\\\\"https://github.com/nodec
-a/pica\\\\\\">https://github.com/nodeca/pica</a>&nbsp;(enable lin
-kify to see)</p><h2 id=\\\\\\"images\\\\\\">Images</h2>\\\\n<p data-spaci
-ng=\\\\\\"double\\\\\\"><img src=\\\\\\"https://octodex.github.com/images/m
-inion.png\\\\\\" alt=\\\\\\"Minion\\\\\\"></p><p data-spacing=\\\\\\"single\\\\\\"><i
-mg src=\\\\\\"https://octodex.github.com/images/stormtroopocat.jp
-g\\\\\\" alt=\\\\\\"Stormtroopocat\\\\\\" title=\\\\\\"The Stormtroopocat\\\\\\"></p>
-<p data-spacing=\\\\\\"double\\\\\\">Like links, Images also have a fo
-otnote style syntax</p><p data-spacing=\\\\\\"double\\\\\\"><img src=\\\\
-\\"https://octodex.github.com/images/dojocat.jpg\\\\\\" alt=\\\\\\"Alt t
-ext\\\\\\" title=\\\\\\"The Dojocat\\\\\\"></p><p data-spacing=\\\\\\"double\\\\\\">W
-ith a reference later in the document defining the URL locat
-ion:</p><h2 id=\\\\\\"plugins\\\\\\">Plugins</h2>\\\\n<p data-spacing=\\\\\\"d
-ouble\\\\\\">The killer feature of <code>markdown-it</code>&nbsp;
-is very effective support of</p><p data-spacing=\\\\\\"single\\\\\\"><
-a href=\\\\\\"https://www.npmjs.org/browse/keyword/markdown-it-pl
-ugin\\\\\\">syntax plugins</a>.</p><h3 id=\\\\\\"emojies\\\\\\"><a href=\\\\\\"h
-ttps://github.com/markdown-it/markdown-it-emoji\\\\\\">Emojies</a
-></h3>\\\\n<blockquote>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Classic mar
-kup: :wink: :crush: :cry: :tear: :laughing: :yum:</p><p data
--spacing=\\\\\\"double\\\\\\">Shortcuts (emoticons): :-) :-( 8-) ;)</p
-></blockquote>\\\\n<p data-spacing=\\\\\\"double\\\\\\">see <a href=\\\\\\"htt
-ps://github.com/markdown-it/markdown-it-emoji#change-output\\\\
-\\">how to change output</a>&nbsp;with twemoji.</p><h3 id=\\\\\\"su
-bscript--superscript\\\\\\"><a href=\\\\\\"https://github.com/markdown
--it/markdown-it-sub\\\\\\">Subscript</a>&nbsp;/ <a href=\\\\\\"https:/
-/github.com/markdown-it/markdown-it-sup\\\\\\">Superscript</a></h
-3>\\\\n<ul>\\\\n<li>19^th^</li>\\\\n<li>H<del>2</del>O</li>\\\\n</ul>\\\\n<
-h3 id=\\\\\\"ins\\\\\\"><a href=\\\\\\"https://github.com/markdown-it/markd
-own-it-ins\\\\\\">&lt;ins&gt;</a></h3>\\\\n<p data-spacing=\\\\\\"double\\\\
-\\">++Inserted text++</p><h3 id=\\\\\\"mark\\\\\\"><a href=\\\\\\"https://git
-hub.com/markdown-it/markdown-it-mark\\\\\\">&lt;mark&gt;</a></h3>
-\\\\n<p data-spacing=\\\\\\"double\\\\\\">==Marked text==</p><h3 id=\\\\\\"foo
-tnotes\\\\\\"><a href=\\\\\\"https://github.com/markdown-it/markdown-i
-t-footnote\\\\\\">Footnotes</a></h3>\\\\n<p data-spacing=\\\\\\"double\\\\\\">
-Footnote 1 link[^first].</p><p data-spacing=\\\\\\"double\\\\\\">Footn
-ote 2 link[^second].</p><p data-spacing=\\\\\\"double\\\\\\">Inline fo
-otnote^[Text of inline footnote] definition.</p><p data-spac
-ing=\\\\\\"double\\\\\\">Duplicated footnote reference[^second].</p><p
- data-spacing=\\\\\\"double\\\\\\">[^first]: Footnote <strong>can have
- markup</strong></p><pre class=\\\\\\"language-undefined\\\\\\"><code 
-class=\\\\\\"language-undefined\\\\\\">and multiple paragraphs.</code>
-</pre><p data-spacing=\\\\\\"double\\\\\\">[^second]: Footnote text.</
-p><h3 id=\\\\\\"definition-lists\\\\\\"><a href=\\\\\\"https://github.com/m
-arkdown-it/markdown-it-deflist\\\\\\">Definition lists</a></h3>\\\\n
-<p data-spacing=\\\\\\"double\\\\\\">Term 1</p><p data-spacing=\\\\\\"doubl
-e\\\\\\">: Definition 1</p><p data-spacing=\\\\\\"single\\\\\\">with lazy c
-ontinuation.</p><p data-spacing=\\\\\\"double\\\\\\">Term 2 with <em>i
-nline markup</em></p><p data-spacing=\\\\\\"double\\\\\\">: Definition
- 2</p><pre class=\\\\\\"language-undefined\\\\\\"><code class=\\\\\\"langua
-ge-undefined\\\\\\">    { some code, part of Definition 2 }<br/>T
-hird paragraph of definition 2.</code></pre><p data-spacing=
-\\\\\\"double\\\\\\"><em>Compact style:</em></p><p data-spacing=\\\\\\"doub
-le\\\\\\">Term 1</p><p data-spacing=\\\\\\"single\\\\\\">~ Definition 1</p>
-<p data-spacing=\\\\\\"double\\\\\\">Term 2</p><p data-spacing=\\\\\\"singl
-e\\\\\\">~ Definition 2a</p><p data-spacing=\\\\\\"single\\\\\\">~ Definiti
-on 2b</p><h3 id=\\\\\\"abbreviations\\\\\\"><a href=\\\\\\"https://github.c
-om/markdown-it/markdown-it-abbr\\\\\\">Abbreviations</a></h3>\\\\n<p
- data-spacing=\\\\\\"double\\\\\\">This is HTML abbreviation example.<
-/p><p data-spacing=\\\\\\"double\\\\\\">It converts &quot;HTML&quot;, 
-but keep intact partial entries like &quot;xxxHTMLyyy&quot; 
-and so on.</p><p data-spacing=\\\\\\"double\\\\\\">*[HTML]: Hyper Text
- Markup Language</p><h3 id=\\\\\\"custom-containers\\\\\\"><a href=\\\\\\"h
-ttps://github.com/markdown-it/markdown-it-container\\\\\\">Custom
- containers</a></h3>\\\\n<p data-spacing=\\\\\\"double\\\\\\">::: warning
-</p><p data-spacing=\\\\\\"single\\\\\\"><em>here be dragons</em></p><
-p data-spacing=\\\\\\"single\\\\\\">:::</p>\\"}},{\\"title\\":\\"test3\\",\\"dateE
-dited\\":1639388210000,\\"content\\":{\\"type\\":\\"html\\",\\"data\\":\\"<hr>\\\\n
-<p data-spacing=\\\\\\"double\\\\\\"><strong>Advertisement :)</strong>
-</p><ul>\\\\n<li><strong><a href=\\\\\\"https://nodeca.github.io/pic
-a/demo/\\\\\\">pica</a></strong>&nbsp;- high quality and fast ima
-ge</p><p data-spacing=\\\\\\"single\\\\\\">resize in browser.</li>\\\\n<l
-i><strong><a href=\\\\\\"https://github.com/nodeca/babelfish/\\\\\\">b
-abelfish</a></strong>&nbsp;- developer friendly</p><p data-s
-pacing=\\\\\\"single\\\\\\">i18n with plurals support and easy syntax.
-</li>\\\\n</ul>\\\\n<h2 id=\\\\\\"you-will-like-those-projects\\\\\\">You wi
-ll like those projects!</h2>\\\\n<h1 id=\\\\\\"h1-heading-8-\\\\\\">h1 He
-ading 8-)</h1>\\\\n<h2 id=\\\\\\"h2-heading\\\\\\">h2 Heading</h2>\\\\n<h3 i
-d=\\\\\\"h3-heading\\\\\\">h3 Heading</h3>\\\\n<h4 id=\\\\\\"h4-heading\\\\\\">h4 H
-eading</h4>\\\\n<h5 id=\\\\\\"h5-heading\\\\\\">h5 Heading</h5>\\\\n<h6 id=\\\\
-\\"h6-heading\\\\\\">h6 Heading</h6>\\\\n<h2 id=\\\\\\"horizontal-rules\\\\\\">H
-orizontal Rules</h2>\\\\n<hr>\\\\n<hr>\\\\n<hr>\\\\n<h2 id=\\\\\\"typographic
--replacements\\\\\\">Typographic replacements</h2>\\\\n<p data-spaci
-ng=\\\\\\"double\\\\\\">Enable typographer option to see result.</p><p
- data-spacing=\\\\\\"double\\\\\\">(c) (C) (r) (R) (tm) (TM) (p) (P) +
--</p><p data-spacing=\\\\\\"double\\\\\\">test.. test... test..... tes
-t?..... test!....</p><p data-spacing=\\\\\\"double\\\\\\">!!!!!! ???? 
-,, -- ---</p><p data-spacing=\\\\\\"double\\\\\\">&quot;Smartypants, d
-ouble quotes&quot; and &#39;single quotes&#39;</p><h2 id=\\\\\\"e
-mphasis\\\\\\">Emphasis</h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\"><strong>
-This is bold text</strong></p><p data-spacing=\\\\\\"double\\\\\\"><st
-rong>This is bold text</strong></p><p data-spacing=\\\\\\"double\\\\
-\\"><em>This is italic text</em></p><p data-spacing=\\\\\\"double\\\\\\"
-><em>This is italic text</em></p><p data-spacing=\\\\\\"double\\\\\\">
-<del>Strikethrough</del></p><h2 id=\\\\\\"blockquotes\\\\\\">Blockquot
-es</h2>\\\\n<blockquote>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Blockquote
-s can also be nested...</p><blockquote>\\\\n<p data-spacing=\\\\\\"d
-ouble\\\\\\">...by using additional greater-than signs right next
- to each other...</p><blockquote>\\\\n<p data-spacing=\\\\\\"double\\\\
-\\">...or with spaces between arrows.</p></blockquote>\\\\n</bloc
-kquote>\\\\n</blockquote>\\\\n<h2 id=\\\\\\"lists\\\\\\">Lists</h2>\\\\n<p data
--spacing=\\\\\\"double\\\\\\">Unordered</p><ul>\\\\n<li>Create a list by 
-starting a line with <code>+</code>, <code>-</code>, or <cod
-e>*</code></li>\\\\n<li>Sub-lists are made by indenting 2 space
-s:<ul>\\\\n<li>Marker character change forces new list start:<u
-l>\\\\n<li>Ac tristique libero volutpat at</li>\\\\n</ul>\\\\n<ul>\\\\n<
-li>Facilisis in pretium nisl aliquet</li>\\\\n</ul>\\\\n<ul>\\\\n<li>
-Nulla volutpat aliquam velit</li>\\\\n</ul>\\\\n</li>\\\\n</ul>\\\\n</li
->\\\\n<li>Very easy!</li>\\\\n</ul>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Or
-dered</p><ol>\\\\n<li><p data-spacing=\\\\\\"double\\\\\\">Lorem ipsum do
-lor sit amet</p></li>\\\\n<li><p data-spacing=\\\\\\"double\\\\\\">Consec
-tetur adipiscing elit</p></li>\\\\n<li><p data-spacing=\\\\\\"double
-\\\\\\">Integer molestie lorem at massa</p></li>\\\\n<li><p data-spa
-cing=\\\\\\"double\\\\\\">You can use sequential numbers...</p></li>\\\\n
-<li><p data-spacing=\\\\\\"double\\\\\\">...or keep all the numbers as
- <code>1.</code></p></li>\\\\n</ol>\\\\n<p data-spacing=\\\\\\"double\\\\\\"
->Start numbering with offset:</p><ol start=\\\\\\"57\\\\\\">\\\\n<li>foo<
-/li>\\\\n<li>bar</li>\\\\n</ol>\\\\n<h2 id=\\\\\\"code\\\\\\">Code</h2>\\\\n<p dat
-a-spacing=\\\\\\"double\\\\\\">Inline <code>code</code></p><p data-spa
-cing=\\\\\\"double\\\\\\">Indented code</p><pre class=\\\\\\"language-undef
-ined\\\\\\"><code class=\\\\\\"language-undefined\\\\\\">// Some comments<b
-r/>line 1 of code<br/>line 2 of code<br/>line 3 of code</cod
-e></pre><p data-spacing=\\\\\\"double\\\\\\">Block code &quot;fences&q
-uot;</p><pre class=\\\\\\"language-\\\\\\"><code class=\\\\\\"language-\\\\\\">S
-ample text here...</code></pre><p data-spacing=\\\\\\"double\\\\\\">Sy
-ntax highlighting</p><pre class=\\\\\\"language-js\\\\\\"><code class=
-\\\\\\"language-js\\\\\\">var foo = function (bar) {<br/>  return bar+
-+;<br/>};<br/>console.log(foo(5));</code></pre><h2 id=\\\\\\"tabl
-es\\\\\\">Tables</h2>\\\\n<table>\\\\n<thead>\\\\n<tr>\\\\n<th>Option</th>\\\\n<
-th>Description</th>\\\\n</tr>\\\\n</thead>\\\\n<tbody><tr>\\\\n<td>data<
-/td>\\\\n<td>path to data files to supply the data that will be
- passed into templates.</td>\\\\n</tr>\\\\n<tr>\\\\n<td>engine</td>\\\\n
-<td>engine to be used for processing templates. Handlebars i
-s the default.</td>\\\\n</tr>\\\\n<tr>\\\\n<td>ext</td>\\\\n<td>extensio
-n to be used for dest files.</td>\\\\n</tr>\\\\n</tbody></table>\\\\n
-<p data-spacing=\\\\\\"double\\\\\\">Right aligned columns</p><table>\\\\
-n<thead>\\\\n<tr>\\\\n<th align=\\\\\\"right\\\\\\">Option</th>\\\\n<th align=\\\\
-\\"right\\\\\\">Description</th>\\\\n</tr>\\\\n</thead>\\\\n<tbody><tr>\\\\n<td
- align=\\\\\\"right\\\\\\">data</td>\\\\n<td align=\\\\\\"right\\\\\\">path to data
- files to supply the data that will be passed into templates
-.</td>\\\\n</tr>\\\\n<tr>\\\\n<td align=\\\\\\"right\\\\\\">engine</td>\\\\n<td al
-ign=\\\\\\"right\\\\\\">engine to be used for processing templates. Ha
-ndlebars is the default.</td>\\\\n</tr>\\\\n<tr>\\\\n<td align=\\\\\\"righ
-t\\\\\\">ext</td>\\\\n<td align=\\\\\\"right\\\\\\">extension to be used for d
-est files.</td>\\\\n</tr>\\\\n</tbody></table>\\\\n<h2 id=\\\\\\"links\\\\\\">L
-inks</h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\"><a href=\\\\\\"http://dev.n
-odeca.com\\\\\\">link text</a></p><p data-spacing=\\\\\\"double\\\\\\"><a h
-ref=\\\\\\"http://nodeca.github.io/pica/demo/\\\\\\" title=\\\\\\"title tex
-t!\\\\\\">link with title</a></p><p data-spacing=\\\\\\"double\\\\\\">Autoc
-onverted link <a href=\\\\\\"https://github.com/nodeca/pica\\\\\\">htt
-ps://github.com/nodeca/pica</a>&nbsp;(enable linkify to see)
-</p><h2 id=\\\\\\"images\\\\\\">Images</h2>\\\\n<p data-spacing=\\\\\\"double\\\\
-\\"><img src=\\\\\\"https://octodex.github.com/images/minion.png\\\\\\" 
-alt=\\\\\\"Minion\\\\\\"></p><p data-spacing=\\\\\\"single\\\\\\"><img src=\\\\\\"htt
-ps://octodex.github.com/images/stormtroopocat.jpg\\\\\\" alt=\\\\\\"St
-ormtroopocat\\\\\\" title=\\\\\\"The Stormtroopocat\\\\\\"></p><p data-spac
-ing=\\\\\\"double\\\\\\">Like links, Images also have a footnote style
- syntax</p><p data-spacing=\\\\\\"double\\\\\\"><img src=\\\\\\"https://oct
-odex.github.com/images/dojocat.jpg\\\\\\" alt=\\\\\\"Alt text\\\\\\" title=
-\\\\\\"The Dojocat\\\\\\"></p><p data-spacing=\\\\\\"double\\\\\\">With a refere
-nce later in the document defining the URL location:</p><h2 
-id=\\\\\\"plugins\\\\\\">Plugins</h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\">The 
-killer feature of <code>markdown-it</code>&nbsp;is very effe
-ctive support of</p><p data-spacing=\\\\\\"single\\\\\\"><a href=\\\\\\"htt
-ps://www.npmjs.org/browse/keyword/markdown-it-plugin\\\\\\">synta
-x plugins</a>.</p><h3 id=\\\\\\"emojies\\\\\\"><a href=\\\\\\"https://githu
-b.com/markdown-it/markdown-it-emoji\\\\\\">Emojies</a></h3>\\\\n<blo
-ckquote>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Classic markup: :wink: 
-:crush: :cry: :tear: :laughing: :yum:</p><p data-spacing=\\\\\\"d
-ouble\\\\\\">Shortcuts (emoticons): :-) :-( 8-) ;)</p></blockquot
-e>\\\\n<p data-spacing=\\\\\\"double\\\\\\">see <a href=\\\\\\"https://github.
-com/markdown-it/markdown-it-emoji#change-output\\\\\\">how to cha
-nge output</a>&nbsp;with twemoji.</p><h3 id=\\\\\\"subscript--sup
-erscript\\\\\\"><a href=\\\\\\"https://github.com/markdown-it/markdown
--it-sub\\\\\\">Subscript</a>&nbsp;/ <a href=\\\\\\"https://github.com/
-markdown-it/markdown-it-sup\\\\\\">Superscript</a></h3>\\\\n<ul>\\\\n<l
-i>19^th^</li>\\\\n<li>H<del>2</del>O</li>\\\\n</ul>\\\\n<h3 id=\\\\\\"ins\\\\
-\\"><a href=\\\\\\"https://github.com/markdown-it/markdown-it-ins\\\\\\"
->&lt;ins&gt;</a></h3>\\\\n<p data-spacing=\\\\\\"double\\\\\\">++Inserted
- text++</p><h3 id=\\\\\\"mark\\\\\\"><a href=\\\\\\"https://github.com/mark
-down-it/markdown-it-mark\\\\\\">&lt;mark&gt;</a></h3>\\\\n<p data-sp
-acing=\\\\\\"double\\\\\\">==Marked text==</p><h3 id=\\\\\\"footnotes\\\\\\"><a 
-href=\\\\\\"https://github.com/markdown-it/markdown-it-footnote\\\\\\"
->Footnotes</a></h3>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Footnote 1 l
-ink[^first].</p><p data-spacing=\\\\\\"double\\\\\\">Footnote 2 link[^
-second].</p><p data-spacing=\\\\\\"double\\\\\\">Inline footnote^[Text
- of inline footnote] definition.</p><p data-spacing=\\\\\\"double
-\\\\\\">Duplicated footnote reference[^second].</p><p data-spacin
-g=\\\\\\"double\\\\\\">[^first]: Footnote <strong>can have markup</str
-ong></p><pre class=\\\\\\"language-undefined\\\\\\"><code class=\\\\\\"lang
-uage-undefined\\\\\\">and multiple paragraphs.</code></pre><p dat
-a-spacing=\\\\\\"double\\\\\\">[^second]: Footnote text.</p><h3 id=\\\\\\"d
-efinition-lists\\\\\\"><a href=\\\\\\"https://github.com/markdown-it/m
-arkdown-it-deflist\\\\\\">Definition lists</a></h3>\\\\n<p data-spac
-ing=\\\\\\"double\\\\\\">Term 1</p><p data-spacing=\\\\\\"double\\\\\\">: Defini
-tion 1</p><p data-spacing=\\\\\\"single\\\\\\">with lazy continuation.
-</p><p data-spacing=\\\\\\"double\\\\\\">Term 2 with <em>inline markup
-</em></p><p data-spacing=\\\\\\"double\\\\\\">: Definition 2</p><pre c
-lass=\\\\\\"language-undefined\\\\\\"><code class=\\\\\\"language-undefined
-\\\\\\">    { some code, part of Definition 2 }<br/>Third paragra
-ph of definition 2.</code></pre><p data-spacing=\\\\\\"double\\\\\\"><
-em>Compact style:</em></p><p data-spacing=\\\\\\"double\\\\\\">Term 1<
-/p><p data-spacing=\\\\\\"single\\\\\\">~ Definition 1</p><p data-spac
-ing=\\\\\\"double\\\\\\">Term 2</p><p data-spacing=\\\\\\"single\\\\\\">~ Defini
-tion 2a</p><p data-spacing=\\\\\\"single\\\\\\">~ Definition 2b</p><h3
- id=\\\\\\"abbreviations\\\\\\"><a href=\\\\\\"https://github.com/markdown-
-it/markdown-it-abbr\\\\\\">Abbreviations</a></h3>\\\\n<p data-spacin
-g=\\\\\\"double\\\\\\">This is HTML abbreviation example.</p><p data-s
-pacing=\\\\\\"double\\\\\\">It converts &quot;HTML&quot;, but keep int
-act partial entries like &quot;xxxHTMLyyy&quot; and so on.</
-p><p data-spacing=\\\\\\"double\\\\\\">*[HTML]: Hyper Text Markup Lang
-uage</p><h3 id=\\\\\\"custom-containers\\\\\\"><a href=\\\\\\"https://githu
-b.com/markdown-it/markdown-it-container\\\\\\">Custom containers<
-/a></h3>\\\\n<p data-spacing=\\\\\\"double\\\\\\">::: warning</p><p data-
-spacing=\\\\\\"single\\\\\\"><em>here be dragons</em></p><p data-spaci
-ng=\\\\\\"single\\\\\\">:::</p>\\"}}]"
+<code class=\\\\\\"language-js\\\\\\">var foo = function (bar) {<br>  
+return bar++;<br>};<br>console.log(foo(5));</code></pre><h2 
+id=\\\\\\"tables\\\\\\">Tables</h2>\\\\n<table>\\\\n<thead>\\\\n<tr>\\\\n<th>Optio
+n</th>\\\\n<th>Description</th>\\\\n</tr>\\\\n</thead>\\\\n<tbody><tr>\\\\n
+<td>data</td>\\\\n<td>path to data files to supply the data tha
+t will be passed into templates.</td>\\\\n</tr>\\\\n<tr>\\\\n<td>engi
+ne</td>\\\\n<td>engine to be used for processing templates. Han
+dlebars is the default.</td>\\\\n</tr>\\\\n<tr>\\\\n<td>ext</td>\\\\n<td
+>extension to be used for dest files.</td>\\\\n</tr>\\\\n</tbody><
+/table>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Right aligned columns</p
+><table>\\\\n<thead>\\\\n<tr>\\\\n<th align=\\\\\\"right\\\\\\">Option</th>\\\\n<t
+h align=\\\\\\"right\\\\\\">Description</th>\\\\n</tr>\\\\n</thead>\\\\n<tbody>
+<tr>\\\\n<td align=\\\\\\"right\\\\\\">data</td>\\\\n<td align=\\\\\\"right\\\\\\">pat
+h to data files to supply the data that will be passed into 
+templates.</td>\\\\n</tr>\\\\n<tr>\\\\n<td align=\\\\\\"right\\\\\\">engine</td
+>\\\\n<td align=\\\\\\"right\\\\\\">engine to be used for processing temp
+lates. Handlebars is the default.</td>\\\\n</tr>\\\\n<tr>\\\\n<td ali
+gn=\\\\\\"right\\\\\\">ext</td>\\\\n<td align=\\\\\\"right\\\\\\">extension to be u
+sed for dest files.</td>\\\\n</tr>\\\\n</tbody></table>\\\\n<h2 id=\\\\\\"
+links\\\\\\">Links</h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\"><a href=\\\\\\"htt
+p://dev.nodeca.com\\\\\\">link text</a></p><p data-spacing=\\\\\\"doub
+le\\\\\\"><a href=\\\\\\"http://nodeca.github.io/pica/demo/\\\\\\" title=\\\\\\"
+title text!\\\\\\">link with title</a></p><p data-spacing=\\\\\\"doubl
+e\\\\\\">Autoconverted link <a href=\\\\\\"https://github.com/nodeca/p
+ica\\\\\\">https://github.com/nodeca/pica</a>&#xa0;(enable linkif
+y to see)</p><h2 id=\\\\\\"images\\\\\\">Images</h2>\\\\n<p data-spacing=
+\\\\\\"double\\\\\\"><img src=\\\\\\"https://octodex.github.com/images/mini
+on.png\\\\\\" alt=\\\\\\"Minion\\\\\\"></p><p data-spacing=\\\\\\"single\\\\\\"><img 
+src=\\\\\\"https://octodex.github.com/images/stormtroopocat.jpg\\\\\\"
+ alt=\\\\\\"Stormtroopocat\\\\\\" title=\\\\\\"The Stormtroopocat\\\\\\"></p><p 
+data-spacing=\\\\\\"double\\\\\\">Like links, Images also have a footn
+ote style syntax</p><p data-spacing=\\\\\\"double\\\\\\"><img src=\\\\\\"ht
+tps://octodex.github.com/images/dojocat.jpg\\\\\\" alt=\\\\\\"Alt text
+\\\\\\" title=\\\\\\"The Dojocat\\\\\\"></p><p data-spacing=\\\\\\"double\\\\\\">With
+ a reference later in the document defining the URL location
+:</p><h2 id=\\\\\\"plugins\\\\\\">Plugins</h2>\\\\n<p data-spacing=\\\\\\"doub
+le\\\\\\">The killer feature of <code>markdown-it</code>&#xa0;is 
+very effective support of</p><p data-spacing=\\\\\\"single\\\\\\"><a h
+ref=\\\\\\"https://www.npmjs.org/browse/keyword/markdown-it-plugi
+n\\\\\\">syntax plugins</a>.</p><h3 id=\\\\\\"emojies\\\\\\"><a href=\\\\\\"http
+s://github.com/markdown-it/markdown-it-emoji\\\\\\">Emojies</a></
+h3>\\\\n<blockquote>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Classic markup
+: :wink: :crush: :cry: :tear: :laughing: :yum:</p><p data-sp
+acing=\\\\\\"double\\\\\\">Shortcuts (emoticons): :-) :-( 8-) ;)</p></
+blockquote>\\\\n<p data-spacing=\\\\\\"double\\\\\\">see <a href=\\\\\\"https:
+//github.com/markdown-it/markdown-it-emoji#change-output\\\\\\">h
+ow to change output</a>&#xa0;with twemoji.</p><h3 id=\\\\\\"subsc
+ript--superscript\\\\\\"><a href=\\\\\\"https://github.com/markdown-it
+/markdown-it-sub\\\\\\">Subscript</a>&#xa0;/ <a href=\\\\\\"https://gi
+thub.com/markdown-it/markdown-it-sup\\\\\\">Superscript</a></h3>\\\\
+n<ul>\\\\n<li>19^th^</li>\\\\n<li>H<del>2</del>O</li>\\\\n</ul>\\\\n<h3 
+id=\\\\\\"ins\\\\\\"><a href=\\\\\\"https://github.com/markdown-it/markdown
+-it-ins\\\\\\">&lt;ins&gt;</a></h3>\\\\n<p data-spacing=\\\\\\"double\\\\\\">+
++Inserted text++</p><h3 id=\\\\\\"mark\\\\\\"><a href=\\\\\\"https://github
+.com/markdown-it/markdown-it-mark\\\\\\">&lt;mark&gt;</a></h3>\\\\n<
+p data-spacing=\\\\\\"double\\\\\\">==Marked text==</p><h3 id=\\\\\\"footno
+tes\\\\\\"><a href=\\\\\\"https://github.com/markdown-it/markdown-it-f
+ootnote\\\\\\">Footnotes</a></h3>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Foo
+tnote 1 link[^first].</p><p data-spacing=\\\\\\"double\\\\\\">Footnote
+ 2 link[^second].</p><p data-spacing=\\\\\\"double\\\\\\">Inline footn
+ote^[Text of inline footnote] definition.</p><p data-spacing
+=\\\\\\"double\\\\\\">Duplicated footnote reference[^second].</p><p da
+ta-spacing=\\\\\\"double\\\\\\">[^first]: Footnote <strong>can have ma
+rkup</strong></p><pre class=\\\\\\"language-undefined\\\\\\"><code cla
+ss=\\\\\\"language-undefined\\\\\\">and multiple paragraphs.</code></p
+re><p data-spacing=\\\\\\"double\\\\\\">[^second]: Footnote text.</p><
+h3 id=\\\\\\"definition-lists\\\\\\"><a href=\\\\\\"https://github.com/mark
+down-it/markdown-it-deflist\\\\\\">Definition lists</a></h3>\\\\n<p 
+data-spacing=\\\\\\"double\\\\\\">Term 1</p><p data-spacing=\\\\\\"double\\\\\\"
+>: Definition 1</p><p data-spacing=\\\\\\"single\\\\\\">with lazy cont
+inuation.</p><p data-spacing=\\\\\\"double\\\\\\">Term 2 with <em>inli
+ne markup</em></p><p data-spacing=\\\\\\"double\\\\\\">: Definition 2<
+/p><pre class=\\\\\\"language-undefined\\\\\\"><code class=\\\\\\"language-
+undefined\\\\\\">    { some code, part of Definition 2 }<br>Third
+ paragraph of definition 2.</code></pre><p data-spacing=\\\\\\"do
+uble\\\\\\"><em>Compact style:</em></p><p data-spacing=\\\\\\"double\\\\\\"
+>Term 1</p><p data-spacing=\\\\\\"single\\\\\\">~ Definition 1</p><p d
+ata-spacing=\\\\\\"double\\\\\\">Term 2</p><p data-spacing=\\\\\\"single\\\\\\">
+~ Definition 2a</p><p data-spacing=\\\\\\"single\\\\\\">~ Definition 2
+b</p><h3 id=\\\\\\"abbreviations\\\\\\"><a href=\\\\\\"https://github.com/m
+arkdown-it/markdown-it-abbr\\\\\\">Abbreviations</a></h3>\\\\n<p dat
+a-spacing=\\\\\\"double\\\\\\">This is HTML abbreviation example.</p><
+p data-spacing=\\\\\\"double\\\\\\">It converts &quot;HTML&quot;, but 
+keep intact partial entries like &quot;xxxHTMLyyy&quot; and 
+so on.</p><p data-spacing=\\\\\\"double\\\\\\">*[HTML]: Hyper Text Mar
+kup Language</p><h3 id=\\\\\\"custom-containers\\\\\\"><a href=\\\\\\"https
+://github.com/markdown-it/markdown-it-container\\\\\\">Custom con
+tainers</a></h3>\\\\n<p data-spacing=\\\\\\"double\\\\\\">::: warning</p>
+<p data-spacing=\\\\\\"single\\\\\\"><em>here be dragons</em></p><p da
+ta-spacing=\\\\\\"single\\\\\\">:::</p>\\"}},{\\"title\\":\\"You will like tho
+se projects!\\",\\"dateEdited\\":1639388210000,\\"attachments\\":[],\\"c
+ontent\\":{\\"type\\":\\"html\\",\\"data\\":\\"<hr>\\\\n<p data-spacing=\\\\\\"doubl
+e\\\\\\"><strong>Advertisement :)</strong></p><ul>\\\\n<li><strong><
+a href=\\\\\\"https://nodeca.github.io/pica/demo/\\\\\\">pica</a></str
+ong>&#xa0;- high quality and fast image<p></p><p data-spacin
+g=\\\\\\"single\\\\\\">resize in browser.</p></li>\\\\n<li><strong><a hre
+f=\\\\\\"https://github.com/nodeca/babelfish/\\\\\\">babelfish</a></st
+rong>&#xa0;- developer friendly<p></p><p data-spacing=\\\\\\"sing
+le\\\\\\">i18n with plurals support and easy syntax.</p></li>\\\\n</
+ul>\\\\n<h2 id=\\\\\\"you-will-like-those-projects\\\\\\">You will like t
+hose projects!</h2>\\\\n<h1 id=\\\\\\"h1-heading-8-\\\\\\">h1 Heading 8-)
+</h1>\\\\n<h2 id=\\\\\\"h2-heading\\\\\\">h2 Heading</h2>\\\\n<h3 id=\\\\\\"h3-he
+ading\\\\\\">h3 Heading</h3>\\\\n<h4 id=\\\\\\"h4-heading\\\\\\">h4 Heading</h
+4>\\\\n<h5 id=\\\\\\"h5-heading\\\\\\">h5 Heading</h5>\\\\n<h6 id=\\\\\\"h6-headi
+ng\\\\\\">h6 Heading</h6>\\\\n<h2 id=\\\\\\"horizontal-rules\\\\\\">Horizontal
+ Rules</h2>\\\\n<hr>\\\\n<hr>\\\\n<hr>\\\\n<h2 id=\\\\\\"typographic-replacem
+ents\\\\\\">Typographic replacements</h2>\\\\n<p data-spacing=\\\\\\"doub
+le\\\\\\">Enable typographer option to see result.</p><p data-spa
+cing=\\\\\\"double\\\\\\">(c) (C) (r) (R) (tm) (TM) (p) (P) +-</p><p d
+ata-spacing=\\\\\\"double\\\\\\">test.. test... test..... test?..... t
+est!....</p><p data-spacing=\\\\\\"double\\\\\\">!!!!!! ???? ,, -- ---
+</p><p data-spacing=\\\\\\"double\\\\\\">&quot;Smartypants, double quo
+tes&quot; and &apos;single quotes&apos;</p><h2 id=\\\\\\"emphasis
+\\\\\\">Emphasis</h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\"><strong>This is
+ bold text</strong></p><p data-spacing=\\\\\\"double\\\\\\"><strong>Th
+is is bold text</strong></p><p data-spacing=\\\\\\"double\\\\\\"><em>T
+his is italic text</em></p><p data-spacing=\\\\\\"double\\\\\\"><em>Th
+is is italic text</em></p><p data-spacing=\\\\\\"double\\\\\\"><del>St
+rikethrough</del></p><h2 id=\\\\\\"blockquotes\\\\\\">Blockquotes</h2>
+\\\\n<blockquote>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Blockquotes can a
+lso be nested...</p><blockquote>\\\\n<p data-spacing=\\\\\\"double\\\\\\"
+>...by using additional greater-than signs right next to eac
+h other...</p><blockquote>\\\\n<p data-spacing=\\\\\\"double\\\\\\">...or
+ with spaces between arrows.</p></blockquote>\\\\n</blockquote>
+\\\\n</blockquote>\\\\n<h2 id=\\\\\\"lists\\\\\\">Lists</h2>\\\\n<p data-spacin
+g=\\\\\\"double\\\\\\">Unordered</p><ul>\\\\n<li>Create a list by startin
+g a line with <code>+</code>, <code>-</code>, or <code>*</co
+de></li>\\\\n<li>Sub-lists are made by indenting 2 spaces:<ul>\\\\
+n<li>Marker character change forces new list start:<ul>\\\\n<li
+>Ac tristique libero volutpat at</li>\\\\n</ul>\\\\n<ul>\\\\n<li>Faci
+lisis in pretium nisl aliquet</li>\\\\n</ul>\\\\n<ul>\\\\n<li>Nulla v
+olutpat aliquam velit</li>\\\\n</ul>\\\\n</li>\\\\n</ul>\\\\n</li>\\\\n<li>
+Very easy!</li>\\\\n</ul>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Ordered</
+p><ol>\\\\n<li><p data-spacing=\\\\\\"double\\\\\\">Lorem ipsum dolor sit
+ amet</p></li>\\\\n<li><p data-spacing=\\\\\\"double\\\\\\">Consectetur a
+dipiscing elit</p></li>\\\\n<li><p data-spacing=\\\\\\"double\\\\\\">Inte
+ger molestie lorem at massa</p></li>\\\\n<li><p data-spacing=\\\\\\"
+double\\\\\\">You can use sequential numbers...</p></li>\\\\n<li><p 
+data-spacing=\\\\\\"double\\\\\\">...or keep all the numbers as <code>
+1.</code></p></li>\\\\n</ol>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Start 
+numbering with offset:</p><ol start=\\\\\\"57\\\\\\">\\\\n<li>foo</li>\\\\n<
+li>bar</li>\\\\n</ol>\\\\n<h2 id=\\\\\\"code\\\\\\">Code</h2>\\\\n<p data-spaci
+ng=\\\\\\"double\\\\\\">Inline <code>code</code></p><p data-spacing=\\\\\\"
+double\\\\\\">Indented code</p><pre class=\\\\\\"language-undefined\\\\\\">
+<code class=\\\\\\"language-undefined\\\\\\">// Some comments<br>line 
+1 of code<br>line 2 of code<br>line 3 of code</code></pre><p
+ data-spacing=\\\\\\"double\\\\\\">Block code &quot;fences&quot;</p><p
+re class=\\\\\\"language-\\\\\\"><code class=\\\\\\"language-\\\\\\">Sample text
+ here...</code></pre><p data-spacing=\\\\\\"double\\\\\\">Syntax highl
+ighting</p><pre class=\\\\\\"language-js\\\\\\"><code class=\\\\\\"language
+-js\\\\\\">var foo = function (bar) {<br>  return bar++;<br>};<br
+>console.log(foo(5));</code></pre><h2 id=\\\\\\"tables\\\\\\">Tables</
+h2>\\\\n<table>\\\\n<thead>\\\\n<tr>\\\\n<th>Option</th>\\\\n<th>Descriptio
+n</th>\\\\n</tr>\\\\n</thead>\\\\n<tbody><tr>\\\\n<td>data</td>\\\\n<td>pat
+h to data files to supply the data that will be passed into 
+templates.</td>\\\\n</tr>\\\\n<tr>\\\\n<td>engine</td>\\\\n<td>engine to
+ be used for processing templates. Handlebars is the default
+.</td>\\\\n</tr>\\\\n<tr>\\\\n<td>ext</td>\\\\n<td>extension to be used 
+for dest files.</td>\\\\n</tr>\\\\n</tbody></table>\\\\n<p data-spaci
+ng=\\\\\\"double\\\\\\">Right aligned columns</p><table>\\\\n<thead>\\\\n<tr
+>\\\\n<th align=\\\\\\"right\\\\\\">Option</th>\\\\n<th align=\\\\\\"right\\\\\\">Desc
+ription</th>\\\\n</tr>\\\\n</thead>\\\\n<tbody><tr>\\\\n<td align=\\\\\\"righ
+t\\\\\\">data</td>\\\\n<td align=\\\\\\"right\\\\\\">path to data files to sup
+ply the data that will be passed into templates.</td>\\\\n</tr>
+\\\\n<tr>\\\\n<td align=\\\\\\"right\\\\\\">engine</td>\\\\n<td align=\\\\\\"right\\\\\\"
+>engine to be used for processing templates. Handlebars is t
+he default.</td>\\\\n</tr>\\\\n<tr>\\\\n<td align=\\\\\\"right\\\\\\">ext</td>\\\\
+n<td align=\\\\\\"right\\\\\\">extension to be used for dest files.</t
+d>\\\\n</tr>\\\\n</tbody></table>\\\\n<h2 id=\\\\\\"links\\\\\\">Links</h2>\\\\n<p
+ data-spacing=\\\\\\"double\\\\\\"><a href=\\\\\\"http://dev.nodeca.com\\\\\\">l
+ink text</a></p><p data-spacing=\\\\\\"double\\\\\\"><a href=\\\\\\"http://
+nodeca.github.io/pica/demo/\\\\\\" title=\\\\\\"title text!\\\\\\">link wit
+h title</a></p><p data-spacing=\\\\\\"double\\\\\\">Autoconverted link
+ <a href=\\\\\\"https://github.com/nodeca/pica\\\\\\">https://github.c
+om/nodeca/pica</a>&#xa0;(enable linkify to see)</p><h2 id=\\\\\\"
+images\\\\\\">Images</h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\"><img src=\\\\\\"
+https://octodex.github.com/images/minion.png\\\\\\" alt=\\\\\\"Minion\\\\
+\\"></p><p data-spacing=\\\\\\"single\\\\\\"><img src=\\\\\\"https://octodex.
+github.com/images/stormtroopocat.jpg\\\\\\" alt=\\\\\\"Stormtroopocat\\\\
+\\" title=\\\\\\"The Stormtroopocat\\\\\\"></p><p data-spacing=\\\\\\"double\\\\
+\\">Like links, Images also have a footnote style syntax</p><p
+ data-spacing=\\\\\\"double\\\\\\"><img src=\\\\\\"https://octodex.github.c
+om/images/dojocat.jpg\\\\\\" alt=\\\\\\"Alt text\\\\\\" title=\\\\\\"The Dojocat
+\\\\\\"></p><p data-spacing=\\\\\\"double\\\\\\">With a reference later in 
+the document defining the URL location:</p><h2 id=\\\\\\"plugins\\\\
+\\">Plugins</h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\">The killer featur
+e of <code>markdown-it</code>&#xa0;is very effective support
+ of</p><p data-spacing=\\\\\\"single\\\\\\"><a href=\\\\\\"https://www.npmj
+s.org/browse/keyword/markdown-it-plugin\\\\\\">syntax plugins</a>
+.</p><h3 id=\\\\\\"emojies\\\\\\"><a href=\\\\\\"https://github.com/markdow
+n-it/markdown-it-emoji\\\\\\">Emojies</a></h3>\\\\n<blockquote>\\\\n<p 
+data-spacing=\\\\\\"double\\\\\\">Classic markup: :wink: :crush: :cry:
+ :tear: :laughing: :yum:</p><p data-spacing=\\\\\\"double\\\\\\">Short
+cuts (emoticons): :-) :-( 8-) ;)</p></blockquote>\\\\n<p data-s
+pacing=\\\\\\"double\\\\\\">see <a href=\\\\\\"https://github.com/markdown-
+it/markdown-it-emoji#change-output\\\\\\">how to change output</a
+>&#xa0;with twemoji.</p><h3 id=\\\\\\"subscript--superscript\\\\\\"><a
+ href=\\\\\\"https://github.com/markdown-it/markdown-it-sub\\\\\\">Sub
+script</a>&#xa0;/ <a href=\\\\\\"https://github.com/markdown-it/m
+arkdown-it-sup\\\\\\">Superscript</a></h3>\\\\n<ul>\\\\n<li>19^th^</li>
+\\\\n<li>H<del>2</del>O</li>\\\\n</ul>\\\\n<h3 id=\\\\\\"ins\\\\\\"><a href=\\\\\\"h
+ttps://github.com/markdown-it/markdown-it-ins\\\\\\">&lt;ins&gt;<
+/a></h3>\\\\n<p data-spacing=\\\\\\"double\\\\\\">++Inserted text++</p><h
+3 id=\\\\\\"mark\\\\\\"><a href=\\\\\\"https://github.com/markdown-it/markd
+own-it-mark\\\\\\">&lt;mark&gt;</a></h3>\\\\n<p data-spacing=\\\\\\"doubl
+e\\\\\\">==Marked text==</p><h3 id=\\\\\\"footnotes\\\\\\"><a href=\\\\\\"https:
+//github.com/markdown-it/markdown-it-footnote\\\\\\">Footnotes</a
+></h3>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Footnote 1 link[^first].<
+/p><p data-spacing=\\\\\\"double\\\\\\">Footnote 2 link[^second].</p><
+p data-spacing=\\\\\\"double\\\\\\">Inline footnote^[Text of inline fo
+otnote] definition.</p><p data-spacing=\\\\\\"double\\\\\\">Duplicated
+ footnote reference[^second].</p><p data-spacing=\\\\\\"double\\\\\\">
+[^first]: Footnote <strong>can have markup</strong></p><pre 
+class=\\\\\\"language-undefined\\\\\\"><code class=\\\\\\"language-undefine
+d\\\\\\">and multiple paragraphs.</code></pre><p data-spacing=\\\\\\"d
+ouble\\\\\\">[^second]: Footnote text.</p><h3 id=\\\\\\"definition-lis
+ts\\\\\\"><a href=\\\\\\"https://github.com/markdown-it/markdown-it-de
+flist\\\\\\">Definition lists</a></h3>\\\\n<p data-spacing=\\\\\\"double\\\\
+\\">Term 1</p><p data-spacing=\\\\\\"double\\\\\\">: Definition 1</p><p 
+data-spacing=\\\\\\"single\\\\\\">with lazy continuation.</p><p data-s
+pacing=\\\\\\"double\\\\\\">Term 2 with <em>inline markup</em></p><p d
+ata-spacing=\\\\\\"double\\\\\\">: Definition 2</p><pre class=\\\\\\"langua
+ge-undefined\\\\\\"><code class=\\\\\\"language-undefined\\\\\\">    { some
+ code, part of Definition 2 }<br>Third paragraph of definiti
+on 2.</code></pre><p data-spacing=\\\\\\"double\\\\\\"><em>Compact sty
+le:</em></p><p data-spacing=\\\\\\"double\\\\\\">Term 1</p><p data-spa
+cing=\\\\\\"single\\\\\\">~ Definition 1</p><p data-spacing=\\\\\\"double\\\\\\"
+>Term 2</p><p data-spacing=\\\\\\"single\\\\\\">~ Definition 2a</p><p 
+data-spacing=\\\\\\"single\\\\\\">~ Definition 2b</p><h3 id=\\\\\\"abbrevia
+tions\\\\\\"><a href=\\\\\\"https://github.com/markdown-it/markdown-it
+-abbr\\\\\\">Abbreviations</a></h3>\\\\n<p data-spacing=\\\\\\"double\\\\\\">T
+his is HTML abbreviation example.</p><p data-spacing=\\\\\\"doubl
+e\\\\\\">It converts &quot;HTML&quot;, but keep intact partial en
+tries like &quot;xxxHTMLyyy&quot; and so on.</p><p data-spac
+ing=\\\\\\"double\\\\\\">*[HTML]: Hyper Text Markup Language</p><h3 id
+=\\\\\\"custom-containers\\\\\\"><a href=\\\\\\"https://github.com/markdown
+-it/markdown-it-container\\\\\\">Custom containers</a></h3>\\\\n<p d
+ata-spacing=\\\\\\"double\\\\\\">::: warning</p><p data-spacing=\\\\\\"sing
+le\\\\\\"><em>here be dragons</em></p><p data-spacing=\\\\\\"single\\\\\\">
+:::</p>\\"}}]"
 `;
 
 exports[`transform simplenote files to notesnook importer compatible format 1`] = `
@@ -10740,6 +10768,1179 @@ dy><tr><td>hello</td><td>123</td><td></td><td></td><td></td>
 d></td><td></td><td></td><td>hello</td><td>123</td><tr><td><
 /td><td></td><td></td><td>hello</td><td>123</td></tbody></ta
 ble>\\"}}]"
+`;
+
+exports[`transform textbundle files to notesnook importer compatible format 1`] = `
+"[{\\"title\\":\\"Textbundle Example\\",\\"dateEdited\\":1409574618000,\\"a
+ttachments\\":[{\\"size\\":3319,\\"hash\\":\\"cba0ce7401c5c9bd\\",\\"filenam
+e\\":\\"cba0ce7401c5c9bd\\",\\"hashType\\":\\"xxh64\\",\\"mime\\":\\"image/png\\"}
+],\\"content\\":{\\"type\\":\\"html\\",\\"data\\":\\"<h1 id=\\\\\\"textbundle-examp
+le\\\\\\">Textbundle Example</h1>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Thi
+s is a simple example of a textbundle package. The following
+ paragraph contains an example of a referenced image using t
+he embedding code <code>![](assets/textbundle.png)</code>.</
+p><p data-spacing=\\\\\\"double\\\\\\"><img src=\\\\\\"assets/textbundle.pn
+g\\\\\\" alt></p>\\"}},{\\"title\\":\\"Textbundle Example\\",\\"dateEdited\\":1
+409574618000,\\"attachments\\":[{\\"size\\":3319,\\"hash\\":\\"cba0ce7401c
+5c9bd\\",\\"filename\\":\\"cba0ce7401c5c9bd\\",\\"hashType\\":\\"xxh64\\",\\"mim
+e\\":\\"image/png\\"}],\\"content\\":{\\"type\\":\\"html\\",\\"data\\":\\"<h1 id=\\\\\\"t
+extbundle-example\\\\\\">Textbundle Example</h1>\\\\n<p data-spacing
+=\\\\\\"double\\\\\\">This is a simple example of a textbundle package
+. The following paragraph contains an example of a reference
+d image using the embedding code <code>![](assets/textbundle
+.png)</code>.</p><p data-spacing=\\\\\\"double\\\\\\"><img src=\\\\\\"asset
+s/textbundle.png\\\\\\" alt></p>\\"}}]"
+`;
+
+exports[`transform txt files to notesnook importer compatible format 1`] = `
+"[{\\"title\\":\\"#goals\\",\\"attachments\\":[],\\"content\\":{\\"type\\":\\"html\\"
+,\\"data\\":\\"<p data-spacing=\\\\\\"single\\\\\\">#goals\\\\r</p><p data-spac
+ing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">##a. Succeed
+ing\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">1. Write out a clear, de
+tailed present-tense description of your major goals -- as i
+f they already existed.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">2. D
+ecide exactly what you really want to achieve in terms of yo
+ur income, and family, and your health.\\\\r</p><p data-spacing
+=\\\\\\"single\\\\\\">3. To succeed greatly, you must have clear goals
+ in every area of your life.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>4. An unwritten goal, without a deadline, is just a wish or
+ fantasy -- it has no power or energy behind it.\\\\r</p><p dat
+a-spacing=\\\\\\"single\\\\\\">5. Make a list of everything you can th
+ink of to do to achieve your goal; b organize the list by pr
+iority.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">6. Back your goals a
+nd plans with total commitment to their realization.\\\\r</p><p
+ data-spacing=\\\\\\"single\\\\\\">7. Be action-oriented!&#xa0;&#xa0;D
+o something every day to move you towards your biggest goals
+.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">8. Always focus on outward
+ contribution and on measurable results.\\\\r</p><p data-spacin
+g=\\\\\\"single\\\\\\">9. Concentrate on the few goals and objectives 
+where outstanding results are possible.\\\\r</p><p data-spacing
+=\\\\\\"single\\\\\\">10. Set a deadline on every goal; set sub-deadli
+nes on larger goals.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><
+p data-spacing=\\\\\\"single\\\\\\">##b. focusing:\\\\r</p><p data-spacin
+g=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">1. See yoursel
+f as the President of your own personal services corporation
+.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">2. Accept complete respons
+ibility for yourself and for everything you do or become.\\\\r<
+/p><p data-spacing=\\\\\\"single\\\\\\">3. Commit to adding value cont
+inually, every day in every part of your life.\\\\r</p><p data-
+spacing=\\\\\\"single\\\\\\">4. Focus on your output responsibilities 
+-- the things you produce that others pay for or use.\\\\r</p><
+p data-spacing=\\\\\\"single\\\\\\">5. Always work on your highest &qu
+ot;value added&quot; tasks.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">
+6. What are your key result areas?&#xa0;&#xa0;These are the 
+specific, measurable outputs that determine your success.\\\\r<
+/p><p data-spacing=\\\\\\"single\\\\\\">7. Why are you on the payroll?
+&#xa0;&#xa0;Explain why you are paid for what you do in 25 w
+ords or less.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">8. What can yo
+u, and only you, do, which if done well, will make a real di
+fference?\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">9. What is the mos
+t valuable use of my time, right now?&quot;&#xa0;&#xa0;Ask t
+his of yourself continually.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>10. The things that matter most must never be at the mercy 
+of the things that matter least.\\\\r</p><p data-spacing=\\\\\\"sing
+le\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">##c. concentrate:\\\\r</p
+><p data-spacing=\\\\\\"single\\\\\\">1. Time wastage, working on low-
+value, no value activities is the primary reason for failure
+.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">2. The very worst use of t
+ime is to do very well what need not be done at all.\\\\r</p><p
+ data-spacing=\\\\\\"single\\\\\\">3. Doing what you really enjoy and 
+are good at is the key to peak performance.\\\\r</p><p data-spa
+cing=\\\\\\"single\\\\\\">4. Practice zero-based thinking before you b
+egin:&#xa0;&#xa0;&quot;Knowing what I know now, is there any
+thing I&apos;m doing that I wouldn&apos;t get into? &quot; q
+uit that thing.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">5. Set clear
+ priorities on your tasks before you begin.&#xa0;&#xa0;Use t
+he 80/20 Rule.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">6. Select the
+ most important task you could possibly complete and start o
+n that one before you do anything else.\\\\r</p><p data-spacing
+=\\\\\\"single\\\\\\">7. Have everything you need before you begin.&#x
+a0;&#xa0;A few minutes in preparation will save you hours in
+ execution.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">8. Consequences 
+are the measure; the greater the possible consequences, the 
+more vital and important the task.\\\\r</p><p data-spacing=\\\\\\"si
+ngle\\\\\\">9. Separate the urgent from the important.&#xa0;&#xa0
+;Urgent&#xa0;&#xa0;tasks are often unimportant and important
+&#xa0;&#xa0;tasks are often not urgent.\\\\r</p><p data-spacing
+=\\\\\\"single\\\\\\">10. Concentrate single-mindedly on one thing, th
+e most important thing, and stay with it until it&apos;s com
+plete.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing
+=\\\\\\"single\\\\\\">##d. skills:\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">1. 
+Make a list before you begin; always work from a list.\\\\r</p>
+<p data-spacing=\\\\\\"single\\\\\\">2. Set clear priorities on your l
+ist; always begin with the most important tasks.\\\\r</p><p dat
+a-spacing=\\\\\\"single\\\\\\">3. Resist diversion or distraction; kee
+p saying to yourself &quot;Back to work!&#xa0;&#xa0;Back to 
+work!&quot;\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">4. Practice sing
+le-handling with every task -- once you begin, refuse to do 
+anything else until your #1 task is completed.\\\\r</p><p data-
+spacing=\\\\\\"single\\\\\\">5. When you finish with a task, put every
+thing away.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">6. One minute in
+ planning saves ten minutes in execution -- a 1000% return o
+n your investment.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">7. Identi
+fy your limiting step: the task or function that determines 
+the speed at which you achieve your goal.\\\\r</p><p data-spaci
+ng=\\\\\\"single\\\\\\">8. Define your goal and then ask, &quot;Why am
+ I not there already? What is holding me back?&quot;\\\\r</p><p
+ data-spacing=\\\\\\"single\\\\\\">9. With major tasks, you need block
+s of uninterrupted time; turn off the telephone!\\\\r</p><p dat
+a-spacing=\\\\\\"single\\\\\\">10. Plan every day the evening before; 
+then begin first thing the next morning on your most importa
+nt task.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spaci
+ng=\\\\\\"single\\\\\\">##e. planning:\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>1. Continually write, rewrite and program your goals and ac
+tivities to keep yourself focused.\\\\r</p><p data-spacing=\\\\\\"si
+ngle\\\\\\">2. Action without planning is the cause of every fail
+ure.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">3. Neatness is a key pe
+rsonal productivity habit; important tasks are not entrusted
+ to messy people.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">4. Keep yo
+ur desk and work area clean and well-organized. Clean it off
+ completely at the end of each day.\\\\r</p><p data-spacing=\\\\\\"s
+ingle\\\\\\">5. Clear your desk of everything except the one task
+ that you are working on at the moment.\\\\r</p><p data-spacing
+=\\\\\\"single\\\\\\">6. Handle each piece of paper or information jus
+t once; when you pick it up, do something with it.\\\\r</p><p d
+ata-spacing=\\\\\\"single\\\\\\">7. 30% of your time, on average, can 
+be spent looking for things you&apos;ve misplaced!\\\\r</p><p d
+ata-spacing=\\\\\\"single\\\\\\">8. 80% of the materials filed are nev
+er needed again; avoid creating filing work for others.\\\\r</p
+><p data-spacing=\\\\\\"single\\\\\\">9. Use your waste basket generou
+sly; &quot;When in doubt, throw it out.&quot;\\\\r</p><p data-s
+pacing=\\\\\\"single\\\\\\">10. If it is not necessary to do it, it is
+ necessary not to do it.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r<
+/p><p data-spacing=\\\\\\"single\\\\\\">##f. procrastination:\\\\r</p><p 
+data-spacing=\\\\\\"single\\\\\\">1. Procrastination is not only the t
+hief of time; but it also is the thief of life and dreams as
+ well.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">2. The most valuable 
+reputation you can develop is that of a person who gets thin
+gs done fast.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">3. When you do
+ things quickly for others, they think you are smarter and m
+ore competent.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">4. As Nietsch
+e wrote, &quot;A man can bear any what,&#xa0;&#xa0;if he has
+ a big enough why.&quot;&#xa0;&#xa0;Overcome procrastination
+ with intensely desired goal\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>5. Visualize, imagine and feel the task is already complete
+d before you begin.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">6. Set d
+eadlines for yourself on all important tasks and then discip
+line yourself to meet them.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">
+7. Speak to yourself positively all the time:&#xa0;&#xa0;&qu
+ot;Do it now!&#xa0;&#xa0;Do it now! Do it now!&quot;\\\\r</p><p
+ data-spacing=\\\\\\"single\\\\\\">8. Refuse to allow yourself to make
+ excuses or rationalizations for procrastination; hold your 
+own feet to the fire.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">9. Giv
+e yourself a reward for each step you take toward completion
+ and goal attainment.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">10. &q
+uot;A journey of a thousand leagues begins with a single ste
+p.&quot;&#xa0;&#xa0;Do one thing to get started - now!\\\\r</p>
+<p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">
+##g. waste:\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">1. Telephone Int
+erruptions&#xa0;&#xa0;Have your calls held or screened.&#xa0
+;&#xa0;Return them all at the same time.\\\\r</p><p data-spacin
+g=\\\\\\"single\\\\\\">2. Drop-in Visitors&#xa0;&#xa0;Stand up immedia
+tely, walk out of your office with them, keep moving.\\\\r</p><
+p data-spacing=\\\\\\"single\\\\\\">3. Meetings&#xa0;&#xa0;Always have
+ an agenda, start and stop on time; remove all the chairs.\\\\r
+</p><p data-spacing=\\\\\\"single\\\\\\">4. Unexpected Emergencies&#xa
+0;&#xa0;Operate in real time; do it now; move quickly to res
+olve the situation.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">5. Procr
+astination&#xa0;&#xa0;Break up the tasks into small chunks; 
+start with the most important -- and keep at it!\\\\r</p><p dat
+a-spacing=\\\\\\"single\\\\\\">6. Indecision&#xa0;&#xa0;Most decisions
+ (80%!) should be made when they come up.&#xa0;&#xa0;Make a 
+habit of being decisive.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">7. 
+Mistakes&#xa0;&#xa0;Take the time to do the job right the fi
+rst time; be patient and persistent.\\\\r</p><p data-spacing=\\\\\\"
+single\\\\\\">8. Knowledge&#xa0;&#xa0;Dedicate yourself to person
+al and professional development; get better at your key task
+s.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">9. Focus&#xa0;&#xa0;Alway
+s know exactly what it is you are trying to accomplish, and 
+concentrate all your energies in that direction.\\\\r</p><p dat
+a-spacing=\\\\\\"single\\\\\\">10. Socializing&#xa0;&#xa0;Make your co
+nversations short, focused, and to the point.&#xa0;&#xa0;Dis
+cuss personal matters away from work.\\\\r</p><p data-spacing=\\\\
+\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">##h. multitask:\\\\r
+</p><p data-spacing=\\\\\\"single\\\\\\">1. Your ability to plan, orga
+nize and accomplish complex tasks is essential to your succe
+ss.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">2. Project management an
+d time management go hand in hand with high productivity.\\\\r<
+/p><p data-spacing=\\\\\\"single\\\\\\">3. Your ability to bring toget
+her a team of people to complete a multi-task job is the mar
+k of executive excellence.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">4
+. You begin each project by defining the ideal desired resul
+t and working back to the beginning.\\\\r</p><p data-spacing=\\\\\\"
+single\\\\\\">5. People are not just the only thing; they are eve
+rything.&#xa0;&#xa0;Assemble the team first.\\\\r</p><p data-sp
+acing=\\\\\\"single\\\\\\">6. Instill ownership of the project in each
+ team member by involving him or her fully in the planning p
+rocess.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">7. Before beginning,
+ list every task, function and activity that must be complet
+ed.&#xa0;&#xa0;Assign responsibility and set deadlines for e
+ach.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">10. Inspect what you ex
+pect -- if it&apos;s important, stay on top of it at all tim
+es.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"
+single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">Tags:\\\\r</p><p data
+-spacing=\\\\\\"single\\\\\\">&#xa0;&#xa0;Ed, NextProject, Reference</
+p>\\"}},{\\"title\\":\\"KEYWORDS LIST OF MINT PLAYER\\",\\"attachments\\":
+[],\\"content\\":{\\"type\\":\\"html\\",\\"data\\":\\"<p data-spacing=\\\\\\"single
+\\\\\\">KEYWORDS LIST OF MINT PLAYER\\\\r</p><p data-spacing=\\\\\\"singl
+e\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">video player hd\\\\r</p><p
+ data-spacing=\\\\\\"single\\\\\\">video player\\\\r</p><p data-spacing=\\\\
+\\"single\\\\\\">video player download\\\\r</p><p data-spacing=\\\\\\"singl
+e\\\\\\">video player all format\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">
+all format video player for android\\\\r</p><p data-spacing=\\\\\\"s
+ingle\\\\\\">hd video player high quality 1080p\\\\r</p><p data-spac
+ing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">4k video pla
+yer\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">4k video player for andr
+oid\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">4k video player 2019\\\\r</
+p><p data-spacing=\\\\\\"single\\\\\\">4k video player app\\\\r</p><p dat
+a-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">video 
+player 4k ultra hd\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">video pla
+yer 4k \\\\r</p><p data-spacing=\\\\\\"single\\\\\\">video player 4k 2019
+\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">video player 4k hd\\\\r</p><p 
+data-spacing=\\\\\\"single\\\\\\">all video player 2019\\\\r</p><p data-s
+pacing=\\\\\\"single\\\\\\">media player all format\\\\r</p><p data-spaci
+ng=\\\\\\"single\\\\\\">media player\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">m
+edia player hd \\\\r</p><p data-spacing=\\\\\\"single\\\\\\">media player
+ app\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">hd media player for all
+ formats\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">video player app\\\\r<
+/p><p data-spacing=\\\\\\"single\\\\\\">mkv player\\\\r</p><p data-spacin
+g=\\\\\\"single\\\\\\">movie player\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">mo
+vie player hd\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">720p video pla
+yer\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">video player hd 720p\\\\r</
+p><p data-spacing=\\\\\\"single\\\\\\">player mx player\\\\r</p><p data-s
+pacing=\\\\\\"single\\\\\\">player\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">hd 
+video \\\\r</p><p data-spacing=\\\\\\"single\\\\\\">floating video player
+\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">share videos\\\\r</p><p data-s
+pacing=\\\\\\"single\\\\\\">chromecast\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>max player\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">hd max video\\\\r</
+p><p data-spacing=\\\\\\"single\\\\\\">music,videos\\\\r</p><p data-spaci
+ng=\\\\\\"single\\\\\\">km player\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</
+p><p data-spacing=\\\\\\"single\\\\\\">avplayer\\\\r</p><p data-spacing=\\\\
+\\"single\\\\\\">avi player\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">wmv pla
+yer\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">mp3 mp4 player\\\\r</p><p d
+ata-spacing=\\\\\\"single\\\\\\">avi player\\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">movie player\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">4k videos
+\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">ultra hd video player\\\\r</p>
+<p data-spacing=\\\\\\"single\\\\\\">ultra 4k player\\\\r</p><p data-spac
+ing=\\\\\\"single\\\\\\">popup player\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">
+best video player\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p d
+ata-spacing=\\\\\\"single\\\\\\">Media player HD.\\\\r</p><p data-spacing
+=\\\\\\"single\\\\\\">Media player for android.\\\\r</p><p data-spacing=\\\\
+\\"single\\\\\\">Media player for all format.\\\\r</p><p data-spacing=
+\\\\\\"single\\\\\\">HD video player 2019.\\\\r</p><p data-spacing=\\\\\\"sing
+le\\\\\\">Popup video player.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">Mus
+ic Player mp3\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">Music player 2
+019\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">Audio player\\\\r</p><p dat
+a-spacing=\\\\\\"single\\\\\\">&#xa0;Real video player hd all format s
+upport.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">Real video player.\\\\r
+</p><p data-spacing=\\\\\\"single\\\\\\">Vidmataps 2019.\\\\r</p><p data-
+spacing=\\\\\\"single\\\\\\">Vidmax player.\\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">Vidmax vidmax\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">max play
+er\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">flv video player\\\\r</p><p 
+data-spacing=\\\\\\"single\\\\\\">player hd \\\\r</p><p data-spacing=\\\\\\"si
+ngle\\\\\\">real player\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">hd movie\\\\
+r</p><p data-spacing=\\\\\\"single\\\\\\">whatsapp status\\\\r</p><p data
+-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">Mx HD v
+ideo Player Pro\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">Mxv Player\\\\r
+</p><p data-spacing=\\\\\\"single\\\\\\">Hd Mxv Player\\\\r</p><p data-sp
+acing=\\\\\\"single\\\\\\">HD video Player\\\\r</p><p data-spacing=\\\\\\"sing
+le\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">HD Video Player.\\\\r</p>
+<p data-spacing=\\\\\\"single\\\\\\">&#x25cf; HD Video Player high qua
+lity 1080p.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#x25cf; HD Vide
+o Player 2019 new.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#x25cf; 
+HD Video Player high quality 1080p.\\\\r</p><p data-spacing=\\\\\\"s
+ingle\\\\\\">&#x25cf; Full HD Video Player you can play all forma
+ts.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#x25cf; Full HD Video P
+layer high quality 1080p.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#
+x25cf; Full HD Video Player 2019.\\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">&#x25cf; User friendly Video Player all format.\\\\r</p><
+p data-spacing=\\\\\\"single\\\\\\">&#x25cf; Ultra HD 4K Video Player 
+for android.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#x25cf; Ultra 
+HD Video Player 4K.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#x25cf;
+ Ultra HD Video Player.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#x2
+5cf; 4K Video Player.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#x25c
+f; 4K Video Player for android.\\\\r</p><p data-spacing=\\\\\\"singl
+e\\\\\\">&#x25cf; 4K Video Player all format for android.\\\\r</p><p
+ data-spacing=\\\\\\"single\\\\\\">&#x25cf; 4K Video Player HD.\\\\r</p><
+p data-spacing=\\\\\\"single\\\\\\">&#x25cf; 4K HD Video song Player.\\\\
+r</p><p data-spacing=\\\\\\"single\\\\\\">&#x25cf; 4K HD Video Player 
+2019.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#x25cf; 4K Video Play
+er all format for android.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&
+#x25cf; 4K Video Player download free app.\\\\r</p><p data-spac
+ing=\\\\\\"single\\\\\\">&#x25cf; &#x92a;&#x942;&#x930;&#x94d;&#x923; 
+HD &#x935;&#x940;&#x921;&#x93f;&#x92f;&#x94b; &#x92a;&#x94d;
+&#x932;&#x947;&#x92f;&#x930;\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>&#x25cf; &#xbae;&#xbc1;&#xbb4;&#xbc1; HD &#xbb5;&#xbc0;&#xb
+9f;&#xbbf;&#xbaf;&#xbcb; &#xbaa;&#xbbf;&#xbb3;&#xbc7;&#xbaf;
+&#xbb0;&#xbcd;\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#x25cf; Lect
+eur vid&#xe9;o Full HD\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#x25
+cf; &#xe40;&#xe04;&#xe23;&#xe37;&#xe48;&#xe2d;&#xe07;&#xe40;
+&#xe25;&#xe48;&#xe19;&#xe27;&#xe34;&#xe14;&#xe35;&#xe42;&#xe
+2d; Full HD\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#x25cf; &#x5168
+;&#x9ad8;&#x6e05;&#x89c6;&#x9891;&#x64ad;&#x653e;&#x5668;\\\\r<
+/p><p data-spacing=\\\\\\"single\\\\\\">&#x25cf; &#x30d5;&#x30eb;HD&#x
+30d3;&#x30c7;&#x30aa;&#x30d7;&#x30ec;&#x30fc;&#x30e4;&#x30fc
+;\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#x25cf; Lettore video Ful
+l HD\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#x25cf; Reproductor de
+ video Full HD\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#x25cf; &#xd
+480; HD &#xbe44;&#xb514;&#xc624; &#xd50c;&#xb808;&#xc774;&#x
+c5b4;\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#x25cf; &#x5d2;&#x5d0
+;&#x5b7;&#x5e0;&#x5e5; &#x5d4;&#x5d3; &#x5d5;&#x5d9;&#x5d3;&
+#x5d0;&#x5d5; &#x5e4;&#x5bc;&#x5dc;&#x5d9;&#x5d9;&#x5b7;&#x5
+e2;&#x5e8;\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#x25cf; &#xd2b;&
+#xd41;&#xd7e; HD &#xd35;&#xd40;&#xd21;&#xd3f;&#xd2f;&#xd4b; 
+&#xd2a;&#xd4d;&#xd32;&#xd46;&#xd2f;&#xd7c;\\\\r</p><p data-spac
+ing=\\\\\\"single\\\\\\">&#x25cf; P&#x14d;&#x2bb;ani&#x2bb;oni&#x2bb;o
+ni piha piha\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">P&#x14d;&#x2bb;
+ani&#x2bb;oni&#x2bb;oni piha piha\\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">Vedmet app movie player\\\\r</p><p data-spacing=\\\\\\"single\\\\
+\\">Vidmata video player\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">Widma
+tapp movie player\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">Vidmataps 
+2019 HD media player\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">free Vi
+deo Player.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">xx video player 
+\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">Full HD Ultra 4K video play
+back\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">Real HD video player \\\\r
+</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"singl
+e\\\\\\">&#xa0;Video Player.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">- Vi
+deo Player All Format - HD media player.\\\\r</p><p data-spacin
+g=\\\\\\"single\\\\\\">- Video Player for android All Format.\\\\r</p><p 
+data-spacing=\\\\\\"single\\\\\\">- Video Player HD.\\\\r</p><p data-spac
+ing=\\\\\\"single\\\\\\">- Fast video player.\\\\r</p><p data-spacing=\\\\\\"s
+ingle\\\\\\">- 1080p High Quality Video Player.\\\\r</p><p data-spac
+ing=\\\\\\"single\\\\\\">- HD video Player.\\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">- HD Video Player All Format.\\\\r</p><p data-spacing=\\\\\\"s
+ingle\\\\\\">- HD video player for android.\\\\r</p><p data-spacing=
+\\\\\\"single\\\\\\">- Mp4 video player.\\\\r</p><p data-spacing=\\\\\\"single
+\\\\\\">- Mkv video player.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">- Vid
+mataps 2019.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">- Viralmate-hd 
+video player.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">- Music player
+.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">- Mp3 player.\\\\r</p><p data
+-spacing=\\\\\\"single\\\\\\">- Full hd video player.\\\\r</p><p data-spa
+cing=\\\\\\"single\\\\\\">- Full hd video player high volume.\\\\r</p><p 
+data-spacing=\\\\\\"single\\\\\\">- Full hd video player download free
+ app.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">- Ultra hd video playe
+r 2019.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">- Ultra hd video pla
+yer 4k.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacin
+g=\\\\\\"single\\\\\\">- Latest video player new version 2019\\\\r</p><p 
+data-spacing=\\\\\\"single\\\\\\">- Pelicans en 4k\\\\r</p><p data-spacin
+g=\\\\\\"single\\\\\\">- Video Player.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>- Video Player all format.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">
+- Video player 2019 new free app.\\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">- Video player download free app.\\\\r</p><p data-spacing
+=\\\\\\"single\\\\\\">- Video player high quality 1080p.\\\\r</p><p data-
+spacing=\\\\\\"single\\\\\\">- Video player hd\\\\r</p><p data-spacing=\\\\\\"
+single\\\\\\">- Video player for viewing 4k ultra hd movie.\\\\r</p>
+<p data-spacing=\\\\\\"single\\\\\\">- Video player for YouTube Video.
+\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">- Video Player for Android 
+All Format &amp; 4K Support.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>- Video player for android.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>- Video player 1080p.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">- Vid
+eo Player All Format for Android.\\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">- Video Player hd 2019.\\\\r</p><p data-spacing=\\\\\\"single\\\\
+\\">- Media Player &amp; Mp3 Mp4 Player.\\\\r</p><p data-spacing=
+\\\\\\"single\\\\\\">- High quality video player.\\\\r</p><p data-spacing
+=\\\\\\"single\\\\\\">- HD video player.\\\\r</p><p data-spacing=\\\\\\"single
+\\\\\\">- HD video player high quality 1080p.\\\\r</p><p data-spacin
+g=\\\\\\"single\\\\\\">- HD video player download free app.\\\\r</p><p da
+ta-spacing=\\\\\\"single\\\\\\">- HD video player 2019 new.\\\\r</p><p da
+ta-spacing=\\\\\\"single\\\\\\">- Full hd video player.\\\\r</p><p data-s
+pacing=\\\\\\"single\\\\\\">- Full hd video player 2019.\\\\r</p><p data-
+spacing=\\\\\\"single\\\\\\">- Full hd Video Player you can play all f
+ormats.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">- Full hd video play
+er all format media player 1080p.\\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">- Full hd video player high volume.\\\\r</p><p data-spaci
+ng=\\\\\\"single\\\\\\">- Full hd video player download free app.\\\\r</p
+><p data-spacing=\\\\\\"single\\\\\\">- Ultra hd video player.\\\\r</p><p
+ data-spacing=\\\\\\"single\\\\\\">- Ultra hd video player 4k.\\\\r</p><p
+ data-spacing=\\\\\\"single\\\\\\">- Ultra hd 4k video player for andr
+oid free.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">- 4K video player.
+\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">- - [ ] 4k video player for
+ android.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">- 4k video player 
+all format.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">- 4k video playe
+r hd.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">- 4k ultra hd video pl
+ayer free.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">- 4k ultra hd vid
+eo player for android.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">- 4k 
+hd video player 2019.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">- 4k v
+ideo player for android.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">- 4
+k video player all format for android.\\\\r</p><p data-spacing=
+\\\\\\"single\\\\\\">- 4k video player download free app.\\\\r</p><p data
+-spacing=\\\\\\"single\\\\\\">- 2k video player.\\\\r</p><p data-spacing=
+\\\\\\"single\\\\\\">- vidio bokeb full gratis.\\\\r</p><p data-spacing=\\\\
+\\"single\\\\\\">- &#x92b;&#x941;&#x932; &#x90f;&#x91a;&#x921;&#x94
+0; &#x935;&#x940;&#x921;&#x93f;&#x92f;&#x94b; &#x92a;&#x94d;
+&#x932;&#x947;&#x92f;&#x930;\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>- Lecteur vid&#xe9;o Full HD\\\\r</p><p data-spacing=\\\\\\"single\\\\
+\\">- Full hd player de v&#xed;deo\\\\r</p><p data-spacing=\\\\\\"sing
+le\\\\\\">- &#xbae;&#xbc1;&#xbb4;&#xbc1; HD &#xbb5;&#xbc0;&#xb9f;
+&#xbbf;&#xbaf;&#xbcb; &#xbaa;&#xbbf;&#xbb3;&#xbc7;&#xbaf;&#x
+bb0;&#xbcd;\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">- Lecteur vid&#x
+e9;o Full HD\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">- &#xe40;&#xe04
+;&#xe23;&#xe37;&#xe48;&#xe2d;&#xe07;&#xe40;&#xe25;&#xe48;&#x
+e19;&#xe27;&#xe34;&#xe14;&#xe35;&#xe42;&#xe2d; Full HD\\\\r</p>
+<p data-spacing=\\\\\\"single\\\\\\">- &#x5168;&#x9ad8;&#x6e05;&#x89c6
+;&#x9891;&#x64ad;&#x653e;&#x5668;\\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">- &#x30d5;&#x30eb;HD&#x30d3;&#x30c7;&#x30aa;&#x30d7;&#
+x30ec;&#x30fc;&#x30e4;&#x30fc;\\\\r</p><p data-spacing=\\\\\\"single
+\\\\\\">- Lettore video Full HD\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">-
+ Reproductor de video Full HD\\\\r</p><p data-spacing=\\\\\\"single\\\\
+\\">- &#xd480; HD &#xbe44;&#xb514;&#xc624; &#xd50c;&#xb808;&#x
+c774;&#xc5b4;\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">- &#x5d2;&#x5d
+0;&#x5b7;&#x5e0;&#x5e5; &#x5d4;&#x5d3; &#x5d5;&#x5d9;&#x5d3;
+&#x5d0;&#x5d5; &#x5e4;&#x5bc;&#x5dc;&#x5d9;&#x5d9;&#x5b7;&#x
+5e2;&#x5e8;\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">- &#xd2b;&#xd41;
+&#xd7e; HD &#xd35;&#xd40;&#xd21;&#xd3f;&#xd2f;&#xd4b; &#xd2a
+;&#xd4d;&#xd32;&#xd46;&#xd2f;&#xd7c;\\\\r</p><p data-spacing=\\\\\\"
+single\\\\\\">- Easy to Use.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">-- S
+mooth hd video player\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">- Powe
+rful hd video player\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">- Medma
+te app\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">- *- Vidmataps 2019 H
+D video player.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">*- Media pla
+yer all fromat.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">*- 4k video 
+player.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">*- Subtitle support 
+for videos.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">*- Easily to adj
+ust the video sound.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">*- Medm
+ate app.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">*- Wide made app do
+wnload video and play HD quality.\\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">*- Powerful video player.\\\\r</p><p data-spacing=\\\\\\"singl
+e\\\\\\">*- Vidmata download movies and play with this HD video p
+layer.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">*- Viramate hd video 
+player.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">*- Viralmate-hd vide
+o player.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">*- HD video player
+ high quality 1080p.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">*- Medi
+a Player &amp; Mp3 Mp4 Player.\\\\r</p><p data-spacing=\\\\\\"single
+\\\\\\">*- Real video player hd all format support, easy to use.\\\\
+r</p><p data-spacing=\\\\\\"single\\\\\\">- sax video player\\\\r</p><p d
+ata-spacing=\\\\\\"single\\\\\\">- hd sax video\\\\r</p><p data-spacing=\\\\
+\\"single\\\\\\">- VIRALMATE\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">SX Vid
+eo Player\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">Video Player\\\\r</p>
+<p data-spacing=\\\\\\"single\\\\\\">Music Player\\\\r</p><p data-spacing
+=\\\\\\"single\\\\\\">HD Video Player\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">
+Media Player\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">MP3 Player\\\\r</p
+><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>HD Video App\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-
+spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p
+ data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r
+</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"singl
+e\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\
+\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spa
+cing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p da
+ta-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"><br><
+/p>\\"}},{\\"title\\":\\"List of Pages\\",\\"attachments\\":[],\\"content\\":{
+\\"type\\":\\"html\\",\\"data\\":\\"<p data-spacing=\\\\\\"single\\\\\\">List of Pag
+es\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"s
+ingle\\\\\\">1. We Create\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">2. We C
+ontribute\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">3. We Blog\\\\r</p><p
+ data-spacing=\\\\\\"single\\\\\\">4. We Help\\\\r</p><p data-spacing=\\\\\\"s
+ingle\\\\\\">5. We Love Coding\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">6.
+ Work with us\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">7. Our Team\\\\r<
+/p><p data-spacing=\\\\\\"single\\\\\\">8. What we can do\\\\r</p><p data
+-spacing=\\\\\\"single\\\\\\">9. Careers\\\\r</p><p data-spacing=\\\\\\"single
+\\\\\\">10. Blog Page\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p da
+ta-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p
+><p data-spacing=\\\\\\"single\\\\\\">sdavsadv\\\\r</p><p data-spacing=\\\\\\"
+single\\\\\\">dsvdsav\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p da
+ta-spacing=\\\\\\"single\\\\\\">dsavdsavdsav\\\\r</p><p data-spacing=\\\\\\"si
+ngle\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">dsavdsavdsav\\\\r</p><p
+ data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r
+</p><p data-spacing=\\\\\\"single\\\\\\">adsvdsavsadv\\\\r</p><p data-spa
+cing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p da
+ta-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">dsavd
+savsadvsa\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spac
+ing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">dsavdsavsadv
+sa\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">do\\\\r</p><p data-spacing=\\\\
+\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">sdvdsavd\\\\r</p><p 
+data-spacing=\\\\\\"single\\\\\\">s\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">ds
+avdsavdsavdsa\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">dsavdas\\\\r</p><
+p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\
+r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"sing
+le\\\\\\">Tags:\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#xa0;&#xa0;cow, 
+hello</p>\\"}},{\\"title\\":\\"These are selections from work in pro
+gre\\",\\"attachments\\":[],\\"content\\":{\\"type\\":\\"html\\",\\"data\\":\\"<p da
+ta-spacing=\\\\\\"single\\\\\\">These are selections from work in prog
+ress that speaks from years with the Zunis in New Mexico.\\\\r<
+/p><p data-spacing=\\\\\\"single\\\\\\">Dennis Tedlock. 13 Poems\\\\r</p>
+<p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">
+Advice Received\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p dat
+a-spacing=\\\\\\"single\\\\\\">Don&#x2019;t ask too many questions. \\\\r
+</p><p data-spacing=\\\\\\"single\\\\\\">Don&#x2019;t ask questions ab
+out religion. \\\\r</p><p data-spacing=\\\\\\"single\\\\\\">Don&#x2019;t 
+take notes in front of people. \\\\r</p><p data-spacing=\\\\\\"singl
+e\\\\\\">If someone is chopping wood \\\\r</p><p data-spacing=\\\\\\"sing
+le\\\\\\">don&#x2019;t just stand there.\\\\r</p><p data-spacing=\\\\\\"s
+ingle\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spaci
+ng=\\\\\\"single\\\\\\">Dialogue\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p
+><p data-spacing=\\\\\\"single\\\\\\">- I could tell you a story.\\\\r</p
+><p data-spacing=\\\\\\"single\\\\\\">It&#x2019;s the story told to al
+l boys when they are initiated.\\\\r</p><p data-spacing=\\\\\\"singl
+e\\\\\\">Do you want me to it? -\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">
+\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">If you want to tell it go a
+head. -\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacin
+g=\\\\\\"single\\\\\\">Don&#x2019;t say that.\\\\r</p><p data-spacing=\\\\\\"s
+ingle\\\\\\">Say you want me to tell the story.\\\\r</p><p data-spac
+ing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p dat
+a-spacing=\\\\\\"single\\\\\\">The Hunter&#x2019;s Wife\\\\r</p><p data-s
+pacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">1\\\\r</p><p
+ data-spacing=\\\\\\"single\\\\\\">She looks out the window\\\\r</p><p da
+ta-spacing=\\\\\\"single\\\\\\">the snow is falling\\\\r</p><p data-spaci
+ng=\\\\\\"single\\\\\\">her husband went hunting for elk\\\\r</p><p data-
+spacing=\\\\\\"single\\\\\\">the boy went along too\\\\r</p><p data-spaci
+ng=\\\\\\"single\\\\\\">a neighbor thinks he saw them at Red Hill\\\\r</p
+><p data-spacing=\\\\\\"single\\\\\\">she hasn&#x2019;t seen the sun a
+ll day.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacin
+g=\\\\\\"single\\\\\\">2\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">She was out i
+n the woods\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">gathering pine n
+uts \\\\r</p><p data-spacing=\\\\\\"single\\\\\\">and there \\\\r</p><p data
+-spacing=\\\\\\"single\\\\\\">under a tree \\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">was a fawn \\\\r</p><p data-spacing=\\\\\\"single\\\\\\">the fawn s
+aid \\\\r</p><p data-spacing=\\\\\\"single\\\\\\">-Tie me up. -\\\\r</p><p d
+ata-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">3\\\\r<
+/p><p data-spacing=\\\\\\"single\\\\\\">The men left her in camp for t
+he day\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">a wounded buck\\\\r</p><
+p data-spacing=\\\\\\"single\\\\\\">charged right into the fire\\\\r</p><
+p data-spacing=\\\\\\"single\\\\\\">she hit him over the head with a f
+rying pan.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spa
+cing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">The Fire in
+ Your Fireplace\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#xa0;You st
+arted it right up with one match, it must be your aunt loves
+ you it was quiet for awhile but now listen to that fire! Th
+e flames go straight up it roars! Someone is hungry, it must
+ be your great-grandparents every time you eat take a little
+ bread a little meat throw it in the fire, say - Great-grand
+parents! Eat! - That&#x2019;s the shortest prayer there is.\\\\
+r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"sing
+le\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">Winter Solstice\\\\r</p><
+p data-spacing=\\\\\\"single\\\\\\">&#xa0;Here is the place of fear fo
+r four days no greasy foods are eaten there is no coffee no 
+trade all places of business are closed for ten days no swee
+pings no garbage is taken out of the house no fire is taken 
+out of the house not even cigarettes are lighted outside peo
+ple shouldn&#x2019;t use their cars the street lights are al
+l turned out this is the middle of time.\\\\r</p><p data-spacin
+g=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#xa0;Recipe\\\\r
+</p><p data-spacing=\\\\\\"single\\\\\\">&#xa0;Fill a bowl with hot wa
+ter add, to taste: dried leaves of wild mint ground chili on
+ions dried chinchweed flowers wolfberries and venison jerky.
+ This is called hot-bowl it is an ancient dish.\\\\r</p><p data
+-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#xa0;C
+ornshucking\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#xa0;Pull down 
+the husk all around then twist it all off at once with the s
+tem put the dry ears in this pile for us put the damp ears t
+he moldy ears in this one for the hogs and throw the shucks 
+out there some of the ears are yellow some are blue red whit
+e some are pretty the multicolored ones some are black look 
+for the Fully-Finished-Ear without a single kernel missing r
+ight to the very tip a deer, a buck wears that one on his br
+east and the Flat-Ear with a forked tip a doe wears that one
+ on her breast and the Road-Ear with a groove down its whole
+ length runners wear that one on their backs now here it is 
+a Fully-Finished-Ear but it&#x2019;s wet I&#x2019;ll put it 
+at the edge of the good pile and here is an ear yellow, but 
+each kernel is tinged with red it&#x2019;s sort of pretty th
+ere&#x2019;s no name for this one I&#x2019;ll put it here on
+ the fence rail maybe I&#x2019;ll do something with it later
+.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"si
+ngle\\\\\\">#poem\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-s
+pacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">Tags:\\\\r</
+p><p data-spacing=\\\\\\"single\\\\\\">&#xa0;&#xa0;poem, Reference</p>
+\\"}},{\\"title\\":\\"Welcome to Simplenote\\",\\"attachments\\":[],\\"conte
+nt\\":{\\"type\\":\\"html\\",\\"data\\":\\"<p data-spacing=\\\\\\"single\\\\\\">Welcom
+e to Simplenote\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p dat
+a-spacing=\\\\\\"single\\\\\\">Simplenote is an easy way to take notes
+, create to-do lists, capture ideas, and more. Open it, jot 
+down some thoughts, and you&apos;re done. Since Simplenote w
+ill sync across your devices for free, your notes are with y
+ou at all times.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p da
+ta-spacing=\\\\\\"single\\\\\\">Markdown\\\\r</p><p data-spacing=\\\\\\"single
+\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">Use markdown to add styl
+es to your notes. Select &#x201c;Markdown&#x201d; from the n
+ote options to enable markdown on your current note. Find ou
+t more about using markdown at https://simplenote.com/help/#
+markdown.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spac
+ing=\\\\\\"single\\\\\\">Pinned Notes\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">
+\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">Have a few important notes 
+that you keep coming back to? Pin those notes to the top of 
+your list for easier access.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">Tags\\\\r</p><p data-spacing=
+\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">Keep your notes 
+organized by adding tags. Tags work a bit like folders, exce
+pt there&#x2019;s no limit to the number of tags you can add
+ per note.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spa
+cing=\\\\\\"single\\\\\\">Internal Links\\\\r</p><p data-spacing=\\\\\\"single
+\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">Reference one note in an
+other. Select &#x201c;Copy Internal Link&#x201d; from the no
+te options or type &#x201c;[&#x201c; followed by the title o
+f the note you want to link. Find out more about internal li
+nks at https://simplenote.com/help/#internal-links.\\\\r</p><p 
+data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">Syn
+cing\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\
+\\"single\\\\\\">There is no &#x201c;Save&#x201d; button as all you
+r changes are automatically synced and accessible from any p
+latform. Find out more about syncing at https://simplenote.c
+om/help/#syncing.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p d
+ata-spacing=\\\\\\"single\\\\\\">Search\\\\r</p><p data-spacing=\\\\\\"single\\\\
+\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">Quickly find notes using 
+search. To search by tag, type &#x201c;tag:&#x201d; in the s
+earch bar followed by the name of your tag.\\\\r</p><p data-spa
+cing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">Publishing\\\\
+r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"sing
+le\\\\\\">Share your notes by publishing them online. Select &#x2
+01c;Publish&#x201d; from the note options to generate a publ
+ic link. Find out more about publishing at https://simplenot
+e.com/help/#publish.</p>\\"}},{\\"title\\":\\"truisms\\",\\"attachments\\"
+:[],\\"content\\":{\\"type\\":\\"html\\",\\"data\\":\\"<p data-spacing=\\\\\\"singl
+e\\\\\\">truisms\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-sp
+acing=\\\\\\"single\\\\\\">a little knowledge can go a long way\\\\r</p><
+p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">a
+ lot of professionals are crackpots\\\\r</p><p data-spacing=\\\\\\"s
+ingle\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">a man can&apos;t kn
+ow what it is to be a mother\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">a name means a lot just by
+ itself\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacin
+g=\\\\\\"single\\\\\\">a positive attitude means all the difference in
+ the world\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spa
+cing=\\\\\\"single\\\\\\">a relaxed man is not necessarily a better ma
+n\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"si
+ngle\\\\\\">a sense of timing is the mark of genius\\\\r</p><p data-
+spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">a sincer
+e effort is all you can ask\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">
+\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">a single event can have inf
+initely many interpretations\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">a solid home base builds a
+ sense of self\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data
+-spacing=\\\\\\"single\\\\\\">a strong sense of duty imprisons you\\\\r</
+p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\
+\\">absolute submission can be a form of freedom\\\\r</p><p data-
+spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">abstract
+ion is a type of decadence\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\
+r</p><p data-spacing=\\\\\\"single\\\\\\">abuse of power comes as no s
+urprise\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacin
+g=\\\\\\"single\\\\\\">action causes more trouble than thought\\\\r</p><p
+ data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">al
+ienation produces eccentrics or revolutionaries\\\\r</p><p data
+-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">all thi
+ngs are delicately interconnected\\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">ambition is just as d
+angerous as complacency\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</
+p><p data-spacing=\\\\\\"single\\\\\\">ambivalence can ruin your life\\\\
+r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"sing
+le\\\\\\">an elite is inevitable\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">
+\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">anger or hate can be a usef
+ul motivating force\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p
+ data-spacing=\\\\\\"single\\\\\\">animalism is perfectly healthy\\\\r</p
+><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>any surplus is immoral\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</
+p><p data-spacing=\\\\\\"single\\\\\\">anything is a legitimate area o
+f investigation\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p dat
+a-spacing=\\\\\\"single\\\\\\">artificial desires are despoiling the e
+arth\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\
+\\"single\\\\\\">at times inactivity is preferable to mindless func
+tioning\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacin
+g=\\\\\\"single\\\\\\">at times your unconsciousness is truer than you
+r conscious mind\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p da
+ta-spacing=\\\\\\"single\\\\\\">automation is deadly\\\\r</p><p data-spac
+ing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">awful punish
+ment awaits really bad people\\\\r</p><p data-spacing=\\\\\\"single\\\\
+\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">bad intentions can yield 
+good results\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-s
+pacing=\\\\\\"single\\\\\\">being alone with yourself is increasingly 
+unpopular\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spac
+ing=\\\\\\"single\\\\\\">being happy is more important than anything e
+lse\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"
+single\\\\\\">being judgmental is a sign of life\\\\r</p><p data-spa
+cing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">being sure 
+of yourself means you&apos;re a fool\\\\r</p><p data-spacing=\\\\\\"
+single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">believing in rebir
+th is the same as admitting defeat\\\\r</p><p data-spacing=\\\\\\"si
+ngle\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">boredom makes you do
+ crazy things\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-
+spacing=\\\\\\"single\\\\\\">calm is more conductive to creativity tha
+n is anxiety\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-s
+pacing=\\\\\\"single\\\\\\">categorizing fear is calming\\\\r</p><p data-
+spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">change i
+s valuable when the oppressed become tyrants\\\\r</p><p data-sp
+acing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">chasing th
+e new is dangerous to society\\\\r</p><p data-spacing=\\\\\\"single\\\\
+\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">children are the most cru
+el of all\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spac
+ing=\\\\\\"single\\\\\\">children are the hope of the future\\\\r</p><p d
+ata-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">clas
+s action is a nice idea with no substance\\\\r</p><p data-spaci
+ng=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">class structu
+re is as artificial as plastic\\\\r</p><p data-spacing=\\\\\\"single
+\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">confusing yourself is a 
+way to stay honest\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p 
+data-spacing=\\\\\\"single\\\\\\">crime against property is relatively
+ unimportant\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-s
+pacing=\\\\\\"single\\\\\\">decadence can be an end in itself\\\\r</p><p 
+data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">dec
+ency is a relative thing\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r<
+/p><p data-spacing=\\\\\\"single\\\\\\">dependence can be a meal ticke
+t\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"si
+ngle\\\\\\">description is more important than metaphor\\\\r</p><p d
+ata-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">devi
+ants are sacrificed to increase group solidarity\\\\r</p><p dat
+a-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">disgus
+t is the appropriate response to most situations\\\\r</p><p dat
+a-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">disorg
+anization is a kind of anesthesia\\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">don&apos;t place too 
+much trust in experts\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p>
+<p data-spacing=\\\\\\"single\\\\\\">drama often obscures the real iss
+ues\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"
+single\\\\\\">dreaming while awake is a frightening contradiction
+\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">dying and coming back gives you considerable perspecti
+ve\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"s
+ingle\\\\\\">dying should be as easy as falling off a log\\\\r</p><p
+ data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">ea
+ting too much is criminal\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r
+</p><p data-spacing=\\\\\\"single\\\\\\">elaboration is a form of poll
+ution\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=
+\\\\\\"single\\\\\\">emotional responses are as valuable as intellectu
+al responses\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-s
+pacing=\\\\\\"single\\\\\\">enjoy yourself because you can&apos;t chan
+ge anything anyway\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p 
+data-spacing=\\\\\\"single\\\\\\">ensure that your life stays in flux\\\\
+r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"sing
+le\\\\\\">even your family can betray you\\\\r</p><p data-spacing=\\\\\\"
+single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">every achievement 
+requires a sacrifice\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><
+p data-spacing=\\\\\\"single\\\\\\">everyone&apos;s work is equally im
+portant\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacin
+g=\\\\\\"single\\\\\\">everything that&apos;s interesting is new\\\\r</p>
+<p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">
+exceptional people deserve special concessions\\\\r</p><p data-
+spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">expiring
+ for love is beautiful but stupid\\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">expressing anger is n
+ecessary\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spaci
+ng=\\\\\\"single\\\\\\">extreme behavior has its basis in pathological
+ psychology\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-sp
+acing=\\\\\\"single\\\\\\">extreme self-consciousness leads to pervers
+ion\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"
+single\\\\\\">faithfulness is a social not a biological law\\\\r</p>
+<p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">
+fake or real indifference is a powerful personal weapon\\\\r</p
+><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>fathers often use too much force\\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">fear is the greatest 
+incapacitator\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-
+spacing=\\\\\\"single\\\\\\">freedom is a luxury not a necessity\\\\r</p>
+<p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">
+giving free rein to your emotions is an honest way to live\\\\r
+</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"singl
+e\\\\\\">go all out in romance and let the chips fall where they 
+may\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"
+single\\\\\\">going with the flow is soothing but risky\\\\r</p><p d
+ata-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">good
+ deeds eventually are rewarded\\\\r</p><p data-spacing=\\\\\\"single
+\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">government is a burden o
+n the people\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-s
+pacing=\\\\\\"single\\\\\\">grass roots agitation is the only hope\\\\r</
+p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\
+\\">guilt and self-laceration are indulgences\\\\r</p><p data-spa
+cing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">habitual co
+ntempt doesn&apos;t reflect a finer sensibility\\\\r</p><p data
+-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">hiding 
+your emotions is despicable\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">
+\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">holding back protects your 
+vital energies\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data
+-spacing=\\\\\\"single\\\\\\">humanism is obsolete\\\\r</p><p data-spacin
+g=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">humor is a rel
+ease\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\
+\\"single\\\\\\">ideals are replaced by conventional goals at a cer
+tain age\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spaci
+ng=\\\\\\"single\\\\\\">if you aren&apos;t political your personal lif
+e should be exemplary\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p>
+<p data-spacing=\\\\\\"single\\\\\\">if you can&apos;t leave your mark
+ give up\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spaci
+ng=\\\\\\"single\\\\\\">if you have many desires your life will be int
+eresting\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spaci
+ng=\\\\\\"single\\\\\\">if you live simply there is nothing to worry a
+bout\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\
+\\"single\\\\\\">ignoring enemies is the best way to fight\\\\r</p><p 
+data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">ill
+ness is a state of mind\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</
+p><p data-spacing=\\\\\\"single\\\\\\">imposing order is man&apos;s vo
+cation for chaos is hell\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r<
+/p><p data-spacing=\\\\\\"single\\\\\\">in some instances it&apos;s be
+tter to die than to continue\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">inheritance must be abolis
+hed\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"
+single\\\\\\">it can be helpful to keep going no matter what\\\\r</p
+><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>it is heroic to try to stop time\\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">it is man&apos;s fate
+ to outsmart himself\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><
+p data-spacing=\\\\\\"single\\\\\\">it is a gift to the world not to h
+ave babies\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spa
+cing=\\\\\\"single\\\\\\">it&apos;s better to be a good person than a 
+famous person\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-
+spacing=\\\\\\"single\\\\\\">it&apos;s better to be lonely than to be 
+with inferior people\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><
+p data-spacing=\\\\\\"single\\\\\\">it&apos;s better to be naive than 
+jaded\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=
+\\\\\\"single\\\\\\">it&apos;s better to study the living fact than to
+ analyze history\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p da
+ta-spacing=\\\\\\"single\\\\\\">it&apos;s crucial to have an active fa
+ntasy life\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spa
+cing=\\\\\\"single\\\\\\">it&apos;s good to give extra money to charit
+y\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"si
+ngle\\\\\\">it&apos;s important to stay clean on all levels\\\\r</p>
+<p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">
+it&apos;s just an accident that your parents are your parent
+s\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"si
+ngle\\\\\\">it&apos;s not good to hold too many absolutes\\\\r</p><p
+ data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">it
+&apos;s not good to operate on credit\\\\r</p><p data-spacing=\\\\
+\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">it&apos;s vital t
+o live in harmony with nature\\\\r</p><p data-spacing=\\\\\\"single\\\\
+\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">just believing something 
+can make it happen\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p 
+data-spacing=\\\\\\"single\\\\\\">keep something in reserve for emerge
+ncies\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=
+\\\\\\"single\\\\\\">killing is unavoidable but nothing to be proud of
+\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">knowing yourself lets you understand others\\\\r</p><p da
+ta-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">knowl
+edge should be advanced at all costs\\\\r</p><p data-spacing=\\\\\\"
+single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">labor is a life-de
+stroying activity\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p d
+ata-spacing=\\\\\\"single\\\\\\">lack of charisma can be fatal\\\\r</p><p
+ data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">le
+isure time is a gigantic smoke screen\\\\r</p><p data-spacing=\\\\
+\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">listen when your 
+body talks\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spa
+cing=\\\\\\"single\\\\\\">looking back is the first sign of aging and 
+decay\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=
+\\\\\\"single\\\\\\">loving animals is a substitute activity\\\\r</p><p d
+ata-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">low 
+expectations are good protection\\\\r</p><p data-spacing=\\\\\\"sing
+le\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">manual labor can be re
+freshing and wholesome\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p
+><p data-spacing=\\\\\\"single\\\\\\">men are not monogamous by nature
+\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">moderation kills the spirit\\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">money creates taste\\\\r
+</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"singl
+e\\\\\\">monomania is a prerequisite of success\\\\r</p><p data-spac
+ing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">morals are f
+or little people\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p da
+ta-spacing=\\\\\\"single\\\\\\">most people are not fit to rule themse
+lves\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\
+\\"single\\\\\\">mostly you should mind your own business\\\\r</p><p d
+ata-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">moth
+ers shouldn&apos;t make too many sacrifices\\\\r</p><p data-spa
+cing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">much was de
+cided before you were born\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\
+r</p><p data-spacing=\\\\\\"single\\\\\\">murder has its sexual side\\\\r
+</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"singl
+e\\\\\\">myth can make reality more intelligible\\\\r</p><p data-spa
+cing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">noise can b
+e hostile\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spac
+ing=\\\\\\"single\\\\\\">nothing upsets the balance of good and evil\\\\r
+</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"singl
+e\\\\\\">occasionally principles are more valuable than people\\\\r<
+/p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single
+\\\\\\">offer very little information about yourself\\\\r</p><p data
+-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">often y
+ou should act like you are sexless\\\\r</p><p data-spacing=\\\\\\"si
+ngle\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">old friends are bett
+er left in the past\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p
+ data-spacing=\\\\\\"single\\\\\\">opacity is an irresistible challeng
+e\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"si
+ngle\\\\\\">pain can be a very positive thing\\\\r</p><p data-spacin
+g=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">people are bor
+ing unless they are extremists\\\\r</p><p data-spacing=\\\\\\"single
+\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">people are nuts if they 
+think they are important\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r<
+/p><p data-spacing=\\\\\\"single\\\\\\">people are responsible for wha
+t they do unless they are insane\\\\r</p><p data-spacing=\\\\\\"sing
+le\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">people who don&apos;t 
+work with their hands are parasites\\\\r</p><p data-spacing=\\\\\\"s
+ingle\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">people who go crazy
+ are too sensitive\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p 
+data-spacing=\\\\\\"single\\\\\\">people won&apos;t behave if they hav
+e nothing to lose\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p d
+ata-spacing=\\\\\\"single\\\\\\">physical culture is second best\\\\r</p>
+<p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">
+planning for the future is escapism\\\\r</p><p data-spacing=\\\\\\"s
+ingle\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">playing it safe can
+ cause a lot of damage in the long run\\\\r</p><p data-spacing=
+\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">politics is used
+ for personal gain\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p 
+data-spacing=\\\\\\"single\\\\\\">potential counts for nothing until i
+t&apos;s realized\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p d
+ata-spacing=\\\\\\"single\\\\\\">private property created crime\\\\r</p><
+p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">p
+ursuing pleasure for the sake of pleasure will ruin you\\\\r</p
+><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>push yourself to the limit as often as possible\\\\r</p><p dat
+a-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">raise 
+boys and girls the same way\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">
+\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">random mating is good for d
+ebunking sex myths\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p 
+data-spacing=\\\\\\"single\\\\\\">rechanneling destructive impulses is
+ a sign of maturity\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p
+ data-spacing=\\\\\\"single\\\\\\">recluses always get weak\\\\r</p><p da
+ta-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">redis
+tributing wealth is imperative\\\\r</p><p data-spacing=\\\\\\"single
+\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">relativity is no boon to
+ mankind\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spaci
+ng=\\\\\\"single\\\\\\">religion causes as many problems as it solves\\\\
+r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"sing
+le\\\\\\">remember you always have freedom of choice\\\\r</p><p data
+-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">repetit
+ion is the best way to learn\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">resolutions serve to ease 
+our conscience\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data
+-spacing=\\\\\\"single\\\\\\">revolution begins with changes in the in
+dividual\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spaci
+ng=\\\\\\"single\\\\\\">romantic love was invented to manipulate women
+\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">routine is a link with the past\\\\r</p><p data-spacing=\\\\
+\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">routine small exc
+esses are worse than then the occasional debauch\\\\r</p><p dat
+a-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">sacrif
+icing yourself for a bad cause is not a moral act\\\\r</p><p da
+ta-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">salva
+tion can&apos;t be bought and sold\\\\r</p><p data-spacing=\\\\\\"si
+ngle\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">self-awareness can b
+e crippling\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-sp
+acing=\\\\\\"single\\\\\\">self-contempt can do more harm than good\\\\r<
+/p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single
+\\\\\\">selfishness is the most basic motivation\\\\r</p><p data-spa
+cing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">selflessnes
+s is the highest achievement\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">separatism is the way to a
+ new beginning\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data
+-spacing=\\\\\\"single\\\\\\">sex differences are here to stay\\\\r</p><p
+ data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">si
+n is a means of social control\\\\r</p><p data-spacing=\\\\\\"single
+\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">slipping into madness is
+ good for the sake of comparison\\\\r</p><p data-spacing=\\\\\\"sing
+le\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">sloppy thinking gets w
+orse over time\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data
+-spacing=\\\\\\"single\\\\\\">solitude is enriching\\\\r</p><p data-spaci
+ng=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">sometimes sci
+ence advances faster than it should\\\\r</p><p data-spacing=\\\\\\"s
+ingle\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">sometimes things se
+em to happen of their own accord\\\\r</p><p data-spacing=\\\\\\"sing
+le\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">spending too much time
+ on self-improvement is antisocial\\\\r</p><p data-spacing=\\\\\\"si
+ngle\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">starvation is nature
+&apos;s way\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-sp
+acing=\\\\\\"single\\\\\\">stasis is a dream state\\\\r</p><p data-spacin
+g=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">sterilization 
+is a weapon of the rulers\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r
+</p><p data-spacing=\\\\\\"single\\\\\\">strong emotional attachment s
+tems from basic insecurity\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\
+r</p><p data-spacing=\\\\\\"single\\\\\\">stupid people shouldn&apos;t
+ breed\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing
+=\\\\\\"single\\\\\\">survival of the fittest applies to men and anima
+ls\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"s
+ingle\\\\\\">symbols are more meaningful than things themselves\\\\r
+</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"singl
+e\\\\\\">taking a strong stand publicizes the opposite position\\\\r
+</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"singl
+e\\\\\\">talking is used to hide one&apos;s inability to act\\\\r</p
+><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>teasing people sexually can have ugly consequences\\\\r</p><p 
+data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">tec
+hnology will make or break us\\\\r</p><p data-spacing=\\\\\\"single\\\\
+\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">the cruelest disappointme
+nt is when you let yourself down\\\\r</p><p data-spacing=\\\\\\"sing
+le\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">the desire to reproduc
+e is a death wish\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p d
+ata-spacing=\\\\\\"single\\\\\\">the family is living on borrowed time
+\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">the idea of revolution is an adolescent fantasy\\\\r</p><
+p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">t
+he idea of transcendence is used to obscure oppression\\\\r</p>
+<p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">
+the idiosyncratic has lost its authority\\\\r</p><p data-spacin
+g=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">the most profo
+und things are inexpressible\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">the mundane is to be cheri
+shed\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\
+\\"single\\\\\\">the new is nothing but a restatement of the old\\\\r<
+/p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single
+\\\\\\">the only way to be pure is to stay by yourself\\\\r</p><p da
+ta-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">the s
+um of your actions determines what you are\\\\r</p><p data-spac
+ing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">the unattain
+able is invariable attractive\\\\r</p><p data-spacing=\\\\\\"single\\\\
+\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">the world operates accord
+ing to discoverable laws\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r<
+/p><p data-spacing=\\\\\\"single\\\\\\">there are too few immutable tr
+uths today\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spa
+cing=\\\\\\"single\\\\\\">there&apos;s nothing except what you sense\\\\r
+</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"singl
+e\\\\\\">there&apos;s nothing redeeming in toil\\\\r</p><p data-spac
+ing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">thinking too
+ much can only cause problems\\\\r</p><p data-spacing=\\\\\\"single\\\\
+\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">threatening someone sexua
+lly is a horrible act\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p>
+<p data-spacing=\\\\\\"single\\\\\\">timidity is laughable\\\\r</p><p dat
+a-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">to dis
+agree presupposes moral integrity\\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">to volunteer is react
+ionary\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing
+=\\\\\\"single\\\\\\">torture is barbaric\\\\r</p><p data-spacing=\\\\\\"singl
+e\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">trading a life for a li
+fe is fair enough\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p d
+ata-spacing=\\\\\\"single\\\\\\">true freedom is frightful\\\\r</p><p dat
+a-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">unique
+ things must be the most valuable\\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">unquestioning love de
+monstrates largesse of spirit\\\\r</p><p data-spacing=\\\\\\"single\\\\
+\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">using force to stop force
+ is absurd\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spa
+cing=\\\\\\"single\\\\\\">violence is permissible even desirable occas
+ionally\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacin
+g=\\\\\\"single\\\\\\">war is a purification rite\\\\r</p><p data-spacing
+=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">we must make sa
+crifices to maintain our quality of life\\\\r</p><p data-spacin
+g=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">when something
+ terrible happens people wake up\\\\r</p><p data-spacing=\\\\\\"sing
+le\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">wishing things away is
+ not effective\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data
+-spacing=\\\\\\"single\\\\\\">with perseverance you can discover any t
+ruth\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\
+\\"single\\\\\\">words tend to be inadequate\\\\r</p><p data-spacing=\\\\
+\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">worrying can help
+ you prepare\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-s
+pacing=\\\\\\"single\\\\\\">you are a victim of the rules you live by\\\\
+r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"sing
+le\\\\\\">you are guileless in your dreams\\\\r</p><p data-spacing=\\\\
+\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">you are responsib
+le for constituting the meaning of things\\\\r</p><p data-spaci
+ng=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">you are the p
+ast present and future\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p
+><p data-spacing=\\\\\\"single\\\\\\">you can live on through your des
+cendants\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spaci
+ng=\\\\\\"single\\\\\\">you can&apos;t expect people to be something t
+hey&apos;re not\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p dat
+a-spacing=\\\\\\"single\\\\\\">you can&apos;t fool others if you&apos;
+re fooling yourself\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p
+ data-spacing=\\\\\\"single\\\\\\">you don&apos;t know what&apos;s wha
+t until you support yourself\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">you have to hurt others to
+ be extraordinary\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p d
+ata-spacing=\\\\\\"single\\\\\\">you must be intimate with a token few
+\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">you must disagree with authority figures\\\\r</p><p data-
+spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">you must
+ have one grand passion\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</
+p><p data-spacing=\\\\\\"single\\\\\\">you must know where you stop an
+d the world begins\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p 
+data-spacing=\\\\\\"single\\\\\\">you can understand someone of your s
+ex only\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacin
+g=\\\\\\"single\\\\\\">you owe the world not the other way around\\\\r</p
+><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>you should study as much as possible\\\\r</p><p data-spacing=\\\\
+\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">your actions are 
+pointless if no one notices\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">
+\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">your oldest fears are the w
+orst ones\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spac
+ing=\\\\\\"single\\\\\\">Tags:\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#xa0;&
+#xa0;linefeedtest, Textfiles</p>\\"}},{\\"title\\":\\"urlar\\",\\"attach
+ments\\":[],\\"content\\":{\\"type\\":\\"html\\",\\"data\\":\\"<p data-spacing=\\\\
+\\"single\\\\\\">urlar\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p dat
+a-spacing=\\\\\\"single\\\\\\">moon plants stars soil trees\\\\r</p><p da
+ta-spacing=\\\\\\"single\\\\\\">microbes fungi mammals bees\\\\r</p><p da
+ta-spacing=\\\\\\"single\\\\\\">we all are\\\\r</p><p data-spacing=\\\\\\"sing
+le\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">URLAR\\\\r</p><p data-spa
+cing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">where after
+ twenty million years\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">a hund
+red thousand vines appear\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">fr
+om Gladstone earth toward the sky\\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">where every spring&#x2019;s a fruited sigh\\\\r</p><p dat
+a-spacing=\\\\\\"single\\\\\\">&#xa0;&#xa0;&#xa0;&#xa0;(another one ha
+s just gone by!)\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">a crux of t
+ime &amp; place that speaks\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">
+a voice to taste in this unique,\\\\r</p><p data-spacing=\\\\\\"sing
+le\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">sauvignon blanc\\\\r</p><
+p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">w
+here patient vines are sown\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">
+nestled into Gladstone\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p
+><p data-spacing=\\\\\\"single\\\\\\">where patient vines explore the 
+earth\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">of Gladstone\\\\r</p><p d
+ata-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">an i
+ntercept of time and place\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">a
+nd down into stony gladstone\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>290 meters above the sea \\\\r</p><p data-spacing=\\\\\\"single\\\\\\">e
+very twenty million years\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">to
+ form a unique \\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p dat
+a-spacing=\\\\\\"single\\\\\\">URLAR\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\
+r</p><p data-spacing=\\\\\\"single\\\\\\">where after twenty million y
+ears\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">a hundred thousand vine
+s appear\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">from Gladstone eart
+h toward the sky\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">every sprin
+g a fruited sigh\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">a crux of t
+ime &amp; place that speaks\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">
+we taste its voice in this unique,\\\\r</p><p data-spacing=\\\\\\"si
+ngle\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">every spring their f
+ruit bespeaks\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">a gladstone \\\\r
+</p><p data-spacing=\\\\\\"single\\\\\\">the Gladstone earth and sky b
+espeak\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing
+=\\\\\\"single\\\\\\">twining Gladstone earth to offer up\\\\r</p><p data
+-spacing=\\\\\\"single\\\\\\"><br></p>\\"}},{\\"title\\":\\"waiting for the me
+mory\\",\\"attachments\\":[],\\"content\\":{\\"type\\":\\"html\\",\\"data\\":\\"<p d
+ata-spacing=\\\\\\"single\\\\\\">waiting for the memory\\\\r</p><p data-s
+pacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">i woke up
+\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">it began to rain\\\\r</p><p da
+ta-spacing=\\\\\\"single\\\\\\">the rain will stop\\\\r</p><p data-spacin
+g=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#xa0;&#xa0;i 
+became tired\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#xa0;&#xa0;&#x
+a0;&#xa0;the rain stopped\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#
+xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;i re\\\\r</p><p data-spacing=
+\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">i remembered\\\\r</
+p><p data-spacing=\\\\\\"single\\\\\\">the rain stopped\\\\r</p><p data-s
+pacing=\\\\\\"single\\\\\\">i fell asleep\\\\r</p><p data-spacing=\\\\\\"singl
+e\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">how long will i know\\\\r<
+/p><p data-spacing=\\\\\\"single\\\\\\">I&apos;m waking\\\\r</p><p data-s
+pacing=\\\\\\"single\\\\\\">into rain\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">
+\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"sin
+gle\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">Tags:\\\\r</p><p data-sp
+acing=\\\\\\"single\\\\\\">&#xa0;&#xa0;MyIdea, poem</p>\\"}},{\\"title\\":\\"w
+allflower\\",\\"attachments\\":[],\\"content\\":{\\"type\\":\\"html\\",\\"data\\":
+\\"<p data-spacing=\\\\\\"single\\\\\\">wallflower\\\\r</p><p data-spacing=
+\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">#poem\\\\r</p><p da
+ta-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">I am 
+a wallflower\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#xa0;on a movi
+ng wall.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spaci
+ng=\\\\\\"single\\\\\\">There is a flower \\\\r</p><p data-spacing=\\\\\\"sing
+le\\\\\\">&#xa0;on my headrest.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&
+#xa0;There is me.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p d
+ata-spacing=\\\\\\"single\\\\\\">Beside me another\\\\r</p><p data-spacin
+g=\\\\\\"single\\\\\\">&#xa0;sees what i see.\\\\r</p><p data-spacing=\\\\\\"s
+ingle\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">The weather and a b
+ird.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\
+\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">The flowers speak
+ \\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#xa0;when spoken to.\\\\r</p
+><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\"
+>Why not speak of flowers?\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\
+r</p><p data-spacing=\\\\\\"single\\\\\\">&#x201c;Is that a bird?&#x20
+1d;\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"
+single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">Going somewhere i 
+had never been\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#xa0;i fell 
+asleep\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#xa0;and dreamt \\\\r</
+p><p data-spacing=\\\\\\"single\\\\\\">&#xa0;i arrived.\\\\r</p><p data-s
+pacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">Trapped b
+y my own objective\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#xa0;i c
+ould only stay, \\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#xa0;or re
+turn.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=
+\\\\\\"single\\\\\\">But when i awoke\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">
+&#xa0;i was only halfway there\\\\r</p><p data-spacing=\\\\\\"single
+\\\\\\">&#xa0;and daylight- \\\\r</p><p data-spacing=\\\\\\"single\\\\\\">&#xa
+0;everywhere.\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p data-
+spacing=\\\\\\"single\\\\\\">So i stood up smiling\\\\r</p><p data-spacin
+g=\\\\\\"single\\\\\\">&#xa0;stepped off the wall\\\\r</p><p data-spacing
+=\\\\\\"single\\\\\\">&#xa0;and climbed into the field.\\\\r</p><p data-s
+pacing=\\\\\\"single\\\\\\">\\\\r</p><p data-spacing=\\\\\\"single\\\\\\">\\\\r</p><p 
+data-spacing=\\\\\\"single\\\\\\">Tags:\\\\r</p><p data-spacing=\\\\\\"single\\\\
+\\">&#xa0;&#xa0;MyIdea, poem</p>\\"}}]"
 `;
 
 exports[`transform zohonotebook files to notesnook importer compatible format 1`] = `

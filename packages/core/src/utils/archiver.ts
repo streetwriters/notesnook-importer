@@ -31,7 +31,8 @@ type Unpacker = (file: IFile) => IFile[] | Promise<IFile[]>;
 const unpackers: Record<string, Unpacker> = {
   ".zip": unzip,
   ".jex": untar,
-  ".znote": untar
+  ".znote": untar,
+  ".textpack": unzip
 };
 
 function isArchive(file: IFile) {

@@ -26,3 +26,4 @@ export * from "./onenote";
 export * from "./simplenote";
 export * from "./standard-notes";
 export * from "./zoho-notebook";
+export * from "./textbundle";
