@@ -46,7 +46,6 @@ export class TextBundle implements IFileProvider {
   }
 
   async *process(file: File, settings: ProviderSettings, files: File[]) {
-    console.log("FILE", file.name);
     for (const provider of this.supportedProviders) {
       if (!provider.filter(file)) continue;
       yield* provider.process(file, settings, files);
