@@ -219,7 +219,13 @@ function extname(path: string) {
   const firstChar = path.charAt(0);
   if (firstChar === ".") return "";
 
-  return path.substring(path.lastIndexOf("."));
+  const periodLastIndex = path.lastIndexOf(".");
+  let separatorLastIndex = path.lastIndexOf("/");
+  if (separatorLastIndex <= -1) separatorLastIndex = path.lastIndexOf("\\");
+
+  return periodLastIndex > -1 && periodLastIndex > separatorLastIndex
+    ? path.substring(periodLastIndex)
+    : "";
 }
 
 export const path = { extname, join, dirname, basename, normalize };
