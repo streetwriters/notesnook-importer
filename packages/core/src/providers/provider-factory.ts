@@ -26,10 +26,12 @@ import { Simplenote } from "./simplenote";
 import { ZohoNotebook } from "./zoho-notebook";
 import { OneNote } from "./onenote";
 import { Joplin } from "./joplin";
+import { Text } from "./txt";
 
 const providerMap = {
   evernote: Evernote,
   md: Markdown,
+  txt: Text,
   html: HTML,
   keep: GoogleKeep,
   simplenote: Simplenote,

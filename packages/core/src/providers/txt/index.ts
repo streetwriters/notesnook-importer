@@ -19,15 +19,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import { IFileProvider, ProviderSettings } from "../provider";
 import { File } from "../../utils/file";
-import { markdowntoHTML } from "../../utils/to-html";
+import { textToHTML } from "../../utils/to-html";
 import { HTML } from "../html";
 
-export class Markdown implements IFileProvider {
+export class Text implements IFileProvider {
   public type = "file" as const;
-  public supportedExtensions = [".md", ".markdown", ".mdown"];
+  public supportedExtensions = [".txt"];
   public version = "1.0.0";
-  public name = "Markdown";
-  public examples = ["document.md"];
+  public name = "Text";
+  public examples = ["import-help.txt"];
 
   filter(file: File) {
     return this.supportedExtensions.includes(file.extension);
@@ -35,7 +35,7 @@ export class Markdown implements IFileProvider {
 
   async *process(file: File, settings: ProviderSettings, files: File[]) {
     const data = await file.text();
-    const html = markdowntoHTML(data);
+    const html = textToHTML(data);
     yield await HTML.processHTML(file, files, settings.hasher, html);
   }
 }
