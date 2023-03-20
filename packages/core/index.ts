@@ -45,6 +45,7 @@ export async function transform(
         settings.reporter(++count);
       }
     } catch (e) {
+      console.error(e);
       if (isQuotaExceeded(e)) {
         errors.push(new Error(`You are out of storage space.`));
       } else {
