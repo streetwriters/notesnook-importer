@@ -1,2 +1,4 @@
 1. Markdown & HTML imports now support attachments (they must be placed inside the .zip archive)
 2. Added support for importing from TextBundle/TextPack files
+3. Optimized the importer for offline use.
+4. Frontmatter support in Markdown (currently only detects title, tags, pinned & favorite).
