@@ -22,17 +22,24 @@ export function ImportResult(props: ImportResultProps) {
   const [selectedNote, setSelectedNote] = useState<Note | undefined>();
   const [downloaded, setDownloaded] = useState(0);
   const [isDone, setIsDone] = useState(false);
+  const [error, setError] = useState<Error>();
 
   const downloadAsZip = useCallback(async () => {
-    const storage = new BrowserStorage<Note>(provider.name);
+    try {
+      const storage = new BrowserStorage<Note>(provider.name);
 
-    await pack(storage, setDownloaded).pipeTo(
-      streamSaver.createWriteStream("notesnook-importer.zip")
-    );
-    setIsDone(true);
+      await pack(storage, setDownloaded).pipeTo(
+        streamSaver.createWriteStream("notesnook-importer.zip")
+      );
+    } catch (error) {
+      if (error instanceof Error) setError(error);
+      else if (typeof error === "string") setError(new Error(error));
+    } finally {
+      setIsDone(true);
+    }
   }, [provider]);
 
-  if (isDone) {
+  if (isDone && !error) {
     return (
       <StepContainer sx={{ flexDirection: "column", alignItems: "stretch" }}>
         <Text variant="title">Download successful</Text>
@@ -40,6 +47,19 @@ export function ImportResult(props: ImportResultProps) {
           Please look in your Downloads directory for the downloaded .zip
           archive (or wherever else you saved it).
         </Text>
+        <Button onClick={onReset} sx={{ alignSelf: "center", mt: 2, px: 4 }}>
+          Start over
+        </Button>
+      </StepContainer>
+    );
+  } else if (error && isDone) {
+    return (
+      <StepContainer sx={{ flexDirection: "column", alignItems: "stretch" }}>
+        <Text variant="title">Download unsuccessful</Text>
+        <Text variant="body" sx={{ mt: 2 }}>
+          We failed to download the processed files. Please try again.
+        </Text>
+        <ImportErrors errors={[error]} />
         <Button onClick={onReset} sx={{ alignSelf: "center", mt: 2, px: 4 }}>
           Start over
         </Button>

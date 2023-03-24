@@ -69,7 +69,6 @@ function App() {
                 result={transformResult}
                 provider={selectedProvider}
                 onReset={() => {
-                  setSelectedProvider(undefined);
                   setTransformResult(undefined);
                 }}
               />
