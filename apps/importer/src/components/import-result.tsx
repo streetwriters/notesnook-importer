@@ -8,8 +8,9 @@ import { ImportHelp } from "./import-help";
 import { NotesList } from "./notes-list";
 import { TransformResult } from "../types";
 import { BrowserStorage } from "@notesnook-importer/storage/dist/browser";
-import streamSaver from "streamsaver";
-streamSaver.mitm = "/mitm.html";
+import { createWriteStream } from "../utils/stream-saver";
+import { toBlob } from "@notesnook-importer/core/dist/src/utils/stream";
+import { saveAs } from "file-saver";
 
 type ImportResultProps = {
   result: TransformResult;
@@ -28,9 +29,16 @@ export function ImportResult(props: ImportResultProps) {
     try {
       const storage = new BrowserStorage<Note>(provider.name);
 
-      await pack(storage, setDownloaded).pipeTo(
-        streamSaver.createWriteStream("notesnook-importer.zip")
-      );
+      if (navigator.serviceWorker) {
+        await pack(storage, setDownloaded).pipeTo(
+          createWriteStream("notesnook-importer.zip")
+        );
+      } else {
+        saveAs(
+          await toBlob(pack(storage, setDownloaded)),
+          "notesnook-importer.zip"
+        );
+      }
     } catch (error) {
       if (error instanceof Error) setError(error);
       else if (typeof error === "string") setError(new Error(error));

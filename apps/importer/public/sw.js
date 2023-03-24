@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-globals */
+
 self.addEventListener("install", () => {
   self.skipWaiting();
 });
@@ -30,12 +32,7 @@ self.onmessage = (event) => {
   metadata[1] = data;
   metadata[2] = port;
 
-  // Note to self:
-  // old streamsaver v1.2.0 might still use `readableStream`...
-  // but v2.0.0 will always transfer the stream through MessageChannel #94
-  if (event.data.readableStream) {
-    metadata[0] = event.data.readableStream;
-  } else if (event.data.transferringReadable) {
+  if (event.data.transferringReadable) {
     port.onmessage = (evt) => {
       port.onmessage = null;
       metadata[0] = evt.data.readableStream;
@@ -81,11 +78,10 @@ self.onfetch = (event) => {
     return event.respondWith(new Response("pong"));
   }
 
-  const hijacke = map.get(url);
+  const metadata = map.get(url);
+  if (!metadata) return null;
 
-  if (!hijacke) return null;
-
-  const [stream, data, port] = hijacke;
+  const [stream, data, port] = metadata;
 
   map.delete(url);
 

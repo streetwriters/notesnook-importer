@@ -1,4 +1,3 @@
-import { Flex, Text } from "@theme-ui/components";
 import { Note } from "@notesnook-importer/core";
 import { Accordion } from "./accordion";
 
@@ -7,7 +6,7 @@ type NotesListProps = {
   onNoteSelected: (note: Note) => void;
 };
 export function NotesList(props: NotesListProps) {
-  const { totalNotes, onNoteSelected } = props;
+  const { totalNotes } = props;
 
   return (
     <Accordion
