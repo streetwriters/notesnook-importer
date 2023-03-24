@@ -21,6 +21,7 @@ import { IFileProvider, ProviderSettings } from "../provider";
 import { File } from "../../utils/file";
 import { markdowntoHTML } from "../../utils/to-html";
 import { HTML } from "../html";
+import { parseFrontmatter } from "../../utils/frontmatter";
 
 export class Markdown implements IFileProvider {
   public type = "file" as const;
@@ -34,8 +35,18 @@ export class Markdown implements IFileProvider {
   }
 
   async *process(file: File, settings: ProviderSettings, files: File[]) {
-    const data = await file.text();
-    const html = markdowntoHTML(data);
-    yield await HTML.processHTML(file, files, settings.hasher, html);
+    const text = await file.text();
+    const { content, frontmatter } = parseFrontmatter(text);
+    const html = markdowntoHTML(content);
+    const note = await HTML.processHTML(file, files, settings.hasher, html);
+    if (frontmatter) {
+      note.title = frontmatter.title || note.title;
+      note.tags = Array.isArray(frontmatter.tags)
+        ? frontmatter.tags
+        : frontmatter.tags?.split(",");
+      note.pinned = frontmatter.pinned;
+      note.favorite = frontmatter.favorite;
+    }
+    yield note;
   }
 }

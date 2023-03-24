@@ -166,9 +166,10 @@ exports[`transform & pack keep files to notesnook importer compatible format 1`]
 
 exports[`transform & pack md files to notesnook importer compatible format 1`] = `
 [
+  "/cf04d2d9b3e94538a08163b9db2f528a/note.json",
   "/e58619fd17f7d69ce11476489739abba/note.json",
-  "/d8966d40fe67699e83230506f8561495/note.json",
-  "/5382c8ca1cadb01cc1f3329074c4354c/note.json",
+  "/f4aa8df716fac548ee9be9b091ec49c4/note.json",
+  "/f61d31c28c6298875b4e234c8a8a5f39/note.json",
   "metadata.json",
 ]
 `;
@@ -7121,404 +7122,485 @@ filename\\":\\"1629964295873.139657380.png\\",\\"size\\":41348,\\"hash\\":
 `;
 
 exports[`transform md files to notesnook importer compatible format 1`] = `
-"[{\\"title\\":\\"An h1 header\\",\\"attachments\\":[],\\"content\\":{\\"type\\":
-\\"html\\",\\"data\\":\\"<h1 id=\\\\\\"an-h1-header\\\\\\">An h1 header</h1>\\\\n<p
- data-spacing=\\\\\\"double\\\\\\">Paragraphs are separated by a blank
- line.</p><p data-spacing=\\\\\\"double\\\\\\">2nd paragraph. <em>Ital
-ic</em>, <strong>bold</strong>, and <code>monospace</code>. 
-Itemized lists</p><p data-spacing=\\\\\\"single\\\\\\">look like:</p><
-ul>\\\\n<li>this one</li>\\\\n<li>that one</li>\\\\n<li>the other one
-</li>\\\\n</ul>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Note that --- not c
-onsidering the asterisk --- the actual text</p><p data-spaci
-ng=\\\\\\"single\\\\\\">content starts at 4-columns in.</p><blockquote
->\\\\n<p data-spacing=\\\\\\"double\\\\\\">Block quotes are</p><p data-sp
-acing=\\\\\\"single\\\\\\">written like so.</p><p data-spacing=\\\\\\"doubl
-e\\\\\\">They can span multiple paragraphs,</p><p data-spacing=\\\\\\"
-single\\\\\\">if you like.</p></blockquote>\\\\n<p data-spacing=\\\\\\"do
-uble\\\\\\">Use 3 dashes for an em-dash. Use 2 dashes for ranges 
-(ex., &quot;it&apos;s all</p><p data-spacing=\\\\\\"single\\\\\\">in c
-hapters 12--14&quot;). Three dots ... will be converted to a
-n ellipsis.</p><p data-spacing=\\\\\\"single\\\\\\">Unicode is support
-ed. &#x263a;</p><h2 id=\\\\\\"an-h2-header\\\\\\">An h2 header</h2>\\\\n<
-p data-spacing=\\\\\\"double\\\\\\">Here&apos;s a numbered list:</p><o
-l>\\\\n<li>first item</li>\\\\n<li>second item</li>\\\\n<li>third ite
-m</li>\\\\n</ol>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Note again how the
- actual text starts at 4 columns in (4 characters</p><p data
--spacing=\\\\\\"single\\\\\\">from the left side). Here&apos;s a code 
-sample:</p><pre class=\\\\\\"language-undefined\\\\\\"><code class=\\\\\\"l
-anguage-undefined\\\\\\"># Let me re-iterate ...<br>for i in 1 ..
- 10 { do-something(i) }</code></pre><p data-spacing=\\\\\\"double
-\\\\\\">As you probably guessed, indented 4 spaces. By the way, i
-nstead of</p><p data-spacing=\\\\\\"single\\\\\\">indenting the block,
- you can use delimited blocks, if you like:</p><pre class=\\\\\\"
-language-\\\\\\"><code class=\\\\\\"language-\\\\\\">define foobar() {<br> 
-   print &quot;Welcome to flavor country!&quot;;<br>}</code>
-</pre><p data-spacing=\\\\\\"double\\\\\\">(which makes copying &amp; 
-pasting easier). You can optionally mark the</p><p data-spac
-ing=\\\\\\"single\\\\\\">delimited block for Pandoc to syntax highligh
-t it:</p><pre class=\\\\\\"language-python\\\\\\"><code class=\\\\\\"langua
-ge-python\\\\\\">import time<br># Quick, count to ten!<br>for i i
-n range(10):<br>    # (but not *too* quick)<br>    time.slee
-p(0.5)<br>    print i</code></pre><h3 id=\\\\\\"an-h3-header\\\\\\">An
- h3 header</h3>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Now a nested lis
-t:</p><ol>\\\\n<li><p data-spacing=\\\\\\"double\\\\\\">First, get these 
-ingredients:</p><ul>\\\\n<li>carrots</li>\\\\n<li>celery</li>\\\\n<li
->lentils</li>\\\\n</ul>\\\\n</li>\\\\n<li><p data-spacing=\\\\\\"double\\\\\\">
-Boil some water.</p></li>\\\\n<li><p data-spacing=\\\\\\"double\\\\\\">Du
-mp everything in the pot and follow</p><p data-spacing=\\\\\\"sin
-gle\\\\\\">this algorithm:</p><pre class=\\\\\\"language-undefined\\\\\\"><
-code class=\\\\\\"language-undefined\\\\\\">find wooden spoon<br>uncov
-er pot<br>stir<br>cover pot<br>balance wooden spoon precario
-usly on pot handle<br>wait 10 minutes<br>goto first step (or
- shut off burner when done)</code></pre><p data-spacing=\\\\\\"do
-uble\\\\\\">Do not bump wooden spoon or it will fall.</p></li>\\\\n<
-/ol>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Notice again how text alway
-s lines up on 4-space indents (including</p><p data-spacing=
-\\\\\\"single\\\\\\">that last line which continues item 3 above).</p>
-<p data-spacing=\\\\\\"double\\\\\\">Here&apos;s a link to <a href=\\\\\\"h
-ttp://foo.bar\\\\\\">a website</a>, to a <a href=\\\\\\"local-doc.html
-\\\\\\">local</a></p><p data-spacing=\\\\\\"single\\\\\\">doc, and to a <a 
-href=\\\\\\"#an-h2-header\\\\\\">section heading in the current</a></p
-><p data-spacing=\\\\\\"single\\\\\\">doc. Here&apos;s a footnote [^1]
-.</p><p data-spacing=\\\\\\"double\\\\\\">[^1]: Footnote text goes her
-e.</p><p data-spacing=\\\\\\"double\\\\\\">Tables can look like this:<
-/p><p data-spacing=\\\\\\"double\\\\\\">size material color</p><hr>\\\\n<
-p data-spacing=\\\\\\"double\\\\\\">9 leather brown</p><p data-spacing
-=\\\\\\"single\\\\\\">10 hemp canvas natural</p><p data-spacing=\\\\\\"sing
-le\\\\\\">11 glass transparent</p><p data-spacing=\\\\\\"double\\\\\\">Tabl
-e: Shoes, their sizes, and what they&apos;re made of</p><p d
-ata-spacing=\\\\\\"double\\\\\\">(The above is the caption for the tab
-le.) Pandoc also supports</p><p data-spacing=\\\\\\"single\\\\\\">mult
-i-line tables:</p><hr>\\\\n<p data-spacing=\\\\\\"double\\\\\\">keyword t
-ext</p><hr>\\\\n<p data-spacing=\\\\\\"double\\\\\\">red Sunsets, apples,
- and</p><p data-spacing=\\\\\\"single\\\\\\">other red or reddish</p><
-p data-spacing=\\\\\\"single\\\\\\">things.</p><p data-spacing=\\\\\\"doubl
-e\\\\\\">green Leaves, grass, frogs</p><p data-spacing=\\\\\\"single\\\\\\"
->and other things it&apos;s</p><p data-spacing=\\\\\\"single\\\\\\">no
-t easy being.</p><hr>\\\\n<p data-spacing=\\\\\\"double\\\\\\">A horizont
-al rule follows.</p><hr>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Here&ap
-os;s a definition list:</p><p data-spacing=\\\\\\"double\\\\\\">apples
-</p><p data-spacing=\\\\\\"single\\\\\\">: Good for making applesauce.
-</p><p data-spacing=\\\\\\"single\\\\\\">oranges</p><p data-spacing=\\\\\\"
-single\\\\\\">: Citrus!</p><p data-spacing=\\\\\\"single\\\\\\">tomatoes</p
-><p data-spacing=\\\\\\"single\\\\\\">: There&apos;s no &quot;e&quot; 
-in tomatoe.</p><p data-spacing=\\\\\\"double\\\\\\">Again, text is ind
-ented 4 spaces. (Put a blank line between each</p><p data-sp
-acing=\\\\\\"single\\\\\\">term/definition pair to spread things out m
-ore.)</p><p data-spacing=\\\\\\"double\\\\\\">Here&apos;s a &quot;line
- block&quot;:</p><p data-spacing=\\\\\\"double\\\\\\">| Line one</p><p
- data-spacing=\\\\\\"single\\\\\\">| Line too</p><p data-spacing=\\\\\\"sin
-gle\\\\\\">| Line tree</p><p data-spacing=\\\\\\"double\\\\\\">and images c
-an be specified like so:</p><p data-spacing=\\\\\\"double\\\\\\"><img 
-src=\\\\\\"example-image.jpg\\\\\\" alt=\\\\\\"example image\\\\\\" title=\\\\\\"An e
-xemplary image\\\\\\"></p><p data-spacing=\\\\\\"double\\\\\\">Inline math 
-equations go in like so: &#x24;\\\\\\\\omega = d\\\\\\\\phi / dt&#x24;. 
-Display</p><p data-spacing=\\\\\\"single\\\\\\">math should get its ow
-n line and be put in in double-dollarsigns:</p><p data-spaci
-ng=\\\\\\"double\\\\\\">&#x24;&#x24;I = \\\\\\\\int \\\\\\\\rho R^{2} dV&#x24;&#x2
-4;</p><p data-spacing=\\\\\\"double\\\\\\">And note that you can backs
-lash-escape any punctuation characters</p><p data-spacing=\\\\\\"
-single\\\\\\">which you wish to be displayed literally, ex.: \`foo
-\`, *bar*, etc.</p>\\"}},{\\"title\\":\\"You will like those projects
-!\\",\\"attachments\\":[],\\"content\\":{\\"type\\":\\"html\\",\\"data\\":\\"<hr>\\\\n<
-p data-spacing=\\\\\\"double\\\\\\"><strong>Advertisement :)</strong><
-/p><ul>\\\\n<li><strong><a href=\\\\\\"https://nodeca.github.io/pica
-/demo/\\\\\\">pica</a></strong>&#xa0;- high quality and fast imag
-e<p></p><p data-spacing=\\\\\\"single\\\\\\">resize in browser.</p></l
-i>\\\\n<li><strong><a href=\\\\\\"https://github.com/nodeca/babelfis
-h/\\\\\\">babelfish</a></strong>&#xa0;- developer friendly<p></p>
-<p data-spacing=\\\\\\"single\\\\\\">i18n with plurals support and eas
-y syntax.</p></li>\\\\n</ul>\\\\n<h2 id=\\\\\\"you-will-like-those-proj
-ects\\\\\\">You will like those projects!</h2>\\\\n<h1 id=\\\\\\"h1-headi
-ng-8-\\\\\\">h1 Heading 8-)</h1>\\\\n<h2 id=\\\\\\"h2-heading\\\\\\">h2 Headin
-g</h2>\\\\n<h3 id=\\\\\\"h3-heading\\\\\\">h3 Heading</h3>\\\\n<h4 id=\\\\\\"h4-h
-eading\\\\\\">h4 Heading</h4>\\\\n<h5 id=\\\\\\"h5-heading\\\\\\">h5 Heading</
-h5>\\\\n<h6 id=\\\\\\"h6-heading\\\\\\">h6 Heading</h6>\\\\n<h2 id=\\\\\\"horizon
-tal-rules\\\\\\">Horizontal Rules</h2>\\\\n<hr>\\\\n<hr>\\\\n<hr>\\\\n<h2 id=
-\\\\\\"typographic-replacements\\\\\\">Typographic replacements</h2>\\\\n
-<p data-spacing=\\\\\\"double\\\\\\">Enable typographer option to see 
-result.</p><p data-spacing=\\\\\\"double\\\\\\">(c) (C) (r) (R) (tm) (
-TM) (p) (P) +-</p><p data-spacing=\\\\\\"double\\\\\\">test.. test... 
-test..... test?..... test!....</p><p data-spacing=\\\\\\"double\\\\\\"
->!!!!!! ???? ,, -- ---</p><p data-spacing=\\\\\\"double\\\\\\">&quot;S
-martypants, double quotes&quot; and &apos;single quotes&apos
-;</p><h2 id=\\\\\\"emphasis\\\\\\">Emphasis</h2>\\\\n<p data-spacing=\\\\\\"do
-uble\\\\\\"><strong>This is bold text</strong></p><p data-spacing
-=\\\\\\"double\\\\\\"><strong>This is bold text</strong></p><p data-sp
-acing=\\\\\\"double\\\\\\"><em>This is italic text</em></p><p data-spa
-cing=\\\\\\"double\\\\\\"><em>This is italic text</em></p><p data-spac
-ing=\\\\\\"double\\\\\\"><del>Strikethrough</del></p><h2 id=\\\\\\"blockquo
-tes\\\\\\">Blockquotes</h2>\\\\n<blockquote>\\\\n<p data-spacing=\\\\\\"doub
-le\\\\\\">Blockquotes can also be nested...</p><blockquote>\\\\n<p d
-ata-spacing=\\\\\\"double\\\\\\">...by using additional greater-than s
-igns right next to each other...</p><blockquote>\\\\n<p data-sp
-acing=\\\\\\"double\\\\\\">...or with spaces between arrows.</p></bloc
-kquote>\\\\n</blockquote>\\\\n</blockquote>\\\\n<h2 id=\\\\\\"lists\\\\\\">List
-s</h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Unordered</p><ul>\\\\n<li>Cr
-eate a list by starting a line with <code>+</code>, <code>-<
-/code>, or <code>*</code></li>\\\\n<li>Sub-lists are made by in
-denting 2 spaces:<ul>\\\\n<li>Marker character change forces ne
-w list start:<ul>\\\\n<li>Ac tristique libero volutpat at</li>\\\\
-n</ul>\\\\n<ul>\\\\n<li>Facilisis in pretium nisl aliquet</li>\\\\n</
-ul>\\\\n<ul>\\\\n<li>Nulla volutpat aliquam velit</li>\\\\n</ul>\\\\n</l
-i>\\\\n</ul>\\\\n</li>\\\\n<li>Very easy!</li>\\\\n</ul>\\\\n<p data-spacin
-g=\\\\\\"double\\\\\\">Ordered</p><ol>\\\\n<li><p data-spacing=\\\\\\"double\\\\\\"
->Lorem ipsum dolor sit amet</p></li>\\\\n<li><p data-spacing=\\\\\\"
-double\\\\\\">Consectetur adipiscing elit</p></li>\\\\n<li><p data-s
-pacing=\\\\\\"double\\\\\\">Integer molestie lorem at massa</p></li>\\\\n
-<li><p data-spacing=\\\\\\"double\\\\\\">You can use sequential number
-s...</p></li>\\\\n<li><p data-spacing=\\\\\\"double\\\\\\">...or keep all
- the numbers as <code>1.</code></p></li>\\\\n</ol>\\\\n<p data-spa
-cing=\\\\\\"double\\\\\\">Start numbering with offset:</p><ol start=\\\\\\"
-57\\\\\\">\\\\n<li>foo</li>\\\\n<li>bar</li>\\\\n</ol>\\\\n<h2 id=\\\\\\"code\\\\\\">Co
-de</h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Inline <code>code</code>
-</p><p data-spacing=\\\\\\"double\\\\\\">Indented code</p><pre class=\\\\
-\\"language-undefined\\\\\\"><code class=\\\\\\"language-undefined\\\\\\">// 
-Some comments<br>line 1 of code<br>line 2 of code<br>line 3 
-of code</code></pre><p data-spacing=\\\\\\"double\\\\\\">Block code &q
-uot;fences&quot;</p><pre class=\\\\\\"language-\\\\\\"><code class=\\\\\\"l
-anguage-\\\\\\">Sample text here...</code></pre><p data-spacing=\\\\
-\\"double\\\\\\">Syntax highlighting</p><pre class=\\\\\\"language-js\\\\\\">
-<code class=\\\\\\"language-js\\\\\\">var foo = function (bar) {<br>  
-return bar++;<br>};<br>console.log(foo(5));</code></pre><h2 
-id=\\\\\\"tables\\\\\\">Tables</h2>\\\\n<table>\\\\n<thead>\\\\n<tr>\\\\n<th>Optio
-n</th>\\\\n<th>Description</th>\\\\n</tr>\\\\n</thead>\\\\n<tbody><tr>\\\\n
-<td>data</td>\\\\n<td>path to data files to supply the data tha
-t will be passed into templates.</td>\\\\n</tr>\\\\n<tr>\\\\n<td>engi
-ne</td>\\\\n<td>engine to be used for processing templates. Han
-dlebars is the default.</td>\\\\n</tr>\\\\n<tr>\\\\n<td>ext</td>\\\\n<td
->extension to be used for dest files.</td>\\\\n</tr>\\\\n</tbody><
-/table>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Right aligned columns</p
-><table>\\\\n<thead>\\\\n<tr>\\\\n<th align=\\\\\\"right\\\\\\">Option</th>\\\\n<t
-h align=\\\\\\"right\\\\\\">Description</th>\\\\n</tr>\\\\n</thead>\\\\n<tbody>
-<tr>\\\\n<td align=\\\\\\"right\\\\\\">data</td>\\\\n<td align=\\\\\\"right\\\\\\">pat
-h to data files to supply the data that will be passed into 
-templates.</td>\\\\n</tr>\\\\n<tr>\\\\n<td align=\\\\\\"right\\\\\\">engine</td
->\\\\n<td align=\\\\\\"right\\\\\\">engine to be used for processing temp
-lates. Handlebars is the default.</td>\\\\n</tr>\\\\n<tr>\\\\n<td ali
-gn=\\\\\\"right\\\\\\">ext</td>\\\\n<td align=\\\\\\"right\\\\\\">extension to be u
-sed for dest files.</td>\\\\n</tr>\\\\n</tbody></table>\\\\n<h2 id=\\\\\\"
-links\\\\\\">Links</h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\"><a href=\\\\\\"htt
-p://dev.nodeca.com\\\\\\">link text</a></p><p data-spacing=\\\\\\"doub
-le\\\\\\"><a href=\\\\\\"http://nodeca.github.io/pica/demo/\\\\\\" title=\\\\\\"
-title text!\\\\\\">link with title</a></p><p data-spacing=\\\\\\"doubl
-e\\\\\\">Autoconverted link <a href=\\\\\\"https://github.com/nodeca/p
-ica\\\\\\">https://github.com/nodeca/pica</a>&#xa0;(enable linkif
-y to see)</p><h2 id=\\\\\\"images\\\\\\">Images</h2>\\\\n<p data-spacing=
-\\\\\\"double\\\\\\"><img src=\\\\\\"https://octodex.github.com/images/mini
-on.png\\\\\\" alt=\\\\\\"Minion\\\\\\"></p><p data-spacing=\\\\\\"single\\\\\\"><img 
-src=\\\\\\"https://octodex.github.com/images/stormtroopocat.jpg\\\\\\"
- alt=\\\\\\"Stormtroopocat\\\\\\" title=\\\\\\"The Stormtroopocat\\\\\\"></p><p 
-data-spacing=\\\\\\"double\\\\\\">Like links, Images also have a footn
-ote style syntax</p><p data-spacing=\\\\\\"double\\\\\\"><img src=\\\\\\"ht
-tps://octodex.github.com/images/dojocat.jpg\\\\\\" alt=\\\\\\"Alt text
-\\\\\\" title=\\\\\\"The Dojocat\\\\\\"></p><p data-spacing=\\\\\\"double\\\\\\">With
- a reference later in the document defining the URL location
-:</p><h2 id=\\\\\\"plugins\\\\\\">Plugins</h2>\\\\n<p data-spacing=\\\\\\"doub
-le\\\\\\">The killer feature of <code>markdown-it</code>&#xa0;is 
-very effective support of</p><p data-spacing=\\\\\\"single\\\\\\"><a h
-ref=\\\\\\"https://www.npmjs.org/browse/keyword/markdown-it-plugi
-n\\\\\\">syntax plugins</a>.</p><h3 id=\\\\\\"emojies\\\\\\"><a href=\\\\\\"http
-s://github.com/markdown-it/markdown-it-emoji\\\\\\">Emojies</a></
-h3>\\\\n<blockquote>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Classic markup
-: :wink: :crush: :cry: :tear: :laughing: :yum:</p><p data-sp
-acing=\\\\\\"double\\\\\\">Shortcuts (emoticons): :-) :-( 8-) ;)</p></
-blockquote>\\\\n<p data-spacing=\\\\\\"double\\\\\\">see <a href=\\\\\\"https:
-//github.com/markdown-it/markdown-it-emoji#change-output\\\\\\">h
-ow to change output</a>&#xa0;with twemoji.</p><h3 id=\\\\\\"subsc
-ript--superscript\\\\\\"><a href=\\\\\\"https://github.com/markdown-it
-/markdown-it-sub\\\\\\">Subscript</a>&#xa0;/ <a href=\\\\\\"https://gi
-thub.com/markdown-it/markdown-it-sup\\\\\\">Superscript</a></h3>\\\\
-n<ul>\\\\n<li>19^th^</li>\\\\n<li>H<del>2</del>O</li>\\\\n</ul>\\\\n<h3 
-id=\\\\\\"ins\\\\\\"><a href=\\\\\\"https://github.com/markdown-it/markdown
--it-ins\\\\\\">&lt;ins&gt;</a></h3>\\\\n<p data-spacing=\\\\\\"double\\\\\\">+
-+Inserted text++</p><h3 id=\\\\\\"mark\\\\\\"><a href=\\\\\\"https://github
-.com/markdown-it/markdown-it-mark\\\\\\">&lt;mark&gt;</a></h3>\\\\n<
-p data-spacing=\\\\\\"double\\\\\\">==Marked text==</p><h3 id=\\\\\\"footno
-tes\\\\\\"><a href=\\\\\\"https://github.com/markdown-it/markdown-it-f
-ootnote\\\\\\">Footnotes</a></h3>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Foo
-tnote 1 link[^first].</p><p data-spacing=\\\\\\"double\\\\\\">Footnote
- 2 link[^second].</p><p data-spacing=\\\\\\"double\\\\\\">Inline footn
-ote^[Text of inline footnote] definition.</p><p data-spacing
-=\\\\\\"double\\\\\\">Duplicated footnote reference[^second].</p><p da
-ta-spacing=\\\\\\"double\\\\\\">[^first]: Footnote <strong>can have ma
-rkup</strong></p><pre class=\\\\\\"language-undefined\\\\\\"><code cla
-ss=\\\\\\"language-undefined\\\\\\">and multiple paragraphs.</code></p
-re><p data-spacing=\\\\\\"double\\\\\\">[^second]: Footnote text.</p><
-h3 id=\\\\\\"definition-lists\\\\\\"><a href=\\\\\\"https://github.com/mark
-down-it/markdown-it-deflist\\\\\\">Definition lists</a></h3>\\\\n<p 
-data-spacing=\\\\\\"double\\\\\\">Term 1</p><p data-spacing=\\\\\\"double\\\\\\"
->: Definition 1</p><p data-spacing=\\\\\\"single\\\\\\">with lazy cont
-inuation.</p><p data-spacing=\\\\\\"double\\\\\\">Term 2 with <em>inli
-ne markup</em></p><p data-spacing=\\\\\\"double\\\\\\">: Definition 2<
-/p><pre class=\\\\\\"language-undefined\\\\\\"><code class=\\\\\\"language-
-undefined\\\\\\">    { some code, part of Definition 2 }<br>Third
- paragraph of definition 2.</code></pre><p data-spacing=\\\\\\"do
-uble\\\\\\"><em>Compact style:</em></p><p data-spacing=\\\\\\"double\\\\\\"
->Term 1</p><p data-spacing=\\\\\\"single\\\\\\">~ Definition 1</p><p d
-ata-spacing=\\\\\\"double\\\\\\">Term 2</p><p data-spacing=\\\\\\"single\\\\\\">
-~ Definition 2a</p><p data-spacing=\\\\\\"single\\\\\\">~ Definition 2
-b</p><h3 id=\\\\\\"abbreviations\\\\\\"><a href=\\\\\\"https://github.com/m
-arkdown-it/markdown-it-abbr\\\\\\">Abbreviations</a></h3>\\\\n<p dat
-a-spacing=\\\\\\"double\\\\\\">This is HTML abbreviation example.</p><
-p data-spacing=\\\\\\"double\\\\\\">It converts &quot;HTML&quot;, but 
-keep intact partial entries like &quot;xxxHTMLyyy&quot; and 
-so on.</p><p data-spacing=\\\\\\"double\\\\\\">*[HTML]: Hyper Text Mar
-kup Language</p><h3 id=\\\\\\"custom-containers\\\\\\"><a href=\\\\\\"https
-://github.com/markdown-it/markdown-it-container\\\\\\">Custom con
-tainers</a></h3>\\\\n<p data-spacing=\\\\\\"double\\\\\\">::: warning</p>
-<p data-spacing=\\\\\\"single\\\\\\"><em>here be dragons</em></p><p da
-ta-spacing=\\\\\\"single\\\\\\">:::</p>\\"}},{\\"title\\":\\"You will like tho
-se projects!\\",\\"dateEdited\\":1639388210000,\\"attachments\\":[],\\"c
-ontent\\":{\\"type\\":\\"html\\",\\"data\\":\\"<hr>\\\\n<p data-spacing=\\\\\\"doubl
-e\\\\\\"><strong>Advertisement :)</strong></p><ul>\\\\n<li><strong><
-a href=\\\\\\"https://nodeca.github.io/pica/demo/\\\\\\">pica</a></str
-ong>&#xa0;- high quality and fast image<p></p><p data-spacin
-g=\\\\\\"single\\\\\\">resize in browser.</p></li>\\\\n<li><strong><a hre
-f=\\\\\\"https://github.com/nodeca/babelfish/\\\\\\">babelfish</a></st
-rong>&#xa0;- developer friendly<p></p><p data-spacing=\\\\\\"sing
-le\\\\\\">i18n with plurals support and easy syntax.</p></li>\\\\n</
-ul>\\\\n<h2 id=\\\\\\"you-will-like-those-projects\\\\\\">You will like t
-hose projects!</h2>\\\\n<h1 id=\\\\\\"h1-heading-8-\\\\\\">h1 Heading 8-)
-</h1>\\\\n<h2 id=\\\\\\"h2-heading\\\\\\">h2 Heading</h2>\\\\n<h3 id=\\\\\\"h3-he
-ading\\\\\\">h3 Heading</h3>\\\\n<h4 id=\\\\\\"h4-heading\\\\\\">h4 Heading</h
-4>\\\\n<h5 id=\\\\\\"h5-heading\\\\\\">h5 Heading</h5>\\\\n<h6 id=\\\\\\"h6-headi
-ng\\\\\\">h6 Heading</h6>\\\\n<h2 id=\\\\\\"horizontal-rules\\\\\\">Horizontal
- Rules</h2>\\\\n<hr>\\\\n<hr>\\\\n<hr>\\\\n<h2 id=\\\\\\"typographic-replacem
-ents\\\\\\">Typographic replacements</h2>\\\\n<p data-spacing=\\\\\\"doub
-le\\\\\\">Enable typographer option to see result.</p><p data-spa
-cing=\\\\\\"double\\\\\\">(c) (C) (r) (R) (tm) (TM) (p) (P) +-</p><p d
-ata-spacing=\\\\\\"double\\\\\\">test.. test... test..... test?..... t
-est!....</p><p data-spacing=\\\\\\"double\\\\\\">!!!!!! ???? ,, -- ---
-</p><p data-spacing=\\\\\\"double\\\\\\">&quot;Smartypants, double quo
-tes&quot; and &apos;single quotes&apos;</p><h2 id=\\\\\\"emphasis
-\\\\\\">Emphasis</h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\"><strong>This is
- bold text</strong></p><p data-spacing=\\\\\\"double\\\\\\"><strong>Th
-is is bold text</strong></p><p data-spacing=\\\\\\"double\\\\\\"><em>T
-his is italic text</em></p><p data-spacing=\\\\\\"double\\\\\\"><em>Th
-is is italic text</em></p><p data-spacing=\\\\\\"double\\\\\\"><del>St
-rikethrough</del></p><h2 id=\\\\\\"blockquotes\\\\\\">Blockquotes</h2>
-\\\\n<blockquote>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Blockquotes can a
-lso be nested...</p><blockquote>\\\\n<p data-spacing=\\\\\\"double\\\\\\"
->...by using additional greater-than signs right next to eac
-h other...</p><blockquote>\\\\n<p data-spacing=\\\\\\"double\\\\\\">...or
- with spaces between arrows.</p></blockquote>\\\\n</blockquote>
-\\\\n</blockquote>\\\\n<h2 id=\\\\\\"lists\\\\\\">Lists</h2>\\\\n<p data-spacin
-g=\\\\\\"double\\\\\\">Unordered</p><ul>\\\\n<li>Create a list by startin
-g a line with <code>+</code>, <code>-</code>, or <code>*</co
-de></li>\\\\n<li>Sub-lists are made by indenting 2 spaces:<ul>\\\\
-n<li>Marker character change forces new list start:<ul>\\\\n<li
->Ac tristique libero volutpat at</li>\\\\n</ul>\\\\n<ul>\\\\n<li>Faci
-lisis in pretium nisl aliquet</li>\\\\n</ul>\\\\n<ul>\\\\n<li>Nulla v
-olutpat aliquam velit</li>\\\\n</ul>\\\\n</li>\\\\n</ul>\\\\n</li>\\\\n<li>
-Very easy!</li>\\\\n</ul>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Ordered</
-p><ol>\\\\n<li><p data-spacing=\\\\\\"double\\\\\\">Lorem ipsum dolor sit
- amet</p></li>\\\\n<li><p data-spacing=\\\\\\"double\\\\\\">Consectetur a
-dipiscing elit</p></li>\\\\n<li><p data-spacing=\\\\\\"double\\\\\\">Inte
-ger molestie lorem at massa</p></li>\\\\n<li><p data-spacing=\\\\\\"
-double\\\\\\">You can use sequential numbers...</p></li>\\\\n<li><p 
-data-spacing=\\\\\\"double\\\\\\">...or keep all the numbers as <code>
-1.</code></p></li>\\\\n</ol>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Start 
-numbering with offset:</p><ol start=\\\\\\"57\\\\\\">\\\\n<li>foo</li>\\\\n<
-li>bar</li>\\\\n</ol>\\\\n<h2 id=\\\\\\"code\\\\\\">Code</h2>\\\\n<p data-spaci
-ng=\\\\\\"double\\\\\\">Inline <code>code</code></p><p data-spacing=\\\\\\"
-double\\\\\\">Indented code</p><pre class=\\\\\\"language-undefined\\\\\\">
-<code class=\\\\\\"language-undefined\\\\\\">// Some comments<br>line 
-1 of code<br>line 2 of code<br>line 3 of code</code></pre><p
- data-spacing=\\\\\\"double\\\\\\">Block code &quot;fences&quot;</p><p
-re class=\\\\\\"language-\\\\\\"><code class=\\\\\\"language-\\\\\\">Sample text
- here...</code></pre><p data-spacing=\\\\\\"double\\\\\\">Syntax highl
-ighting</p><pre class=\\\\\\"language-js\\\\\\"><code class=\\\\\\"language
--js\\\\\\">var foo = function (bar) {<br>  return bar++;<br>};<br
->console.log(foo(5));</code></pre><h2 id=\\\\\\"tables\\\\\\">Tables</
-h2>\\\\n<table>\\\\n<thead>\\\\n<tr>\\\\n<th>Option</th>\\\\n<th>Descriptio
-n</th>\\\\n</tr>\\\\n</thead>\\\\n<tbody><tr>\\\\n<td>data</td>\\\\n<td>pat
-h to data files to supply the data that will be passed into 
-templates.</td>\\\\n</tr>\\\\n<tr>\\\\n<td>engine</td>\\\\n<td>engine to
- be used for processing templates. Handlebars is the default
-.</td>\\\\n</tr>\\\\n<tr>\\\\n<td>ext</td>\\\\n<td>extension to be used 
-for dest files.</td>\\\\n</tr>\\\\n</tbody></table>\\\\n<p data-spaci
-ng=\\\\\\"double\\\\\\">Right aligned columns</p><table>\\\\n<thead>\\\\n<tr
->\\\\n<th align=\\\\\\"right\\\\\\">Option</th>\\\\n<th align=\\\\\\"right\\\\\\">Desc
-ription</th>\\\\n</tr>\\\\n</thead>\\\\n<tbody><tr>\\\\n<td align=\\\\\\"righ
-t\\\\\\">data</td>\\\\n<td align=\\\\\\"right\\\\\\">path to data files to sup
-ply the data that will be passed into templates.</td>\\\\n</tr>
-\\\\n<tr>\\\\n<td align=\\\\\\"right\\\\\\">engine</td>\\\\n<td align=\\\\\\"right\\\\\\"
->engine to be used for processing templates. Handlebars is t
-he default.</td>\\\\n</tr>\\\\n<tr>\\\\n<td align=\\\\\\"right\\\\\\">ext</td>\\\\
-n<td align=\\\\\\"right\\\\\\">extension to be used for dest files.</t
-d>\\\\n</tr>\\\\n</tbody></table>\\\\n<h2 id=\\\\\\"links\\\\\\">Links</h2>\\\\n<p
- data-spacing=\\\\\\"double\\\\\\"><a href=\\\\\\"http://dev.nodeca.com\\\\\\">l
-ink text</a></p><p data-spacing=\\\\\\"double\\\\\\"><a href=\\\\\\"http://
-nodeca.github.io/pica/demo/\\\\\\" title=\\\\\\"title text!\\\\\\">link wit
-h title</a></p><p data-spacing=\\\\\\"double\\\\\\">Autoconverted link
- <a href=\\\\\\"https://github.com/nodeca/pica\\\\\\">https://github.c
-om/nodeca/pica</a>&#xa0;(enable linkify to see)</p><h2 id=\\\\\\"
-images\\\\\\">Images</h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\"><img src=\\\\\\"
-https://octodex.github.com/images/minion.png\\\\\\" alt=\\\\\\"Minion\\\\
-\\"></p><p data-spacing=\\\\\\"single\\\\\\"><img src=\\\\\\"https://octodex.
-github.com/images/stormtroopocat.jpg\\\\\\" alt=\\\\\\"Stormtroopocat\\\\
-\\" title=\\\\\\"The Stormtroopocat\\\\\\"></p><p data-spacing=\\\\\\"double\\\\
-\\">Like links, Images also have a footnote style syntax</p><p
- data-spacing=\\\\\\"double\\\\\\"><img src=\\\\\\"https://octodex.github.c
-om/images/dojocat.jpg\\\\\\" alt=\\\\\\"Alt text\\\\\\" title=\\\\\\"The Dojocat
-\\\\\\"></p><p data-spacing=\\\\\\"double\\\\\\">With a reference later in 
-the document defining the URL location:</p><h2 id=\\\\\\"plugins\\\\
-\\">Plugins</h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\">The killer featur
-e of <code>markdown-it</code>&#xa0;is very effective support
- of</p><p data-spacing=\\\\\\"single\\\\\\"><a href=\\\\\\"https://www.npmj
-s.org/browse/keyword/markdown-it-plugin\\\\\\">syntax plugins</a>
-.</p><h3 id=\\\\\\"emojies\\\\\\"><a href=\\\\\\"https://github.com/markdow
-n-it/markdown-it-emoji\\\\\\">Emojies</a></h3>\\\\n<blockquote>\\\\n<p 
-data-spacing=\\\\\\"double\\\\\\">Classic markup: :wink: :crush: :cry:
- :tear: :laughing: :yum:</p><p data-spacing=\\\\\\"double\\\\\\">Short
-cuts (emoticons): :-) :-( 8-) ;)</p></blockquote>\\\\n<p data-s
-pacing=\\\\\\"double\\\\\\">see <a href=\\\\\\"https://github.com/markdown-
-it/markdown-it-emoji#change-output\\\\\\">how to change output</a
->&#xa0;with twemoji.</p><h3 id=\\\\\\"subscript--superscript\\\\\\"><a
- href=\\\\\\"https://github.com/markdown-it/markdown-it-sub\\\\\\">Sub
-script</a>&#xa0;/ <a href=\\\\\\"https://github.com/markdown-it/m
-arkdown-it-sup\\\\\\">Superscript</a></h3>\\\\n<ul>\\\\n<li>19^th^</li>
-\\\\n<li>H<del>2</del>O</li>\\\\n</ul>\\\\n<h3 id=\\\\\\"ins\\\\\\"><a href=\\\\\\"h
-ttps://github.com/markdown-it/markdown-it-ins\\\\\\">&lt;ins&gt;<
-/a></h3>\\\\n<p data-spacing=\\\\\\"double\\\\\\">++Inserted text++</p><h
-3 id=\\\\\\"mark\\\\\\"><a href=\\\\\\"https://github.com/markdown-it/markd
-own-it-mark\\\\\\">&lt;mark&gt;</a></h3>\\\\n<p data-spacing=\\\\\\"doubl
-e\\\\\\">==Marked text==</p><h3 id=\\\\\\"footnotes\\\\\\"><a href=\\\\\\"https:
-//github.com/markdown-it/markdown-it-footnote\\\\\\">Footnotes</a
-></h3>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Footnote 1 link[^first].<
-/p><p data-spacing=\\\\\\"double\\\\\\">Footnote 2 link[^second].</p><
-p data-spacing=\\\\\\"double\\\\\\">Inline footnote^[Text of inline fo
-otnote] definition.</p><p data-spacing=\\\\\\"double\\\\\\">Duplicated
- footnote reference[^second].</p><p data-spacing=\\\\\\"double\\\\\\">
-[^first]: Footnote <strong>can have markup</strong></p><pre 
-class=\\\\\\"language-undefined\\\\\\"><code class=\\\\\\"language-undefine
-d\\\\\\">and multiple paragraphs.</code></pre><p data-spacing=\\\\\\"d
-ouble\\\\\\">[^second]: Footnote text.</p><h3 id=\\\\\\"definition-lis
-ts\\\\\\"><a href=\\\\\\"https://github.com/markdown-it/markdown-it-de
-flist\\\\\\">Definition lists</a></h3>\\\\n<p data-spacing=\\\\\\"double\\\\
-\\">Term 1</p><p data-spacing=\\\\\\"double\\\\\\">: Definition 1</p><p 
-data-spacing=\\\\\\"single\\\\\\">with lazy continuation.</p><p data-s
-pacing=\\\\\\"double\\\\\\">Term 2 with <em>inline markup</em></p><p d
-ata-spacing=\\\\\\"double\\\\\\">: Definition 2</p><pre class=\\\\\\"langua
-ge-undefined\\\\\\"><code class=\\\\\\"language-undefined\\\\\\">    { some
- code, part of Definition 2 }<br>Third paragraph of definiti
-on 2.</code></pre><p data-spacing=\\\\\\"double\\\\\\"><em>Compact sty
-le:</em></p><p data-spacing=\\\\\\"double\\\\\\">Term 1</p><p data-spa
-cing=\\\\\\"single\\\\\\">~ Definition 1</p><p data-spacing=\\\\\\"double\\\\\\"
->Term 2</p><p data-spacing=\\\\\\"single\\\\\\">~ Definition 2a</p><p 
-data-spacing=\\\\\\"single\\\\\\">~ Definition 2b</p><h3 id=\\\\\\"abbrevia
-tions\\\\\\"><a href=\\\\\\"https://github.com/markdown-it/markdown-it
--abbr\\\\\\">Abbreviations</a></h3>\\\\n<p data-spacing=\\\\\\"double\\\\\\">T
-his is HTML abbreviation example.</p><p data-spacing=\\\\\\"doubl
-e\\\\\\">It converts &quot;HTML&quot;, but keep intact partial en
-tries like &quot;xxxHTMLyyy&quot; and so on.</p><p data-spac
-ing=\\\\\\"double\\\\\\">*[HTML]: Hyper Text Markup Language</p><h3 id
-=\\\\\\"custom-containers\\\\\\"><a href=\\\\\\"https://github.com/markdown
--it/markdown-it-container\\\\\\">Custom containers</a></h3>\\\\n<p d
-ata-spacing=\\\\\\"double\\\\\\">::: warning</p><p data-spacing=\\\\\\"sing
-le\\\\\\"><em>here be dragons</em></p><p data-spacing=\\\\\\"single\\\\\\">
-:::</p>\\"}}]"
+"[{\\"title\\":\\"A beautiful morning\\",\\"attachments\\":[],\\"content\\":{
+\\"type\\":\\"html\\",\\"data\\":\\"<h1 id=\\\\\\"an-h1-header\\\\\\">An h1 header</
+h1>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Paragraphs are separated by 
+a blank line.</p><p data-spacing=\\\\\\"double\\\\\\">2nd paragraph. <
+em>Italic</em>, <strong>bold</strong>, and <code>monospace</
+code>. Itemized lists</p><p data-spacing=\\\\\\"single\\\\\\">look lik
+e:</p><ul>\\\\n<li>this one</li>\\\\n<li>that one</li>\\\\n<li>the ot
+her one</li>\\\\n</ul>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Note that --
+- not considering the asterisk --- the actual text</p><p dat
+a-spacing=\\\\\\"single\\\\\\">content starts at 4-columns in.</p><blo
+ckquote>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Block quotes are</p><p 
+data-spacing=\\\\\\"single\\\\\\">written like so.</p><p data-spacing=
+\\\\\\"double\\\\\\">They can span multiple paragraphs,</p><p data-spa
+cing=\\\\\\"single\\\\\\">if you like.</p></blockquote>\\\\n<p data-spaci
+ng=\\\\\\"double\\\\\\">Use 3 dashes for an em-dash. Use 2 dashes for 
+ranges (ex., &quot;it&apos;s all</p><p data-spacing=\\\\\\"single
+\\\\\\">in chapters 12--14&quot;). Three dots ... will be convert
+ed to an ellipsis.</p><p data-spacing=\\\\\\"single\\\\\\">Unicode is 
+supported. &#x263a;</p><h2 id=\\\\\\"an-h2-header\\\\\\">An h2 header<
+/h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Here&apos;s a numbered list
+:</p><ol>\\\\n<li>first item</li>\\\\n<li>second item</li>\\\\n<li>th
+ird item</li>\\\\n</ol>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Note again 
+how the actual text starts at 4 columns in (4 characters</p>
+<p data-spacing=\\\\\\"single\\\\\\">from the left side). Here&apos;s 
+a code sample:</p><pre class=\\\\\\"language-undefined\\\\\\"><code cl
+ass=\\\\\\"language-undefined\\\\\\"># Let me re-iterate ...<br>for i 
+in 1 .. 10 { do-something(i) }</code></pre><p data-spacing=\\\\
+\\"double\\\\\\">As you probably guessed, indented 4 spaces. By the
+ way, instead of</p><p data-spacing=\\\\\\"single\\\\\\">indenting the
+ block, you can use delimited blocks, if you like:</p><pre c
+lass=\\\\\\"language-\\\\\\"><code class=\\\\\\"language-\\\\\\">define foobar()
+ {<br>    print &quot;Welcome to flavor country!&quot;;<br>}
+</code></pre><p data-spacing=\\\\\\"double\\\\\\">(which makes copying
+ &amp; pasting easier). You can optionally mark the</p><p da
+ta-spacing=\\\\\\"single\\\\\\">delimited block for Pandoc to syntax h
+ighlight it:</p><pre class=\\\\\\"language-python\\\\\\"><code class=\\\\
+\\"language-python\\\\\\">import time<br># Quick, count to ten!<br>
+for i in range(10):<br>    # (but not *too* quick)<br>    ti
+me.sleep(0.5)<br>    print i</code></pre><h3 id=\\\\\\"an-h3-head
+er\\\\\\">An h3 header</h3>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Now a nes
+ted list:</p><ol>\\\\n<li><p data-spacing=\\\\\\"double\\\\\\">First, get
+ these ingredients:</p><ul>\\\\n<li>carrots</li>\\\\n<li>celery</l
+i>\\\\n<li>lentils</li>\\\\n</ul>\\\\n</li>\\\\n<li><p data-spacing=\\\\\\"do
+uble\\\\\\">Boil some water.</p></li>\\\\n<li><p data-spacing=\\\\\\"doub
+le\\\\\\">Dump everything in the pot and follow</p><p data-spacin
+g=\\\\\\"single\\\\\\">this algorithm:</p><pre class=\\\\\\"language-undefi
+ned\\\\\\"><code class=\\\\\\"language-undefined\\\\\\">find wooden spoon<b
+r>uncover pot<br>stir<br>cover pot<br>balance wooden spoon p
+recariously on pot handle<br>wait 10 minutes<br>goto first s
+tep (or shut off burner when done)</code></pre><p data-spaci
+ng=\\\\\\"double\\\\\\">Do not bump wooden spoon or it will fall.</p><
+/li>\\\\n</ol>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Notice again how tex
+t always lines up on 4-space indents (including</p><p data-s
+pacing=\\\\\\"single\\\\\\">that last line which continues item 3 abov
+e).</p><p data-spacing=\\\\\\"double\\\\\\">Here&apos;s a link to <a h
+ref=\\\\\\"http://foo.bar\\\\\\">a website</a>, to a <a href=\\\\\\"local-d
+oc.html\\\\\\">local</a></p><p data-spacing=\\\\\\"single\\\\\\">doc, and t
+o a <a href=\\\\\\"#an-h2-header\\\\\\">section heading in the current
+</a></p><p data-spacing=\\\\\\"single\\\\\\">doc. Here&apos;s a footno
+te [^1].</p><p data-spacing=\\\\\\"double\\\\\\">[^1]: Footnote text g
+oes here.</p><p data-spacing=\\\\\\"double\\\\\\">Tables can look like
+ this:</p><p data-spacing=\\\\\\"double\\\\\\">size material color</p>
+<hr>\\\\n<p data-spacing=\\\\\\"double\\\\\\">9 leather brown</p><p data-
+spacing=\\\\\\"single\\\\\\">10 hemp canvas natural</p><p data-spacing
+=\\\\\\"single\\\\\\">11 glass transparent</p><p data-spacing=\\\\\\"double
+\\\\\\">Table: Shoes, their sizes, and what they&apos;re made of<
+/p><p data-spacing=\\\\\\"double\\\\\\">(The above is the caption for 
+the table.) Pandoc also supports</p><p data-spacing=\\\\\\"single
+\\\\\\">multi-line tables:</p><hr>\\\\n<p data-spacing=\\\\\\"double\\\\\\">ke
+yword text</p><hr>\\\\n<p data-spacing=\\\\\\"double\\\\\\">red Sunsets, 
+apples, and</p><p data-spacing=\\\\\\"single\\\\\\">other red or reddi
+sh</p><p data-spacing=\\\\\\"single\\\\\\">things.</p><p data-spacing=
+\\\\\\"double\\\\\\">green Leaves, grass, frogs</p><p data-spacing=\\\\\\"s
+ingle\\\\\\">and other things it&apos;s</p><p data-spacing=\\\\\\"sing
+le\\\\\\">not easy being.</p><hr>\\\\n<p data-spacing=\\\\\\"double\\\\\\">A h
+orizontal rule follows.</p><hr>\\\\n<p data-spacing=\\\\\\"double\\\\\\">
+Here&apos;s a definition list:</p><p data-spacing=\\\\\\"double\\\\\\"
+>apples</p><p data-spacing=\\\\\\"single\\\\\\">: Good for making appl
+esauce.</p><p data-spacing=\\\\\\"single\\\\\\">oranges</p><p data-spa
+cing=\\\\\\"single\\\\\\">: Citrus!</p><p data-spacing=\\\\\\"single\\\\\\">toma
+toes</p><p data-spacing=\\\\\\"single\\\\\\">: There&apos;s no &quot;e
+&quot; in tomatoe.</p><p data-spacing=\\\\\\"double\\\\\\">Again, text
+ is indented 4 spaces. (Put a blank line between each</p><p 
+data-spacing=\\\\\\"single\\\\\\">term/definition pair to spread thing
+s out more.)</p><p data-spacing=\\\\\\"double\\\\\\">Here&apos;s a &qu
+ot;line block&quot;:</p><p data-spacing=\\\\\\"double\\\\\\">| Line on
+e</p><p data-spacing=\\\\\\"single\\\\\\">| Line too</p><p data-spacin
+g=\\\\\\"single\\\\\\">| Line tree</p><p data-spacing=\\\\\\"double\\\\\\">and i
+mages can be specified like so:</p><p data-spacing=\\\\\\"double\\\\
+\\"><img src=\\\\\\"example-image.jpg\\\\\\" alt=\\\\\\"example image\\\\\\" title
+=\\\\\\"An exemplary image\\\\\\"></p><p data-spacing=\\\\\\"double\\\\\\">Inlin
+e math equations go in like so: &#x24;\\\\\\\\omega = d\\\\\\\\phi / dt&
+#x24;. Display</p><p data-spacing=\\\\\\"single\\\\\\">math should get
+ its own line and be put in in double-dollarsigns:</p><p dat
+a-spacing=\\\\\\"double\\\\\\">&#x24;&#x24;I = \\\\\\\\int \\\\\\\\rho R^{2} dV&#x
+24;&#x24;</p><p data-spacing=\\\\\\"double\\\\\\">And note that you ca
+n backslash-escape any punctuation characters</p><p data-spa
+cing=\\\\\\"single\\\\\\">which you wish to be displayed literally, ex
+.: \`foo\`, *bar*, etc.</p>\\"},\\"tags\\":[\\"wonderful\\",\\"journal\\"],\\"
+pinned\\":true,\\"favorite\\":true},{\\"title\\":\\"An h1 header\\",\\"attac
+hments\\":[],\\"content\\":{\\"type\\":\\"html\\",\\"data\\":\\"<h1 id=\\\\\\"an-h1-h
+eader\\\\\\">An h1 header</h1>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Paragr
+aphs are separated by a blank line.</p><p data-spacing=\\\\\\"dou
+ble\\\\\\">2nd paragraph. <em>Italic</em>, <strong>bold</strong>,
+ and <code>monospace</code>. Itemized lists</p><p data-spaci
+ng=\\\\\\"single\\\\\\">look like:</p><ul>\\\\n<li>this one</li>\\\\n<li>tha
+t one</li>\\\\n<li>the other one</li>\\\\n</ul>\\\\n<p data-spacing=\\\\
+\\"double\\\\\\">Note that --- not considering the asterisk --- the
+ actual text</p><p data-spacing=\\\\\\"single\\\\\\">content starts at
+ 4-columns in.</p><blockquote>\\\\n<p data-spacing=\\\\\\"double\\\\\\">B
+lock quotes are</p><p data-spacing=\\\\\\"single\\\\\\">written like s
+o.</p><p data-spacing=\\\\\\"double\\\\\\">They can span multiple para
+graphs,</p><p data-spacing=\\\\\\"single\\\\\\">if you like.</p></bloc
+kquote>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Use 3 dashes for an em-d
+ash. Use 2 dashes for ranges (ex., &quot;it&apos;s all</p><p
+ data-spacing=\\\\\\"single\\\\\\">in chapters 12--14&quot;). Three do
+ts ... will be converted to an ellipsis.</p><p data-spacing=
+\\\\\\"single\\\\\\">Unicode is supported. &#x263a;</p><h2 id=\\\\\\"an-h2-
+header\\\\\\">An h2 header</h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Here&
+apos;s a numbered list:</p><ol>\\\\n<li>first item</li>\\\\n<li>se
+cond item</li>\\\\n<li>third item</li>\\\\n</ol>\\\\n<p data-spacing=
+\\\\\\"double\\\\\\">Note again how the actual text starts at 4 column
+s in (4 characters</p><p data-spacing=\\\\\\"single\\\\\\">from the le
+ft side). Here&apos;s a code sample:</p><pre class=\\\\\\"languag
+e-undefined\\\\\\"><code class=\\\\\\"language-undefined\\\\\\"># Let me re
+-iterate ...<br>for i in 1 .. 10 { do-something(i) }</code><
+/pre><p data-spacing=\\\\\\"double\\\\\\">As you probably guessed, ind
+ented 4 spaces. By the way, instead of</p><p data-spacing=\\\\\\"
+single\\\\\\">indenting the block, you can use delimited blocks, 
+if you like:</p><pre class=\\\\\\"language-\\\\\\"><code class=\\\\\\"langu
+age-\\\\\\">define foobar() {<br>    print &quot;Welcome to flavo
+r country!&quot;;<br>}</code></pre><p data-spacing=\\\\\\"double\\\\
+\\">(which makes copying &amp; pasting easier). You can option
+ally mark the</p><p data-spacing=\\\\\\"single\\\\\\">delimited block 
+for Pandoc to syntax highlight it:</p><pre class=\\\\\\"language-
+python\\\\\\"><code class=\\\\\\"language-python\\\\\\">import time<br># Qu
+ick, count to ten!<br>for i in range(10):<br>    # (but not 
+*too* quick)<br>    time.sleep(0.5)<br>    print i</code></p
+re><h3 id=\\\\\\"an-h3-header\\\\\\">An h3 header</h3>\\\\n<p data-spacin
+g=\\\\\\"double\\\\\\">Now a nested list:</p><ol>\\\\n<li><p data-spacing
+=\\\\\\"double\\\\\\">First, get these ingredients:</p><ul>\\\\n<li>carro
+ts</li>\\\\n<li>celery</li>\\\\n<li>lentils</li>\\\\n</ul>\\\\n</li>\\\\n<l
+i><p data-spacing=\\\\\\"double\\\\\\">Boil some water.</p></li>\\\\n<li>
+<p data-spacing=\\\\\\"double\\\\\\">Dump everything in the pot and fo
+llow</p><p data-spacing=\\\\\\"single\\\\\\">this algorithm:</p><pre c
+lass=\\\\\\"language-undefined\\\\\\"><code class=\\\\\\"language-undefined
+\\\\\\">find wooden spoon<br>uncover pot<br>stir<br>cover pot<br>
+balance wooden spoon precariously on pot handle<br>wait 10 m
+inutes<br>goto first step (or shut off burner when done)</co
+de></pre><p data-spacing=\\\\\\"double\\\\\\">Do not bump wooden spoon
+ or it will fall.</p></li>\\\\n</ol>\\\\n<p data-spacing=\\\\\\"double\\\\
+\\">Notice again how text always lines up on 4-space indents (
+including</p><p data-spacing=\\\\\\"single\\\\\\">that last line which
+ continues item 3 above).</p><p data-spacing=\\\\\\"double\\\\\\">Here
+&apos;s a link to <a href=\\\\\\"http://foo.bar\\\\\\">a website</a>, 
+to a <a href=\\\\\\"local-doc.html\\\\\\">local</a></p><p data-spacing
+=\\\\\\"single\\\\\\">doc, and to a <a href=\\\\\\"#an-h2-header\\\\\\">section 
+heading in the current</a></p><p data-spacing=\\\\\\"single\\\\\\">doc
+. Here&apos;s a footnote [^1].</p><p data-spacing=\\\\\\"double\\\\\\"
+>[^1]: Footnote text goes here.</p><p data-spacing=\\\\\\"double\\\\
+\\">Tables can look like this:</p><p data-spacing=\\\\\\"double\\\\\\">s
+ize material color</p><hr>\\\\n<p data-spacing=\\\\\\"double\\\\\\">9 lea
+ther brown</p><p data-spacing=\\\\\\"single\\\\\\">10 hemp canvas natu
+ral</p><p data-spacing=\\\\\\"single\\\\\\">11 glass transparent</p><p
+ data-spacing=\\\\\\"double\\\\\\">Table: Shoes, their sizes, and what
+ they&apos;re made of</p><p data-spacing=\\\\\\"double\\\\\\">(The abo
+ve is the caption for the table.) Pandoc also supports</p><p
+ data-spacing=\\\\\\"single\\\\\\">multi-line tables:</p><hr>\\\\n<p data
+-spacing=\\\\\\"double\\\\\\">keyword text</p><hr>\\\\n<p data-spacing=\\\\\\"
+double\\\\\\">red Sunsets, apples, and</p><p data-spacing=\\\\\\"singl
+e\\\\\\">other red or reddish</p><p data-spacing=\\\\\\"single\\\\\\">thing
+s.</p><p data-spacing=\\\\\\"double\\\\\\">green Leaves, grass, frogs<
+/p><p data-spacing=\\\\\\"single\\\\\\">and other things it&apos;s</p>
+<p data-spacing=\\\\\\"single\\\\\\">not easy being.</p><hr>\\\\n<p data-
+spacing=\\\\\\"double\\\\\\">A horizontal rule follows.</p><hr>\\\\n<p da
+ta-spacing=\\\\\\"double\\\\\\">Here&apos;s a definition list:</p><p d
+ata-spacing=\\\\\\"double\\\\\\">apples</p><p data-spacing=\\\\\\"single\\\\\\">
+: Good for making applesauce.</p><p data-spacing=\\\\\\"single\\\\\\">
+oranges</p><p data-spacing=\\\\\\"single\\\\\\">: Citrus!</p><p data-s
+pacing=\\\\\\"single\\\\\\">tomatoes</p><p data-spacing=\\\\\\"single\\\\\\">: T
+here&apos;s no &quot;e&quot; in tomatoe.</p><p data-spacing=
+\\\\\\"double\\\\\\">Again, text is indented 4 spaces. (Put a blank li
+ne between each</p><p data-spacing=\\\\\\"single\\\\\\">term/definitio
+n pair to spread things out more.)</p><p data-spacing=\\\\\\"doub
+le\\\\\\">Here&apos;s a &quot;line block&quot;:</p><p data-spacin
+g=\\\\\\"double\\\\\\">| Line one</p><p data-spacing=\\\\\\"single\\\\\\">| Line
+ too</p><p data-spacing=\\\\\\"single\\\\\\">| Line tree</p><p data-sp
+acing=\\\\\\"double\\\\\\">and images can be specified like so:</p><p 
+data-spacing=\\\\\\"double\\\\\\"><img src=\\\\\\"example-image.jpg\\\\\\" alt=\\\\
+\\"example image\\\\\\" title=\\\\\\"An exemplary image\\\\\\"></p><p data-sp
+acing=\\\\\\"double\\\\\\">Inline math equations go in like so: &#x24;
+\\\\\\\\omega = d\\\\\\\\phi / dt&#x24;. Display</p><p data-spacing=\\\\\\"si
+ngle\\\\\\">math should get its own line and be put in in double-
+dollarsigns:</p><p data-spacing=\\\\\\"double\\\\\\">&#x24;&#x24;I = \\\\
+\\\\int \\\\\\\\rho R^{2} dV&#x24;&#x24;</p><p data-spacing=\\\\\\"double\\\\
+\\">And note that you can backslash-escape any punctuation cha
+racters</p><p data-spacing=\\\\\\"single\\\\\\">which you wish to be d
+isplayed literally, ex.: \`foo\`, *bar*, etc.</p>\\"}},{\\"title\\":
+\\"h1 Heading 8-)\\",\\"attachments\\":[],\\"content\\":{\\"type\\":\\"html\\",\\"
+data\\":\\"<h1 id=\\\\\\"h1-heading-8-\\\\\\">h1 Heading 8-)</h1>\\\\n<h2 id=
+\\\\\\"h2-heading\\\\\\">h2 Heading</h2>\\\\n<h3 id=\\\\\\"h3-heading\\\\\\">h3 Hea
+ding</h3>\\\\n<h4 id=\\\\\\"h4-heading\\\\\\">h4 Heading</h4>\\\\n<h5 id=\\\\\\"h
+5-heading\\\\\\">h5 Heading</h5>\\\\n<h6 id=\\\\\\"h6-heading\\\\\\">h6 Headin
+g</h6>\\\\n<h2 id=\\\\\\"horizontal-rules\\\\\\">Horizontal Rules</h2>\\\\n<
+hr>\\\\n<hr>\\\\n<hr>\\\\n<h2 id=\\\\\\"typographic-replacements\\\\\\">Typogra
+phic replacements</h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Enable ty
+pographer option to see result.</p><p data-spacing=\\\\\\"double\\\\
+\\">(c) (C) (r) (R) (tm) (TM) (p) (P) +-</p><p data-spacing=\\\\\\"
+double\\\\\\">test.. test... test..... test?..... test!....</p><p
+ data-spacing=\\\\\\"double\\\\\\">!!!!!! ???? ,, -- ---</p><p data-sp
+acing=\\\\\\"double\\\\\\">&quot;Smartypants, double quotes&quot; and 
+&apos;single quotes&apos;</p><h2 id=\\\\\\"emphasis\\\\\\">Emphasis</h
+2>\\\\n<p data-spacing=\\\\\\"double\\\\\\"><strong>This is bold text</st
+rong></p><p data-spacing=\\\\\\"double\\\\\\"><strong>This is bold tex
+t</strong></p><p data-spacing=\\\\\\"double\\\\\\"><em>This is italic 
+text</em></p><p data-spacing=\\\\\\"double\\\\\\"><em>This is italic t
+ext</em></p><p data-spacing=\\\\\\"double\\\\\\"><del>Strikethrough</d
+el></p><h2 id=\\\\\\"blockquotes\\\\\\">Blockquotes</h2>\\\\n<blockquote>
+\\\\n<p data-spacing=\\\\\\"double\\\\\\">Blockquotes can also be nested.
+..</p><blockquote>\\\\n<p data-spacing=\\\\\\"double\\\\\\">...by using a
+dditional greater-than signs right next to each other...</p>
+<blockquote>\\\\n<p data-spacing=\\\\\\"double\\\\\\">...or with spaces b
+etween arrows.</p></blockquote>\\\\n</blockquote>\\\\n</blockquote
+>\\\\n<h2 id=\\\\\\"lists\\\\\\">Lists</h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\">U
+nordered</p><ul>\\\\n<li>Create a list by starting a line with 
+<code>+</code>, <code>-</code>, or <code>*</code></li>\\\\n<li>
+Sub-lists are made by indenting 2 spaces:<ul>\\\\n<li>Marker ch
+aracter change forces new list start:<ul>\\\\n<li>Ac tristique 
+libero volutpat at</li>\\\\n</ul>\\\\n<ul>\\\\n<li>Facilisis in preti
+um nisl aliquet</li>\\\\n</ul>\\\\n<ul>\\\\n<li>Nulla volutpat aliqua
+m velit</li>\\\\n</ul>\\\\n</li>\\\\n</ul>\\\\n</li>\\\\n<li>Very easy!</li
+>\\\\n</ul>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Ordered</p><ol>\\\\n<li><p
+ data-spacing=\\\\\\"double\\\\\\">Lorem ipsum dolor sit amet</p></li>
+\\\\n<li><p data-spacing=\\\\\\"double\\\\\\">Consectetur adipiscing elit
+</p></li>\\\\n<li><p data-spacing=\\\\\\"double\\\\\\">Integer molestie l
+orem at massa</p></li>\\\\n<li><p data-spacing=\\\\\\"double\\\\\\">You c
+an use sequential numbers...</p></li>\\\\n<li><p data-spacing=\\\\
+\\"double\\\\\\">...or keep all the numbers as <code>1.</code></p><
+/li>\\\\n</ol>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Start numbering with
+ offset:</p><ol start=\\\\\\"57\\\\\\">\\\\n<li>foo</li>\\\\n<li>bar</li>\\\\n<
+/ol>\\\\n<h2 id=\\\\\\"code\\\\\\">Code</h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\">
+Inline <code>code</code></p><p data-spacing=\\\\\\"double\\\\\\">Inden
+ted code</p><pre class=\\\\\\"language-undefined\\\\\\"><code class=\\\\\\"
+language-undefined\\\\\\">// Some comments<br>line 1 of code<br>l
+ine 2 of code<br>line 3 of code</code></pre><p data-spacing=
+\\\\\\"double\\\\\\">Block code &quot;fences&quot;</p><pre class=\\\\\\"lan
+guage-\\\\\\"><code class=\\\\\\"language-\\\\\\">Sample text here...</code
+></pre><p data-spacing=\\\\\\"double\\\\\\">Syntax highlighting</p><pr
+e class=\\\\\\"language-js\\\\\\"><code class=\\\\\\"language-js\\\\\\">var foo 
+= function (bar) {<br>  return bar++;<br>};<br>console.log(f
+oo(5));</code></pre><h2 id=\\\\\\"tables\\\\\\">Tables</h2>\\\\n<table>\\\\n
+<thead>\\\\n<tr>\\\\n<th>Option</th>\\\\n<th>Description</th>\\\\n</tr>\\\\
+n</thead>\\\\n<tbody><tr>\\\\n<td>data</td>\\\\n<td>path to data file
+s to supply the data that will be passed into templates.</td
+>\\\\n</tr>\\\\n<tr>\\\\n<td>engine</td>\\\\n<td>engine to be used for p
+rocessing templates. Handlebars is the default.</td>\\\\n</tr>\\\\
+n<tr>\\\\n<td>ext</td>\\\\n<td>extension to be used for dest files
+.</td>\\\\n</tr>\\\\n</tbody></table>\\\\n<p data-spacing=\\\\\\"double\\\\\\">
+Right aligned columns</p><table>\\\\n<thead>\\\\n<tr>\\\\n<th align=\\\\
+\\"right\\\\\\">Option</th>\\\\n<th align=\\\\\\"right\\\\\\">Description</th>\\\\n
+</tr>\\\\n</thead>\\\\n<tbody><tr>\\\\n<td align=\\\\\\"right\\\\\\">data</td>\\\\
+n<td align=\\\\\\"right\\\\\\">path to data files to supply the data t
+hat will be passed into templates.</td>\\\\n</tr>\\\\n<tr>\\\\n<td al
+ign=\\\\\\"right\\\\\\">engine</td>\\\\n<td align=\\\\\\"right\\\\\\">engine to be 
+used for processing templates. Handlebars is the default.</t
+d>\\\\n</tr>\\\\n<tr>\\\\n<td align=\\\\\\"right\\\\\\">ext</td>\\\\n<td align=\\\\\\"r
+ight\\\\\\">extension to be used for dest files.</td>\\\\n</tr>\\\\n</t
+body></table>\\\\n<h2 id=\\\\\\"links\\\\\\">Links</h2>\\\\n<p data-spacing=
+\\\\\\"double\\\\\\"><a href=\\\\\\"http://dev.nodeca.com\\\\\\">link text</a></
+p><p data-spacing=\\\\\\"double\\\\\\"><a href=\\\\\\"http://nodeca.github.
+io/pica/demo/\\\\\\" title=\\\\\\"title text!\\\\\\">link with title</a></p
+><p data-spacing=\\\\\\"double\\\\\\">Autoconverted link <a href=\\\\\\"htt
+ps://github.com/nodeca/pica\\\\\\">https://github.com/nodeca/pica
+</a>&#xa0;(enable linkify to see)</p><h2 id=\\\\\\"images\\\\\\">Image
+s</h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\"><img src=\\\\\\"https://octode
+x.github.com/images/minion.png\\\\\\" alt=\\\\\\"Minion\\\\\\"></p><p data-
+spacing=\\\\\\"single\\\\\\"><img src=\\\\\\"https://octodex.github.com/ima
+ges/stormtroopocat.jpg\\\\\\" alt=\\\\\\"Stormtroopocat\\\\\\" title=\\\\\\"The 
+Stormtroopocat\\\\\\"></p><p data-spacing=\\\\\\"double\\\\\\">Like links, 
+Images also have a footnote style syntax</p><p data-spacing=
+\\\\\\"double\\\\\\"><img src=\\\\\\"https://octodex.github.com/images/dojo
+cat.jpg\\\\\\" alt=\\\\\\"Alt text\\\\\\" title=\\\\\\"The Dojocat\\\\\\"></p><p data
+-spacing=\\\\\\"double\\\\\\">With a reference later in the document d
+efining the URL location:</p><h2 id=\\\\\\"plugins\\\\\\">Plugins</h2>
+\\\\n<p data-spacing=\\\\\\"double\\\\\\">The killer feature of <code>mar
+kdown-it</code>&#xa0;is very effective support of</p><p data
+-spacing=\\\\\\"single\\\\\\"><a href=\\\\\\"https://www.npmjs.org/browse/k
+eyword/markdown-it-plugin\\\\\\">syntax plugins</a>.</p><h3 id=\\\\\\"
+emojies\\\\\\"><a href=\\\\\\"https://github.com/markdown-it/markdown-
+it-emoji\\\\\\">Emojies</a></h3>\\\\n<blockquote>\\\\n<p data-spacing=\\\\
+\\"double\\\\\\">Classic markup: :wink: :crush: :cry: :tear: :laugh
+ing: :yum:</p><p data-spacing=\\\\\\"double\\\\\\">Shortcuts (emoticon
+s): :-) :-( 8-) ;)</p></blockquote>\\\\n<p data-spacing=\\\\\\"doubl
+e\\\\\\">see <a href=\\\\\\"https://github.com/markdown-it/markdown-it
+-emoji#change-output\\\\\\">how to change output</a>&#xa0;with tw
+emoji.</p><h3 id=\\\\\\"subscript--superscript\\\\\\"><a href=\\\\\\"https:
+//github.com/markdown-it/markdown-it-sub\\\\\\">Subscript</a>&#xa
+0;/ <a href=\\\\\\"https://github.com/markdown-it/markdown-it-sup
+\\\\\\">Superscript</a></h3>\\\\n<ul>\\\\n<li>19^th^</li>\\\\n<li>H<del>2<
+/del>O</li>\\\\n</ul>\\\\n<h3 id=\\\\\\"ins\\\\\\"><a href=\\\\\\"https://github.
+com/markdown-it/markdown-it-ins\\\\\\">&lt;ins&gt;</a></h3>\\\\n<p d
+ata-spacing=\\\\\\"double\\\\\\">++Inserted text++</p><h3 id=\\\\\\"mark\\\\\\">
+<a href=\\\\\\"https://github.com/markdown-it/markdown-it-mark\\\\\\">
+&lt;mark&gt;</a></h3>\\\\n<p data-spacing=\\\\\\"double\\\\\\">==Marked t
+ext==</p><h3 id=\\\\\\"footnotes\\\\\\"><a href=\\\\\\"https://github.com/m
+arkdown-it/markdown-it-footnote\\\\\\">Footnotes</a></h3>\\\\n<p dat
+a-spacing=\\\\\\"double\\\\\\">Footnote 1 link[^first].</p><p data-spa
+cing=\\\\\\"double\\\\\\">Footnote 2 link[^second].</p><p data-spacing
+=\\\\\\"double\\\\\\">Inline footnote^[Text of inline footnote] defini
+tion.</p><p data-spacing=\\\\\\"double\\\\\\">Duplicated footnote refe
+rence[^second].</p><p data-spacing=\\\\\\"double\\\\\\">[^first]: Foot
+note <strong>can have markup</strong></p><pre class=\\\\\\"langua
+ge-undefined\\\\\\"><code class=\\\\\\"language-undefined\\\\\\">and multip
+le paragraphs.</code></pre><p data-spacing=\\\\\\"double\\\\\\">[^seco
+nd]: Footnote text.</p><h3 id=\\\\\\"definition-lists\\\\\\"><a href=\\\\
+\\"https://github.com/markdown-it/markdown-it-deflist\\\\\\">Defini
+tion lists</a></h3>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Term 1</p><p
+ data-spacing=\\\\\\"double\\\\\\">: Definition 1</p><p data-spacing=\\\\
+\\"single\\\\\\">with lazy continuation.</p><p data-spacing=\\\\\\"doubl
+e\\\\\\">Term 2 with <em>inline markup</em></p><p data-spacing=\\\\\\"
+double\\\\\\">: Definition 2</p><pre class=\\\\\\"language-undefined\\\\\\"
+><code class=\\\\\\"language-undefined\\\\\\">    { some code, part of
+ Definition 2 }<br>Third paragraph of definition 2.</code></
+pre><p data-spacing=\\\\\\"double\\\\\\"><em>Compact style:</em></p><p
+ data-spacing=\\\\\\"double\\\\\\">Term 1</p><p data-spacing=\\\\\\"single\\\\
+\\">~ Definition 1</p><p data-spacing=\\\\\\"double\\\\\\">Term 2</p><p 
+data-spacing=\\\\\\"single\\\\\\">~ Definition 2a</p><p data-spacing=\\\\
+\\"single\\\\\\">~ Definition 2b</p><h3 id=\\\\\\"abbreviations\\\\\\"><a hre
+f=\\\\\\"https://github.com/markdown-it/markdown-it-abbr\\\\\\">Abbrev
+iations</a></h3>\\\\n<p data-spacing=\\\\\\"double\\\\\\">This is HTML ab
+breviation example.</p><p data-spacing=\\\\\\"double\\\\\\">It convert
+s &quot;HTML&quot;, but keep intact partial entries like &qu
+ot;xxxHTMLyyy&quot; and so on.</p><p data-spacing=\\\\\\"double\\\\\\"
+>*[HTML]: Hyper Text Markup Language</p><h3 id=\\\\\\"custom-cont
+ainers\\\\\\"><a href=\\\\\\"https://github.com/markdown-it/markdown-i
+t-container\\\\\\">Custom containers</a></h3>\\\\n<p data-spacing=\\\\\\"
+double\\\\\\">::: warning</p><p data-spacing=\\\\\\"single\\\\\\"><em>here 
+be dragons</em></p><p data-spacing=\\\\\\"single\\\\\\">:::</p>\\"}},{\\"t
+itle\\":\\"h1 Heading 8-)\\",\\"dateEdited\\":1639388210000,\\"attachmen
+ts\\":[],\\"content\\":{\\"type\\":\\"html\\",\\"data\\":\\"<h1 id=\\\\\\"h1-heading-
+8-\\\\\\">h1 Heading 8-)</h1>\\\\n<h2 id=\\\\\\"h2-heading\\\\\\">h2 Heading</
+h2>\\\\n<h3 id=\\\\\\"h3-heading\\\\\\">h3 Heading</h3>\\\\n<h4 id=\\\\\\"h4-head
+ing\\\\\\">h4 Heading</h4>\\\\n<h5 id=\\\\\\"h5-heading\\\\\\">h5 Heading</h5>
+\\\\n<h6 id=\\\\\\"h6-heading\\\\\\">h6 Heading</h6>\\\\n<h2 id=\\\\\\"horizontal
+-rules\\\\\\">Horizontal Rules</h2>\\\\n<hr>\\\\n<hr>\\\\n<hr>\\\\n<h2 id=\\\\\\"t
+ypographic-replacements\\\\\\">Typographic replacements</h2>\\\\n<p 
+data-spacing=\\\\\\"double\\\\\\">Enable typographer option to see res
+ult.</p><p data-spacing=\\\\\\"double\\\\\\">(c) (C) (r) (R) (tm) (TM)
+ (p) (P) +-</p><p data-spacing=\\\\\\"double\\\\\\">test.. test... tes
+t..... test?..... test!....</p><p data-spacing=\\\\\\"double\\\\\\">!!
+!!!! ???? ,, -- ---</p><p data-spacing=\\\\\\"double\\\\\\">&quot;Smar
+typants, double quotes&quot; and &apos;single quotes&apos;</
+p><h2 id=\\\\\\"emphasis\\\\\\">Emphasis</h2>\\\\n<p data-spacing=\\\\\\"doubl
+e\\\\\\"><strong>This is bold text</strong></p><p data-spacing=\\\\\\"
+double\\\\\\"><strong>This is bold text</strong></p><p data-spaci
+ng=\\\\\\"double\\\\\\"><em>This is italic text</em></p><p data-spacin
+g=\\\\\\"double\\\\\\"><em>This is italic text</em></p><p data-spacing
+=\\\\\\"double\\\\\\"><del>Strikethrough</del></p><h2 id=\\\\\\"blockquotes
+\\\\\\">Blockquotes</h2>\\\\n<blockquote>\\\\n<p data-spacing=\\\\\\"double\\\\
+\\">Blockquotes can also be nested...</p><blockquote>\\\\n<p data
+-spacing=\\\\\\"double\\\\\\">...by using additional greater-than sign
+s right next to each other...</p><blockquote>\\\\n<p data-spaci
+ng=\\\\\\"double\\\\\\">...or with spaces between arrows.</p></blockqu
+ote>\\\\n</blockquote>\\\\n</blockquote>\\\\n<h2 id=\\\\\\"lists\\\\\\">Lists</
+h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Unordered</p><ul>\\\\n<li>Creat
+e a list by starting a line with <code>+</code>, <code>-</co
+de>, or <code>*</code></li>\\\\n<li>Sub-lists are made by inden
+ting 2 spaces:<ul>\\\\n<li>Marker character change forces new l
+ist start:<ul>\\\\n<li>Ac tristique libero volutpat at</li>\\\\n</
+ul>\\\\n<ul>\\\\n<li>Facilisis in pretium nisl aliquet</li>\\\\n</ul>
+\\\\n<ul>\\\\n<li>Nulla volutpat aliquam velit</li>\\\\n</ul>\\\\n</li>\\\\
+n</ul>\\\\n</li>\\\\n<li>Very easy!</li>\\\\n</ul>\\\\n<p data-spacing=\\\\
+\\"double\\\\\\">Ordered</p><ol>\\\\n<li><p data-spacing=\\\\\\"double\\\\\\">Lo
+rem ipsum dolor sit amet</p></li>\\\\n<li><p data-spacing=\\\\\\"dou
+ble\\\\\\">Consectetur adipiscing elit</p></li>\\\\n<li><p data-spac
+ing=\\\\\\"double\\\\\\">Integer molestie lorem at massa</p></li>\\\\n<li
+><p data-spacing=\\\\\\"double\\\\\\">You can use sequential numbers..
+.</p></li>\\\\n<li><p data-spacing=\\\\\\"double\\\\\\">...or keep all th
+e numbers as <code>1.</code></p></li>\\\\n</ol>\\\\n<p data-spacin
+g=\\\\\\"double\\\\\\">Start numbering with offset:</p><ol start=\\\\\\"57\\\\
+\\">\\\\n<li>foo</li>\\\\n<li>bar</li>\\\\n</ol>\\\\n<h2 id=\\\\\\"code\\\\\\">Code<
+/h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Inline <code>code</code></p
+><p data-spacing=\\\\\\"double\\\\\\">Indented code</p><pre class=\\\\\\"la
+nguage-undefined\\\\\\"><code class=\\\\\\"language-undefined\\\\\\">// Som
+e comments<br>line 1 of code<br>line 2 of code<br>line 3 of 
+code</code></pre><p data-spacing=\\\\\\"double\\\\\\">Block code &quot
+;fences&quot;</p><pre class=\\\\\\"language-\\\\\\"><code class=\\\\\\"lang
+uage-\\\\\\">Sample text here...</code></pre><p data-spacing=\\\\\\"do
+uble\\\\\\">Syntax highlighting</p><pre class=\\\\\\"language-js\\\\\\"><co
+de class=\\\\\\"language-js\\\\\\">var foo = function (bar) {<br>  ret
+urn bar++;<br>};<br>console.log(foo(5));</code></pre><h2 id=
+\\\\\\"tables\\\\\\">Tables</h2>\\\\n<table>\\\\n<thead>\\\\n<tr>\\\\n<th>Option</
+th>\\\\n<th>Description</th>\\\\n</tr>\\\\n</thead>\\\\n<tbody><tr>\\\\n<td
+>data</td>\\\\n<td>path to data files to supply the data that w
+ill be passed into templates.</td>\\\\n</tr>\\\\n<tr>\\\\n<td>engine<
+/td>\\\\n<td>engine to be used for processing templates. Handle
+bars is the default.</td>\\\\n</tr>\\\\n<tr>\\\\n<td>ext</td>\\\\n<td>ex
+tension to be used for dest files.</td>\\\\n</tr>\\\\n</tbody></ta
+ble>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Right aligned columns</p><t
+able>\\\\n<thead>\\\\n<tr>\\\\n<th align=\\\\\\"right\\\\\\">Option</th>\\\\n<th a
+lign=\\\\\\"right\\\\\\">Description</th>\\\\n</tr>\\\\n</thead>\\\\n<tbody><tr
+>\\\\n<td align=\\\\\\"right\\\\\\">data</td>\\\\n<td align=\\\\\\"right\\\\\\">path t
+o data files to supply the data that will be passed into tem
+plates.</td>\\\\n</tr>\\\\n<tr>\\\\n<td align=\\\\\\"right\\\\\\">engine</td>\\\\n
+<td align=\\\\\\"right\\\\\\">engine to be used for processing templat
+es. Handlebars is the default.</td>\\\\n</tr>\\\\n<tr>\\\\n<td align=
+\\\\\\"right\\\\\\">ext</td>\\\\n<td align=\\\\\\"right\\\\\\">extension to be used
+ for dest files.</td>\\\\n</tr>\\\\n</tbody></table>\\\\n<h2 id=\\\\\\"lin
+ks\\\\\\">Links</h2>\\\\n<p data-spacing=\\\\\\"double\\\\\\"><a href=\\\\\\"http:/
+/dev.nodeca.com\\\\\\">link text</a></p><p data-spacing=\\\\\\"double\\\\
+\\"><a href=\\\\\\"http://nodeca.github.io/pica/demo/\\\\\\" title=\\\\\\"tit
+le text!\\\\\\">link with title</a></p><p data-spacing=\\\\\\"double\\\\\\"
+>Autoconverted link <a href=\\\\\\"https://github.com/nodeca/pica
+\\\\\\">https://github.com/nodeca/pica</a>&#xa0;(enable linkify t
+o see)</p><h2 id=\\\\\\"images\\\\\\">Images</h2>\\\\n<p data-spacing=\\\\\\"d
+ouble\\\\\\"><img src=\\\\\\"https://octodex.github.com/images/minion.
+png\\\\\\" alt=\\\\\\"Minion\\\\\\"></p><p data-spacing=\\\\\\"single\\\\\\"><img src
+=\\\\\\"https://octodex.github.com/images/stormtroopocat.jpg\\\\\\" al
+t=\\\\\\"Stormtroopocat\\\\\\" title=\\\\\\"The Stormtroopocat\\\\\\"></p><p dat
+a-spacing=\\\\\\"double\\\\\\">Like links, Images also have a footnote
+ style syntax</p><p data-spacing=\\\\\\"double\\\\\\"><img src=\\\\\\"https
+://octodex.github.com/images/dojocat.jpg\\\\\\" alt=\\\\\\"Alt text\\\\\\" 
+title=\\\\\\"The Dojocat\\\\\\"></p><p data-spacing=\\\\\\"double\\\\\\">With a 
+reference later in the document defining the URL location:</
+p><h2 id=\\\\\\"plugins\\\\\\">Plugins</h2>\\\\n<p data-spacing=\\\\\\"double\\\\
+\\">The killer feature of <code>markdown-it</code>&#xa0;is ver
+y effective support of</p><p data-spacing=\\\\\\"single\\\\\\"><a href
+=\\\\\\"https://www.npmjs.org/browse/keyword/markdown-it-plugin\\\\\\"
+>syntax plugins</a>.</p><h3 id=\\\\\\"emojies\\\\\\"><a href=\\\\\\"https:/
+/github.com/markdown-it/markdown-it-emoji\\\\\\">Emojies</a></h3>
+\\\\n<blockquote>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Classic markup: :
+wink: :crush: :cry: :tear: :laughing: :yum:</p><p data-spaci
+ng=\\\\\\"double\\\\\\">Shortcuts (emoticons): :-) :-( 8-) ;)</p></blo
+ckquote>\\\\n<p data-spacing=\\\\\\"double\\\\\\">see <a href=\\\\\\"https://g
+ithub.com/markdown-it/markdown-it-emoji#change-output\\\\\\">how 
+to change output</a>&#xa0;with twemoji.</p><h3 id=\\\\\\"subscrip
+t--superscript\\\\\\"><a href=\\\\\\"https://github.com/markdown-it/ma
+rkdown-it-sub\\\\\\">Subscript</a>&#xa0;/ <a href=\\\\\\"https://githu
+b.com/markdown-it/markdown-it-sup\\\\\\">Superscript</a></h3>\\\\n<u
+l>\\\\n<li>19^th^</li>\\\\n<li>H<del>2</del>O</li>\\\\n</ul>\\\\n<h3 id=
+\\\\\\"ins\\\\\\"><a href=\\\\\\"https://github.com/markdown-it/markdown-it
+-ins\\\\\\">&lt;ins&gt;</a></h3>\\\\n<p data-spacing=\\\\\\"double\\\\\\">++In
+serted text++</p><h3 id=\\\\\\"mark\\\\\\"><a href=\\\\\\"https://github.co
+m/markdown-it/markdown-it-mark\\\\\\">&lt;mark&gt;</a></h3>\\\\n<p d
+ata-spacing=\\\\\\"double\\\\\\">==Marked text==</p><h3 id=\\\\\\"footnotes
+\\\\\\"><a href=\\\\\\"https://github.com/markdown-it/markdown-it-foot
+note\\\\\\">Footnotes</a></h3>\\\\n<p data-spacing=\\\\\\"double\\\\\\">Footno
+te 1 link[^first].</p><p data-spacing=\\\\\\"double\\\\\\">Footnote 2 
+link[^second].</p><p data-spacing=\\\\\\"double\\\\\\">Inline footnote
+^[Text of inline footnote] definition.</p><p data-spacing=\\\\\\"
+double\\\\\\">Duplicated footnote reference[^second].</p><p data-
+spacing=\\\\\\"double\\\\\\">[^first]: Footnote <strong>can have marku
+p</strong></p><pre class=\\\\\\"language-undefined\\\\\\"><code class=
+\\\\\\"language-undefined\\\\\\">and multiple paragraphs.</code></pre>
+<p data-spacing=\\\\\\"double\\\\\\">[^second]: Footnote text.</p><h3 
+id=\\\\\\"definition-lists\\\\\\"><a href=\\\\\\"https://github.com/markdow
+n-it/markdown-it-deflist\\\\\\">Definition lists</a></h3>\\\\n<p dat
+a-spacing=\\\\\\"double\\\\\\">Term 1</p><p data-spacing=\\\\\\"double\\\\\\">: 
+Definition 1</p><p data-spacing=\\\\\\"single\\\\\\">with lazy continu
+ation.</p><p data-spacing=\\\\\\"double\\\\\\">Term 2 with <em>inline 
+markup</em></p><p data-spacing=\\\\\\"double\\\\\\">: Definition 2</p>
+<pre class=\\\\\\"language-undefined\\\\\\"><code class=\\\\\\"language-und
+efined\\\\\\">    { some code, part of Definition 2 }<br>Third pa
+ragraph of definition 2.</code></pre><p data-spacing=\\\\\\"doubl
+e\\\\\\"><em>Compact style:</em></p><p data-spacing=\\\\\\"double\\\\\\">Te
+rm 1</p><p data-spacing=\\\\\\"single\\\\\\">~ Definition 1</p><p data
+-spacing=\\\\\\"double\\\\\\">Term 2</p><p data-spacing=\\\\\\"single\\\\\\">~ D
+efinition 2a</p><p data-spacing=\\\\\\"single\\\\\\">~ Definition 2b</
+p><h3 id=\\\\\\"abbreviations\\\\\\"><a href=\\\\\\"https://github.com/mark
+down-it/markdown-it-abbr\\\\\\">Abbreviations</a></h3>\\\\n<p data-s
+pacing=\\\\\\"double\\\\\\">This is HTML abbreviation example.</p><p d
+ata-spacing=\\\\\\"double\\\\\\">It converts &quot;HTML&quot;, but kee
+p intact partial entries like &quot;xxxHTMLyyy&quot; and so 
+on.</p><p data-spacing=\\\\\\"double\\\\\\">*[HTML]: Hyper Text Markup
+ Language</p><h3 id=\\\\\\"custom-containers\\\\\\"><a href=\\\\\\"https://
+github.com/markdown-it/markdown-it-container\\\\\\">Custom contai
+ners</a></h3>\\\\n<p data-spacing=\\\\\\"double\\\\\\">::: warning</p><p 
+data-spacing=\\\\\\"single\\\\\\"><em>here be dragons</em></p><p data-
+spacing=\\\\\\"single\\\\\\">:::</p>\\"}}]"
 `;
 
 exports[`transform simplenote files to notesnook importer compatible format 1`] = `
