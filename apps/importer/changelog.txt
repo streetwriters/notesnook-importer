@@ -2,3 +2,4 @@
 2. Added support for importing from TextBundle/TextPack files
 3. Optimized the importer for offline use.
 4. Frontmatter support in Markdown (currently only detects title, tags, pinned & favorite).
+5. Codeblocks in markdown now get HTML encoded by default
