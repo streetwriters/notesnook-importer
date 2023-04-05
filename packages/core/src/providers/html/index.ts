@@ -21,7 +21,7 @@ import { ContentType, Note } from "../../models/note";
 import { File } from "../../utils/file";
 import { IFileProvider, ProviderSettings } from "../provider";
 import { parseDocument } from "htmlparser2";
-import { textContent, findOne, findAll } from "domutils";
+import { textContent, findOne, findAll, removeElement } from "domutils";
 import { render } from "dom-serializer";
 import { IHasher } from "../../utils/hasher";
 import { Attachment } from "../../models";
@@ -61,6 +61,8 @@ export class HTML implements IFileProvider {
       document.childNodes,
       true
     );
+    if (titleElement) removeElement(titleElement);
+
     const title = titleElement
       ? textContent(titleElement)
       : file.nameWithoutExtension;

@@ -22,7 +22,6 @@ import { IFileProvider, ProviderSettings } from "../provider";
 import { ContentType, Note, Notebook } from "../../models/note";
 import { ElementHandler } from "./element-handlers";
 import { File } from "../../utils/file";
-import { path } from "../../utils/path";
 
 export class Evernote implements IFileProvider {
   public type = "file" as const;
@@ -37,7 +36,7 @@ export class Evernote implements IFileProvider {
 
   async *process(file: File, settings: ProviderSettings) {
     const notebook: Notebook = {
-      notebook: path.basename(file.name)
+      notebook: file.nameWithoutExtension
     };
 
     for await (const chunk of parse(

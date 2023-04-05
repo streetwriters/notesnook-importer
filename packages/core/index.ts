@@ -41,6 +41,14 @@ export async function transform(
         allFiles,
         preprocessData
       )) {
+        // NOTE: this needs to be done temporarily because Notesnook converts all \n
+        // characters to paragraphs. While that has been fixed we should keep this here
+        // for a while until the new version has propagated everywhere.
+        if (note.content?.data)
+          note.content.data = note.content.data
+            .replace(/\n+/gm, "")
+            .replace(/(\r\n)+/gm, "");
+
         await settings.storage.write(note);
         settings.reporter(++count);
       }
