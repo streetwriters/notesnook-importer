@@ -80,9 +80,12 @@ marked.use({
       return false;
     },
     code: function (code, language, _isEscaped) {
-      return `<pre class="language-${language?.toLowerCase()}"><code class="language-${language?.toLowerCase()}">${code
+      return `<pre class="language-${language?.toLowerCase()}"><code class="language-${language?.toLowerCase()}">${encodeHTML5(
+        code
+      )
         .replace(/(\r\n)+/gm, "<br/>")
-        .replace(/\n+/gm, "<br/>")}</code></pre>`;
+        .replace(/\n+/gm, "<br/>")
+        .replace(/&NewLine;/gm, "<br/>")}</code></pre>`;
     }
   }
 });
