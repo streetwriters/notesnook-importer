@@ -17,8 +17,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { formatBytes } from "../utils/formatter";
-
 export type Attachment = {
   hash: string;
   hashType: string;
@@ -44,8 +42,7 @@ const attributeMap: Record<string, Attribute> = {
     key: "data-size",
     value: (value) => {
       const bytes = parseInt(value);
-      if (!isNaN(bytes)) return formatBytes(bytes, 1);
-      return value;
+      return !isNaN(bytes) ? value : "0";
     }
   },
   hash: {
