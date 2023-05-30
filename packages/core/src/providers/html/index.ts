@@ -21,10 +21,17 @@ import { ContentType, Note } from "../../models/note";
 import { File } from "../../utils/file";
 import { IFileProvider, ProviderSettings } from "../provider";
 import { parseDocument } from "htmlparser2";
-import { textContent, findOne, findAll, removeElement } from "domutils";
+import {
+  textContent,
+  findOne,
+  findAll,
+  removeElement,
+  replaceElement
+} from "domutils";
 import { render } from "dom-serializer";
 import { IHasher } from "../../utils/hasher";
-import { Attachment } from "../../models";
+import { Attachment, attachmentToHTML } from "../../models";
+import { path } from "../../utils/path";
 
 export class HTML implements IFileProvider {
   public type = "file" as const;
@@ -68,19 +75,25 @@ export class HTML implements IFileProvider {
       : file.nameWithoutExtension;
 
     const resources = findAll(
-      (elem) => elem.tagName.toLowerCase() === "img",
+      (elem) =>
+        elem.tagName.toLowerCase() === "img" ||
+        elem.tagName.toLowerCase() === "video" ||
+        elem.tagName.toLowerCase() === "audio",
       document.childNodes
     );
 
     const attachments: Attachment[] = [];
     for (const resource of resources) {
-      const src = resource.attribs.src;
-      if (!src) continue;
+      const fullPath =
+        resource.attribs.src &&
+        file?.path &&
+        path.join(path.dirname(file.path), resource.attribs.src);
+      if (!fullPath) continue;
 
-      const file = files.find((file) => file.path && file.path.endsWith(src));
-      if (!file) continue;
+      const resourceFile = files.find((file) => file.path === fullPath);
+      if (!resourceFile) continue;
 
-      const data = await file.bytes();
+      const data = await resourceFile.bytes();
       if (!data) continue;
 
       const dataHash = await hasher.hash(data);
@@ -91,9 +104,14 @@ export class HTML implements IFileProvider {
         filename:
           resource.attribs.title || resource.attribs.filename || dataHash,
         hashType: hasher.type,
-        mime: resource.attribs.mime || "application/octet-stream"
+        mime:
+          resource.attribs.mime ||
+          EXTENSION_TO_MIMETYPE[resourceFile.extension] ||
+          `application/octet-stream`
       };
       attachments.push(attachment);
+
+      replaceElement(resource, parseDocument(attachmentToHTML(attachment)));
     }
 
     const note: Note = {
@@ -110,3 +128,17 @@ export class HTML implements IFileProvider {
     return note;
   }
 }
+
+const EXTENSION_TO_MIMETYPE: Record<string, string> = {
+  ".jpg": "image/jpg",
+  ".jpeg": "image/jpeg",
+  ".png": "image/png",
+  ".webp": "image/webp",
+  ".gif": "image/gif",
+  ".bmp": "image/bmp",
+  ".ico": "image/vnd.microsoft.icon",
+  ".tiff": "image/tiff",
+  ".tif": "image/tiff",
+  ".svg": "image/svg+xml",
+  ".svgz": "image/svg+xml"
+};
