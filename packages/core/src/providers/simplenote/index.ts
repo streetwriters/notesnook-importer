@@ -49,17 +49,13 @@ export class Simplenote implements IFileProvider {
       if (parent && key) delete (parent as any)[key];
 
       const activeNote = value as SimplenoteNote;
-      if (
-        !activeNote.content ||
-        !activeNote.creationDate ||
-        !activeNote.lastModified
-      ) {
+      if (!activeNote.creationDate || !activeNote.lastModified) {
         throw new Error(
-          `Invalid note. content, creationDate & lastModified properties are required. (File: ${file.name})`
+          `Invalid note. creationDate & lastModified properties are required. (File: ${file.name})`
         );
       }
 
-      const lines = activeNote.content.split(/\r\n|\n/);
+      const lines = (activeNote.content || "").split(/\r\n|\n/);
       const title = lines[0];
       const content = activeNote.markdown
         ? markdowntoHTML(lines.join("\n"))
