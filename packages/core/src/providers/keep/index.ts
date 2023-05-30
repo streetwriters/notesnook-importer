@@ -22,7 +22,6 @@ import { KeepNote, listToHTML } from "./types";
 import { IFileProvider, ProviderSettings } from "../provider";
 import { File } from "../../utils/file";
 import { Attachment, attachmentToHTML } from "../../models/attachment";
-import { path } from "../../utils/path";
 import { markdowntoHTML } from "../../utils/to-html";
 import { parseDocument } from "htmlparser2";
 import { append } from "domutils";
@@ -60,7 +59,7 @@ export class GoogleKeep implements IFileProvider {
 
     const dateEdited = this.usToMilliseconds(keepNote.userEditedTimestampUsec);
     const note: Note = {
-      title: keepNote.title || path.basename(file.name),
+      title: keepNote.title || file.nameWithoutExtension,
       dateCreated: dateEdited,
       dateEdited,
       pinned: keepNote.isPinned,
