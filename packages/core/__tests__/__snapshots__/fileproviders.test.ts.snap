@@ -155,11 +155,24 @@ exports[`transform & pack keep files to notesnook importer compatible format 1`]
 [
   "/2a772c65252fb50d757ab0fb8a5879fa/note.json",
   "/0fd171054ffe8d4d39217f8d2afb2a25/note.json",
-  "/d4fe8512db32db646421cd67b142312a/attachments/891ec65d29e946d5",
-  "/d4fe8512db32db646421cd67b142312a/note.json",
+  "/31fe410c74d290a3af14fd682f22deeb/attachments/891ec65d29e946d5",
+  "/31fe410c74d290a3af14fd682f22deeb/note.json",
   "/60501399e879b9c6d3985fcdae8c5470/note.json",
-  "/2bad9f90e0e55cb099cf46fd1c3a8489/attachments/c52fdb48c0f1b106",
-  "/2bad9f90e0e55cb099cf46fd1c3a8489/note.json",
+  "/1e5c6135ab566f25b4bb5728c1a2a1c5/attachments/c52fdb48c0f1b106",
+  "/1e5c6135ab566f25b4bb5728c1a2a1c5/note.json",
+  "/309d58f4f975ad8128e919019e9ad6bb/attachments/891ec65d29e946d5",
+  "/309d58f4f975ad8128e919019e9ad6bb/note.json",
+  "/c7fc66632348996fa89018acb5fd9dba/attachments/891ec65d29e946d5",
+  "/c7fc66632348996fa89018acb5fd9dba/note.json",
+  "/6b7191f7146715a47afcd56e72e821dc/attachments/891ec65d29e946d5",
+  "/6b7191f7146715a47afcd56e72e821dc/note.json",
+  "/2a772c65252fb50d757ab0fb8a5879fa/note.json",
+  "/60501399e879b9c6d3985fcdae8c5470/note.json",
+  "/31fe410c74d290a3af14fd682f22deeb/attachments/891ec65d29e946d5",
+  "/31fe410c74d290a3af14fd682f22deeb/note.json",
+  "/0fd171054ffe8d4d39217f8d2afb2a25/note.json",
+  "/1e5c6135ab566f25b4bb5728c1a2a1c5/attachments/c52fdb48c0f1b106",
+  "/1e5c6135ab566f25b4bb5728c1a2a1c5/note.json",
   "metadata.json",
 ]
 `;
@@ -173,6 +186,8 @@ exports[`transform & pack md files to notesnook importer compatible format 1`] =
   "/05aad2af0da68cf33e76e4a5415c28c3/note.json",
   "/3807d86fab063a8735a2c166be46320b/attachments/2c9f83c82d41d91e",
   "/3807d86fab063a8735a2c166be46320b/note.json",
+  "/2de6092ee1868cf556ce91485aaec6d8/attachments/427fcb0247323183",
+  "/2de6092ee1868cf556ce91485aaec6d8/note.json",
   "metadata.json",
 ]
 `;
@@ -6967,21 +6982,75 @@ i>bing</li><li>run</li><li>fast</li>      </ul>\\"}},{\\"title\\":
 \\",\\"data\\":\\"<p data-spacing=\\\\\\"double\\\\\\">this is a note</p><img 
 class=\\\\\\"attachment\\\\\\" data-filename=\\\\\\"1629964333125.746683646
 .jpg\\\\\\" data-size=\\\\\\"170832\\\\\\" data-hash=\\\\\\"891ec65d29e946d5\\\\\\" d
-ata-mime=\\\\\\"image/jpeg\\\\\\" alt=\\\\\\"1629964333125.746683646.jpg\\\\\\">
-\\"},\\"attachments\\":[{\\"filename\\":\\"1629964333125.746683646.jpg\\",
-\\"size\\":170832,\\"hash\\":\\"891ec65d29e946d5\\",\\"hashType\\":\\"xxh64\\",\\"
-mime\\":\\"image/jpeg\\"}]},{\\"title\\":\\"2021-08-26T12_50_07.132+05_0
-0\\",\\"dateCreated\\":1629964207042,\\"dateEdited\\":1629964207042,\\"p
-inned\\":false,\\"content\\":{\\"type\\":\\"html\\",\\"data\\":\\"<p data-spacin
-g=\\\\\\"double\\\\\\">hello world</p>\\"}},{\\"title\\":\\"draw\\",\\"dateCreated
-\\":1629964316377,\\"dateEdited\\":1629964316377,\\"pinned\\":false,\\"c
-ontent\\":{\\"type\\":\\"html\\",\\"data\\":\\"<p data-spacing=\\\\\\"double\\\\\\">a 
-simple drawing</p><img class=\\\\\\"attachment\\\\\\" data-filename=\\\\\\"
-1629964295873.139657380.png\\\\\\" data-size=\\\\\\"41348\\\\\\" data-hash=
-\\\\\\"c52fdb48c0f1b106\\\\\\" data-mime=\\\\\\"image/png\\\\\\" alt=\\\\\\"162996429
-5873.139657380.png\\\\\\">\\"},\\"attachments\\":[{\\"filename\\":\\"16299642
-95873.139657380.png\\",\\"size\\":41348,\\"hash\\":\\"c52fdb48c0f1b106\\",
-\\"hashType\\":\\"xxh64\\",\\"mime\\":\\"image/png\\"}]}]"
+ata-mime=\\\\\\"image/jpeg\\\\\\" alt=\\\\\\"1629964333125.746683646.jpg\\\\\\" 
+/>\\"},\\"attachments\\":[{\\"filename\\":\\"1629964333125.746683646.jpg
+\\",\\"size\\":170832,\\"hash\\":\\"891ec65d29e946d5\\",\\"hashType\\":\\"xxh64\\"
+,\\"mime\\":\\"image/jpeg\\"}]},{\\"title\\":\\"2021-08-26T12_50_07.132+05
+_00\\",\\"dateCreated\\":1629964207042,\\"dateEdited\\":1629964207042,
+\\"pinned\\":false,\\"content\\":{\\"type\\":\\"html\\",\\"data\\":\\"<p data-spac
+ing=\\\\\\"double\\\\\\">hello world</p>\\"}},{\\"title\\":\\"draw\\",\\"dateCreat
+ed\\":1629964316377,\\"dateEdited\\":1629964316377,\\"pinned\\":false,
+\\"content\\":{\\"type\\":\\"html\\",\\"data\\":\\"<p data-spacing=\\\\\\"double\\\\\\">
+a simple drawing</p><img class=\\\\\\"attachment\\\\\\" data-filename=
+\\\\\\"1629964295873.139657380.png\\\\\\" data-size=\\\\\\"41348\\\\\\" data-has
+h=\\\\\\"c52fdb48c0f1b106\\\\\\" data-mime=\\\\\\"image/png\\\\\\" alt=\\\\\\"1629964
+295873.139657380.png\\\\\\" />\\"},\\"attachments\\":[{\\"filename\\":\\"1629
+964295873.139657380.png\\",\\"size\\":41348,\\"hash\\":\\"c52fdb48c0f1b1
+06\\",\\"hashType\\":\\"xxh64\\",\\"mime\\":\\"image/png\\"}]},{\\"title\\":\\"#they
+Say \\",\\"dateCreated\\":1492509461455,\\"dateEdited\\":1492509461455
+,\\"pinned\\":false,\\"tags\\":[\\"theySay\\"],\\"content\\":{\\"type\\":\\"html\\",
+\\"data\\":\\"<p data-spacing=\\\\\\"double\\\\\\">There is some text!</p><i
+mg class=\\\\\\"attachment\\\\\\" data-filename=\\\\\\"15b807dfd35.9d0e780f
+c8254993.jpg\\\\\\" data-size=\\\\\\"170832\\\\\\" data-hash=\\\\\\"891ec65d29e9
+46d5\\\\\\" data-mime=\\\\\\"image/jpeg\\\\\\" alt=\\\\\\"15b807dfd35.9d0e780fc8
+254993.jpg\\\\\\" />\\"},\\"attachments\\":[{\\"filename\\":\\"15b807dfd35.9d
+0e780fc8254993.jpg\\",\\"size\\":170832,\\"hash\\":\\"891ec65d29e946d5\\",
+\\"hashType\\":\\"xxh64\\",\\"mime\\":\\"image/jpeg\\"}]},{\\"title\\":\\"#theySay
+ \\",\\"dateCreated\\":1492509461455,\\"dateEdited\\":1492509461455,\\"p
+inned\\":false,\\"tags\\":[\\"theySay\\"],\\"content\\":{\\"type\\":\\"html\\",\\"da
+ta\\":\\"<img class=\\\\\\"attachment\\\\\\" data-filename=\\\\\\"15b807dfd35.9
+d0e780fc8254993.jpg\\\\\\" data-size=\\\\\\"170832\\\\\\" data-hash=\\\\\\"891ec
+65d29e946d5\\\\\\" data-mime=\\\\\\"image/jpeg\\\\\\" alt=\\\\\\"15b807dfd35.9d0
+e780fc8254993.jpg\\\\\\" />\\"},\\"attachments\\":[{\\"filename\\":\\"15b807d
+fd35.9d0e780fc8254993.jpg\\",\\"size\\":170832,\\"hash\\":\\"891ec65d29e
+946d5\\",\\"hashType\\":\\"xxh64\\",\\"mime\\":\\"image/jpeg\\"}]},{\\"title\\":\\"S
+creenshot (09:48PM, Nov 25, 2020)\\",\\"dateCreated\\":16063337589
+49,\\"dateEdited\\":1606333758949,\\"pinned\\":false,\\"tags\\":[\\"Ответы
+\\"],\\"content\\":{\\"type\\":\\"html\\",\\"data\\":\\"<img class=\\\\\\"attachment\\\\
+\\" data-filename=\\\\\\"17600f3e30b.903a5cd0ac11ff5d.jpg\\\\\\" data-si
+ze=\\\\\\"170832\\\\\\" data-hash=\\\\\\"891ec65d29e946d5\\\\\\" data-mime=\\\\\\"ima
+ge/jpeg\\\\\\" alt=\\\\\\"17600f3e30b.903a5cd0ac11ff5d.jpg\\\\\\" />\\"},\\"att
+achments\\":[{\\"filename\\":\\"17600f3e30b.903a5cd0ac11ff5d.jpg\\",\\"s
+ize\\":170832,\\"hash\\":\\"891ec65d29e946d5\\",\\"hashType\\":\\"xxh64\\",\\"mi
+me\\":\\"image/jpeg\\"}]},{\\"title\\":\\"2021-08-26T12_50_12.122+05_00\\"
+,\\"dateCreated\\":1629964212062,\\"dateEdited\\":1629964212062,\\"pin
+ned\\":false,\\"content\\":{\\"type\\":\\"html\\",\\"data\\":\\"<p data-spacing=
+\\\\\\"double\\\\\\">another note</p>\\"}},{\\"title\\":\\"2021-08-26T12_50_07
+.132+05_00\\",\\"dateCreated\\":1629964207042,\\"dateEdited\\":1629964
+207042,\\"pinned\\":false,\\"content\\":{\\"type\\":\\"html\\",\\"data\\":\\"<p da
+ta-spacing=\\\\\\"double\\\\\\">hello world</p>\\"}},{\\"title\\":\\"good plac
+e\\",\\"dateCreated\\":1629964346280,\\"dateEdited\\":1629964346280,\\"p
+inned\\":false,\\"color\\":\\"red\\",\\"content\\":{\\"type\\":\\"html\\",\\"data\\":\\"
+<p data-spacing=\\\\\\"double\\\\\\">this is a note</p><img class=\\\\\\"at
+tachment\\\\\\" data-filename=\\\\\\"1629964333125.746683646.jpg\\\\\\" dat
+a-size=\\\\\\"170832\\\\\\" data-hash=\\\\\\"891ec65d29e946d5\\\\\\" data-mime=\\\\
+\\"image/jpeg\\\\\\" alt=\\\\\\"1629964333125.746683646.jpg\\\\\\" />\\"},\\"atta
+chments\\":[{\\"filename\\":\\"1629964333125.746683646.jpg\\",\\"size\\":1
+70832,\\"hash\\":\\"891ec65d29e946d5\\",\\"hashType\\":\\"xxh64\\",\\"mime\\":\\"i
+mage/jpeg\\"}]},{\\"title\\":\\"2021-08-26T14_23_07.058+05_00\\",\\"date
+Created\\":1629964242424,\\"dateEdited\\":1629964242424,\\"pinned\\":f
+alse,\\"color\\":\\"blue\\",\\"tags\\":[\\"cats\\",\\"run\\"],\\"content\\":{\\"type\\":
+\\"html\\",\\"data\\":\\"<ul class=\\\\\\"checklist\\\\\\">        <li>note</li>
+<li>bing</li><li>run</li><li>fast</li>      </ul>\\"}},{\\"title
+\\":\\"draw\\",\\"dateCreated\\":1629964316377,\\"dateEdited\\":1629964316
+377,\\"pinned\\":false,\\"content\\":{\\"type\\":\\"html\\",\\"data\\":\\"<p data-
+spacing=\\\\\\"double\\\\\\">a simple drawing</p><img class=\\\\\\"attachme
+nt\\\\\\" data-filename=\\\\\\"1629964295873.139657380.png\\\\\\" data-size
+=\\\\\\"41348\\\\\\" data-hash=\\\\\\"c52fdb48c0f1b106\\\\\\" data-mime=\\\\\\"image/
+png\\\\\\" alt=\\\\\\"1629964295873.139657380.png\\\\\\" />\\"},\\"attachments\\"
+:[{\\"filename\\":\\"1629964295873.139657380.png\\",\\"size\\":41348,\\"ha
+sh\\":\\"c52fdb48c0f1b106\\",\\"hashType\\":\\"xxh64\\",\\"mime\\":\\"image/png\\"
+}]}]"
 `;
 
 exports[`transform md files to notesnook importer compatible format 1`] = `
@@ -8526,7 +8595,16 @@ d91e\\",\\"hashType\\":\\"xxh64\\",\\"mime\\":\\"image/jpg\\"}],\\"content\\":{\
 pe\\":\\"html\\",\\"data\\":\\"<p data-spacing=\\\\\\"double\\\\\\"><img class=\\\\\\"a
 ttachment\\\\\\" data-filename=\\\\\\"2c9f83c82d41d91e\\\\\\" data-size=\\\\\\"4
 6605\\\\\\" data-hash=\\\\\\"2c9f83c82d41d91e\\\\\\" data-mime=\\\\\\"image/jpg\\\\
-\\" alt=\\\\\\"2c9f83c82d41d91e\\\\\\"></p>\\"}}]"
+\\" alt=\\\\\\"2c9f83c82d41d91e\\\\\\"></p>\\"}},{\\"title\\":\\"Temp note\\",\\"dat
+eEdited\\":1685533484000,\\"attachments\\":[{\\"size\\":202725,\\"hash\\":
+\\"427fcb0247323183\\",\\"filename\\":\\"427fcb0247323183\\",\\"hashType\\":
+\\"xxh64\\",\\"mime\\":\\"application/pdf\\"}],\\"content\\":{\\"type\\":\\"html\\",
+\\"data\\":\\"<p data-spacing=\\\\\\"double\\\\\\"><span class=\\\\\\"attachment\\\\
+\\" data-filename=\\\\\\"427fcb0247323183\\\\\\" data-size=\\\\\\"202725\\\\\\" da
+ta-hash=\\\\\\"427fcb0247323183\\\\\\" data-mime=\\\\\\"application/pdf\\\\\\" c
+ontenteditable=\\\\\\"false\\\\\\" title=\\\\\\"427fcb0247323183\\\\\\">      <e
+m>&#xa0;</em>      <span class=\\\\\\"filename\\\\\\">427fcb0247323183
+</span>    </span></p>\\"}}]"
 `;
 
 exports[`transform simplenote files to notesnook importer compatible format 1`] = `
