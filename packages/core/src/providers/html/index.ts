@@ -26,13 +26,16 @@ import {
   findOne,
   findAll,
   removeElement,
-  replaceElement
+  replaceElement,
+  getAttributeValue
 } from "domutils";
 import { render } from "dom-serializer";
+import { Document } from "domhandler";
 import { IHasher } from "../../utils/hasher";
 import { Attachment, attachmentToHTML } from "../../models";
 import { path } from "../../utils/path";
 
+const RESOURCE_TAGS = ["img", "video", "audio", "a"];
 export class HTML implements IFileProvider {
   public type = "file" as const;
   public supportedExtensions = [".html", ".htm"];
@@ -74,20 +77,45 @@ export class HTML implements IFileProvider {
       ? textContent(titleElement)
       : file.nameWithoutExtension;
 
+    const resources = await HTML.extractResources(
+      document,
+      file,
+      files,
+      hasher
+    );
+
+    const note: Note = {
+      title: title,
+      dateCreated: file.createdAt,
+      dateEdited: file.modifiedAt,
+      attachments: [...resources],
+      content: {
+        type: ContentType.HTML,
+        data: body ? render(body.childNodes) : render(document.childNodes)
+      }
+    };
+
+    return note;
+  }
+
+  private static async extractResources(
+    document: Document,
+    file: File,
+    files: File[],
+    hasher: IHasher
+  ) {
     const resources = findAll(
-      (elem) =>
-        elem.tagName.toLowerCase() === "img" ||
-        elem.tagName.toLowerCase() === "video" ||
-        elem.tagName.toLowerCase() === "audio",
+      (elem) => RESOURCE_TAGS.includes(elem.tagName.toLowerCase()),
       document.childNodes
     );
 
     const attachments: Attachment[] = [];
     for (const resource of resources) {
+      const src =
+        getAttributeValue(resource, "src") ||
+        getAttributeValue(resource, "href");
       const fullPath =
-        resource.attribs.src &&
-        file?.path &&
-        path.join(path.dirname(file.path), resource.attribs.src);
+        src && file?.path && path.join(path.dirname(file.path), src);
       if (!fullPath) continue;
 
       const resourceFile = files.find((file) => file.path === fullPath);
@@ -113,19 +141,7 @@ export class HTML implements IFileProvider {
 
       replaceElement(resource, parseDocument(attachmentToHTML(attachment)));
     }
-
-    const note: Note = {
-      title: title,
-      dateCreated: file.createdAt,
-      dateEdited: file.modifiedAt,
-      attachments,
-      content: {
-        type: ContentType.HTML,
-        data: body ? render(body.childNodes) : render(document.childNodes)
-      }
-    };
-
-    return note;
+    return attachments;
   }
 }
 
@@ -140,5 +156,6 @@ const EXTENSION_TO_MIMETYPE: Record<string, string> = {
   ".tiff": "image/tiff",
   ".tif": "image/tiff",
   ".svg": "image/svg+xml",
-  ".svgz": "image/svg+xml"
+  ".svgz": "image/svg+xml",
+  ".pdf": "application/pdf"
 };
