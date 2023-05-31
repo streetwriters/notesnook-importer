@@ -23,9 +23,6 @@ import { IFileProvider, ProviderSettings } from "../provider";
 import { File } from "../../utils/file";
 import { Attachment, attachmentToHTML } from "../../models/attachment";
 import { markdowntoHTML } from "../../utils/to-html";
-import { parseDocument } from "htmlparser2";
-import { append } from "domutils";
-import { render } from "dom-serializer";
 
 const colorMap: Record<string, string | undefined> = {
   default: undefined,
@@ -73,7 +70,6 @@ export class GoogleKeep implements IFileProvider {
 
     if (keepNote.attachments && note.content) {
       note.attachments = [];
-      const document = parseDocument(note.content.data);
       for (const keepAttachment of keepNote.attachments) {
         const attachmentFile = files.find((f) =>
           keepAttachment.filePath.includes(f.nameWithoutExtension)
@@ -93,15 +89,9 @@ export class GoogleKeep implements IFileProvider {
           mime: keepAttachment.mimetype
         };
 
-        if (document.firstChild)
-          append(
-            document.firstChild,
-            parseDocument(attachmentToHTML(attachment))
-          );
-
+        note.content.data += attachmentToHTML(attachment);
         note.attachments.push(attachment);
       }
-      note.content.data = render(document.childNodes);
     }
     yield note;
   }
