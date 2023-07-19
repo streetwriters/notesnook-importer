@@ -115,7 +115,9 @@ export class HTML implements IFileProvider {
         getAttributeValue(resource, "src") ||
         getAttributeValue(resource, "href");
       const fullPath =
-        src && file?.path && path.join(path.dirname(file.path), src);
+        src &&
+        file?.path &&
+        decodeURIComponent(path.join(path.dirname(file.path), src));
       if (!fullPath) continue;
 
       const resourceFile = files.find((file) => file.path === fullPath);
@@ -130,7 +132,10 @@ export class HTML implements IFileProvider {
         size: data.byteLength,
         hash: dataHash,
         filename:
-          resource.attribs.title || resource.attribs.filename || dataHash,
+          resource.attribs.title ||
+          resource.attribs.filename ||
+          resourceFile.name ||
+          dataHash,
         hashType: hasher.type,
         mime:
           resource.attribs.mime ||
