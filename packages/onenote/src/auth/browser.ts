@@ -1,7 +1,7 @@
 /*
 This file is part of the Notesnook project (https://notesnook.com/)
 
-Copyright (C) 2022 Streetwriters (Private) Limited
+Copyright (C) 2023 Streetwriters (Private) Limited
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import {
   PublicClientApplication,
-  AuthenticationResult,
+  AuthenticationResult
 } from "@azure/msal-browser";
 import { AuthConfig, SCOPES } from "./config";
 
@@ -30,13 +30,13 @@ function getClient(config: AuthConfig): PublicClientApplication {
     client = new PublicClientApplication({
       auth: {
         clientId: config.clientId,
-        redirectUri: config.redirectUri,
+        redirectUri: config.redirectUri
       },
       cache: {
         cacheLocation: "localStorage",
         storeAuthStateInCookie: false,
-        secureCookies: false,
-      },
+        secureCookies: false
+      }
     });
   return client;
 }
@@ -49,12 +49,12 @@ export async function authenticate(
   return await client
     .acquireTokenSilent({
       scopes: SCOPES,
-      account: accounts[0],
+      account: accounts[0]
     })
     .catch(() => {
       if (!client) return null;
       return client.acquireTokenPopup({
-        scopes: SCOPES,
+        scopes: SCOPES
       });
     });
 }

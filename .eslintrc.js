@@ -2,7 +2,7 @@ const LICENSE = [
   "",
   "This file is part of the Notesnook project (https://notesnook.com/)",
   "",
-  "Copyright (C) 2022 Streetwriters (Private) Limited",
+  "Copyright (C) 2023 Streetwriters (Private) Limited",
   "",
   "This program is free software: you can redistribute it and/or modify",
   "it under the terms of the GNU General Public License as published by",
@@ -46,9 +46,7 @@ module.exports = {
     "react",
     "@typescript-eslint",
     "unused-imports",
-    "detox",
     "jest",
-    "react-native",
     "header",
     "react-hooks"
   ],
@@ -85,26 +83,5 @@ module.exports = {
     react: {
       version: "17"
     }
-  },
-  overrides: [
-    {
-      files: ["apps/web/__e2e__/**/**/*.{jsx,tsx,ts,js}"],
-      rules: { "react-hooks/rules-of-hooks": "off" }
-    },
-    {
-      files: ["apps/mobile/**/**/*.{jsx,tsx,ts,js}"],
-      env: {
-        "react-native/react-native": true,
-        es2021: true,
-        browser: true,
-        "detox/detox": true
-      },
-      rules: {
-        // TODO: remove this gradually
-        "@typescript-eslint/ban-ts-comment": "off",
-        "react/react-in-jsx-scope": 2,
-        "react/jsx-uses-react": 2
-      }
-    }
-  ]
+  }
 };

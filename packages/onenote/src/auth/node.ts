@@ -1,7 +1,7 @@
 /*
 This file is part of the Notesnook project (https://notesnook.com/)
 
-Copyright (C) 2022 Streetwriters (Private) Limited
+Copyright (C) 2023 Streetwriters (Private) Limited
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -19,12 +19,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import {
   AuthenticationResult,
-  PublicClientApplication,
+  PublicClientApplication
 } from "@azure/msal-node";
 import { AuthConfig, SCOPES } from "./config";
 import {
   PersistenceCachePlugin,
-  FilePersistence,
+  FilePersistence
 } from "@azure/msal-node-extensions";
 
 let client: PublicClientApplication | undefined;
@@ -36,11 +36,11 @@ async function getClient(config: AuthConfig): Promise<PublicClientApplication> {
     client = new PublicClientApplication({
       auth: {
         authority: "https://login.microsoftonline.com/common",
-        clientId: config.clientId,
+        clientId: config.clientId
       },
       cache: {
-        cachePlugin: new PersistenceCachePlugin(persistence),
-      },
+        cachePlugin: new PersistenceCachePlugin(persistence)
+      }
     });
   }
   return client;
@@ -55,7 +55,7 @@ export async function authenticate(
   return await client
     .acquireTokenSilent({
       scopes: SCOPES,
-      account: accountInfo[0],
+      account: accountInfo[0]
     })
     .catch(() => {
       if (!client) return null;
@@ -63,7 +63,7 @@ export async function authenticate(
         scopes: SCOPES,
         deviceCodeCallback: (res) => {
           console.log(res.message);
-        },
+        }
       });
     });
 }

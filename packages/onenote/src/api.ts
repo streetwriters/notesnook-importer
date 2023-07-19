@@ -1,7 +1,7 @@
 /*
 This file is part of the Notesnook project (https://notesnook.com/)
 
-Copyright (C) 2022 Streetwriters (Private) Limited
+Copyright (C) 2023 Streetwriters (Private) Limited
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ import {
   OnenotePage,
   Notebook as OnenoteNotebook,
   OnenoteSection,
-  SectionGroup as OnenoteSectionGroup,
+  SectionGroup as OnenoteSectionGroup
 } from "@microsoft/microsoft-graph-types-beta";
 import { GraphAPIResponse, IProgressReporter, ItemType } from "./types";
 import { Client, GraphError } from "@microsoft/microsoft-graph-client";
@@ -33,7 +33,7 @@ const defaultProperties = [
   "createdDateTime",
   "displayName",
   "lastModifiedDateTime",
-  "id",
+  "id"
 ] as const;
 
 export class OneNoteClient {
@@ -54,7 +54,7 @@ export class OneNoteClient {
           if (result) done(null, result.accessToken);
           else done("Could not get access token", null);
         }
-      },
+      }
     });
   }
 
@@ -145,7 +145,7 @@ export class OneNoteClient {
         "lastModifiedDateTime",
         "level",
         "order",
-        "userTags",
+        "userTags"
       ]
     );
 
@@ -155,7 +155,7 @@ export class OneNoteClient {
         parentSectionGroup: section.parentSectionGroup,
         parentNotebook: section.parentNotebook,
         id: section.id,
-        displayName: section.displayName,
+        displayName: section.displayName
       };
       page.content = await this.#getPageContent(page);
     });
@@ -172,7 +172,7 @@ export class OneNoteClient {
 
       const html = (await convertStream(stream)).toString("utf8");
       return new Content(html, {
-        attachmentResolver: (url) => this.#resolveDataUrl(url, page),
+        attachmentResolver: (url) => this.#resolveDataUrl(url, page)
       });
     } catch (e) {
       const error = <Error>e;
@@ -194,7 +194,7 @@ export class OneNoteClient {
       op: "process",
       type,
       total: items.length,
-      current: 0,
+      current: 0
     });
 
     for (let i = 0; i < items.length; ++i) {
@@ -205,7 +205,7 @@ export class OneNoteClient {
         op: "process",
         type,
         total: items.length,
-        current: i + 1,
+        current: i + 1
       });
     }
     return items;
@@ -226,7 +226,7 @@ export class OneNoteClient {
         op: "fetch",
         type,
         total: skip + limit,
-        current: skip,
+        current: skip
       });
 
       response = <GraphAPIResponse<T[]>>await this.#client
@@ -251,7 +251,7 @@ export class OneNoteClient {
       op: "fetch",
       type,
       total: items.length,
-      current: items.length,
+      current: items.length
     });
     return items;
   }

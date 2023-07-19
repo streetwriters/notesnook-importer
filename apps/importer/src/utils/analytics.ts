@@ -1,3 +1,22 @@
+/*
+This file is part of the Notesnook project (https://notesnook.com/)
+
+Copyright (C) 2023 Streetwriters (Private) Limited
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 import { useEffect, useState } from "react";
 import Config from "./config";
 
@@ -17,11 +36,11 @@ declare global {
 
 export function loadTrackerScript() {
   if (Config.get("telemetry") === "false") return Promise.resolve(false);
-  if (!!document.getElementById("analytics")) {
+  if (document.getElementById("analytics")) {
     return Promise.resolve(true);
   }
 
-  var script = document.createElement("script");
+  const script = document.createElement("script");
   script.id = "analytics";
   script.src = "https://analytics.streetwriters.co/umami.js";
   script.async = true;
@@ -37,7 +56,7 @@ export function loadTrackerScript() {
     script.onload = () => resolve(true);
     script.onerror = (e) => reject(e);
 
-    var firstScriptElement = document.getElementsByTagName("script")[0];
+    const firstScriptElement = document.getElementsByTagName("script")[0];
     firstScriptElement.parentNode?.insertBefore(script, firstScriptElement);
   });
 }
@@ -60,7 +79,7 @@ export async function trackEvent(event: TrackerEvent, eventMessage?: string) {
   else if (eventMessage) window.umami.trackEvent(eventMessage, event.name);
 }
 
-function trackVisit(url: string = "/") {
+function trackVisit(url = "/") {
   window.umami?.trackView(url, window.document.referrer);
 }
 

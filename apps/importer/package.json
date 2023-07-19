@@ -41,12 +41,6 @@
     "eject": "react-scripts eject",
     "postinstall": "patch-package"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
