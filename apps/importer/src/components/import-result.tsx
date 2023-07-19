@@ -134,6 +134,7 @@ export function ImportResult(props: ImportResultProps) {
         <>
           <Text variant="body" sx={{ color: "fontTertiary" }}></Text>
           <NotesList
+            provider={provider}
             totalNotes={result.totalNotes}
             onNoteSelected={(note) => setSelectedNote(note)}
           />

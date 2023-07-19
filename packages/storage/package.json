@@ -2,17 +2,12 @@
   "name": "@notesnook-importer/storage",
   "private": false,
   "version": "1.6.0",
-  "description": "",
   "main": "dist/index.js",
   "devDependencies": {
     "@types/node": "^16.11.10",
-    "@types/tap": "^15.0.5",
-    "tap": "^15.1.2",
-    "ts-node": "^10.4.0",
     "typescript": "^4.8.2"
   },
   "scripts": {
-    "test": "tap --ts --no-check-coverage --no-coverage",
     "build": "tsc",
     "prepublishOnly": "npm run build"
   },
@@ -22,8 +17,5 @@
     "type": "git",
     "url": "https://github.com/streetwriters/notesnook-importer.git",
     "directory": "packages/storage"
-  },
-  "dependencies": {
-    "localforage": "^1.10.0"
   }
 }

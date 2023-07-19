@@ -17,17 +17,15 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import localforage from "localforage";
+import { IndexedDBKVStore, IKVStore } from "./key-value";
 import { IStorage } from "./index";
 
 export class BrowserStorage<T> implements IStorage<T> {
-  storage: LocalForage;
+  storage: IKVStore;
   count = 0;
+
   constructor(directoryName: string) {
-    this.storage = localforage.createInstance({
-      storeName: directoryName,
-      driver: localforage.INDEXEDDB
-    });
+    this.storage = new IndexedDBKVStore(directoryName, "keyvaluepairs");
   }
 
   clear(): Promise<void> {
@@ -35,13 +33,13 @@ export class BrowserStorage<T> implements IStorage<T> {
   }
 
   async write(data: T): Promise<void> {
-    await this.storage.setItem(this.getId(), data);
+    await this.storage.set(this.getId(), data);
   }
 
   async *iterate() {
     const keys = await this.storage.keys();
     for (const key of keys) {
-      const item = await this.storage.getItem<T>(key);
+      const item = await this.storage.get<T>(key);
       if (!item) continue;
       yield item;
     }
@@ -51,7 +49,7 @@ export class BrowserStorage<T> implements IStorage<T> {
   async get(from: number, length: number) {
     const items = [];
     for (let i = from; i < from + length; ++i) {
-      const item = await this.storage.getItem<T>(i.toString());
+      const item = await this.storage.get<T>(i.toString());
       if (!item) continue;
       items.push(item);
     }

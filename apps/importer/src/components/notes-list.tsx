@@ -17,15 +17,28 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Note } from "@notesnook-importer/core";
+import { IProvider, Note } from "@notesnook-importer/core";
 import { Accordion } from "./accordion";
+import { Virtuoso } from "react-virtuoso";
+import { useState, useEffect } from "react";
+import { BrowserStorage } from "@notesnook-importer/storage/dist/browser";
+import { Flex, Text } from "theme-ui";
 
 type NotesListProps = {
+  provider: IProvider;
   totalNotes: number;
   onNoteSelected: (note: Note) => void;
 };
 export function NotesList(props: NotesListProps) {
-  const { totalNotes } = props;
+  const { provider, totalNotes, onNoteSelected } = props;
+  const [items, setItems] = useState<Note[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const storage = new BrowserStorage<Note>(provider.name);
+      setItems(await storage.get(items.length, items.length + 20));
+    })();
+  }, [provider.name]);
 
   return (
     <Accordion
@@ -36,14 +49,14 @@ export function NotesList(props: NotesListProps) {
         borderRadius: "default"
       }}
     >
-      {/* <Flex
-        sx={{
-          flexDirection: "column",
-          overflowY: "auto",
-          maxHeight: 300
+      <Virtuoso
+        style={{ height: 300 }}
+        data={items}
+        endReached={async () => {
+          const storage = new BrowserStorage<Note>(provider.name);
+          setItems(await storage.get(items.length, items.length + 20));
         }}
-      >
-        {notes.map((note, index) => (
+        itemContent={(index, note) => (
           <Flex
             key={note.title + note.dateCreated}
             sx={{
@@ -71,8 +84,8 @@ export function NotesList(props: NotesListProps) {
               </Text>
             )}
           </Flex>
-        ))}
-      </Flex> */}
+        )}
+      ></Virtuoso>
     </Accordion>
   );
 }
