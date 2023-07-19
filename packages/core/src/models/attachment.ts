@@ -63,9 +63,15 @@ const attributeMap: Record<string, Attribute> = {
   }
 };
 
-export function attachmentToHTML(attachment: Attachment): string {
-  const tag: "img" | "span" = attachment.mime.startsWith("image/")
+export function attachmentToHTML(
+  attachment: Attachment,
+  url?: string,
+  title?: string
+): string {
+  const tag: "img" | "span" | "iframe" = attachment.mime.startsWith("image/")
     ? "img"
+    : attachment.mime.includes("vnd.notesnook.web-clip")
+    ? "iframe"
     : "span";
 
   const attributes: string[] = [`class="attachment"`];
@@ -79,6 +85,10 @@ export function attachmentToHTML(attachment: Attachment): string {
   switch (tag) {
     case "img":
       return `<img ${attributes.join(" ")} alt="${attachment.filename}" />`;
+    case "iframe":
+      return `<iframe class="web-clip" ${attributes.join(
+        " "
+      )} src="${url}" title="${title}">&nbsp;</iframe>`;
     case "span":
       return `<span ${attributes.join(" ")} contenteditable="false" title="${
         attachment.filename

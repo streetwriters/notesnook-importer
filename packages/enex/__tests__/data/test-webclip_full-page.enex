@@ -1,0 +1,1113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-export SYSTEM "http://xml.evernote.com/pub/evernote-export4.dtd">
+<en-export export-date="20230819T024737Z" application="Evernote" version="10.58.8">
+  <note>
+    <title>Release v3.1.4 · petyosi/react-virtuoso</title>
+    <created>20221116T173409Z</created>
+    <updated>20221116T173643Z</updated>
+    <note-attributes>
+      <source>web.clip7</source>
+      <source-url>https://github.com/petyosi/react-virtuoso/releases/tag/v3.1.4</source-url>
+      <source-application>webclipper.evernote</source-application>
+    </note-attributes>
+    <content>
+      <![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd"><en-note>
+  <div style="--en-clipped-content:fullPage; --en-clipped-source-url:https://github.com/petyosi/react-virtuoso/releases/tag/v3.1.4; --en-clipped-source-title:Release v3.1.4 · petyosi/react-virtuoso;">
+<div><br/></div><div style="min-height: 1007px; font-size: 16px; display: block; min-width: 100%; position: relative;"> <div style="font-family:sans-serif;text-size-adjust:100%;box-sizing:border-box;color:rgb(36, 41, 47);background-color:rgb(255, 255, 255);color-scheme:light;"><div style="box-sizing:border-box;font-family:-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Noto Sans&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;;font-size:14px;line-height:1.5;color:rgb(36, 41, 47);background-color:rgb(255, 255, 255);overflow-wrap:break-word;--base-sticky-header-height:69px;">
+    
+
+
+    <div style="box-sizing:border-box;position:relative;">
+      <a href="https://github.com/petyosi/react-virtuoso/releases/tag/v3.1.4#start-of-content" style="box-sizing:border-box;text-decoration:none;position:absolute;width:1px;height:1px;margin:0px;overflow:hidden;clip:rect(1px, 1px, 1px, 1px);color:rgb(255, 255, 255);background-color:rgb(9, 105, 218);padding:16px;">Skip to content</a>
+            
+      
+
+
+        
+
+
+
+
+            <div style="box-sizing:border-box;z-index:32;padding:16px;font-size:14px;line-height:1.5;color:rgba(255, 255, 255, 0.7);background-color:rgb(36, 41, 47);align-items:center;display:flex;flex-wrap:nowrap;padding-right:32px;padding-left:32px;">
+
+    <div style="box-sizing:border-box;margin-right:16px;align-self:stretch;align-items:center;flex-wrap:nowrap;margin-top:-4px;margin-bottom:-4px;display:flex;">
+      <a href="https://github.com/" style="background-color:transparent;box-sizing:border-box;text-decoration:none;font-weight:600;white-space:nowrap;color:rgb(255, 255, 255);">
+  <en-media type="image/svg+xml" hash="24fa3f9cd50decfe902679a5220b30c7" style="box-sizing:border-box;display:inline-block;fill:currentcolor;overflow:visible;vertical-align:middle;" width="32" height="32" />
+</a>
+
+    </div>
+
+    
+
+    <div style="box-sizing:border-box;align-self:stretch;align-items:center;flex-wrap:nowrap;flex:1 1 auto;flex-direction:row;order:inherit;width:100%;margin-right:0px;margin-top:0px;display:flex;">
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span style="box-sizing:border-box;display:block;width:350px;">
+  <div style="box-sizing:border-box;height:32px;color:rgb(255, 255, 255);background-color:rgb(36, 41, 47);border:1px solid rgb(87, 96, 106);border-radius:6px;flex-direction:row;align-items:center;position:relative;margin-right:24px;display:flex;">
+      
+
+    
+
+    
+
+  </div>
+  
+  <div style="box-sizing:border-box;color:rgb(36, 41, 47);">
+    
+
+
+    
+
+
+    
+
+  </div>
+</span>
+
+        <div style="box-sizing:border-box;flex-direction:row;align-self:auto;display:flex;">
+    
+
+  <a href="https://github.com/pulls" style="background-color:transparent;box-sizing:border-box;text-decoration:none;font-weight:600;white-space:nowrap;color:rgb(255, 255, 255);border-top:0px;margin-right:16px;margin-top:-16px;margin-bottom:-16px;padding-top:16px;padding-bottom:16px;border-color:rgba(255, 255, 255, 0.15);">
+      Pull<span style="box-sizing:border-box;display:inline;"> request</span>s
+</a>
+  <a href="https://github.com/issues" style="background-color:transparent;box-sizing:border-box;text-decoration:none;font-weight:600;white-space:nowrap;color:rgb(255, 255, 255);border-top:0px;margin-right:16px;margin-top:-16px;margin-bottom:-16px;padding-top:16px;padding-bottom:16px;border-color:rgba(255, 255, 255, 0.15);">Issues</a>
+
+    <a href="https://github.com/codespaces" style="background-color:transparent;box-sizing:border-box;text-decoration:none;font-weight:600;white-space:nowrap;color:rgb(255, 255, 255);border-top:0px;margin-right:16px;margin-top:-16px;margin-bottom:-16px;padding-top:16px;padding-bottom:16px;border-color:rgba(255, 255, 255, 0.15);">Codespaces</a>
+
+    <div style="box-sizing:border-box;position:relative;display:flex;">
+      <a href="https://github.com/marketplace" style="background-color:transparent;box-sizing:border-box;text-decoration:none;font-weight:600;white-space:nowrap;color:rgb(255, 255, 255);border-top:0px;flex:1 1 auto;margin-right:16px;margin-top:-16px;margin-bottom:-16px;padding-top:16px;padding-bottom:16px;border-color:rgba(255, 255, 255, 0.15);">Marketplace</a>
+    </div>
+
+  <a href="https://github.com/explore" style="background-color:transparent;box-sizing:border-box;text-decoration:none;font-weight:600;white-space:nowrap;color:rgb(255, 255, 255);border-top:0px;margin-right:16px;margin-top:-16px;margin-bottom:-16px;padding-top:16px;padding-bottom:16px;border-color:rgba(255, 255, 255, 0.15);">Explore</a>
+
+      
+
+    
+
+    
+    <div style="box-sizing:border-box;">
+      
+</div></div>
+
+    </div>
+
+    
+
+    <div style="box-sizing:border-box;display:flex;align-self:stretch;align-items:center;flex-wrap:nowrap;order:inherit;margin-right:16px;">
+        
+
+<span style="box-sizing:border-box;display:block;">
+  <a href="https://github.com/notifications" style="background-color:transparent;box-sizing:border-box;text-decoration:none;font-weight:600;white-space:nowrap;color:rgb(255, 255, 255);position:relative;">
+
+    <span style="box-sizing:border-box;position:absolute;top:-6px;left:6px;z-index:2;width:14px;height:14px;color:rgb(255, 255, 255);background-image:linear-gradient(rgb(84, 163, 255), rgb(0, 110, 237));background-clip:padding-box;border:2px solid rgb(36, 41, 47);border-radius:50%;display:inline-block;">
+    </span>
+
+      <en-media type="image/svg+xml" hash="5b3ecda2b98558ebcf7d4a505f6544c3" style="box-sizing:border-box;display:inline-block;fill:currentcolor;vertical-align:text-bottom;overflow:visible;" width="16" height="16" />
+  </a>
+
+</span>
+    </div>
+
+
+    <div style="box-sizing:border-box;margin-right:16px;align-self:stretch;align-items:center;flex-wrap:nowrap;position:relative;display:flex;">
+        <div style="display:block;box-sizing:border-box;">
+  <div style="display:list-item;box-sizing:border-box;cursor:pointer;list-style:none;font-weight:600;color:rgb(255, 255, 255);white-space:nowrap;transition:color 80ms cubic-bezier(0.33, 1, 0.68, 1) 0s, background-color, box-shadow, border-color;">
+    <en-media type="image/svg+xml" hash="cf505d616d4a5cc53102b3291b5f6408" style="box-sizing:border-box;display:inline-block;fill:currentcolor;vertical-align:text-bottom;overflow:visible;" width="16" height="16" /> <span style="box-sizing:border-box;display:inline-block;width:0px;height:0px;vertical-align:middle;content:&quot;&quot;;border-style:solid;border-width:4px 4px 0px;border-right-color:transparent;border-bottom-color:transparent;border-left-color:transparent;"></span>
+  </div>
+  
+</div>
+
+    </div>
+
+    <div style="box-sizing:border-box;align-self:stretch;align-items:center;flex-wrap:nowrap;position:relative;margin-right:0px;display:flex;">
+        
+  <div style="display:block;box-sizing:border-box;">
+
+  <div style="display:list-item;box-sizing:border-box;cursor:pointer;list-style:none;font-weight:600;color:rgb(255, 255, 255);white-space:nowrap;transition:color 80ms cubic-bezier(0.33, 1, 0.68, 1) 0s, background-color, box-shadow, border-color;">
+    <en-media type="image/jpeg" hash="411d32730902927e40774c600a9b9996" height="20" width="20" style="border-style:none;box-sizing:border-box;display:inline-block;overflow:hidden;line-height:1;vertical-align:middle;background-color:rgb(255, 255, 255);flex-shrink:0;box-shadow:rgba(27, 31, 36, 0.15) 0px 0px 0px 1px;border-radius:50%;" />
+      
+    <span style="box-sizing:border-box;display:inline-block;width:0px;height:0px;vertical-align:middle;content:&quot;&quot;;border-style:solid;border-width:4px 4px 0px;border-right-color:transparent;border-bottom-color:transparent;border-left-color:transparent;"></span>
+  </div>
+  
+</div>
+
+    </div>
+</div>
+
+            
+    </div>
+
+  <div style="box-sizing:border-box;position:absolute;width:1px;height:1px;margin:0px;overflow:hidden;clip:rect(1px, 1px, 1px, 1px);"></div>
+
+
+
+
+
+
+
+    <div style="box-sizing:border-box;">
+
+
+
+
+  
+</div>
+
+
+    
+
+  <div style="box-sizing:border-box;background-color:rgb(255, 255, 255);z-index:34;border-top:0px;top:0px;overflow-x:hidden;margin-top:0px;position:relative;padding:20px 16px;border-style:solid;color:rgb(36, 41, 47);background-image:linear-gradient(rgb(221, 244, 255), rgb(221, 244, 255));border-color:rgb(36, 41, 47) rgba(84, 174, 255, 0.4) rgba(84, 174, 255, 0.4);border-width:1px 0px;border-radius:0px;">
+    <div style="box-sizing:border-box;justify-content:space-between;display:flex;">
+      <a href="https://github.com/notifications" title="Return to notifications" style="box-sizing:border-box;text-decoration:none;position:relative;display:inline-block;font-weight:500;white-space:nowrap;vertical-align:middle;cursor:pointer;user-select:none;border:1px solid;border-radius:6px;appearance:none;border-color:rgba(27, 31, 36, 0.15);box-shadow:rgba(27, 31, 36, 0.04) 0px 1px 0px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px 0px inset;transition:color 80ms cubic-bezier(0.33, 1, 0.68, 1) 0s, background-color, box-shadow, border-color;background-color:rgb(246, 248, 250);color:rgb(9, 105, 218);padding:3px 12px;font-size:12px;line-height:20px;margin-right:8px;">
+          ←
+          
+          <span style="box-sizing:border-box;display:inline;">Back to notifications</span>
+      </a>
+
+      
+      <ul style="box-sizing:border-box;padding-left:0px;margin-top:0px;margin-bottom:0px;align-items:center;list-style:none;display:flex;">
+        
+  
+
+
+
+
+
+  
+
+<li style="box-sizing:border-box;margin-right:8px;display:block;">
+  <span style="box-sizing:border-box;justify-content:center;align-items:center;width:100%;height:100%;display:flex;">
+    <div style="box-sizing:border-box;">
+        
+
+      
+</div>  </span>
+</li>
+
+
+
+  
+
+<li style="box-sizing:border-box;margin-right:8px;display:block;">
+  <span style="box-sizing:border-box;justify-content:center;align-items:center;width:100%;height:100%;display:flex;">
+    <div style="box-sizing:border-box;">
+        
+
+      
+</div>  </span>
+</li>
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+<li style="box-sizing:border-box;margin-right:8px;display:block;">
+  <span style="box-sizing:border-box;justify-content:center;align-items:center;width:100%;height:100%;display:flex;">
+    <div style="box-sizing:border-box;">
+        
+
+      
+</div>  </span>
+</li>
+
+
+
+
+
+<li style="box-sizing:border-box;display:block;">
+  <span style="box-sizing:border-box;justify-content:center;align-items:center;width:100%;height:100%;display:flex;">
+    <div style="box-sizing:border-box;">
+        
+
+      
+</div>  </span>
+</li>
+
+
+
+
+
+
+
+
+
+        <li style="box-sizing:border-box;">
+          
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+
+
+
+      <div style="display:block;box-sizing:border-box;">
+  <div style="display:list-item;box-sizing:border-box;cursor:pointer;list-style:none;transition:color 80ms cubic-bezier(0.33, 1, 0.68, 1) 0s, background-color, box-shadow, border-color;"></div>
+  
+</div>
+
+
+
+
+  <div style="box-sizing:border-box;">
+        <div style="box-sizing:border-box;">
+    <span style="display:block;box-sizing:border-box;">
+      
+  
+    
+
+
+
+
+
+    <div style="box-sizing:border-box;padding-top:16px;background-color:var(--color-page-header-bg);">
+
+      <div style="box-sizing:border-box;flex-wrap:wrap;justify-content:flex-end;margin-bottom:16px;padding-right:32px;padding-left:32px;display:flex;gap:1rem;">
+
+        <div style="box-sizing:border-box;flex:1 1 auto;max-width:100%;min-width:0px;margin-right:16px;">
+            
+  <div style="box-sizing:border-box;flex-wrap:wrap;align-items:center;font-size:20px;font-weight:400;word-break:break-word;overflow-wrap:break-word;display:flex;">
+      <en-media type="image/svg+xml" hash="fe1a2727e4336cc9d7a1a5461dd0b2bd" style="box-sizing:border-box;display:inline-block;fill:currentcolor;vertical-align:text-bottom;overflow:visible;color:rgb(87, 96, 106);margin-right:8px;" width="16" height="16" />
+    
+    <span style="box-sizing:border-box;align-self:stretch;">
+      <a rel="author" href="https://github.com/petyosi" style="background-color:transparent;box-sizing:border-box;color:rgb(9, 105, 218);text-decoration:none;">petyosi</a>
+    </span>
+    <span style="box-sizing:border-box;color:rgb(87, 96, 106);align-self:stretch;margin-right:4px;margin-left:4px;">/</span>
+    <strong style="box-sizing:border-box;font-weight:600;align-self:stretch;margin-right:8px;">
+      <a href="https://github.com/petyosi/react-virtuoso" style="background-color:transparent;box-sizing:border-box;color:rgb(9, 105, 218);text-decoration:none;">react-virtuoso</a>
+    </strong>
+
+    <span style="box-sizing:border-box;"></span><span style="box-sizing:border-box;border:1px solid rgb(208, 215, 222);border-radius:2em;display:inline-block;font-size:12px;font-weight:500;line-height:18px;padding:0px 7px;white-space:nowrap;border-color:rgb(208, 215, 222);color:rgb(87, 96, 106);vertical-align:middle;margin-right:4px;">Public</span>
+  </div>
+
+
+        </div>
+
+          <ul style="box-sizing:border-box;padding-left:0px;margin-top:0px;margin-bottom:0px;flex-shrink:0;display:inline;padding:2px 0;">
+      <li style="box-sizing:border-box;float:left;margin:0px 8px 0px 0px;font-size:12px;color:rgb(36, 41, 47);list-style-type:none;">
+        <div style="box-sizing:border-box;float:left;display:inline-block;">
+    <div title="Sponsor petyosi/react-virtuoso" style="box-sizing:border-box;position:relative;font-weight:500;white-space:nowrap;vertical-align:middle;user-select:none;border:1px solid;border-radius:6px;appearance:none;display:inline-block;cursor:pointer;color:rgb(36, 41, 47);background-color:rgb(246, 248, 250);border-color:rgba(27, 31, 36, 0.15);box-shadow:rgba(27, 31, 36, 0.04) 0px 1px 0px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px 0px inset;padding:3px 12px;font-size:12px;line-height:20px;list-style:none;transition:color 80ms cubic-bezier(0.33, 1, 0.68, 1) 0s, background-color, box-shadow, border-color;">    <en-media type="image/svg+xml" hash="71b5531a12400f7784882005da064e0f" style="box-sizing:border-box;display:inline-block;fill:currentcolor;transition:transform 0.15s cubic-bezier(0.2, 0, 0.13, 2) 0s;transform:scale(1);vertical-align:text-top;color:rgb(191, 57, 137);margin-right:4px;overflow:visible;" width="16" height="16" />
+      Sponsor
+</div>
+  
+</div>
+
+      </li>
+
+      
+
+  <li style="box-sizing:border-box;float:left;margin:0px 8px 0px 0px;font-size:12px;color:rgb(36, 41, 47);list-style-type:none;">
+          <span style="box-sizing:border-box;display:block;position:relative;font-size:14px;">
+      <div style="display:block;box-sizing:border-box;position:relative;font-size:14px;">
+
+        <div style="box-sizing:border-box;position:relative;font-weight:500;white-space:nowrap;vertical-align:middle;user-select:none;border:1px solid;border-radius:6px;appearance:none;display:inline-block;cursor:pointer;color:rgb(36, 41, 47);background-color:rgb(246, 248, 250);border-color:rgba(27, 31, 36, 0.15);box-shadow:rgba(27, 31, 36, 0.04) 0px 1px 0px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px 0px inset;padding:3px 12px;font-size:12px;line-height:20px;list-style:none;transition:color 80ms cubic-bezier(0.33, 1, 0.68, 1) 0s, background-color, box-shadow, border-color;">    <span style="box-sizing:border-box;">
+            <span style="box-sizing:border-box;">
+              <en-media type="image/svg+xml" hash="171e872fc06ee7fb9cf5b45b0304ee3d" style="box-sizing:border-box;display:inline-block;fill:currentcolor;color:rgb(87, 96, 106);vertical-align:text-top;margin-right:0px;overflow:visible;" width="16" height="16" />
+              Unwatch
+            </span>
+            
+            
+          </span>
+            <span title="25" style="box-sizing:border-box;border:1px solid rgba(0, 0, 0, 0);border-radius:2em;display:inline-block;font-size:12px;font-weight:500;line-height:18px;min-width:20px;padding:0px 6px;text-align:center;margin-left:2px;text-shadow:none;vertical-align:top;background-color:rgba(27, 31, 36, 0.08);color:inherit;">25</span>
+          <span style="box-sizing:border-box;display:inline-block;width:0px;height:0px;vertical-align:middle;content:&quot;&quot;;border-style:solid;border-width:4px 4px 0px;border-right-color:transparent;border-bottom-color:transparent;border-left-color:transparent;margin-left:4px;opacity:0.8;"></span>
+</div>
+        
+
+        
+
+
+        
+      </div>
+    </span>
+
+
+
+  </li>
+
+  <li style="box-sizing:border-box;float:left;margin:0px 8px 0px 0px;font-size:12px;color:rgb(36, 41, 47);list-style-type:none;">
+        <div style="box-sizing:border-box;display:inline-block;vertical-align:middle;">
+        <a href="https://github.com/petyosi/react-virtuoso/fork" style="box-sizing:border-box;text-decoration:none;display:inline-block;font-weight:500;white-space:nowrap;vertical-align:middle;cursor:pointer;user-select:none;border:1px solid;appearance:none;border-color:rgba(27, 31, 36, 0.15);box-shadow:rgba(27, 31, 36, 0.04) 0px 1px 0px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px 0px inset;transition:color 80ms cubic-bezier(0.33, 1, 0.68, 1) 0s, background-color, box-shadow, border-color;background-color:rgb(246, 248, 250);color:rgb(36, 41, 47);padding:3px 12px;font-size:12px;line-height:20px;float:left;border-right-width:0px;position:relative;border-radius:0px;border-top-left-radius:6px;border-bottom-left-radius:6px;">    <en-media type="image/svg+xml" hash="abcc98ed2eb7ca5e535ffa66a1a9501d" style="box-sizing:border-box;display:inline-block;fill:currentcolor;color:rgb(87, 96, 106);vertical-align:text-top;overflow:visible;margin-right:8px;" width="16" height="16" />Fork
+          <span title="197" style="box-sizing:border-box;border:1px solid rgba(0, 0, 0, 0);border-radius:2em;display:inline-block;font-size:12px;font-weight:500;line-height:18px;min-width:20px;padding:0px 6px;text-align:center;margin-left:2px;text-shadow:none;vertical-align:top;background-color:rgba(27, 31, 36, 0.08);color:inherit;">197</span>
+</a>
+      <div style="box-sizing:border-box;float:left;position:relative;display:inline-block;">
+              <div style="box-sizing:border-box;font-weight:500;white-space:nowrap;vertical-align:middle;user-select:none;border:1px solid;appearance:none;display:inline-block;cursor:pointer;color:rgb(36, 41, 47);background-color:rgb(246, 248, 250);border-color:rgba(27, 31, 36, 0.15);box-shadow:rgba(27, 31, 36, 0.04) 0px 1px 0px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px 0px inset;padding:3px 12px;font-size:12px;line-height:20px;position:relative;list-style:none;transition:color 80ms cubic-bezier(0.33, 1, 0.68, 1) 0s, background-color, box-shadow, border-color;border-top-left-radius:6px;border-bottom-left-radius:6px;border-radius:0px;border-top-right-radius:6px;border-bottom-right-radius:6px;border-right-width:1px;float:none;padding-right:8px;padding-left:8px;">    <en-media type="image/svg+xml" hash="4e58c06ccbd7bb64ad6fe558c47eb009" style="box-sizing:border-box;display:inline-block;fill:currentcolor;color:rgb(87, 96, 106);vertical-align:text-top;margin-right:0px;overflow:visible;" width="16" height="16" />
+</div>
+  
+</div></div>
+  </li>
+
+  <li style="box-sizing:border-box;float:left;margin:0px 8px 0px 0px;font-size:12px;color:rgb(36, 41, 47);list-style-type:none;margin-right:0px;">
+        
+
+  <div style="box-sizing:border-box;display:flex;">
+    <div style="box-sizing:border-box;vertical-align:middle;display:block;flex:1 1 0%;">
+      <div style="box-sizing:border-box;float:left;flex:1 1 auto;">
+          
+        
+          </div>        <div style="box-sizing:border-box;float:left;position:relative;display:inline-block;">
+        <div style="box-sizing:border-box;font-weight:500;white-space:nowrap;vertical-align:middle;user-select:none;border:1px solid;appearance:none;display:inline-block;cursor:pointer;color:rgb(36, 41, 47);background-color:rgb(246, 248, 250);border-color:rgba(27, 31, 36, 0.15);box-shadow:rgba(27, 31, 36, 0.04) 0px 1px 0px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px 0px inset;padding:3px 12px;font-size:12px;line-height:20px;position:relative;list-style:none;transition:color 80ms cubic-bezier(0.33, 1, 0.68, 1) 0s, background-color, box-shadow, border-color;border-top-left-radius:6px;border-bottom-left-radius:6px;border-radius:0px;border-top-right-radius:6px;border-bottom-right-radius:6px;border-right-width:1px;float:none;padding-right:8px;padding-left:8px;">    <en-media type="image/svg+xml" hash="9027af59e578a3bffbf18212952b26f8" style="box-sizing:border-box;display:inline-block;fill:currentcolor;color:rgb(87, 96, 106);vertical-align:text-top;margin-right:0px;overflow:visible;" width="16" height="16" />
+</div>
+  
+</div>
+</div>
+    </div>
+  </li>
+
+    
+
+</ul>
+
+      </div>
+
+        <div style="box-sizing:border-box;">
+</div>
+
+
+          <div style="box-sizing:border-box;min-height:48px;box-shadow:rgb(216, 222, 228) 0px -1px 0px 0px inset;justify-content:space-between;display:flex;overflow:hidden;padding-right:32px;padding-left:32px;">
+
+  <ul style="box-sizing:border-box;padding-left:0px;margin-top:0px;margin-bottom:0px;display:flex;align-items:center;gap:8px;list-style:none;">
+      <li style="box-sizing:border-box;display:inline-flex;">
+  <a href="https://github.com/petyosi/react-virtuoso/tree/v3.1.4" style="box-sizing:border-box;text-decoration:none;position:relative;display:flex;padding:0px 8px;font-size:14px;line-height:30px;text-align:center;cursor:pointer;border:0px;border-radius:6px;align-items:center;background-color:transparent;font-weight:600;border-bottom-color:rgb(253, 140, 115);color:rgb(36, 41, 47);white-space:nowrap;">
+    
+                <en-media type="image/svg+xml" hash="cfa861c800a5cc72ab05f54b5f6aa88c" style="box-sizing:border-box;vertical-align:text-bottom;margin-right:8px;fill:rgb(87, 96, 106);color:inherit;overflow:visible;display:inline;" width="16" height="16" />
+        <span style="box-sizing:border-box;">Code</span>
+          
+
+
+    
+</a></li>
+      <li style="box-sizing:border-box;display:inline-flex;">
+  <a href="https://github.com/petyosi/react-virtuoso/issues" style="box-sizing:border-box;text-decoration:none;position:relative;display:flex;padding:0px 8px;font-size:14px;line-height:30px;text-align:center;cursor:pointer;border:0px;border-radius:6px;align-items:center;background-color:transparent;color:rgb(36, 41, 47);white-space:nowrap;">
+    
+                <en-media type="image/svg+xml" hash="3d2a19ae49b722983f250928511b1ae7" style="box-sizing:border-box;vertical-align:text-bottom;margin-right:8px;color:rgb(87, 96, 106);fill:rgb(87, 96, 106);overflow:visible;display:inline;" width="16" height="16" />
+        <span style="box-sizing:border-box;">Issues</span>
+          <span title="25" style="box-sizing:border-box;border:1px solid rgba(0, 0, 0, 0);border-radius:2em;display:inline-block;font-size:12px;font-weight:500;line-height:18px;min-width:20px;padding:0px 6px;text-align:center;margin-left:8px;background-color:rgba(175, 184, 193, 0.2);color:rgb(36, 41, 47);">25</span>
+
+
+    
+</a></li>
+      <li style="box-sizing:border-box;display:inline-flex;">
+  <a href="https://github.com/petyosi/react-virtuoso/pulls" style="box-sizing:border-box;text-decoration:none;position:relative;display:flex;padding:0px 8px;font-size:14px;line-height:30px;text-align:center;cursor:pointer;border:0px;border-radius:6px;align-items:center;background-color:transparent;color:rgb(36, 41, 47);white-space:nowrap;">
+    
+                <en-media type="image/svg+xml" hash="1cd864e348eec30afe2c7054526a379b" style="box-sizing:border-box;vertical-align:text-bottom;margin-right:8px;color:rgb(87, 96, 106);fill:rgb(87, 96, 106);overflow:visible;display:inline;" width="16" height="16" />
+        <span style="box-sizing:border-box;">Pull requests</span>
+          <span title="2" style="box-sizing:border-box;border:1px solid rgba(0, 0, 0, 0);border-radius:2em;display:inline-block;font-size:12px;font-weight:500;line-height:18px;min-width:20px;padding:0px 6px;text-align:center;margin-left:8px;background-color:rgba(175, 184, 193, 0.2);color:rgb(36, 41, 47);">2</span>
+
+
+    
+</a></li>
+      <li style="box-sizing:border-box;display:inline-flex;">
+  <a href="https://github.com/petyosi/react-virtuoso/discussions" style="box-sizing:border-box;text-decoration:none;position:relative;display:flex;padding:0px 8px;font-size:14px;line-height:30px;text-align:center;cursor:pointer;border:0px;border-radius:6px;align-items:center;background-color:transparent;color:rgb(36, 41, 47);white-space:nowrap;">
+    
+                <en-media type="image/svg+xml" hash="c166e93ba5b2e58d5a400bc275c034db" style="box-sizing:border-box;vertical-align:text-bottom;margin-right:8px;color:rgb(87, 96, 106);fill:rgb(87, 96, 106);overflow:visible;display:inline;" width="16" height="16" />
+        <span style="box-sizing:border-box;">Discussions</span>
+          
+
+
+    
+</a></li>
+      <li style="box-sizing:border-box;display:inline-flex;">
+  <a href="https://github.com/petyosi/react-virtuoso/actions" style="box-sizing:border-box;text-decoration:none;position:relative;display:flex;padding:0px 8px;font-size:14px;line-height:30px;text-align:center;cursor:pointer;border:0px;border-radius:6px;align-items:center;background-color:transparent;color:rgb(36, 41, 47);white-space:nowrap;">
+    
+                <en-media type="image/svg+xml" hash="dec3dc059e9fc34e3caf4a6b4d6743ed" style="box-sizing:border-box;vertical-align:text-bottom;margin-right:8px;color:rgb(87, 96, 106);fill:rgb(87, 96, 106);overflow:visible;display:inline;" width="16" height="16" />
+        <span style="box-sizing:border-box;">Actions</span>
+          
+
+
+    
+</a></li>
+      <li style="box-sizing:border-box;display:inline-flex;">
+  <a href="https://github.com/petyosi/react-virtuoso/projects" style="box-sizing:border-box;text-decoration:none;position:relative;display:flex;padding:0px 8px;font-size:14px;line-height:30px;text-align:center;cursor:pointer;border:0px;border-radius:6px;align-items:center;background-color:transparent;color:rgb(36, 41, 47);white-space:nowrap;">
+    
+                <en-media type="image/svg+xml" hash="52c7fafee6060eb41b96e196c763cf52" style="box-sizing:border-box;vertical-align:text-bottom;margin-right:8px;color:rgb(87, 96, 106);fill:rgb(87, 96, 106);overflow:visible;display:inline;" width="16" height="16" />
+        <span style="box-sizing:border-box;">Projects</span>
+          
+
+
+    
+</a></li>
+      <li style="box-sizing:border-box;display:inline-flex;">
+  <a href="https://github.com/petyosi/react-virtuoso/security" style="box-sizing:border-box;text-decoration:none;position:relative;display:flex;padding:0px 8px;font-size:14px;line-height:30px;text-align:center;cursor:pointer;border:0px;border-radius:6px;align-items:center;background-color:transparent;color:rgb(36, 41, 47);white-space:nowrap;">
+    
+                <en-media type="image/svg+xml" hash="99e3b59af31fe2711641f4fe10e3e2d7" style="box-sizing:border-box;vertical-align:text-bottom;margin-right:8px;color:rgb(87, 96, 106);fill:rgb(87, 96, 106);overflow:visible;display:inline;" width="16" height="16" />
+        <span style="box-sizing:border-box;">Security</span>
+          
+
+    
+</a></li>
+      <li style="box-sizing:border-box;display:inline-flex;">
+  <a href="https://github.com/petyosi/react-virtuoso/pulse" style="box-sizing:border-box;text-decoration:none;position:relative;display:flex;padding:0px 8px;font-size:14px;line-height:30px;text-align:center;cursor:pointer;border:0px;border-radius:6px;align-items:center;background-color:transparent;color:rgb(36, 41, 47);white-space:nowrap;">
+    
+                <en-media type="image/svg+xml" hash="bff2cf32e28a01b239008b9b6863b02d" style="box-sizing:border-box;vertical-align:text-bottom;margin-right:8px;color:rgb(87, 96, 106);fill:rgb(87, 96, 106);overflow:visible;display:inline;" width="16" height="16" />
+        <span style="box-sizing:border-box;">Insights</span>
+          
+
+
+    
+</a></li>
+</ul>
+    <div style="box-sizing:border-box;align-self:center;position:absolute;right:0px;padding-right:32px;visibility:hidden;">      <div style="display:block;box-sizing:border-box;position:relative;">
+  <div style="display:list-item;box-sizing:border-box;cursor:pointer;list-style:none;transition:color 80ms cubic-bezier(0.33, 1, 0.68, 1) 0s, background-color, box-shadow, border-color;">          <div style="box-sizing:border-box;position:relative;display:flex;padding:0px 8px;font-size:14px;line-height:30px;color:rgb(36, 41, 47);text-align:center;white-space:nowrap;cursor:pointer;background-color:transparent;border-radius:6px;align-items:center;border:0px;margin-right:0px;">
+            <en-media type="image/svg+xml" hash="9cb980e5c41defd2a6406aef982ba995" style="box-sizing:border-box;display:inline-block;fill:currentcolor;vertical-align:text-bottom;overflow:visible;" width="16" height="16" />
+            <span style="box-sizing:border-box;position:absolute;width:1px;height:1px;padding:0px;overflow:hidden;clip:rect(0px, 0px, 0px, 0px);overflow-wrap:normal;border:0px;">More</span>
+          </div>
+</div>
+  
+</div></div>
+</div>
+
+
+
+  </div>
+
+
+
+  <span style="box-sizing:border-box;display:block;">
+      <div style="box-sizing:border-box;">
+    
+      
+
+
+
+    
+      
+<div style="box-sizing:border-box;max-width:1280px;margin-right:auto;margin-left:auto;margin-top:24px;padding-right:32px;padding-left:32px;">
+  <div style="display:block;box-sizing:border-box;margin-bottom:32px;">
+  <ol style="box-sizing:border-box;padding-left:0px;margin-top:0px;margin-bottom:0px;">
+      <li style="box-sizing:border-box;display:inline-block;list-style:none;white-space:nowrap;margin-left:0px;"><a href="https://github.com/petyosi/react-virtuoso/releases" style="background-color:transparent;box-sizing:border-box;color:rgb(9, 105, 218);text-decoration:none;">Releases</a></li>
+      <li style="box-sizing:border-box;display:inline-block;list-style:none;margin-left:-0.35em;white-space:nowrap;"><a href="https://github.com/petyosi/react-virtuoso/releases/tag/v3.1.4" style="background-color:transparent;box-sizing:border-box;text-decoration:none;color:rgb(36, 41, 47);">    v3.1.4
+</a></li>
+  </ol>
+</div>
+<div style="box-sizing:border-box;">
+  <div style="box-sizing:border-box;background-color:rgb(255, 255, 255);border-color:rgb(208, 215, 222);border-style:solid;border-width:1px;border-radius:6px;">
+  
+  <div style="box-sizing:border-box;padding:16px;border-bottom:1px solid rgb(208, 215, 222);">      <div style="box-sizing:border-box;flex-direction:row;display:flex;">
+  <div style="box-sizing:border-box;flex-direction:row;flex:1 1 0%;margin-bottom:16px;word-break:break-word;overflow-wrap:break-word;display:flex;">
+    <div style="box-sizing:border-box;flex:1 1 0%;">
+        <h1 style="margin:0.67em 0px;box-sizing:border-box;margin-top:0px;margin-bottom:0px;font-weight:600;font-size:32px;margin-right:16px;display:inline;">v3.1.4</h1>
+      <a href="https://github.com/petyosi/react-virtuoso/releases/latest" style="background-color:transparent;box-sizing:border-box;color:rgb(9, 105, 218);text-decoration:none;vertical-align:text-bottom;display:inline-block;"><span style="box-sizing:border-box;border:1px solid rgb(45, 164, 78);border-radius:2em;display:inline-block;font-size:12px;font-weight:500;padding:0px 7px;white-space:nowrap;padding-left:10px;padding-right:10px;line-height:22px;border-color:rgb(45, 164, 78);color:rgb(26, 127, 55);">Latest</span></a>
+        <div style="box-sizing:border-box;vertical-align:text-bottom;margin-left:8px;display:inline;">
+            
+        </div>
+    </div>
+
+    
+        
+  </div>
+  <div style="box-sizing:border-box;margin-bottom:16px;display:flex;">
+                    
+<div style="display:block;box-sizing:border-box;position:relative;">
+    <div style="box-sizing:border-box;position:relative;font-weight:500;white-space:nowrap;vertical-align:middle;user-select:none;border:1px solid;border-radius:6px;appearance:none;display:inline-block;cursor:pointer;color:rgb(36, 41, 47);background-color:rgb(246, 248, 250);border-color:rgba(27, 31, 36, 0.15);box-shadow:rgba(27, 31, 36, 0.04) 0px 1px 0px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px 0px inset;padding:3px 12px;font-size:12px;line-height:20px;list-style:none;transition:color 80ms cubic-bezier(0.33, 1, 0.68, 1) 0s, background-color, box-shadow, border-color;text-align:left;">    <i style="box-sizing:border-box;font-style:normal;font-weight:500;opacity:0.75;"></i><span style="box-sizing:border-box;">Compare</span><en-media type="image/svg+xml" hash="26637b920fe81a50bbd6fae513886100" style="box-sizing:border-box;display:inline-block;fill:currentcolor;color:rgb(87, 96, 106);vertical-align:text-top;overflow:visible;margin-left:8px;margin-right:-4px;" width="16" height="16" />
+</div>
+  
+</div>
+
+
+  </div>
+</div>
+
+  <div style="box-sizing:border-box;border-bottom:1px solid rgb(208, 215, 222);margin-bottom:16px;padding-bottom:24px;">
+    <div style="box-sizing:border-box;color:rgb(87, 96, 106);flex-direction:row;flex-wrap:wrap;align-items:flex-end;display:flex;">
+  <div style="box-sizing:border-box;margin-bottom:8px;margin-right:24px;">
+      <en-media type="image/png" hash="f15b8d79365b873f11b9267a7548ca0f" height="20" width="20" style="border-style:none;box-sizing:border-box;display:inline-block;overflow:hidden;line-height:1;vertical-align:middle;background-color:rgb(255, 255, 255);flex-shrink:0;box-shadow:rgba(27, 31, 36, 0.15) 0px 0px 0px 1px;border-radius:4px;" />
+      <a href="https://github.com/apps/github-actions" style="background-color:transparent;box-sizing:border-box;text-decoration:none;color:rgb(87, 96, 106);font-weight:600;">github-actions</a>
+
+    released this
+
+      <span title="Nov 16, 2022, 12:12 PM GMT+5" style="box-sizing:border-box;white-space:nowrap;">
+        16 Nov 07:12
+      </span>
+  </div>
+
+  
+        <div style="box-sizing:border-box;margin-bottom:8px;margin-right:24px;">
+          ·
+          <a href="https://github.com/petyosi/react-virtuoso/compare/v3.1.4...master" style="background-color:transparent;box-sizing:border-box;color:rgb(9, 105, 218);text-decoration:none;">
+            1 commit
+          </a>
+          to master
+          since this release
+        </div>
+
+        <div style="box-sizing:border-box;margin-bottom:8px;margin-right:24px;">
+          <a href="https://github.com/petyosi/react-virtuoso/tree/v3.1.4" style="background-color:transparent;box-sizing:border-box;text-decoration:none;color:rgb(87, 96, 106);">
+            <span style="box-sizing:border-box;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block;max-width:125px;vertical-align:top;">
+              <en-media type="image/svg+xml" hash="c7d0271a7081a08f6c086d11abc9ae96" style="box-sizing:border-box;display:inline-block;fill:currentcolor;vertical-align:text-bottom;overflow:visible;" width="16" height="16" />
+              <span style="box-sizing:border-box;margin-left:4px;">
+                v3.1.4
+              </span>
+</span></a>          
+        </div>
+        <div style="box-sizing:border-box;margin-bottom:8px;margin-right:24px;position:relative;top:1px;">
+          <a href="https://github.com/petyosi/react-virtuoso/commit/fbaa3f53368f97abb33846eb74627330d5e36bd3" style="background-color:transparent;box-sizing:border-box;text-decoration:none;color:rgb(87, 96, 106);">
+              <en-media type="image/svg+xml" hash="99261f3e86be915f47f990518f64bae0" style="box-sizing:border-box;display:inline-block;fill:currentcolor;vertical-align:text-bottom;overflow:visible;" width="16" height="16" />
+              <code style="box-sizing:border-box;font-family:ui-monospace, SFMono-Regular, &quot;SF Mono&quot;, Menlo, Consolas, &quot;Liberation Mono&quot;, monospace;margin-left:4px;font-size:14px;">fbaa3f5</code>
+</a>          <div style="box-sizing:border-box;position:relative;margin-left:4px;display:inline-block;">
+    <div title="Commit signature" style="display:list-item;box-sizing:border-box;cursor:pointer;list-style:none;transition:color 80ms cubic-bezier(0.33, 1, 0.68, 1) 0s, background-color, box-shadow, border-color;color:rgb(26, 127, 55);">
+      <en-media type="image/svg+xml" hash="7937f8dcac1dab76937c84a25713513f" style="box-sizing:border-box;display:inline-block;fill:currentcolor;vertical-align:text-bottom;overflow:visible;" width="16" height="16" />
+    </div>
+
+    
+</div>
+
+        </div>
+
+</div>
+  </div>
+        <div style="box-sizing:border-box;font-family:-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Noto Sans&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;;font-size:16px;line-height:1.5;overflow-wrap:break-word;margin-top:16px;margin-bottom:16px;"><h2 style="box-sizing:border-box;line-height:1.25;margin-bottom:16px;font-weight:600;padding-bottom:0.3em;border-bottom:1px solid rgb(216, 222, 228);font-size:1.5em;margin-top:0px;"><a href="https://github.com/petyosi/react-virtuoso/compare/v3.1.3...v3.1.4" style="background-color:transparent;box-sizing:border-box;color:rgb(9, 105, 218);text-decoration:none;">3.1.4</a> (2022-11-16)</h2>
+<h3 style="box-sizing:border-box;line-height:1.25;margin-top:24px;margin-bottom:16px;font-weight:600;font-size:1.25em;">Bug Fixes</h3>
+<ul style="box-sizing:border-box;margin-top:0px;padding-left:2em;margin-bottom:0px;">
+<li style="box-sizing:border-box;">fix intermittent test issues (<a href="https://github.com/petyosi/react-virtuoso/commit/a6c021d544a2ad6fc9f7c05c34803e4d40b5a334" style="background-color:transparent;box-sizing:border-box;color:rgb(9, 105, 218);text-decoration:none;">a6c021d</a>)</li>
+<li style="box-sizing:border-box;margin-top:0.25em;">upward scroll after scrollTo glitch in iOS Chrome / Webview (<a href="https://github.com/petyosi/react-virtuoso/commit/910d517703c139ea71b9056ea6f9e3597833a0d4" style="background-color:transparent;box-sizing:border-box;color:rgb(9, 105, 218);text-decoration:none;">910d517</a>)</li>
+</ul></div>
+</div>
+  <div style="box-sizing:border-box;padding:16px;margin-top:-1px;border-top-color:rgb(208, 215, 222);border-top-style:solid;border-top-width:1px;border-radius:0px 0px 6px 6px;">
+        <div style="box-sizing:border-box;margin-bottom:16px;">
+          <div style="display:block;box-sizing:border-box;">
+  <div style="display:list-item;box-sizing:border-box;cursor:pointer;">    <span style="box-sizing:border-box;margin-right:16px;font-size:20px;font-weight:600;display:inline;">Assets</span>
+    <span title="2" style="box-sizing:border-box;background-color:rgba(175, 184, 193, 0.2);border:1px solid rgba(0, 0, 0, 0);border-radius:2em;color:rgb(36, 41, 47);display:inline-block;font-size:12px;font-weight:500;line-height:18px;min-width:20px;padding:0px 6px;text-align:center;margin-left:4px;">2</span>
+</div>
+  <div style="box-sizing:border-box;">      <div style="box-sizing:border-box;background-color:rgb(255, 255, 255);border-color:rgb(208, 215, 222);border-style:solid;border-width:1px;border-radius:6px;line-height:1.25;margin-top:16px;">
+  
+  
+    <ul style="box-sizing:border-box;padding-left:0px;margin-top:0px;margin-bottom:0px;">
+        <li style="box-sizing:border-box;margin-top:-1px;list-style-type:none;border-top-style:solid;border-top-width:1px;padding:8px 16px;border-top-left-radius:6px;border-top-right-radius:6px;border-top-color:transparent;flex-direction:row;display:flex;">      <div style="box-sizing:border-box;width:75%;justify-content:flex-start;display:flex;">
+        <en-media type="image/svg+xml" hash="097fcca35848106550df46136b87cf6e" style="box-sizing:border-box;display:inline-block;fill:currentcolor;vertical-align:text-bottom;overflow:visible;color:rgb(87, 96, 106);" width="16" height="16" />
+        <a href="https://github.com/petyosi/react-virtuoso/archive/refs/tags/v3.1.4.zip" rel="nofollow" style="background-color:transparent;box-sizing:border-box;color:rgb(9, 105, 218);text-decoration:none;display:inline-flex;max-width:100%;min-width:0px;">
+    <span style="box-sizing:border-box;max-width:fit-content;min-width:1ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;">Source code</span>
+    <span style="box-sizing:border-box;max-width:fit-content;min-width:1ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-left:4px;">(zip)</span>
+</a></div>      <div style="box-sizing:border-box;width:33.3333%;justify-content:flex-end;flex:1 1 auto;margin-top:0px;margin-left:0px;padding-left:0px;display:flex;">
+          <span style="box-sizing:border-box;color:rgb(87, 96, 106);flex-grow:0;flex-shrink:0;margin-left:16px;text-align:right;white-space:nowrap;"><span title="Nov 16, 2022, 12:00 PM GMT+5" style="box-sizing:border-box;white-space:nowrap;">2022-11-16T07:00:26Z</span></span>
+</div></li>
+        <li style="box-sizing:border-box;margin-top:-1px;list-style-type:none;border-top-color:rgb(216, 222, 228);border-top-style:solid;border-top-width:1px;padding:8px 16px;border-bottom-right-radius:6px;border-bottom-left-radius:6px;flex-direction:row;display:flex;">      <div style="box-sizing:border-box;width:75%;justify-content:flex-start;display:flex;">
+        <en-media type="image/svg+xml" hash="d92e8f8d5e1fea9cf378c2cbf1c5a484" style="box-sizing:border-box;display:inline-block;fill:currentcolor;vertical-align:text-bottom;overflow:visible;color:rgb(87, 96, 106);" width="16" height="16" />
+        <a href="https://github.com/petyosi/react-virtuoso/archive/refs/tags/v3.1.4.tar.gz" rel="nofollow" style="background-color:transparent;box-sizing:border-box;color:rgb(9, 105, 218);text-decoration:none;display:inline-flex;max-width:100%;min-width:0px;">
+    <span style="box-sizing:border-box;max-width:fit-content;min-width:1ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;">Source code</span>
+    <span style="box-sizing:border-box;max-width:fit-content;min-width:1ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-left:4px;">(tar.gz)</span>
+</a></div>      <div style="box-sizing:border-box;width:33.3333%;justify-content:flex-end;flex:1 1 auto;margin-top:0px;margin-left:0px;padding-left:0px;display:flex;">
+          <span style="box-sizing:border-box;color:rgb(87, 96, 106);flex-grow:0;flex-shrink:0;margin-left:16px;text-align:right;white-space:nowrap;"><span title="Nov 16, 2022, 12:00 PM GMT+5" style="box-sizing:border-box;white-space:nowrap;">2022-11-16T07:00:26Z</span></span>
+</div></li>
+    </ul>
+  
+</div>
+</div>
+</div>
+        </div>
+
+
+          <div style="box-sizing:border-box;flex-direction:row;flex-wrap:wrap;justify-content:space-between;display:flex;">
+              <div style="box-sizing:border-box;flex-direction:row-reverse;justify-content:flex-end;display:flex;">
+    <div style="box-sizing:border-box;color:rgb(87, 96, 106);margin-top:4px;"></div>
+  <div style="box-sizing:border-box;">
+    
+    <div style="box-sizing:border-box;flex-direction:row;flex-wrap:wrap;align-items:center;display:flex;">
+          </div>
+</div>
+      <div style="box-sizing:border-box;position:relative;display:inline-block;">
+      <div style="box-sizing:border-box;position:relative;font-size:14px;font-weight:500;line-height:20px;white-space:nowrap;vertical-align:middle;user-select:none;appearance:none;cursor:pointer;box-shadow:none;list-style:none;transition:color 80ms cubic-bezier(0.33, 1, 0.68, 1) 0s, background-color, box-shadow, border-color;color:rgb(87, 96, 106);width:26px;height:26px;border:1px solid rgb(216, 222, 228);border-radius:50%;background-color:rgb(246, 248, 250);border-color:rgb(216, 222, 228);justify-content:center;align-items:center;margin-right:4px;padding:0px;display:flex;">    <en-media type="image/svg+xml" hash="11cf07e920d4a9d0dae411c79f4ab180" style="box-sizing:border-box;fill:currentcolor;width:16px;height:16px;line-height:1.25;display:inline-block;color:rgb(87, 96, 106);vertical-align:text-bottom;margin-right:0px;overflow:visible;font-size:1em;" width="18" height="18" />
+</div>      
+  </div>
+
+</div>
+          </div>
+</div>
+</div></div>
+
+</div>
+
+
+  </div>
+
+  </span>
+
+
+    </span>
+  </div>
+
+  </div>
+
+          <div style="display:block;box-sizing:border-box;max-width:1280px;margin-right:auto;margin-left:auto;width:100%;padding-right:16px;padding-left:16px;">
+  <h2 style="box-sizing:border-box;margin-top:0px;margin-bottom:0px;font-size:24px;font-weight:600;position:absolute;width:1px;padding:0px;overflow:hidden;clip:rect(0px, 0px, 0px, 0px);overflow-wrap:normal;border:0px;">Footer</h2>
+
+  <div style="box-sizing:border-box;border-top:1px solid rgb(216, 222, 228);color:rgb(87, 96, 106);border-color:rgb(216, 222, 228);align-items:center;flex-direction:row;flex-wrap:nowrap;position:relative;margin-top:40px;padding-bottom:8px;padding-top:40px;font-size:12px;display:flex;">
+    <div style="box-sizing:border-box;width:16.6667%;flex-wrap:wrap;justify-content:space-between;margin-bottom:0px;list-style:none;display:flex;">
+      <div style="box-sizing:border-box;align-items:center;margin-top:0px;display:flex;">
+        <a title="GitHub" href="https://github.com/" style="background-color:transparent;box-sizing:border-box;text-decoration:none;color:rgb(110, 119, 129);margin-right:8px;">
+          <en-media type="image/svg+xml" hash="37109494054d261658704f7521823908" style="box-sizing:border-box;display:inline-block;fill:currentcolor;vertical-align:text-bottom;overflow:visible;" width="24" height="24" />
+</a>        <span style="box-sizing:border-box;">
+        © 2022 GitHub, Inc.
+        </span>
+      </div>
+    </div>
+
+    <div style="display:block;box-sizing:border-box;width:66.6667%;">
+      <h3 style="box-sizing:border-box;margin-top:0px;margin-bottom:0px;font-size:20px;font-weight:600;position:absolute;width:1px;padding:0px;overflow:hidden;clip:rect(0px, 0px, 0px, 0px);overflow-wrap:normal;border:0px;">Footer navigation</h3>
+      <ul style="box-sizing:border-box;padding-left:0px;margin-top:0px;width:100%;flex-wrap:wrap;justify-content:space-between;margin-bottom:0px;list-style:none;display:flex;">
+          <li style="box-sizing:border-box;margin-right:0px;"><a href="https://docs.github.com/en/github/site-policy/github-terms-of-service" style="background-color:transparent;box-sizing:border-box;color:rgb(9, 105, 218);text-decoration:none;">Terms</a></li>
+          <li style="box-sizing:border-box;margin-right:0px;"><a href="https://docs.github.com/en/github/site-policy/github-privacy-statement" style="background-color:transparent;box-sizing:border-box;color:rgb(9, 105, 218);text-decoration:none;">Privacy</a></li>
+          <li style="box-sizing:border-box;margin-right:0px;"><a href="https://github.com/security" style="background-color:transparent;box-sizing:border-box;color:rgb(9, 105, 218);text-decoration:none;">Security</a></li>
+          <li style="box-sizing:border-box;margin-right:0px;"><a href="https://www.githubstatus.com/" style="background-color:transparent;box-sizing:border-box;color:rgb(9, 105, 218);text-decoration:none;">Status</a></li>
+          <li style="box-sizing:border-box;margin-right:0px;"><a href="https://docs.github.com/" style="background-color:transparent;box-sizing:border-box;color:rgb(9, 105, 218);text-decoration:none;">Docs</a></li>
+          <li style="box-sizing:border-box;margin-right:0px;"><a href="https://support.github.com/?tags=dotcom-footer" style="background-color:transparent;box-sizing:border-box;color:rgb(9, 105, 218);text-decoration:none;">Contact GitHub</a></li>
+          <li style="box-sizing:border-box;margin-right:0px;"><a href="https://github.com/pricing" style="background-color:transparent;box-sizing:border-box;color:rgb(9, 105, 218);text-decoration:none;">Pricing</a></li>
+        <li style="box-sizing:border-box;margin-right:0px;"><a href="https://docs.github.com/" style="background-color:transparent;box-sizing:border-box;color:rgb(9, 105, 218);text-decoration:none;">API</a></li>
+        <li style="box-sizing:border-box;margin-right:0px;"><a href="https://services.github.com/" style="background-color:transparent;box-sizing:border-box;color:rgb(9, 105, 218);text-decoration:none;">Training</a></li>
+          <li style="box-sizing:border-box;margin-right:0px;"><a href="https://github.blog/" style="background-color:transparent;box-sizing:border-box;color:rgb(9, 105, 218);text-decoration:none;">Blog</a></li>
+          <li style="box-sizing:border-box;"><a href="https://github.com/about" style="background-color:transparent;box-sizing:border-box;color:rgb(9, 105, 218);text-decoration:none;">About</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="box-sizing:border-box;justify-content:center;padding-bottom:40px;display:flex;">
+    <span style="box-sizing:border-box;color:rgb(87, 96, 106);font-size:12px;"></span>
+  </div>
+</div>
+
+
+
+
+  
+
+  
+    
+
+    
+
+    
+
+
+    
+
+
+  
+
+
+<div style="box-sizing:border-box;position:absolute;width:1px;height:1px;padding:0px;overflow:hidden;clip:rect(0px, 0px, 0px, 0px);overflow-wrap:normal;border:0px;"></div></div></div></div>
+</div>
+</en-note>      ]]>
+    </content>
+    <resource>
+      <data encoding="base64">
+PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIGRhdGEtdmlldy1jb21wb25lbnQ9InRydWUiIGNsYXNzPSJvY3RpY29uIG9jdGljb24tZmlsZS16aXAgY29sb3ItZmctbXV0ZWQganMtZXZlcm5vdGUtY2hlY2tlZCIgZGF0YS1ldmVybm90ZS1pZD0iMzcyIiB4bWxucz0iaHR0cDovL3d3
+dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMy41IDEuNzVhLjI1LjI1IDAgMDEuMjUtLjI1aDNhLjc1Ljc1IDAgMDAwIDEuNWguNWEuNzUuNzUgMCAwMDAtMS41aDIuMDg2YS4yNS4yNSAwIDAxLjE3Ny4wNzNsMi45MTQgMi45MTRhLjI1LjI1IDAgMDEuMDczLjE3N3Y4LjU4NmEuMjUuMjUg
+MCAwMS0uMjUuMjVoLS41YS43NS43NSAwIDAwMCAxLjVoLjVBMS43NSAxLjc1IDAgMDAxNCAxMy4yNVY0LjY2NGMwLS40NjQtLjE4NC0uOTA5LS41MTMtMS4yMzdMMTAuNTczLjUxM0ExLjc1IDEuNzUgMCAwMDkuMzM2IDBIMy43NUExLjc1IDEuNzUgMCAwMDIgMS43NXYxMS41YzAgLjY0OS4zNTMgMS4yMTQuODc0IDEuNTE1YS43NS43NSAw
+IDEwLjc1Mi0xLjI5OC4yNS4yNSAwIDAxLS4xMjYtLjIxN1YxLjc1ek04Ljc1IDNhLjc1Ljc1IDAgMDAwIDEuNWguNWEuNzUuNzUgMCAwMDAtMS41aC0uNXpNNiA1LjI1YS43NS43NSAwIDAxLjc1LS43NWguNWEuNzUuNzUgMCAwMTAgMS41aC0uNUEuNzUuNzUgMCAwMTYgNS4yNXptMiAxLjVBLjc1Ljc1IDAgMDE4Ljc1IDZoLjVhLjc1Ljc1
+IDAgMDEwIDEuNWgtLjVBLjc1Ljc1IDAgMDE4IDYuNzV6bS0xLjI1Ljc1YS43NS43NSAwIDAwMCAxLjVoLjVhLjc1Ljc1IDAgMDAwLTEuNWgtLjV6TTggOS43NUEuNzUuNzUgMCAwMTguNzUgOWguNWEuNzUuNzUgMCAwMTAgMS41aC0uNUEuNzUuNzUgMCAwMTggOS43NXptLS43NS43NWExLjc1IDEuNzUgMCAwMC0xLjc1IDEuNzV2M2MwIC40
+MTQuMzM2Ljc1Ljc1Ljc1aDIuNWEuNzUuNzUgMCAwMC43NS0uNzV2LTNhMS43NSAxLjc1IDAgMDAtMS43NS0xLjc1aC0uNXpNNyAxMi4yNWEuMjUuMjUgMCAwMS4yNS0uMjVoLjVhLjI1LjI1IDAgMDEuMjUuMjV2Mi4yNUg3di0yLjI1eiIgZGF0YS1ldmVybm90ZS1pZD0iMTM0NyIgY2xhc3M9ImpzLWV2ZXJub3RlLWNoZWNrZWQiPjwvcGF0
+aD4KPC9zdmc+
+      </data>
+      <mime>image/svg+xml</mime>
+      <resource-attributes>
+        <file-name>svg_23.svg</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+097fcca35848106550df46136b87cf6e+https://www.evernote.com/shard/s344/res/50d8b706-2f59-4727-9949-a06295cd836b</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIGRhdGEtdmlldy1jb21wb25lbnQ9InRydWUiIGNsYXNzPSJvY3RpY29uIG9jdGljb24tc21pbGV5IHNvY2lhbC1idXR0b24tZW1vamkganMtZXZlcm5vdGUtY2hlY2tlZCIgZGF0YS1ldmVybm90ZS1pZD0iMzc0IiB4bWxucz0iaHR0cDov
+L3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMS41IDhhNi41IDYuNSAwIDExMTMgMCA2LjUgNi41IDAgMDEtMTMgMHpNOCAwYTggOCAwIDEwMCAxNkE4IDggMCAwMDggMHpNNSA4YTEgMSAwIDEwMC0yIDEgMSAwIDAwMCAyem03LTFhMSAxIDAgMTEtMiAwIDEgMSAwIDAxMiAwek01LjMy
+IDkuNjM2YS43NS43NSAwIDAxMS4wMzguMTc1bC4wMDcuMDA5Yy4xMDMuMTE4LjIyLjIyMi4zNS4zMS4yNjQuMTc4LjY4My4zNyAxLjI4NS4zNy42MDIgMCAxLjAyLS4xOTIgMS4yODUtLjM3MS4xMy0uMDg4LjI0Ny0uMTkyLjM1LS4zMWwuMDA3LS4wMDhhLjc1Ljc1IDAgMTExLjIyMi44N2wtLjYxNC0uNDMxYy42MTQuNDMuNjE0LjQzMS42
+MTMuNDMxdi4wMDFsLS4wMDEuMDAyLS4wMDIuMDAzLS4wMDUuMDA3LS4wMTQuMDE5YTEuOTg0IDEuOTg0IDAgMDEtLjE4NC4yMTNjLS4xNi4xNjYtLjMzOC4zMTYtLjUzLjQ0NS0uNjMuNDE4LTEuMzcuNjM4LTIuMTI3LjYyOS0uOTQ2IDAtMS42NTItLjMwOC0yLjEyNi0uNjNhMy4zMiAzLjMyIDAgMDEtLjcxNS0uNjU3bC0uMDE0LS4wMi0u
+MDA1LS4wMDYtLjAwMi0uMDAzdi0uMDAyaC0uMDAxbC42MTMtLjQzMi0uNjE0LjQzYS43NS43NSAwIDAxLjE4My0xLjA0NGguMDAxeiIgZGF0YS1ldmVybm90ZS1pZD0iMTM2NiIgY2xhc3M9ImpzLWV2ZXJub3RlLWNoZWNrZWQiPjwvcGF0aD4KPC9zdmc+
+      </data>
+      <mime>image/svg+xml</mime>
+      <resource-attributes>
+        <file-name>svg_25.svg</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+11cf07e920d4a9d0dae411c79f4ab180+https://www.evernote.com/shard/s344/res/b49d014d-d8e4-44d5-bf9d-a8146860cbab</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIGRhdGEtdmlldy1jb21wb25lbnQ9InRydWUiIGNsYXNzPSJvY3RpY29uIG9jdGljb24tZXllIGpzLWV2ZXJub3RlLWNoZWNrZWQiIGRhdGEtZXZlcm5vdGUtaWQ9IjMzMyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4K
+ICAgIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTEuNjc5IDcuOTMyYy40MTItLjYyMSAxLjI0Mi0xLjc1IDIuMzY2LTIuNzE3QzUuMTc1IDQuMjQyIDYuNTI3IDMuNSA4IDMuNWMxLjQ3MyAwIDIuODI0Ljc0MiAzLjk1NSAxLjcxNSAxLjEyNC45NjcgMS45NTQgMi4wOTYgMi4zNjYgMi43MTdhLjExOS4xMTkgMCAwMTAgLjEzNmMt
+LjQxMi42MjEtMS4yNDIgMS43NS0yLjM2NiAyLjcxN0MxMC44MjUgMTEuNzU4IDkuNDczIDEyLjUgOCAxMi41Yy0xLjQ3MyAwLTIuODI0LS43NDItMy45NTUtMS43MTVDMi45MiA5LjgxOCAyLjA5IDguNjkgMS42NzkgOC4wNjhhLjExOS4xMTkgMCAwMTAtLjEzNnpNOCAyYy0xLjk4MSAwLTMuNjcuOTkyLTQuOTMzIDIuMDc4QzEuNzk3IDUu
+MTY5Ljg4IDYuNDIzLjQzIDcuMWExLjYxOSAxLjYxOSAwIDAwMCAxLjc5OGMuNDUuNjc4IDEuMzY3IDEuOTMyIDIuNjM3IDMuMDI0QzQuMzI5IDEzLjAwOCA2LjAxOSAxNCA4IDE0YzEuOTgxIDAgMy42Ny0uOTkyIDQuOTMzLTIuMDc4IDEuMjctMS4wOTEgMi4xODctMi4zNDUgMi42MzctMy4wMjNhMS42MTkgMS42MTkgMCAwMDAtMS43OThj
+LS40NS0uNjc4LTEuMzY3LTEuOTMyLTIuNjM3LTMuMDIzQzExLjY3MSAyLjk5MiA5Ljk4MSAyIDggMnptMCA4YTIgMiAwIDEwMC00IDIgMiAwIDAwMCA0eiIgZGF0YS1ldmVybm90ZS1pZD0iMTE0OSIgY2xhc3M9ImpzLWV2ZXJub3RlLWNoZWNrZWQiPjwvcGF0aD4KPC9zdmc+
+      </data>
+      <mime>image/svg+xml</mime>
+      <resource-attributes>
+        <file-name>svg_6.svg</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+171e872fc06ee7fb9cf5b45b0304ee3d+https://www.evernote.com/shard/s344/res/334db505-8096-417e-8ded-daf35be3df31</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIGRhdGEtdmlldy1jb21wb25lbnQ9InRydWUiIGNsYXNzPSJvY3RpY29uIG9jdGljb24tZ2l0LXB1bGwtcmVxdWVzdCBVbmRlcmxpbmVOYXYtb2N0aWNvbiBkLW5vbmUgZC1zbS1pbmxpbmUganMtZXZlcm5vdGUtY2hlY2tlZCIgZGF0YS1l
+dmVybm90ZS1pZD0iMzU4IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNy4xNzcgMy4wNzNMOS41NzMuNjc3QS4yNS4yNSAwIDAxMTAgLjg1NHY0Ljc5MmEuMjUuMjUgMCAwMS0uNDI3LjE3N0w3LjE3NyAzLjQyN2EuMjUuMjUgMCAwMTAtLjM1NHpNMy43NSAy
+LjVhLjc1Ljc1IDAgMTAwIDEuNS43NS43NSAwIDAwMC0xLjV6bS0yLjI1Ljc1YTIuMjUgMi4yNSAwIDExMyAyLjEyMnY1LjI1NmEyLjI1MSAyLjI1MSAwIDExLTEuNSAwVjUuMzcyQTIuMjUgMi4yNSAwIDAxMS41IDMuMjV6TTExIDIuNWgtMVY0aDFhMSAxIDAgMDExIDF2NS42MjhhMi4yNTEgMi4yNTEgMCAxMDEuNSAwVjVBMi41IDIuNSAw
+IDAwMTEgMi41em0xIDEwLjI1YS43NS43NSAwIDExMS41IDAgLjc1Ljc1IDAgMDEtMS41IDB6TTMuNzUgMTJhLjc1Ljc1IDAgMTAwIDEuNS43NS43NSAwIDAwMC0xLjV6IiBkYXRhLWV2ZXJub3RlLWlkPSIxMjU4IiBjbGFzcz0ianMtZXZlcm5vdGUtY2hlY2tlZCI+PC9wYXRoPgo8L3N2Zz4=
+      </data>
+      <mime>image/svg+xml</mime>
+      <resource-attributes>
+        <file-name>svg_12.svg</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+1cd864e348eec30afe2c7054526a379b+https://www.evernote.com/shard/s344/res/6392183d-5ed3-4b95-8234-65b4d06dfde8</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIGRhdGEtdmlldy1jb21wb25lbnQ9InRydWUiIGNsYXNzPSJvY3RpY29uIG9jdGljb24tbWFyay1naXRodWIgdi1hbGlnbi1taWRkbGUganMtZXZlcm5vdGUtY2hlY2tlZCIgZGF0YS1ldmVybm90ZS1pZD0iMjY2IiB4bWxucz0iaHR0cDov
+L3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNOCAwQzMuNTggMCAwIDMuNTggMCA4YzAgMy41NCAyLjI5IDYuNTMgNS40NyA3LjU5LjQuMDcuNTUtLjE3LjU1LS4zOCAwLS4xOS0uMDEtLjgyLS4wMS0xLjQ5LTIuMDEuMzctMi41My0uNDktMi42OS0uOTQtLjA5LS4yMy0uNDgtLjk0LS44
+Mi0xLjEzLS4yOC0uMTUtLjY4LS41Mi0uMDEtLjUzLjYzLS4wMSAxLjA4LjU4IDEuMjMuODIuNzIgMS4yMSAxLjg3Ljg3IDIuMzMuNjYuMDctLjUyLjI4LS44Ny41MS0xLjA3LTEuNzgtLjItMy42NC0uODktMy42NC0zLjk1IDAtLjg3LjMxLTEuNTkuODItMi4xNS0uMDgtLjItLjM2LTEuMDIuMDgtMi4xMiAwIDAgLjY3LS4yMSAyLjIuODIu
+NjQtLjE4IDEuMzItLjI3IDItLjI3LjY4IDAgMS4zNi4wOSAyIC4yNyAxLjUzLTEuMDQgMi4yLS44MiAyLjItLjgyLjQ0IDEuMS4xNiAxLjkyLjA4IDIuMTIuNTEuNTYuODIgMS4yNy44MiAyLjE1IDAgMy4wNy0xLjg3IDMuNzUtMy42NSAzLjk1LjI5LjI1LjU0LjczLjU0IDEuNDggMCAxLjA3LS4wMSAxLjkzLS4wMSAyLjIgMCAuMjEuMTUu
+NDYuNTUuMzhBOC4wMTMgOC4wMTMgMCAwMDE2IDhjMC00LjQyLTMuNTgtOC04LTh6IiBkYXRhLWV2ZXJub3RlLWlkPSI2NzgiIGNsYXNzPSJqcy1ldmVybm90ZS1jaGVja2VkIj48L3BhdGg+Cjwvc3ZnPg==
+      </data>
+      <mime>image/svg+xml</mime>
+      <resource-attributes>
+        <file-name>svg_1.svg</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+24fa3f9cd50decfe902679a5220b30c7+https://www.evernote.com/shard/s344/res/6d518769-2bef-4b93-93af-f04f8db6c64a</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIGRhdGEtdmlldy1jb21wb25lbnQ9InRydWUiIGNsYXNzPSJvY3RpY29uIG9jdGljb24tdHJpYW5nbGUtZG93biBtbC0yIG1yLW4xIGpzLWV2ZXJub3RlLWNoZWNrZWQiIGRhdGEtZXZlcm5vdGUtaWQ9IjM2NSIgeG1sbnM9Imh0dHA6Ly93
+d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik00LjQyNyA3LjQyN2wzLjM5NiAzLjM5NmEuMjUuMjUgMCAwMC4zNTQgMGwzLjM5Ni0zLjM5NkEuMjUuMjUgMCAwMDExLjM5NiA3SDQuNjA0YS4yNS4yNSAwIDAwLS4xNzcuNDI3eiIgZGF0YS1ldmVybm90ZS1pZD0iMTI5OSIgY2xhc3M9ImpzLWV2ZXJub3RlLWNoZWNrZWQiPjwv
+cGF0aD4KPC9zdmc+
+      </data>
+      <mime>image/svg+xml</mime>
+      <resource-attributes>
+        <file-name>svg_19.svg</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+26637b920fe81a50bbd6fae513886100+https://www.evernote.com/shard/s344/res/6cc98a5e-2fd3-41de-9d39-deb9f0c29215</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIGRhdGEtdmlldy1jb21wb25lbnQ9InRydWUiIGNsYXNzPSJvY3RpY29uIG9jdGljb24tbWFyay1naXRodWIganMtZXZlcm5vdGUtY2hlY2tlZCIgZGF0YS1ldmVybm90ZS1pZD0iMzc1IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAw
+MC9zdmciPgogICAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNOCAwQzMuNTggMCAwIDMuNTggMCA4YzAgMy41NCAyLjI5IDYuNTMgNS40NyA3LjU5LjQuMDcuNTUtLjE3LjU1LS4zOCAwLS4xOS0uMDEtLjgyLS4wMS0xLjQ5LTIuMDEuMzctMi41My0uNDktMi42OS0uOTQtLjA5LS4yMy0uNDgtLjk0LS44Mi0xLjEzLS4yOC0uMTUt
+LjY4LS41Mi0uMDEtLjUzLjYzLS4wMSAxLjA4LjU4IDEuMjMuODIuNzIgMS4yMSAxLjg3Ljg3IDIuMzMuNjYuMDctLjUyLjI4LS44Ny41MS0xLjA3LTEuNzgtLjItMy42NC0uODktMy42NC0zLjk1IDAtLjg3LjMxLTEuNTkuODItMi4xNS0uMDgtLjItLjM2LTEuMDIuMDgtMi4xMiAwIDAgLjY3LS4yMSAyLjIuODIuNjQtLjE4IDEuMzItLjI3
+IDItLjI3LjY4IDAgMS4zNi4wOSAyIC4yNyAxLjUzLTEuMDQgMi4yLS44MiAyLjItLjgyLjQ0IDEuMS4xNiAxLjkyLjA4IDIuMTIuNTEuNTYuODIgMS4yNy44MiAyLjE1IDAgMy4wNy0xLjg3IDMuNzUtMy42NSAzLjk1LjI5LjI1LjU0LjczLjU0IDEuNDggMCAxLjA3LS4wMSAxLjkzLS4wMSAyLjIgMCAuMjEuMTUuNDYuNTUuMzhBOC4wMTMg
+OC4wMTMgMCAwMDE2IDhjMC00LjQyLTMuNTgtOC04LTh6IiBkYXRhLWV2ZXJub3RlLWlkPSIxMzg1IiBjbGFzcz0ianMtZXZlcm5vdGUtY2hlY2tlZCI+PC9wYXRoPgo8L3N2Zz4=
+      </data>
+      <mime>image/svg+xml</mime>
+      <resource-attributes>
+        <file-name>svg_26.svg</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+37109494054d261658704f7521823908+https://www.evernote.com/shard/s344/res/23c3da58-1458-4e7f-aaf7-f3d99be59206</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIGRhdGEtdmlldy1jb21wb25lbnQ9InRydWUiIGNsYXNzPSJvY3RpY29uIG9jdGljb24taXNzdWUtb3BlbmVkIFVuZGVybGluZU5hdi1vY3RpY29uIGQtbm9uZSBkLXNtLWlubGluZSBqcy1ldmVybm90ZS1jaGVja2VkIiBkYXRhLWV2ZXJu
+b3RlLWlkPSIzNTciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8cGF0aCBkPSJNOCA5LjVhMS41IDEuNSAwIDEwMC0zIDEuNSAxLjUgMCAwMDAgM3oiIGRhdGEtZXZlcm5vdGUtaWQ9IjEyNTQiIGNsYXNzPSJqcy1ldmVybm90ZS1jaGVja2VkIj48L3BhdGg+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJN
+OCAwYTggOCAwIDEwMCAxNkE4IDggMCAwMDggMHpNMS41IDhhNi41IDYuNSAwIDExMTMgMCA2LjUgNi41IDAgMDEtMTMgMHoiIGRhdGEtZXZlcm5vdGUtaWQ9IjEyNTUiIGNsYXNzPSJqcy1ldmVybm90ZS1jaGVja2VkIj48L3BhdGg+Cjwvc3ZnPg==
+      </data>
+      <mime>image/svg+xml</mime>
+      <resource-attributes>
+        <file-name>svg_11.svg</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+3d2a19ae49b722983f250928511b1ae7+https://www.evernote.com/shard/s344/res/4ffc6c94-dde0-4585-b3c0-9721cea62023</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+/9j/2wCEAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDIBCQkJDAsMGA0NGDIhHCEyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMv/AABEIACgAKAMBIgACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIB
+AwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAA
+AAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/
+2gAMAwEAAhEDEQA/AOzFkSeleW+JfET32oyWFmZBdi4MEYI2CPDY4IbkkhTnH8q9wNtGo3FgBnFcZF4H0OXxUz3qsk8UouIWUgK65GAfXBIFdeLxHuaM48uoJ1HdHnN14U8YeHo5Lg4KTKRMI5Cd4PY+v+Nei+D7K/fw1CdRVlkz8qMpBRcDAx29v/r1f8QR3tprMMl1rUEWnMrbkYkJGg9Vzgn+ddPY2yNpls0cwnQxriUdH46j2rkwNeSnJPoe
+jmlGPsotdTBNgM8LSfYfauiNnk9KT7F7V6n1nzPC9iuxx1rc3sN7NG1vM0XJcMp2568f/W9ak1DxadX1a/8AD+nxiK5sbA3Us7fdDqyYjK9xhifY/SsrxB4giBhNhfRvJbwveKyPuBVCoIOPVHf8q5nw7qcyTXGrW4QyySSNcM4yJRL1Hvg4/wC+RXlRhJU9dz14RSqXZdh8XwXNyTq6vFewI0EitH147qe+71rtfAHjTTbrQ47LUdQt4LuKUxoJ
+WCGQE5X0HfHFeaeNbKQrHfwQQgsis0oYnzVbgY9e556YrjzcOy7pCvyYHAxVYRQqQ5muW5ti4zjLkcrpH1yYhSeUPSvIvhhd61/Z8S35ddJct5E3mYZBzkgc5XcoH4/WvR/Nsf8AoLTf99//AFqyq80JWWooxVtUfM2s6gIdcaSNolt5oni/cgjcrA43ZYnrjv2q14a1azg0a8sZ42S4DCWGaM4Yg4BB7MB1wQe9c7qn+ut/+ua/1qTT/wDj5P8A
+uN/Ktr6hyrlNa4vLyPT1t5Zd9rJKJV2ngHByvtyQcepqvp+j3erQRi2ZA9xeLbLuOMHGSx9gOtSXP/IGg/67v/6Ctbvgvppn/YUf/wBE00+gSelz0GG/t9C8OrDc3KMtjEkASMqzk4wMqpPzMe3vWR/wnFn/AM+eo/8AgKay9Y+5qv8A2ELf/wBCFQ1moJ6j9rJJI//Z
+      </data>
+      <mime>image/jpeg</mime>
+      <width>40</width>
+      <height>40</height>
+      <resource-attributes>
+        <file-name>7473959</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+411d32730902927e40774c600a9b9996+https://www.evernote.com/shard/s344/res/bff2804f-5859-491e-89b6-7ad36223a5b8</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIGRhdGEtdmlldy1jb21wb25lbnQ9InRydWUiIGNsYXNzPSJvY3RpY29uIG9jdGljb24tdHJpYW5nbGUtZG93biBqcy1ldmVybm90ZS1jaGVja2VkIiBkYXRhLWV2ZXJub3RlLWlkPSIzNDUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8y
+MDAwL3N2ZyI+CiAgICA8cGF0aCBkPSJNNC40MjcgNy40MjdsMy4zOTYgMy4zOTZhLjI1LjI1IDAgMDAuMzU0IDBsMy4zOTYtMy4zOTZBLjI1LjI1IDAgMDAxMS4zOTYgN0g0LjYwNGEuMjUuMjUgMCAwMC0uMTc3LjQyN3oiIGRhdGEtZXZlcm5vdGUtaWQ9IjEyMDUiIGNsYXNzPSJqcy1ldmVybm90ZS1jaGVja2VkIj48L3BhdGg+Cjwvc3Zn
+Pg==
+      </data>
+      <mime>image/svg+xml</mime>
+      <resource-attributes>
+        <file-name>svg_8.svg</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+4e58c06ccbd7bb64ad6fe558c47eb009+https://www.evernote.com/shard/s344/res/9dad77bb-45ee-4146-b53a-b00b1b0e078e</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIGRhdGEtdmlldy1jb21wb25lbnQ9InRydWUiIGNsYXNzPSJvY3RpY29uIG9jdGljb24tdGFibGUgVW5kZXJsaW5lTmF2LW9jdGljb24gZC1ub25lIGQtc20taW5saW5lIGpzLWV2ZXJub3RlLWNoZWNrZWQiIGRhdGEtZXZlcm5vdGUtaWQ9
+IjM2MSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTAgMS43NUMwIC43ODQuNzg0IDAgMS43NSAwaDEyLjVDMTUuMjE2IDAgMTYgLjc4NCAxNiAxLjc1djEyLjVBMS43NSAxLjc1IDAgMDExNC4yNSAxNkgxLjc1QTEuNzUgMS43NSAwIDAxMCAxNC4yNVYxLjc1
+ek0xLjUgNi41djcuNzVjMCAuMTM4LjExMi4yNS4yNS4yNUg1di04SDEuNXpNNSA1SDEuNVYxLjc1YS4yNS4yNSAwIDAxLjI1LS4yNUg1VjV6bTEuNSAxLjV2OGg3Ljc1YS4yNS4yNSAwIDAwLjI1LS4yNVY2LjVoLTh6bTgtMS41aC04VjEuNWg3Ljc1YS4yNS4yNSAwIDAxLjI1LjI1VjV6IiBkYXRhLWV2ZXJub3RlLWlkPSIxMjY3IiBjbGFz
+cz0ianMtZXZlcm5vdGUtY2hlY2tlZCI+PC9wYXRoPgo8L3N2Zz4=
+      </data>
+      <mime>image/svg+xml</mime>
+      <resource-attributes>
+        <file-name>svg_15.svg</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+52c7fafee6060eb41b96e196c763cf52+https://www.evernote.com/shard/s344/res/eda2e5de-b6bd-4341-81c5-dccf4ab1338b</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIGRhdGEtdmlldy1jb21wb25lbnQ9InRydWUiIGNsYXNzPSJvY3RpY29uIG9jdGljb24tYmVsbCBqcy1ldmVybm90ZS1jaGVja2VkIiBkYXRhLWV2ZXJub3RlLWlkPSIyNzciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+
+CiAgICA8cGF0aCBkPSJNOCAxNmEyIDIgMCAwMDEuOTg1LTEuNzVjLjAxNy0uMTM3LS4wOTctLjI1LS4yMzUtLjI1aC0zLjVjLS4xMzggMC0uMjUyLjExMy0uMjM1LjI1QTIgMiAwIDAwOCAxNnoiIGRhdGEtZXZlcm5vdGUtaWQ9Ijc1OCIgY2xhc3M9ImpzLWV2ZXJub3RlLWNoZWNrZWQiPjwvcGF0aD48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5v
+ZGQiIGQ9Ik04IDEuNUEzLjUgMy41IDAgMDA0LjUgNXYyLjk0N2MwIC4zNDYtLjEwMi42ODMtLjI5NC45N2wtMS43MDMgMi41NTZhLjAxOC4wMTggMCAwMC0uMDAzLjAxbC4wMDEuMDA2YzAgLjAwMi4wMDIuMDA0LjAwNC4wMDZhLjAxNy4wMTcgMCAwMC4wMDYuMDA0bC4wMDcuMDAxaDEwLjk2NGwuMDA3LS4wMDFhLjAxNi4wMTYgMCAwMC4w
+MDYtLjAwNC4wMTYuMDE2IDAgMDAuMDA0LS4wMDZsLjAwMS0uMDA3YS4wMTcuMDE3IDAgMDAtLjAwMy0uMDFsLTEuNzAzLTIuNTU0YTEuNzUgMS43NSAwIDAxLS4yOTQtLjk3VjVBMy41IDMuNSAwIDAwOCAxLjV6TTMgNWE1IDUgMCAwMTEwIDB2Mi45NDdjMCAuMDUuMDE1LjA5OC4wNDIuMTM5bDEuNzAzIDIuNTU1QTEuNTE4IDEuNTE4IDAg
+MDExMy40ODIgMTNIMi41MThhMS41MTggMS41MTggMCAwMS0xLjI2My0yLjM2bDEuNzAzLTIuNTU0QS4yNS4yNSAwIDAwMyA3Ljk0N1Y1eiIgZGF0YS1ldmVybm90ZS1pZD0iNzU5IiBjbGFzcz0ianMtZXZlcm5vdGUtY2hlY2tlZCI+PC9wYXRoPgo8L3N2Zz4=
+      </data>
+      <mime>image/svg+xml</mime>
+      <resource-attributes>
+        <file-name>svg_2.svg</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+5b3ecda2b98558ebcf7d4a505f6544c3+https://www.evernote.com/shard/s344/res/f589268c-e859-4526-bc1b-7622ea001225</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIGRhdGEtdmlldy1jb21wb25lbnQ9InRydWUiIGNsYXNzPSJvY3RpY29uIG9jdGljb24taGVhcnQgaWNvbi1zcG9uc29yIG1yLTEgY29sb3ItZmctc3BvbnNvcnMganMtZXZlcm5vdGUtY2hlY2tlZCIgZGF0YS1ldmVybm90ZS1pZD0iMzMw
+IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNC4yNSAyLjVjLTEuMzM2IDAtMi43NSAxLjE2NC0yLjc1IDMgMCAyLjE1IDEuNTggNC4xNDQgMy4zNjUgNS42ODJBMjAuNTY1IDIwLjU2NSAwIDAwOCAxMy4zOTNhMjAuNTYxIDIwLjU2MSAwIDAwMy4xMzUtMi4y
+MTFDMTIuOTIgOS42NDQgMTQuNSA3LjY1IDE0LjUgNS41YzAtMS44MzYtMS40MTQtMy0yLjc1LTMtMS4zNzMgMC0yLjYwOS45ODYtMy4wMjkgMi40NTZhLjc1Ljc1IDAgMDEtMS40NDIgMEM2Ljg1OSAzLjQ4NiA1LjYyMyAyLjUgNC4yNSAyLjV6TTggMTQuMjVsLS4zNDUuNjY2LS4wMDItLjAwMS0uMDA2LS4wMDMtLjAxOC0uMDFhNy42NDMg
+Ny42NDMgMCAwMS0uMzEtLjE3IDIyLjA3NSAyMi4wNzUgMCAwMS0zLjQzNC0yLjQxNEMyLjA0NSAxMC43MzEgMCA4LjM1IDAgNS41IDAgMi44MzYgMi4wODYgMSA0LjI1IDEgNS43OTcgMSA3LjE1MyAxLjgwMiA4IDMuMDIgOC44NDcgMS44MDIgMTAuMjAzIDEgMTEuNzUgMSAxMy45MTQgMSAxNiAyLjgzNiAxNiA1LjVjMCAyLjg1LTIuMDQ1
+IDUuMjMxLTMuODg1IDYuODE4YTIyLjA4IDIyLjA4IDAgMDEtMy43NDQgMi41ODRsLS4wMTguMDEtLjAwNi4wMDNoLS4wMDJMOCAxNC4yNXptMCAwbC4zNDUuNjY2YS43NTIuNzUyIDAgMDEtLjY5IDBMOCAxNC4yNXoiIGRhdGEtZXZlcm5vdGUtaWQ9IjExMzYiIGNsYXNzPSJqcy1ldmVybm90ZS1jaGVja2VkIj48L3BhdGg+Cjwvc3ZnPg==
+      </data>
+      <mime>image/svg+xml</mime>
+      <resource-attributes>
+        <file-name>svg_5.svg</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+71b5531a12400f7784882005da064e0f+https://www.evernote.com/shard/s344/res/a2feb4c2-6858-4569-9619-d57412b0bd36</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIGRhdGEtdmlldy1jb21wb25lbnQ9InRydWUiIGNsYXNzPSJvY3RpY29uIG9jdGljb24tdmVyaWZpZWQganMtZXZlcm5vdGUtY2hlY2tlZCIgZGF0YS1ldmVybm90ZS1pZD0iMzcwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9z
+dmciPgogICAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNOS41ODUuNTJhMi42NzggMi42NzggMCAwMC0zLjE3IDBsLS45MjguNjhhMS4xNzggMS4xNzggMCAwMS0uNTE4LjIxNUwzLjgzIDEuNTlhMi42NzggMi42NzggMCAwMC0yLjI0IDIuMjRsLS4xNzUgMS4xNGExLjE3OCAxLjE3OCAwIDAxLS4yMTUuNTE4bC0uNjguOTI4YTIu
+Njc4IDIuNjc4IDAgMDAwIDMuMTdsLjY4LjkyOGMuMTEzLjE1My4xODYuMzMuMjE1LjUxOGwuMTc1IDEuMTM4YTIuNjc4IDIuNjc4IDAgMDAyLjI0IDIuMjRsMS4xMzguMTc1Yy4xODcuMDI5LjM2NS4xMDIuNTE4LjIxNWwuOTI4LjY4YTIuNjc4IDIuNjc4IDAgMDAzLjE3IDBsLjkyOC0uNjhhMS4xNyAxLjE3IDAgMDEuNTE4LS4yMTVsMS4x
+MzgtLjE3NWEyLjY3OCAyLjY3OCAwIDAwMi4yNDEtMi4yNDFsLjE3NS0xLjEzOGMuMDI5LS4xODcuMTAyLS4zNjUuMjE1LS41MThsLjY4LS45MjhhMi42NzggMi42NzggMCAwMDAtMy4xN2wtLjY4LS45MjhhMS4xNzkgMS4xNzkgMCAwMS0uMjE1LS41MThMMTQuNDEgMy44M2EyLjY3OCAyLjY3OCAwIDAwLTIuMjQtMi4yNGwtMS4xMzgtLjE3
+NWExLjE3OSAxLjE3OSAwIDAxLS41MTgtLjIxNUw5LjU4NS41MnpNNy4zMDMgMS43MjhjLjQxNS0uMzA1Ljk4LS4zMDUgMS4zOTQgMGwuOTI4LjY4Yy4zNDguMjU2Ljc1Mi40MjMgMS4xOC40ODlsMS4xMzYuMTc0Yy41MS4wNzguOTA5LjQ3OC45ODcuOTg3bC4xNzQgMS4xMzdjLjA2Ni40MjcuMjMzLjgzMS40ODkgMS4xOGwuNjguOTI3Yy4z
+MDUuNDE1LjMwNS45OCAwIDEuMzk0bC0uNjguOTI4YTIuNjc4IDIuNjc4IDAgMDAtLjQ4OSAxLjE4bC0uMTc0IDEuMTM2YTEuMTc4IDEuMTc4IDAgMDEtLjk4Ny45ODdsLTEuMTM3LjE3NGEyLjY3OCAyLjY3OCAwIDAwLTEuMTguNDg5bC0uOTI3LjY4Yy0uNDE1LjMwNS0uOTguMzA1LTEuMzk0IDBsLS45MjgtLjY4YTIuNjc4IDIuNjc4IDAg
+MDAtMS4xOC0uNDg5bC0xLjEzNi0uMTc0YTEuMTc4IDEuMTc4IDAgMDEtLjk4Ny0uOTg3bC0uMTc0LTEuMTM3YTIuNjc4IDIuNjc4IDAgMDAtLjQ4OS0xLjE4bC0uNjgtLjkyN2ExLjE3OCAxLjE3OCAwIDAxMC0xLjM5NGwuNjgtLjkyOGMuMjU2LS4zNDguNDIzLS43NTIuNDg5LTEuMThsLjE3NC0xLjEzNmMuMDc4LS41MS40NzgtLjkwOS45
+ODctLjk4N2wxLjEzNy0uMTc0YTIuNjc4IDIuNjc4IDAgMDAxLjE4LS40ODlsLjkyNy0uNjh6TTExLjI4IDYuNzhhLjc1Ljc1IDAgMDAtMS4wNi0xLjA2TDcgOC45NCA1Ljc4IDcuNzJhLjc1Ljc1IDAgMDAtMS4wNiAxLjA2bDEuNzUgMS43NWEuNzUuNzUgMCAwMDEuMDYgMGwzLjc1LTMuNzV6IiBkYXRhLWV2ZXJub3RlLWlkPSIxMzIyIiBj
+bGFzcz0ianMtZXZlcm5vdGUtY2hlY2tlZCI+PC9wYXRoPgo8L3N2Zz4=
+      </data>
+      <mime>image/svg+xml</mime>
+      <resource-attributes>
+        <file-name>svg_22.svg</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+7937f8dcac1dab76937c84a25713513f+https://www.evernote.com/shard/s344/res/81da14c8-a385-43e6-99d2-e331694e851f</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIGRhdGEtdmlldy1jb21wb25lbnQ9InRydWUiIGNsYXNzPSJvY3RpY29uIG9jdGljb24tdHJpYW5nbGUtZG93biBqcy1ldmVybm90ZS1jaGVja2VkIiBkYXRhLWV2ZXJub3RlLWlkPSIzNDkiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8y
+MDAwL3N2ZyI+CiAgICA8cGF0aCBkPSJNNC40MjcgNy40MjdsMy4zOTYgMy4zOTZhLjI1LjI1IDAgMDAuMzU0IDBsMy4zOTYtMy4zOTZBLjI1LjI1IDAgMDAxMS4zOTYgN0g0LjYwNGEuMjUuMjUgMCAwMC0uMTc3LjQyN3oiIGRhdGEtZXZlcm5vdGUtaWQ9IjEyMjIiIGNsYXNzPSJqcy1ldmVybm90ZS1jaGVja2VkIj48L3BhdGg+Cjwvc3Zn
+Pg==
+      </data>
+      <mime>image/svg+xml</mime>
+      <resource-attributes>
+        <file-name>svg_9.svg</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+9027af59e578a3bffbf18212952b26f8+https://www.evernote.com/shard/s344/res/f08868ce-f494-4077-85e2-5f8774fe4cc5</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIGRhdGEtdmlldy1jb21wb25lbnQ9InRydWUiIGNsYXNzPSJvY3RpY29uIG9jdGljb24tZ2l0LWNvbW1pdCBqcy1ldmVybm90ZS1jaGVja2VkIiBkYXRhLWV2ZXJub3RlLWlkPSIzNjkiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAw
+L3N2ZyI+CiAgICA8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMC41IDcuNzVhMi41IDIuNSAwIDExLTUgMCAyLjUgMi41IDAgMDE1IDB6bTEuNDMuNzVhNC4wMDIgNC4wMDIgMCAwMS03Ljg2IDBILjc1YS43NS43NSAwIDExMC0xLjVoMy4zMmE0LjAwMSA0LjAwMSAwIDAxNy44NiAwaDMuMzJhLjc1Ljc1IDAgMTEwIDEuNWgtMy4z
+MnoiIGRhdGEtZXZlcm5vdGUtaWQ9IjEzMjEiIGNsYXNzPSJqcy1ldmVybm90ZS1jaGVja2VkIj48L3BhdGg+Cjwvc3ZnPg==
+      </data>
+      <mime>image/svg+xml</mime>
+      <resource-attributes>
+        <file-name>svg_21.svg</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+99261f3e86be915f47f990518f64bae0+https://www.evernote.com/shard/s344/res/4d2df3d3-1b6c-4f4d-83fb-11f1b8d87d4a</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIGRhdGEtdmlldy1jb21wb25lbnQ9InRydWUiIGNsYXNzPSJvY3RpY29uIG9jdGljb24tc2hpZWxkIFVuZGVybGluZU5hdi1vY3RpY29uIGQtbm9uZSBkLXNtLWlubGluZSBqcy1ldmVybm90ZS1jaGVja2VkIiBkYXRhLWV2ZXJub3RlLWlk
+PSIzNjIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik03LjQ2Ny4xMzNhMS43NSAxLjc1IDAgMDExLjA2NiAwbDUuMjUgMS42OEExLjc1IDEuNzUgMCAwMTE1IDMuNDhWN2MwIDEuNTY2LS4zMiAzLjE4Mi0xLjMwMyA0LjY4Mi0uOTgzIDEuNDk4LTIuNTg1IDIu
+ODEzLTUuMDMyIDMuODU1YTEuNyAxLjcgMCAwMS0xLjMzIDBjLTIuNDQ3LTEuMDQyLTQuMDQ5LTIuMzU3LTUuMDMyLTMuODU1QzEuMzIgMTAuMTgyIDEgOC41NjYgMSA3VjMuNDhhMS43NSAxLjc1IDAgMDExLjIxNy0xLjY2N2w1LjI1LTEuNjh6bS42MSAxLjQyOWEuMjUuMjUgMCAwMC0uMTUzIDBsLTUuMjUgMS42OGEuMjUuMjUgMCAwMC0u
+MTc0LjIzOFY3YzAgMS4zNTguMjc1IDIuNjY2IDEuMDU3IDMuODYuNzg0IDEuMTk0IDIuMTIxIDIuMzQgNC4zNjYgMy4yOTdhLjIuMiAwIDAwLjE1NCAwYzIuMjQ1LS45NTYgMy41ODItMi4xMDQgNC4zNjYtMy4yOThDMTMuMjI1IDkuNjY2IDEzLjUgOC4zNiAxMy41IDdWMy40OGEuMjUuMjUgMCAwMC0uMTc0LS4yMzdsLTUuMjUtMS42OHpN
+OSAxMC41YTEgMSAwIDExLTIgMCAxIDEgMCAwMTIgMHptLS4yNS01Ljc1YS43NS43NSAwIDEwLTEuNSAwdjNhLjc1Ljc1IDAgMDAxLjUgMHYtM3oiIGRhdGEtZXZlcm5vdGUtaWQ9IjEyNzAiIGNsYXNzPSJqcy1ldmVybm90ZS1jaGVja2VkIj48L3BhdGg+Cjwvc3ZnPg==
+      </data>
+      <mime>image/svg+xml</mime>
+      <resource-attributes>
+        <file-name>svg_16.svg</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+99e3b59af31fe2711641f4fe10e3e2d7+https://www.evernote.com/shard/s344/res/312b99f8-46d4-4f5f-9364-e9d31f07fe0a</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIGRhdGEtdmlldy1jb21wb25lbnQ9InRydWUiIGNsYXNzPSJvY3RpY29uIG9jdGljb24ta2ViYWItaG9yaXpvbnRhbCBqcy1ldmVybm90ZS1jaGVja2VkIiBkYXRhLWV2ZXJub3RlLWlkPSIzNjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9y
+Zy8yMDAwL3N2ZyI+CiAgICA8cGF0aCBkPSJNOCA5YTEuNSAxLjUgMCAxMDAtMyAxLjUgMS41IDAgMDAwIDN6TTEuNSA5YTEuNSAxLjUgMCAxMDAtMyAxLjUgMS41IDAgMDAwIDN6bTEzIDBhMS41IDEuNSAwIDEwMC0zIDEuNSAxLjUgMCAwMDAgM3oiIGRhdGEtZXZlcm5vdGUtaWQ9IjEyNzciIGNsYXNzPSJqcy1ldmVybm90ZS1jaGVja2Vk
+Ij48L3BhdGg+Cjwvc3ZnPg==
+      </data>
+      <mime>image/svg+xml</mime>
+      <resource-attributes>
+        <file-name>svg_18.svg</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+9cb980e5c41defd2a6406aef982ba995+https://www.evernote.com/shard/s344/res/dc167096-fceb-404d-8160-f66c839b207c</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIGRhdGEtdmlldy1jb21wb25lbnQ9InRydWUiIGNsYXNzPSJvY3RpY29uIG9jdGljb24tcmVwby1mb3JrZWQgbXItMiBqcy1ldmVybm90ZS1jaGVja2VkIiBkYXRhLWV2ZXJub3RlLWlkPSIzNDQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9y
+Zy8yMDAwL3N2ZyI+CiAgICA8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik01IDMuMjVhLjc1Ljc1IDAgMTEtMS41IDAgLjc1Ljc1IDAgMDExLjUgMHptMCAyLjEyMmEyLjI1IDIuMjUgMCAxMC0xLjUgMHYuODc4QTIuMjUgMi4yNSAwIDAwNS43NSA4LjVoMS41djIuMTI4YTIuMjUxIDIuMjUxIDAgMTAxLjUgMFY4LjVoMS41YTIuMjUg
+Mi4yNSAwIDAwMi4yNS0yLjI1di0uODc4YTIuMjUgMi4yNSAwIDEwLTEuNSAwdi44NzhhLjc1Ljc1IDAgMDEtLjc1Ljc1aC00LjVBLjc1Ljc1IDAgMDE1IDYuMjV2LS44Nzh6bTMuNzUgNy4zNzhhLjc1Ljc1IDAgMTEtMS41IDAgLjc1Ljc1IDAgMDExLjUgMHptMy04Ljc1YS43NS43NSAwIDEwMC0xLjUuNzUuNzUgMCAwMDAgMS41eiIgZGF0
+YS1ldmVybm90ZS1pZD0iMTIwNCIgY2xhc3M9ImpzLWV2ZXJub3RlLWNoZWNrZWQiPjwvcGF0aD4KPC9zdmc+
+      </data>
+      <mime>image/svg+xml</mime>
+      <resource-attributes>
+        <file-name>svg_7.svg</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+abcc98ed2eb7ca5e535ffa66a1a9501d+https://www.evernote.com/shard/s344/res/3e5bae3f-9005-4475-8ee6-91e8b5775c67</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIGRhdGEtdmlldy1jb21wb25lbnQ9InRydWUiIGNsYXNzPSJvY3RpY29uIG9jdGljb24tZ3JhcGggVW5kZXJsaW5lTmF2LW9jdGljb24gZC1ub25lIGQtc20taW5saW5lIGpzLWV2ZXJub3RlLWNoZWNrZWQiIGRhdGEtZXZlcm5vdGUtaWQ9
+IjM2MyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTEuNSAxLjc1YS43NS43NSAwIDAwLTEuNSAwdjEyLjVjMCAuNDE0LjMzNi43NS43NS43NWgxNC41YS43NS43NSAwIDAwMC0xLjVIMS41VjEuNzV6bTE0LjI4IDIuNTNhLjc1Ljc1IDAgMDAtMS4wNi0xLjA2
+TDEwIDcuOTQgNy41MyA1LjQ3YS43NS43NSAwIDAwLTEuMDYgMEwzLjIyIDguNzJhLjc1Ljc1IDAgMDAxLjA2IDEuMDZMNyA3LjA2bDIuNDcgMi40N2EuNzUuNzUgMCAwMDEuMDYgMGw1LjI1LTUuMjV6IiBkYXRhLWV2ZXJub3RlLWlkPSIxMjczIiBjbGFzcz0ianMtZXZlcm5vdGUtY2hlY2tlZCI+PC9wYXRoPgo8L3N2Zz4=
+      </data>
+      <mime>image/svg+xml</mime>
+      <resource-attributes>
+        <file-name>svg_17.svg</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+bff2cf32e28a01b239008b9b6863b02d+https://www.evernote.com/shard/s344/res/e1d848f3-c538-4e6c-a476-3c0349b42286</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIGRhdGEtdmlldy1jb21wb25lbnQ9InRydWUiIGNsYXNzPSJvY3RpY29uIG9jdGljb24tY29tbWVudC1kaXNjdXNzaW9uIFVuZGVybGluZU5hdi1vY3RpY29uIGQtbm9uZSBkLXNtLWlubGluZSBqcy1ldmVybm90ZS1jaGVja2VkIiBkYXRh
+LWV2ZXJub3RlLWlkPSIzNTkiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xLjUgMi43NWEuMjUuMjUgMCAwMS4yNS0uMjVoOC41YS4yNS4yNSAwIDAxLjI1LjI1djUuNWEuMjUuMjUgMCAwMS0uMjUuMjVoLTMuNWEuNzUuNzUgMCAwMC0uNTMuMjJMMy41IDEx
+LjQ0VjkuMjVhLjc1Ljc1IDAgMDAtLjc1LS43NWgtMWEuMjUuMjUgMCAwMS0uMjUtLjI1di01LjV6TTEuNzUgMUExLjc1IDEuNzUgMCAwMDAgMi43NXY1LjVDMCA5LjIxNi43ODQgMTAgMS43NSAxMEgydjEuNTQzYTEuNDU3IDEuNDU3IDAgMDAyLjQ4NyAxLjAzTDcuMDYxIDEwaDMuMTg5QTEuNzUgMS43NSAwIDAwMTIgOC4yNXYtNS41QTEu
+NzUgMS43NSAwIDAwMTAuMjUgMWgtOC41ek0xNC41IDQuNzVhLjI1LjI1IDAgMDAtLjI1LS4yNWgtLjVhLjc1Ljc1IDAgMTEwLTEuNWguNWMuOTY2IDAgMS43NS43ODQgMS43NSAxLjc1djUuNUExLjc1IDEuNzUgMCAwMTE0LjI1IDEySDE0djEuNTQzYTEuNDU3IDEuNDU3IDAgMDEtMi40ODcgMS4wM0w5LjIyIDEyLjI4YS43NS43NSAwIDEx
+MS4wNi0xLjA2bDIuMjIgMi4yMnYtMi4xOWEuNzUuNzUgMCAwMS43NS0uNzVoMWEuMjUuMjUgMCAwMC4yNS0uMjV2LTUuNXoiIGRhdGEtZXZlcm5vdGUtaWQ9IjEyNjEiIGNsYXNzPSJqcy1ldmVybm90ZS1jaGVja2VkIj48L3BhdGg+Cjwvc3ZnPg==
+      </data>
+      <mime>image/svg+xml</mime>
+      <resource-attributes>
+        <file-name>svg_13.svg</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+c166e93ba5b2e58d5a400bc275c034db+https://www.evernote.com/shard/s344/res/29d3be6b-12e0-4bb6-96bd-58939fdd49a5</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIGRhdGEtdmlldy1jb21wb25lbnQ9InRydWUiIGNsYXNzPSJvY3RpY29uIG9jdGljb24tdGFnIGpzLWV2ZXJub3RlLWNoZWNrZWQiIGRhdGEtZXZlcm5vdGUtaWQ9IjM2OCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4K
+ICAgIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTIuNSA3Ljc3NVYyLjc1YS4yNS4yNSAwIDAxLjI1LS4yNWg1LjAyNWEuMjUuMjUgMCAwMS4xNzcuMDczbDYuMjUgNi4yNWEuMjUuMjUgMCAwMTAgLjM1NGwtNS4wMjUgNS4wMjVhLjI1LjI1IDAgMDEtLjM1NCAwbC02LjI1LTYuMjVhLjI1LjI1IDAgMDEtLjA3My0uMTc3em0tMS41
+IDBWMi43NUMxIDEuNzg0IDEuNzg0IDEgMi43NSAxaDUuMDI1Yy40NjQgMCAuOTEuMTg0IDEuMjM4LjUxM2w2LjI1IDYuMjVhMS43NSAxLjc1IDAgMDEwIDIuNDc0bC01LjAyNiA1LjAyNmExLjc1IDEuNzUgMCAwMS0yLjQ3NCAwbC02LjI1LTYuMjVBMS43NSAxLjc1IDAgMDExIDcuNzc1ek02IDVhMSAxIDAgMTAwIDIgMSAxIDAgMDAwLTJ6
+IiBkYXRhLWV2ZXJub3RlLWlkPSIxMzE4IiBjbGFzcz0ianMtZXZlcm5vdGUtY2hlY2tlZCI+PC9wYXRoPgo8L3N2Zz4=
+      </data>
+      <mime>image/svg+xml</mime>
+      <resource-attributes>
+        <file-name>svg_20.svg</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+c7d0271a7081a08f6c086d11abc9ae96+https://www.evernote.com/shard/s344/res/5664d83f-1b97-4d98-adf5-4b345b422044</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIGRhdGEtdmlldy1jb21wb25lbnQ9InRydWUiIGNsYXNzPSJvY3RpY29uIG9jdGljb24tcGx1cyBqcy1ldmVybm90ZS1jaGVja2VkIiBkYXRhLWV2ZXJub3RlLWlkPSIyNzgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+
+CiAgICA8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik03Ljc1IDJhLjc1Ljc1IDAgMDEuNzUuNzVWN2g0LjI1YS43NS43NSAwIDExMCAxLjVIOC41djQuMjVhLjc1Ljc1IDAgMTEtMS41IDBWOC41SDIuNzVhLjc1Ljc1IDAgMDEwLTEuNUg3VjIuNzVBLjc1Ljc1IDAgMDE3Ljc1IDJ6IiBkYXRhLWV2ZXJub3RlLWlkPSI3NjEiIGNsYXNz
+PSJqcy1ldmVybm90ZS1jaGVja2VkIj48L3BhdGg+Cjwvc3ZnPg==
+      </data>
+      <mime>image/svg+xml</mime>
+      <resource-attributes>
+        <file-name>svg_3.svg</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+cf505d616d4a5cc53102b3291b5f6408+https://www.evernote.com/shard/s344/res/cd97f81e-0bd7-4e73-9132-ce3fe2899ab4</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIGRhdGEtdmlldy1jb21wb25lbnQ9InRydWUiIGNsYXNzPSJvY3RpY29uIG9jdGljb24tY29kZSBVbmRlcmxpbmVOYXYtb2N0aWNvbiBkLW5vbmUgZC1zbS1pbmxpbmUganMtZXZlcm5vdGUtY2hlY2tlZCIgZGF0YS1ldmVybm90ZS1pZD0i
+MzU2IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNC43MiAzLjIyYS43NS43NSAwIDAxMS4wNiAxLjA2TDIuMDYgOGwzLjcyIDMuNzJhLjc1Ljc1IDAgMTEtMS4wNiAxLjA2TC40NyA4LjUzYS43NS43NSAwIDAxMC0xLjA2bDQuMjUtNC4yNXptNi41NiAwYS43
+NS43NSAwIDEwLTEuMDYgMS4wNkwxMy45NCA4bC0zLjcyIDMuNzJhLjc1Ljc1IDAgMTAxLjA2IDEuMDZsNC4yNS00LjI1YS43NS43NSAwIDAwMC0xLjA2bC00LjI1LTQuMjV6IiBkYXRhLWV2ZXJub3RlLWlkPSIxMjUxIiBjbGFzcz0ianMtZXZlcm5vdGUtY2hlY2tlZCI+PC9wYXRoPgo8L3N2Zz4=
+      </data>
+      <mime>image/svg+xml</mime>
+      <resource-attributes>
+        <file-name>svg_10.svg</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+cfa861c800a5cc72ab05f54b5f6aa88c+https://www.evernote.com/shard/s344/res/84b7b641-820f-49c9-a025-790bd0574363</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIGRhdGEtdmlldy1jb21wb25lbnQ9InRydWUiIGNsYXNzPSJvY3RpY29uIG9jdGljb24tZmlsZS16aXAgY29sb3ItZmctbXV0ZWQganMtZXZlcm5vdGUtY2hlY2tlZCIgZGF0YS1ldmVybm90ZS1pZD0iMzczIiB4bWxucz0iaHR0cDovL3d3
+dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMy41IDEuNzVhLjI1LjI1IDAgMDEuMjUtLjI1aDNhLjc1Ljc1IDAgMDAwIDEuNWguNWEuNzUuNzUgMCAwMDAtMS41aDIuMDg2YS4yNS4yNSAwIDAxLjE3Ny4wNzNsMi45MTQgMi45MTRhLjI1LjI1IDAgMDEuMDczLjE3N3Y4LjU4NmEuMjUuMjUg
+MCAwMS0uMjUuMjVoLS41YS43NS43NSAwIDAwMCAxLjVoLjVBMS43NSAxLjc1IDAgMDAxNCAxMy4yNVY0LjY2NGMwLS40NjQtLjE4NC0uOTA5LS41MTMtMS4yMzdMMTAuNTczLjUxM0ExLjc1IDEuNzUgMCAwMDkuMzM2IDBIMy43NUExLjc1IDEuNzUgMCAwMDIgMS43NXYxMS41YzAgLjY0OS4zNTMgMS4yMTQuODc0IDEuNTE1YS43NS43NSAw
+IDEwLjc1Mi0xLjI5OC4yNS4yNSAwIDAxLS4xMjYtLjIxN1YxLjc1ek04Ljc1IDNhLjc1Ljc1IDAgMDAwIDEuNWguNWEuNzUuNzUgMCAwMDAtMS41aC0uNXpNNiA1LjI1YS43NS43NSAwIDAxLjc1LS43NWguNWEuNzUuNzUgMCAwMTAgMS41aC0uNUEuNzUuNzUgMCAwMTYgNS4yNXptMiAxLjVBLjc1Ljc1IDAgMDE4Ljc1IDZoLjVhLjc1Ljc1
+IDAgMDEwIDEuNWgtLjVBLjc1Ljc1IDAgMDE4IDYuNzV6bS0xLjI1Ljc1YS43NS43NSAwIDAwMCAxLjVoLjVhLjc1Ljc1IDAgMDAwLTEuNWgtLjV6TTggOS43NUEuNzUuNzUgMCAwMTguNzUgOWguNWEuNzUuNzUgMCAwMTAgMS41aC0uNUEuNzUuNzUgMCAwMTggOS43NXptLS43NS43NWExLjc1IDEuNzUgMCAwMC0xLjc1IDEuNzV2M2MwIC40
+MTQuMzM2Ljc1Ljc1Ljc1aDIuNWEuNzUuNzUgMCAwMC43NS0uNzV2LTNhMS43NSAxLjc1IDAgMDAtMS43NS0xLjc1aC0uNXpNNyAxMi4yNWEuMjUuMjUgMCAwMS4yNS0uMjVoLjVhLjI1LjI1IDAgMDEuMjUuMjV2Mi4yNUg3di0yLjI1eiIgZGF0YS1ldmVybm90ZS1pZD0iMTM1MyIgY2xhc3M9ImpzLWV2ZXJub3RlLWNoZWNrZWQiPjwvcGF0
+aD4KPC9zdmc+
+      </data>
+      <mime>image/svg+xml</mime>
+      <resource-attributes>
+        <file-name>svg_24.svg</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+d92e8f8d5e1fea9cf378c2cbf1c5a484+https://www.evernote.com/shard/s344/res/8001b366-2077-4f7b-be94-926ee6b99124</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIGRhdGEtdmlldy1jb21wb25lbnQ9InRydWUiIGNsYXNzPSJvY3RpY29uIG9jdGljb24tcGxheSBVbmRlcmxpbmVOYXYtb2N0aWNvbiBkLW5vbmUgZC1zbS1pbmxpbmUganMtZXZlcm5vdGUtY2hlY2tlZCIgZGF0YS1ldmVybm90ZS1pZD0i
+MzYwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMS41IDhhNi41IDYuNSAwIDExMTMgMCA2LjUgNi41IDAgMDEtMTMgMHpNOCAwYTggOCAwIDEwMCAxNkE4IDggMCAwMDggMHpNNi4zNzkgNS4yMjdBLjI1LjI1IDAgMDA2IDUuNDQydjUuMTE3YS4yNS4yNSAw
+IDAwLjM3OS4yMTRsNC4yNjQtMi41NTlhLjI1LjI1IDAgMDAwLS40MjhMNi4zNzkgNS4yMjd6IiBkYXRhLWV2ZXJub3RlLWlkPSIxMjY0IiBjbGFzcz0ianMtZXZlcm5vdGUtY2hlY2tlZCI+PC9wYXRoPgo8L3N2Zz4=
+      </data>
+      <mime>image/svg+xml</mime>
+      <resource-attributes>
+        <file-name>svg_14.svg</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+dec3dc059e9fc34e3caf4a6b4d6743ed+https://www.evernote.com/shard/s344/res/88c65674-c1f8-4935-95b9-4207472b8c4c</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAEGUlEQVR4nOSYS0g63RvH/+Ptp5YVRZKWIVYgJuFQbWqji0giiCAKMtwVrYLaCG1atatVLqJVUO2KFoVFgSQaYZRDFNmFLppgdnGwRNSs+fNyeKfTGS+j76LF77uImcP3eT5nnnkeZyYehmH/+w1xfoX6V4J5ebkbGxsNBoNOp1MqlaWlpRiGRSIRv99/cnLicDgIgsgjF8ZCEolk
+YmLC6/VSWXV7ezs5OVleXs4mZw4wh8MZHh4OhULZkbBIkhwfH+fxeIWDKysrt7e32SNhuVyumpqaQsB1dXXX19cURX19fdF/M53Sgk8DgUBTU1N+YIVC4fP5CrtWWE9PT2q1mi1YKBQeHR3RweFwOBKJsIe9v7+/vLzQp5eXl6D/c4NnZmbgRB0dHVwuV6/Xb25uZkfa7Xaj0cjn83Ech9cXFxczlBuSVqv1eDw83vd8l5SURKNRcNzZ2anRaI6P
+j+/u7kiSpCiqrKxMqVTiOB4MBtfW1ugRfXt7KyoqAqcURen1eqfTmW2OV1dXwTZBmySTyfSbzaVgMAh3osPhyFZqpVKZSqWQAspksnypYrE4mUwieXAchz0/fqsHBga4XC68QpIkXHaWEgqFz8/PyKLJZMpY6r29PWSbo6Oj+V4uUF9fH5Lq7OwMNnyDuVxuNBqFrSRJCoXCwsAcDuf+/h7O9vn5Cc/Vd6kVCgXdh6AV3W53IpHIt850uMvloigK
+HP/zAOZw6uvracM3WCqVIrcgFAoVRgUKhUJgVumJraqqSgP+8+cPEslcyUvMcIFAkAYcj8cRn1wu/y/g6upqZAVGfIMfHx8Rn06n4/P5BYNbWlqQlR8IuA+ZD4Oenp7Curq9vR1J9fHxUVxcnGacMAzb3d1F3B6PRyAQFDBLdrsdSUUQxA8PXAqbzYYUB8fxhYUF5OcsuzAMm52dNRgMyDqaHN6FXC5PJBJggxcXF6+vr+B4f3+/ra2NzbU2Nzcz
+ywaeExqNBnaiT6elpSVgHRwcVKlU8/PzdLDX67VarSaTicnr7++fm5s7PT1lIoG2traQEBTc0NAQj8fBHi0Wi1arRe7W2NgYEzw0NJQJSVFUKpVqbW3NAcYwbGpqiu5DHMeNRuPBwQFYicViUqmUGSISieh7xJTVamWGpAHz+XyHwwFilpeXJRKJWq3u6uqyWCzd3d1MP9DDw0NaKkEQYrGYFRi8UZ+fn4PI6elpkUiUiUcr7Vupz+erra1N68/4
+Xi2TyQiCAPHhcHhnZ2d9fd3pdLIHX11dqVSqTP5sXxISiWRlZQXOFYvFMpn9fj/s3NjYqKioyJI890dbb2/vzc0NSBePxzPZ6HscCATMZnPOtKy+FgUCgdlsdjqdbrc7k8dmsx0eHo6MjLBpiH/hv6G/718Rvwb+fwAAAP//t7mB3j6KRoAAAAAASUVORK5CYII=
+      </data>
+      <mime>image/png</mime>
+      <width>40</width>
+      <height>40</height>
+      <resource-attributes>
+        <file-name>15368</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+f15b8d79365b873f11b9267a7548ca0f+https://www.evernote.com/shard/s344/res/417c9e0e-dc9d-4782-b936-9426229f42c0</source-url>
+      </resource-attributes>
+    </resource>
+    <resource>
+      <data encoding="base64">
+PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIGRhdGEtdmlldy1jb21wb25lbnQ9InRydWUiIGNsYXNzPSJvY3RpY29uIG9jdGljb24tcmVwbyBjb2xvci1mZy1tdXRlZCBtci0yIGpzLWV2ZXJub3RlLWNoZWNrZWQiIGRhdGEtZXZlcm5vdGUtaWQ9IjMyOSIgeG1sbnM9Imh0dHA6Ly93
+d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTIgMi41QTIuNSAyLjUgMCAwMTQuNSAwaDguNzVhLjc1Ljc1IDAgMDEuNzUuNzV2MTIuNWEuNzUuNzUgMCAwMS0uNzUuNzVoLTIuNWEuNzUuNzUgMCAxMTAtMS41aDEuNzV2LTJoLThhMSAxIDAgMDAtLjcxNCAxLjcuNzUuNzUgMCAwMS0xLjA3
+MiAxLjA1QTIuNDk1IDIuNDk1IDAgMDEyIDExLjV2LTl6bTEwLjUtMVY5aC04Yy0uMzU2IDAtLjY5NC4wNzQtMSAuMjA4VjIuNWExIDEgMCAwMTEtMWg4ek01IDEyLjI1djMuMjVhLjI1LjI1IDAgMDAuNC4ybDEuNDUtMS4wODdhLjI1LjI1IDAgMDEuMyAwTDguNiAxNS43YS4yNS4yNSAwIDAwLjQtLjJ2LTMuMjVhLjI1LjI1IDAgMDAtLjI1
+LS4yNWgtMy41YS4yNS4yNSAwIDAwLS4yNS4yNXoiIGRhdGEtZXZlcm5vdGUtaWQ9IjExMzAiIGNsYXNzPSJqcy1ldmVybm90ZS1jaGVja2VkIj48L3BhdGg+Cjwvc3ZnPg==
+      </data>
+      <mime>image/svg+xml</mime>
+      <resource-attributes>
+        <file-name>svg_4.svg</file-name>
+        <source-url>en-cache://tokenKey%3D%22AuthToken%3AUser%3A212224125%22+767d6a8f-ad46-4053-808a-6f0d7542e93b+fe1a2727e4336cc9d7a1a5461dd0b2bd+https://www.evernote.com/shard/s344/res/110ccd29-b85d-4c5e-972a-7cedb00e183c</source-url>
+      </resource-attributes>
+    </resource>
+  </note>
+</en-export>

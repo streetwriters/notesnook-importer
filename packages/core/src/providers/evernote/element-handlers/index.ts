@@ -26,13 +26,15 @@ import { IMGDataurl } from "./img-dataurl";
 import { IHasher } from "../../../utils/hasher";
 import { ENTodo } from "./en-todo";
 import { ENCodeblock } from "./en-codeblock";
+import { ENWebClip } from "./en-webclip";
 
 const elementMap = {
   "en-media": ENMedia,
   "img-dataurl": IMGDataurl,
   "en-task-group": ENTaskGroup,
   "en-todo": ENTodo,
-  "en-codeblock": ENCodeblock
+  "en-codeblock": ENCodeblock,
+  "en-webclip": ENWebClip
 };
 type Keys = keyof typeof elementMap;
 

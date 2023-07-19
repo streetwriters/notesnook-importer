@@ -83,49 +83,39 @@ export async function processContent(
   );
   if (!noteElement) throw new Error("Could not find a valid en-note tag.");
 
-  const elements = selectAll(cssSelector, noteElement);
-  for (const element of elements) {
-    const elementType =
-      filterAttributes(element) || element.tagName.toLowerCase();
-
-    switch (elementType) {
-      case "img-dataurl":
-      case "en-codeblock":
-      case "en-task-group":
-      case "en-crypt":
-      case "en-todo":
-      case "en-media": {
-        if (handler) {
-          const result = await handler.process(elementType, element);
-          if (result) {
-            replaceElement(element, parseDocument(result));
-          } else removeElement(element);
-        } else removeElement(element);
-        break;
-      }
-    }
+  for (const element of selectAll(cssSelector, noteElement)) {
+    await processElement(
+      element,
+      ["en-codeblock", "en-task-group", "en-crypt", "en-todo", "en-webclip"],
+      handler
+    );
   }
+
+  for (const element of selectAll(cssSelector, noteElement)) {
+    await processElement(element, ["img-dataurl", "en-media"], handler);
+  }
+
   return render(noteElement.childNodes, {
     xmlMode: true
   });
 }
 
-function stylesToObject(input: string): Record<string, string> {
-  const styles = input.split(";");
-  const output: Record<string, string> = {};
-  for (const style of styles) {
-    const [key, value] = style.trim().split(":");
-    output[key] = value;
-  }
-  return output;
-}
+async function processElement(
+  element: Element,
+  elementTypes: string[],
+  handler?: IElementHandler
+) {
+  const elementType =
+    filterAttributes(element) || element.tagName.toLowerCase();
 
-function objectToStyles(input: Record<string, string>): string {
-  const output: string[] = [];
-  for (const key in input) {
-    output.push(`${key}:${input[key]}`);
+  if (elementTypes.includes(elementType)) {
+    if (handler) {
+      const result = await handler.process(elementType, element);
+      if (result) {
+        replaceElement(element, parseDocument(result));
+      } else removeElement(element);
+    } else removeElement(element);
   }
-  return output.join(";");
 }
 
 function filterAttributes(element: Element): string | null {
@@ -153,6 +143,14 @@ function filterAttributes(element: Element): string | null {
         const styles = stylesToObject(value);
         for (const style in styles) {
           switch (style) {
+            case "--en-clipped-source-url":
+            case "--en-clipped-source-title":
+              element.attribs[style.replace("--en-", "")] = styles[style];
+              break;
+            case "--en-clipped-content":
+              element.attribs[style.replace("--en-", "")] = styles[style];
+              elementType = "en-webclip";
+              break;
             case "--en-codeblock":
               elementType = "en-codeblock";
               break;
@@ -173,4 +171,27 @@ function filterAttributes(element: Element): string | null {
     }
   }
   return elementType;
+}
+
+function stylesToObject(input: string): Record<string, string> {
+  const styles = input.split(";");
+  const output: Record<string, string> = {};
+  for (let style of styles) {
+    style = style.trim();
+    if (!style) continue;
+    const separatorIndex = style.indexOf(":");
+    if (separatorIndex <= -1) continue;
+    const key = style.slice(0, separatorIndex);
+    const value = style.slice(separatorIndex + 1);
+    output[key] = value;
+  }
+  return output;
+}
+
+function objectToStyles(input: Record<string, string>): string {
+  const output: string[] = [];
+  for (const key in input) {
+    output.push(`${key}:${input[key]}`);
+  }
+  return output.join(";");
 }
