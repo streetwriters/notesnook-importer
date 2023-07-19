@@ -37,7 +37,7 @@ export function getFiles(dir: string): IFile[] {
     .withSymlinks()
     .crawl(path.join(__dirname, `data`, dir))
     .sync() as string[];
-  return output.map(pathToFile);
+  return output.map(pathToFile).sort((a, b) => a.name.localeCompare(b.name));
 }
 
 export function pathToFile(filePath: string): IFile {
