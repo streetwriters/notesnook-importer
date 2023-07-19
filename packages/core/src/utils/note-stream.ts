@@ -58,7 +58,7 @@ export class NoteStream extends ReadableStream<ZipFile> {
 
         const { files, hash } = filefy(note);
         for (const key in files) {
-          const filePath = `/${hash}/${key}`;
+          const filePath = `${hash}/${key}`;
           controller.enqueue({
             path: filePath,
             data: files[key]
