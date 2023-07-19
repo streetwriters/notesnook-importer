@@ -13,7 +13,7 @@
     ],
     "content": {
       "type": "html",
-      "data": "<p>This is a simple example of a textbundle package. The following paragraph contains an example of a referenced image using the embedding code <code>![](assets/textbundle.png)</code>.</p><p><img class=\"attachment\" data-filename=\"textbundle.png\" data-size=\"3319\" data-hash=\"cba0ce7401c5c9bd\" data-mime=\"image/png\" alt=\"textbundle.png\"></p>"
+      "data": "<p>This is a simple example of a textbundle package. The\n following paragraph contains an example of a referenced\n image using the embedding code <code>![](assets/textbundle.png)</code>.</p><p><img\n  class=\"attachment\" data-filename=\"textbundle.png\"\n  data-size=\"3319\" data-hash=\"cba0ce7401c5c9bd\"\n  data-mime=\"image/png\" alt=\"textbundle.png\"></p>"
     }
   },
   {
@@ -30,7 +30,7 @@
     ],
     "content": {
       "type": "html",
-      "data": "<p>This is a simple example of a textbundle package. The following paragraph contains an example of a referenced image using the embedding code <code>![](assets/textbundle.png)</code>.</p><p><img class=\"attachment\" data-filename=\"textbundle.png\" data-size=\"3319\" data-hash=\"cba0ce7401c5c9bd\" data-mime=\"image/png\" alt=\"textbundle.png\"></p>"
+      "data": "<p>This is a simple example of a textbundle package. The\n following paragraph contains an example of a referenced\n image using the embedding code <code>![](assets/textbundle.png)</code>.</p><p><img\n  class=\"attachment\" data-filename=\"textbundle.png\"\n  data-size=\"3319\" data-hash=\"cba0ce7401c5c9bd\"\n  data-mime=\"image/png\" alt=\"textbundle.png\"></p>"
     }
   }
 ]

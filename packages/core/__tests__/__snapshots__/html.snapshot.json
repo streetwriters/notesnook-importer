@@ -4,7 +4,7 @@
     "attachments": [],
     "content": {
       "type": "html",
-      "data": "<img src=\"forkit.gif\" id=\"octocat\" alt>\r\r<!-- Feel free to change this text here -->\r<p>Fork me? Fork you, @octocat!</p>\r<p>Sean made a change</p>\r"
+      "data": "<img src=\"forkit.gif\" id=\"octocat\" alt>\n<!-- Feel free to change this text here --> <p>Fork me? Fork\n you, @octocat!</p> <p>Sean made a change</p>"
     }
   }
 ]

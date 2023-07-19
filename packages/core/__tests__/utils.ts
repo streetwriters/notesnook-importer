@@ -28,8 +28,9 @@ import { readFile, writeFile } from "node:fs/promises";
 import assertNoDiff from "assert-no-diff";
 import { unified } from "disparity";
 import { Note } from "../src/models";
+import format from "html-format";
 
-const UPDATE_SNAPSHOTS = false;
+const UPDATE_SNAPSHOTS = true;
 
 export function getFiles(dir: string): IFile[] {
   const output = new fdir()
@@ -89,6 +90,11 @@ export async function matchArraySnapshot(filename: string, actual: string[]) {
 }
 
 export async function matchNotesSnapshot(filename: string, actual: Note[]) {
+  actual = actual.map((n) => {
+    if (n.content) n.content.data = format(n.content.data, " ", 60);
+    return n;
+  });
+
   const snapshotPath = path.join(__dirname, "__snapshots__", filename);
   if (UPDATE_SNAPSHOTS) {
     await writeFile(snapshotPath, JSON.stringify(actual, undefined, 2));
@@ -120,8 +126,8 @@ export async function matchNotesSnapshot(filename: string, actual: Note[]) {
     if (!actualNote.content && !expectedNote.content) continue;
 
     const contentDiff = unified(
-      chunker(expectedNote.content?.data || ""),
-      chunker(actualNote.content?.data || ""),
+      expectedNote.content?.data || "",
+      actualNote.content?.data || "",
       { context: 2, paths: ["expected", "actual"] }
     );
     if (contentDiff) {

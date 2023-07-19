@@ -39,6 +39,7 @@
     "assert-no-diff": "^3.0.6",
     "disparity": "^3.2.0",
     "fdir": "^5.1.0",
+    "html-format": "^1.1.2",
     "sinon": "^13.0.1",
     "stream-adapters": "^0.0.2",
     "typescript": "^4.8.2",

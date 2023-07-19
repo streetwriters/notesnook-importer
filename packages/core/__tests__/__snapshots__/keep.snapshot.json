@@ -21,7 +21,7 @@
     ],
     "content": {
       "type": "html",
-      "data": "<ul class=\"checklist\">        <li>note</li><li>bing</li><li>run</li><li>fast</li>      </ul>"
+      "data": "<ul class=\"checklist\"> <li>note</li><li>bing</li><li>run</li><li>fast</li>\n</ul>"
     }
   },
   {
@@ -32,7 +32,7 @@
     "color": "red",
     "content": {
       "type": "html",
-      "data": "<p>this is a note</p><img class=\"attachment\" data-filename=\"1629964333125.746683646.jpg\" data-size=\"170832\" data-hash=\"891ec65d29e946d5\" data-mime=\"image/jpeg\" alt=\"1629964333125.746683646.jpg\" />"
+      "data": "<p>this is a note</p><img class=\"attachment\"\n data-filename=\"1629964333125.746683646.jpg\"\n data-size=\"170832\" data-hash=\"891ec65d29e946d5\"\n data-mime=\"image/jpeg\" alt=\"1629964333125.746683646.jpg\" />"
     },
     "attachments": [
       {
@@ -61,7 +61,7 @@
     "pinned": false,
     "content": {
       "type": "html",
-      "data": "<p>a simple drawing</p><img class=\"attachment\" data-filename=\"1629964295873.139657380.png\" data-size=\"41348\" data-hash=\"c52fdb48c0f1b106\" data-mime=\"image/png\" alt=\"1629964295873.139657380.png\" />"
+      "data": "<p>a simple drawing</p><img class=\"attachment\"\n data-filename=\"1629964295873.139657380.png\"\n data-size=\"41348\" data-hash=\"c52fdb48c0f1b106\"\n data-mime=\"image/png\" alt=\"1629964295873.139657380.png\" />"
     },
     "attachments": [
       {
@@ -83,7 +83,7 @@
     ],
     "content": {
       "type": "html",
-      "data": "<p>There is some text!</p><img class=\"attachment\" data-filename=\"15b807dfd35.9d0e780fc8254993.jpg\" data-size=\"170832\" data-hash=\"891ec65d29e946d5\" data-mime=\"image/jpeg\" alt=\"15b807dfd35.9d0e780fc8254993.jpg\" />"
+      "data": "<p>There is some text!</p><img class=\"attachment\"\n data-filename=\"15b807dfd35.9d0e780fc8254993.jpg\"\n data-size=\"170832\" data-hash=\"891ec65d29e946d5\"\n data-mime=\"image/jpeg\"\n alt=\"15b807dfd35.9d0e780fc8254993.jpg\" />"
     },
     "attachments": [
       {
@@ -105,7 +105,7 @@
     ],
     "content": {
       "type": "html",
-      "data": "<img class=\"attachment\" data-filename=\"15b807dfd35.9d0e780fc8254993.jpg\" data-size=\"170832\" data-hash=\"891ec65d29e946d5\" data-mime=\"image/jpeg\" alt=\"15b807dfd35.9d0e780fc8254993.jpg\" />"
+      "data": "<img class=\"attachment\"\n data-filename=\"15b807dfd35.9d0e780fc8254993.jpg\"\n data-size=\"170832\" data-hash=\"891ec65d29e946d5\"\n data-mime=\"image/jpeg\"\n alt=\"15b807dfd35.9d0e780fc8254993.jpg\" />"
     },
     "attachments": [
       {
@@ -127,7 +127,7 @@
     ],
     "content": {
       "type": "html",
-      "data": "<img class=\"attachment\" data-filename=\"17600f3e30b.903a5cd0ac11ff5d.jpg\" data-size=\"170832\" data-hash=\"891ec65d29e946d5\" data-mime=\"image/jpeg\" alt=\"17600f3e30b.903a5cd0ac11ff5d.jpg\" />"
+      "data": "<img class=\"attachment\"\n data-filename=\"17600f3e30b.903a5cd0ac11ff5d.jpg\"\n data-size=\"170832\" data-hash=\"891ec65d29e946d5\"\n data-mime=\"image/jpeg\"\n alt=\"17600f3e30b.903a5cd0ac11ff5d.jpg\" />"
     },
     "attachments": [
       {
@@ -167,7 +167,7 @@
     "color": "red",
     "content": {
       "type": "html",
-      "data": "<p>this is a note</p><img class=\"attachment\" data-filename=\"1629964333125.746683646.jpg\" data-size=\"170832\" data-hash=\"891ec65d29e946d5\" data-mime=\"image/jpeg\" alt=\"1629964333125.746683646.jpg\" />"
+      "data": "<p>this is a note</p><img class=\"attachment\"\n data-filename=\"1629964333125.746683646.jpg\"\n data-size=\"170832\" data-hash=\"891ec65d29e946d5\"\n data-mime=\"image/jpeg\" alt=\"1629964333125.746683646.jpg\" />"
     },
     "attachments": [
       {
@@ -191,7 +191,7 @@
     ],
     "content": {
       "type": "html",
-      "data": "<ul class=\"checklist\">        <li>note</li><li>bing</li><li>run</li><li>fast</li>      </ul>"
+      "data": "<ul class=\"checklist\"> <li>note</li><li>bing</li><li>run</li><li>fast</li>\n</ul>"
     }
   },
   {
@@ -201,7 +201,7 @@
     "pinned": false,
     "content": {
       "type": "html",
-      "data": "<p>a simple drawing</p><img class=\"attachment\" data-filename=\"1629964295873.139657380.png\" data-size=\"41348\" data-hash=\"c52fdb48c0f1b106\" data-mime=\"image/png\" alt=\"1629964295873.139657380.png\" />"
+      "data": "<p>a simple drawing</p><img class=\"attachment\"\n data-filename=\"1629964295873.139657380.png\"\n data-size=\"41348\" data-hash=\"c52fdb48c0f1b106\"\n data-mime=\"image/png\" alt=\"1629964295873.139657380.png\" />"
     },
     "attachments": [
       {
