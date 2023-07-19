@@ -24,15 +24,17 @@ import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 type AccordionProps = FlexProps & {
   title: string;
   color?: string;
+  isOpened?: boolean;
 };
 export function Accordion({
   title,
   children,
   sx,
   color,
+  isOpened = false,
   ...restProps
 }: PropsWithChildren<AccordionProps>) {
-  const [isContentHidden, setIsContentHidden] = useState<boolean>(true);
+  const [isContentHidden, setIsContentHidden] = useState<boolean>(isOpened);
   return (
     <Flex sx={{ flexDirection: "column", ...sx }} {...restProps}>
       <Flex
@@ -40,7 +42,7 @@ export function Accordion({
           justifyContent: "space-between",
           alignItems: "center",
           p: 2,
-          cursor: "pointer",
+          cursor: "pointer"
         }}
         onClick={() => {
           setIsContentHidden((state) => !state);

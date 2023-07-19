@@ -48,6 +48,7 @@ export function NotesList(props: NotesListProps) {
         mt: 2,
         borderRadius: "default"
       }}
+      isOpened
     >
       <Virtuoso
         style={{ height: 300 }}
