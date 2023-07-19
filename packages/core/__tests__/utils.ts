@@ -23,6 +23,13 @@ import { IFile } from "../src/utils/file";
 import { fdir } from "fdir";
 import { IHasher } from "../src/utils/hasher";
 import { xxh64 } from "@node-rs/xxhash";
+import { existsSync } from "node:fs";
+import { readFile, writeFile } from "node:fs/promises";
+import assertNoDiff from "assert-no-diff";
+import { unified } from "disparity";
+import { Note } from "../src/models";
+
+const UPDATE_SNAPSHOTS = false;
 
 export function getFiles(dir: string): IFile[] {
   const output = new fdir()
@@ -52,3 +59,85 @@ export const hasher: IHasher = {
   },
   type: "xxh64"
 };
+
+export async function matchArraySnapshot(filename: string, actual: string[]) {
+  const snapshotPath = path.join(__dirname, "__snapshots__", filename);
+  if (UPDATE_SNAPSHOTS) {
+    await writeFile(snapshotPath, JSON.stringify(actual, undefined, 2));
+    return true;
+  }
+
+  if (!existsSync(snapshotPath))
+    throw new Error(`Could not find a snapshot at ${snapshotPath}.`);
+
+  const expected = JSON.parse(
+    await readFile(snapshotPath, "utf-8")
+  ) as string[];
+  if (!Array.isArray(expected))
+    throw new Error("Snapshot is not an array of notes.");
+
+  if (expected.length !== actual.length)
+    throw new Error(
+      `Expected ${expected.length} notes but got ${actual.length} notes. Did you forget to update the snapshot?`
+    );
+
+  for (const str of expected) {
+    if (actual.includes(str)) continue;
+    throw new Error(`Could not find "${str}".`);
+  }
+  return true;
+}
+
+export async function matchNotesSnapshot(filename: string, actual: Note[]) {
+  const snapshotPath = path.join(__dirname, "__snapshots__", filename);
+  if (UPDATE_SNAPSHOTS) {
+    await writeFile(snapshotPath, JSON.stringify(actual, undefined, 2));
+    return true;
+  }
+
+  if (!existsSync(snapshotPath))
+    throw new Error(`Could not find a snapshot at ${snapshotPath}.`);
+
+  const expected = JSON.parse(await readFile(snapshotPath, "utf-8")) as Note[];
+  if (!Array.isArray(expected))
+    throw new Error("Snapshot is not an array of notes.");
+
+  if (expected.length !== actual.length)
+    throw new Error(
+      `Expected ${expected.length} notes but got ${actual.length} notes. Did you forget to update the snapshot?`
+    );
+
+  for (let i = 0; i < expected.length; ++i) {
+    const actualNote = actual[i];
+    const expectedNote = expected[i];
+
+    assertNoDiff.json(
+      { ...actualNote, content: undefined },
+      { ...expectedNote, content: undefined },
+      `> Difference found: ${actualNote.title} (${filename})`
+    );
+
+    if (!actualNote.content && !expectedNote.content) continue;
+
+    const contentDiff = unified(
+      chunker(expectedNote.content?.data || ""),
+      chunker(actualNote.content?.data || ""),
+      { context: 2, paths: ["expected", "actual"] }
+    );
+    if (contentDiff) {
+      process.stderr.write(
+        `> Difference found: ${actualNote.title} (${filename})\n`
+      );
+      process.stderr.write(contentDiff);
+      process.stderr.write("\n");
+    }
+  }
+
+  return true;
+}
+
+const CHUNKER_REGEX = /.{1,60}/gs;
+// we have to chunk the output for better debugging
+function chunker(str: string) {
+  return str.match(CHUNKER_REGEX)?.join("\n") || str;
+}

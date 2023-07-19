@@ -21,7 +21,7 @@ import "./globals";
 import { test, afterEach } from "vitest";
 import { Note } from "../index";
 import { ProviderFactory } from "../src/providers/provider-factory";
-import { hasher } from "./utils";
+import { hasher, matchArraySnapshot, matchNotesSnapshot } from "./utils";
 import sinon from "sinon";
 import { OneNoteClient } from "@notesnook-importer/onenote";
 import { Notebook } from "@microsoft/microsoft-graph-types-beta";
@@ -48,19 +48,18 @@ test(`transform OneNote data to Notesnook importer compatible format`, async (t)
       a.data = undefined;
     });
   });
-  t.expect(
-    JSON.stringify(output.notes, undefined, 2),
-    "onenote"
-  ).toMatchSnapshot();
+
+  matchNotesSnapshot("onenote.snapshot.json", output.notes);
 });
 
 test(`transform & pack OneNote data to Notesnook importer compatible format`, async (t) => {
   const output = await toBlob(pack((await importFromOnenote()).storage));
   const files = await unzip({ data: output, name: "Test.zip", size: 0 });
-  t.expect(
-    files.map((f) => f.path || f.name),
-    `onenote-packed`
-  ).toMatchSnapshot();
+
+  matchArraySnapshot(
+    `onenote-packed.snapshot.json`,
+    files.map((f) => f.path || f.name)
+  );
 });
 
 async function importFromOnenote() {

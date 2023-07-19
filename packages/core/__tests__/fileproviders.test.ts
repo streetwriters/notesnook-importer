@@ -20,7 +20,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import "./globals";
 import { test } from "vitest";
 import { transform, Note, pack } from "../index";
-import { getFiles, hasher } from "./utils";
+import {
+  getFiles,
+  hasher,
+  matchArraySnapshot,
+  matchNotesSnapshot
+} from "./utils";
 import { ProviderFactory } from "../src/providers/provider-factory";
 // import { unzipSync } from "fflate";
 import { ProviderSettings } from "../src/providers/provider";
@@ -51,7 +56,8 @@ for (const providerName of ProviderFactory.getAvailableProviders()) {
         a.data = undefined;
       });
     });
-    t.expect(chunker(JSON.stringify(notes)), providerName).toMatchSnapshot();
+
+    matchNotesSnapshot(`${providerName}.snapshot.json`, notes);
   });
 
   test(`transform & pack ${providerName} files to notesnook importer compatible format`, async (t) => {
@@ -74,15 +80,10 @@ for (const providerName of ProviderFactory.getAvailableProviders()) {
       name: "Test.zip",
       size: 0
     });
-    t.expect(
-      unzippedFiles.map((f) => f.path || f.name),
-      `${providerName}-packed`
-    ).toMatchSnapshot();
-  });
-}
 
-const CHUNKER_REGEX = /.{1,60}/gs;
-// we have to chunk the output for better debugging
-function chunker(str: string) {
-  return str.match(CHUNKER_REGEX)?.join("\n") || str;
+    matchArraySnapshot(
+      `${providerName}-packed.snapshot.json`,
+      unzippedFiles.map((f) => f.path || f.name)
+    );
+  });
 }
