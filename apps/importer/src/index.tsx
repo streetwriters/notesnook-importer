@@ -22,8 +22,9 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./app";
 import { Buffer } from "buffer/";
-import { register } from "./utils/mitm";
+import { register } from "./utils/stream-saver/mitm";
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 globalThis.Buffer = Buffer;
 

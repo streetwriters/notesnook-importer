@@ -17,58 +17,27 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 import { postMessage } from "./mitm";
 
 let supportsTransferable = false;
 
-const isSecureContext = global.isSecureContext;
+const isSecureContext = globalThis.isSecureContext;
 // TODO: Must come up with a real detection test (#69)
 let useBlobFallback =
-  /constructor/i.test(global.HTMLElement.toString()) ||
+  /constructor/i.test(globalThis.HTMLElement.toString()) ||
   "safari" in globalThis ||
   "WebKitPoint" in globalThis;
 
-type IFrameContainer = HTMLIFrameElement & {
-  loaded: boolean;
-  isIFrame: boolean;
-  remove: () => void;
-  addEventListener: HTMLIFrameElement["addEventListener"];
-  dispatchEvent: HTMLIFrameElement["dispatchEvent"];
-  removeEventListener: HTMLIFrameElement["removeEventListener"];
-  postMessage(
-    message: any,
-    targetOrigin: string,
-    transfer?: Transferable[] | undefined
-  ): void;
-};
-
 /**
  * create a hidden iframe and append it to the DOM (body)
- *
- * @param  {string} src page to load
- * @return {HTMLIFrameElement} page to load
  */
-function makeIframe(src: string, doc = true): IFrameContainer {
+function makeIframe(src: string, doc = true) {
   if (!src) throw new Error("meh");
 
-  const iframe = document.createElement("iframe") as IFrameContainer;
+  const iframe = document.createElement("iframe");
   iframe.hidden = true;
   if (doc) iframe.srcdoc = src;
   else iframe.src = src;
-  iframe.name = "iframe";
-  iframe.loaded = false;
-  iframe.isIFrame = true;
-  iframe.postMessage = (message, targetOrigin, transfer) =>
-    iframe.contentWindow?.postMessage(message, targetOrigin, transfer);
-
-  iframe.addEventListener(
-    "load",
-    () => {
-      iframe.loaded = true;
-    },
-    { once: true }
-  );
   document.body.appendChild(iframe);
   return iframe;
 }
@@ -84,14 +53,17 @@ try {
 }
 
 function checkSupportsTransferable() {
-  // Transferable stream was first enabled in chrome v73 behind a flag
-  const { readable } = new TransformStream();
-  const mc = new MessageChannel();
-  // @ts-ignore
-  mc.port1.postMessage(readable, [readable]);
-  mc.port1.close();
-  mc.port2.close();
-  supportsTransferable = true;
+  try {
+    // Transferable stream was first enabled in chrome v73 behind a flag
+    const { readable } = new TransformStream();
+    const mc = new MessageChannel();
+    mc.port1.postMessage(readable, [readable as any]);
+    mc.port1.close();
+    mc.port2.close();
+    supportsTransferable = true;
+  } catch {
+    // ignore
+  }
 }
 checkSupportsTransferable();
 
@@ -106,13 +78,14 @@ export function createWriteStream(
   opts: {
     size?: number;
     pathname?: string;
+    signal?: AbortSignal;
   } = {}
 ): WritableStream<Uint8Array> {
   // let bytesWritten = 0; // by StreamSaver.js (not the service worker)
   let downloadUrl: string | null = null;
   let channel: MessageChannel | null = null;
-  let ts = null;
-
+  let ts: TransformStream | null = null;
+  let frame: HTMLIFrameElement | null = null;
   if (!useBlobFallback) {
     channel = new MessageChannel();
 
@@ -120,7 +93,6 @@ export function createWriteStream(
     filename = encodeURIComponent(filename.replace(/\//g, ":"))
       .replace(/['()]/g, escape)
       .replace(/\*/g, "%2A");
-
     const response: {
       transferringReadable: boolean;
       pathname: string;
@@ -142,17 +114,20 @@ export function createWriteStream(
     if (supportsTransferable) {
       ts = new TransformStream();
       const readableStream = ts.readable;
-
-      // @ts-ignore
-      channel.port1.postMessage({ readableStream }, [readableStream]);
+      if (opts.signal) {
+        opts.signal.addEventListener("abort", () => frame?.remove(), {
+          once: true
+        });
+      }
+      channel.port1.postMessage({ readableStream }, [readableStream as any]);
     }
-
     channel.port1.onmessage = async (evt) => {
       // Service worker sent us a link that we should open.
       if (evt.data.download) {
         // We never remove this iframes because it can interrupt saving
-        makeIframe(evt.data.download, false);
+        frame = makeIframe(evt.data.download, false);
       } else if (evt.data.abort) {
+        console.log("HELLO!", "aborted", evt);
         chunks = [];
         if (channel) {
           channel.port1.postMessage("abort"); //send back so controller is aborted
@@ -220,6 +195,7 @@ export function createWriteStream(
       abort() {
         chunks = [];
         if (channel) {
+          console.log("ABORT!");
           channel.port1.postMessage("abort");
           channel.port1.onmessage = null;
           channel.port1.close();

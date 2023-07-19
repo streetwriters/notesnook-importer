@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import { Flex, Input, Text, Button } from "@theme-ui/components";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { StepContainer } from "./step-container";
 import { Accordion } from "./accordion";
@@ -46,8 +46,11 @@ type Progress = {
 export function FileProviderHandler(props: FileProviderHandlerProps) {
   const { provider, onTransformFinished } = props;
   const [files, setFiles] = useState<File[]>([]);
-  const progress = useRef<Progress>({ total: 0, done: 0 });
   const [filesProgress, setFilesProgress] = useState<Progress>({
+    done: 0,
+    total: 0
+  });
+  const [progress, setProgress] = useState<Progress>({
     done: 0,
     total: 0
   });
@@ -75,8 +78,8 @@ export function FileProviderHandler(props: FileProviderHandlerProps) {
           Processing {filesProgress.done} of {filesProgress.total} file(s)
         </Text>
         <Text variant="body" sx={{ mt: 4, textAlign: "center" }}>
-          Found {progress.current.done}{" "}
-          {progress.current.total ? `of ${progress.current.total}` : ""} notes
+          Found {progress.done} {progress.total ? `of ${progress.total}` : ""}{" "}
+          notes
         </Text>
       </StepContainer>
     );
@@ -186,17 +189,19 @@ export function FileProviderHandler(props: FileProviderHandlerProps) {
             sx={{ alignSelf: "center", mt: 2, px: 4 }}
             onClick={async () => {
               const errors: Error[] = [];
+              let totalNotes = 0;
               const settings: ProviderSettings = {
                 clientType: "browser",
                 hasher: { type: "xxh64", hash: xxhash64 },
                 storage: new BrowserStorage(provider.name),
                 reporter: (current, total) => {
-                  progress.current = { done: current, total: total || 0 };
+                  setProgress({ done: current, total: total || 0 });
+                  ++totalNotes;
                 }
               };
               await settings.storage.clear();
 
-              progress.current = { total: 0, done: 0 };
+              setProgress({ total: 0, done: 0 });
               setFilesProgress({
                 total: files.length,
                 done: 0
@@ -218,9 +223,9 @@ export function FileProviderHandler(props: FileProviderHandlerProps) {
                   ...(await transform(provider, [providerFile], settings))
                 );
               }
-
+              console.log("DONE", totalNotes);
               onTransformFinished({
-                totalNotes: progress.current.done,
+                totalNotes,
                 errors
               });
             }}
