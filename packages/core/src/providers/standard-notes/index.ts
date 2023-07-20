@@ -55,6 +55,8 @@ export class StandardNotes implements IFileProvider {
   public examples = [
     "Standard Notes Backup - Fri Jan 14 2022 10_31_29 GMT+0500.zip"
   ];
+  public helpLink =
+    "https://help.notesnook.com/importing-notes/import-notes-from-standardnotes";
 
   filter(file: File) {
     return [".txt"].includes(file.extension);

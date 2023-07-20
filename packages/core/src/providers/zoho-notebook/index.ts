@@ -31,6 +31,8 @@ export class ZohoNotebook implements IFileProvider {
   public version = "1.0.0";
   public name = "Zoho Notebook";
   public examples = ["Notebook_02Mar2022_0441.zip"];
+  public helpLink =
+    "https://help.notesnook.com/importing-notes/import-notes-from-zoho-notebook";
 
   filter(file: File) {
     return [".znel"].includes(file.extension);

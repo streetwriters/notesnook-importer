@@ -52,6 +52,8 @@ export class Joplin implements IFileProvider<JoplinData> {
   public examples = ["3_10_22.jex", "5_12_21.jex"];
   public version = "1.0.0";
   public name = "Joplin";
+  public helpLink =
+    "https://help.notesnook.com/importing-notes/import-notes-from-joplin";
 
   filter(file: File) {
     return [".md"].includes(file.extension);

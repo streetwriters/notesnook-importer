@@ -40,6 +40,8 @@ export class OneNote implements INetworkProvider<OneNoteSettings> {
   public type = "network" as const;
   public version = "1.0.0";
   public name = "OneNote";
+  public helpLink =
+    "https://help.notesnook.com/importing-notes/import-notes-from-onenote";
 
   async process(settings: OneNoteSettings) {
     const errors: Error[] = [];

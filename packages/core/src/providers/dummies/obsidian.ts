@@ -17,27 +17,19 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { IFileProvider, ProviderSettings } from "../provider";
-import { File } from "../../utils/file";
-import { textToHTML } from "../../utils/to-html";
-import { HTML } from "../html";
+import { Markdown } from "../md";
 
-export class Text implements IFileProvider {
+/**
+ * This is just a dummy class for holding metadata.
+ * The actual processing of Obsidian markdown is handled
+ * by the Markdown processor.
+ */
+export class Obsidian extends Markdown {
   public type = "file" as const;
-  public supportedExtensions = [".txt"];
+  public supportedExtensions = [".md", ".markdown", ".mdown"];
   public version = "1.0.0";
-  public name = "Text";
-  public examples = ["import-help.txt"];
+  public name = "Obsidian";
+  public examples = ["document.md"];
   public helpLink =
-    "https://help.notesnook.com/importing-notes/import-notes-from-plaintext-files";
-
-  filter(file: File) {
-    return this.supportedExtensions.includes(file.extension);
-  }
-
-  async *process(file: File, settings: ProviderSettings, files: File[]) {
-    const data = await file.text();
-    const html = textToHTML(data);
-    yield await HTML.processHTML(file, files, settings.hasher, html);
-  }
+    "https://help.notesnook.com/importing-notes/import-notes-from-obsidian";
 }

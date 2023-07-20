@@ -29,6 +29,8 @@ export class TextBundle implements IFileProvider {
   public version = "1.0.0";
   public name = "TextBundle";
   public examples = ["example.textbundle", "example.textpack"];
+  public helpLink =
+    "https://help.notesnook.com/importing-notes/import-notes-from-textbundle-files";
 
   private readonly supportedProviders = [
     new Markdown(),

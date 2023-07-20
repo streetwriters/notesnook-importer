@@ -45,6 +45,8 @@ export class GoogleKeep implements IFileProvider {
   public examples = ["takeout.zip"];
   public version = "1.0.0";
   public name = "Google Keep";
+  public helpLink =
+    "https://help.notesnook.com/importing-notes/import-notes-from-googlekeep";
 
   filter(file: File) {
     return [".json"].includes(file.extension);

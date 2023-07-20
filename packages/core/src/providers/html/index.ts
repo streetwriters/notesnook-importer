@@ -42,6 +42,8 @@ export class HTML implements IFileProvider {
   public examples = ["Import.html"];
   public version = "1.0.0";
   public name = "HTML";
+  public helpLink =
+    "https://help.notesnook.com/importing-notes/import-notes-from-html-files";
 
   filter(file: File) {
     return this.supportedExtensions.includes(file.extension);

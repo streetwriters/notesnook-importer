@@ -93,6 +93,12 @@ export function NetworkProviderHandler(props: NetworkProviderHandlerProps) {
       ) : (
         <>
           <Text variant="title">Connect your {provider.name} account</Text>
+          <Text variant="body" sx={{ color: "fontTertiary", mt: [2, 0] }}>
+            Check out our step-by-step guide on{" "}
+            <a href={provider.helpLink} target="_blank" rel="noreferrer">
+              how to import from {provider.name}.
+            </a>
+          </Text>
           <Button
             variant="primary"
             onClick={startImport}

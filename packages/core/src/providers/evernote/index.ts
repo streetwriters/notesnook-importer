@@ -29,6 +29,8 @@ export class Evernote implements IFileProvider {
   public examples = ["First Notebook.enex", "checklist.enex"];
   public version = "1.0.0";
   public name = "Evernote";
+  public helpLink =
+    "https://help.notesnook.com/importing-notes/import-notes-from-evernote";
 
   filter(file: File) {
     return this.supportedExtensions.includes(file.extension);

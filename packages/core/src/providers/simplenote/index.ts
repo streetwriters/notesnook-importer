@@ -30,6 +30,8 @@ export class Simplenote implements IFileProvider {
   public version = "1.0.0";
   public name = "Simplenote";
   public examples = ["notes.zip"];
+  public helpLink =
+    "https://help.notesnook.com/importing-notes/import-notes-from-simplenote";
 
   filter(file: File) {
     return [".json"].includes(file.extension);

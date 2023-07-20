@@ -29,6 +29,8 @@ export class Markdown implements IFileProvider {
   public version = "1.0.0";
   public name = "Markdown";
   public examples = ["document.md"];
+  public helpLink =
+    "https://help.notesnook.com/importing-notes/import-notes-from-markdown-files";
 
   filter(file: File) {
     return this.supportedExtensions.includes(file.extension);

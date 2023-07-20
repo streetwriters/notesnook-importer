@@ -28,6 +28,7 @@ interface IBaseProvider<T extends ProviderType> {
   type: T;
   version: string;
   name: string;
+  helpLink: string;
 }
 
 export interface IFileProvider<TPreProcessResult = unknown>

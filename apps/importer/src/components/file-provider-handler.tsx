@@ -88,7 +88,12 @@ export function FileProviderHandler(props: FileProviderHandlerProps) {
   return (
     <StepContainer sx={{ flexDirection: "column", alignItems: "stretch" }}>
       <Text variant="title">Select {provider?.name} files</Text>
-
+      <Text variant="body" sx={{ color: "fontTertiary", mt: [2, 0] }}>
+        Check out our step-by-step guide on{" "}
+        <a href={provider.helpLink} target="_blank" rel="noreferrer">
+          how to import from {provider?.name}.
+        </a>
+      </Text>
       <Flex
         {...getRootProps()}
         sx={{
@@ -111,7 +116,7 @@ export function FileProviderHandler(props: FileProviderHandlerProps) {
             : "Drag & drop files here, or click to select files"}
           <br />
           <Text variant="subBody">
-            Only {provider?.supportedExtensions.join(", ")} files are supported.
+            Only {provider?.supportedExtensions.join(", ")} files are supported.{" "}
             {provider?.supportedExtensions.includes(".zip") ? null : (
               <>
                 You can also select .zip files containing{" "}

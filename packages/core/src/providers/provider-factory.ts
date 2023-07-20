@@ -28,6 +28,7 @@ import { OneNote } from "./onenote";
 import { Joplin } from "./joplin";
 import { TextBundle } from "./textbundle";
 import { Text } from "./txt";
+import { Obsidian } from "./dummies/obsidian";
 
 const providerMap = {
   evernote: Evernote,
@@ -40,7 +41,10 @@ const providerMap = {
   standardnotes: StandardNotes,
   zohonotebook: ZohoNotebook,
   joplin: Joplin,
-  textbundle: TextBundle
+  textbundle: TextBundle,
+
+  // Dummies
+  obsidian: Obsidian
 };
 
 type ProvidersMap = typeof providerMap;
