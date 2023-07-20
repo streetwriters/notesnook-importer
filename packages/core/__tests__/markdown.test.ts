@@ -49,3 +49,9 @@ test("parse wikiLinkFile with hash", (t) => {
     `<p><a href="image.pdf" /></p>`
   );
 });
+
+test("parse wikiLinkFile with alias", (t) => {
+  t.expect(markdowntoHTML("![[image.pdf|IMAGE]]")).toBe(
+    `<p><a href="image.pdf" /></p>`
+  );
+});

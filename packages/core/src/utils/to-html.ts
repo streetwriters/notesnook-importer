@@ -57,13 +57,14 @@ const wikiLinkFile: marked.TokenizerExtension & marked.RendererExtension = {
       const [href, dimensions] = match[1].split("|");
       const [width, height] = dimensions ? dimensions.split("x") : [];
       const [filename, _] = href.split("#");
+
       const token: marked.Tokens.HTML = {
         type: "html",
         pre: false,
         raw: match[0],
-        text: `<a href="${filename}"${width ? ` width="${width}"` : ""}${
-          height ? ` height="${height || "auto"}"` : ""
-        } />`
+        text: `<a href="${filename}"${
+          width && !isNaN(parseInt(width)) ? ` width="${width}"` : ""
+        }${height ? ` height="${height || "auto"}"` : ""} />`
       };
       return token;
     }
