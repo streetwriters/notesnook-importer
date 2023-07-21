@@ -1,5 +1,6 @@
-1. Added support for importing from TextBundle/TextPack files
-2. Optimized the importer for offline use.
-3. Frontmatter support in Markdown (currently only detects title, tags, pinned & favorite).
-4. Codeblocks in markdown now get HTML encoded by default
-5. Fix extraction of attachments & images from Markdown & HTML imports
+1. Add support for Obsidian (supporting file embeds, comments & other syntax).
+2. Improve markdown syntax support (highlight, subscript, superscript, math all get imported now).
+3. Add support for Evernote web clips (full page, screenshot, bookmark, article, simplified article are all supported).
+4. Add Help links to all providers.
+5. Fix issue where linked attachments with spaces in their paths wouldn't import.
+6. Fix various other issues with the Markdown importer.
