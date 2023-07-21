@@ -17,126 +17,227 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { marked } from "marked";
-import { encodeHTML5 } from "entities";
-
-const emptyParagraph: marked.TokenizerExtension & marked.RendererExtension = {
-  name: "emptyParagraph",
-  level: "block",
-  start(src) {
-    return src.match(/^\n\n\n|^\r\n\r\n\r\n/)?.index;
-  },
-  tokenizer(src, _) {
-    const rule = /^\n\n\n|^\r\n\r\n\r\n/;
-    const match = rule.exec(src);
-    if (match) {
-      const token = {
-        type: "paragraph",
-        raw: match[0],
-        text: match[0],
-        tokens: [{ type: "br", raw: "<br>" } as const]
-      };
-      return token;
-    }
-  },
-  renderer() {
-    return `<p><br></p>`;
-  }
-};
-
-const wikiLinkFile: marked.TokenizerExtension & marked.RendererExtension = {
-  name: "wikiLinkFile",
-  level: "inline",
-  start(src) {
-    return src.match(/^!\[\[/)?.index;
-  },
-  tokenizer(src, _) {
-    const rule = /^!\[\[(.+)\]\]/;
-    const match = rule.exec(src);
-    if (match) {
-      const [href, dimensions] = match[1].split("|");
-      const [width, height] = dimensions ? dimensions.split("x") : [];
-      const [filename, _] = href.split("#");
-
-      const token: marked.Tokens.HTML = {
-        type: "html",
-        pre: false,
-        raw: match[0],
-        text: `<a href="${filename}"${
-          width && !isNaN(parseInt(width)) ? ` width="${width}"` : ""
-        }${height ? ` height="${height || "auto"}"` : ""} />`
-      };
-      return token;
-    }
-  },
-  renderer() {
-    return false;
-  }
-};
-
-const CHECKLIST_ITEM_REGEX = /class="checklist--item/gm;
-marked.use({
-  extensions: [emptyParagraph, wikiLinkFile],
-
-  renderer: {
-    text(text) {
-      return text.replace(/(^ +)|( {2,})/g, (sub, ...args) => {
-        const [starting, inline] = args;
-        if (starting) return "&nbsp;".repeat(starting.length);
-        if (inline) return "&nbsp;".repeat(inline.length);
-        return sub;
-      });
-    },
-    paragraph: function (text) {
-      return `<p>${text}</p>`;
-    },
-    br: function () {
-      return `</p><p data-spacing="single">`;
-    },
-    checkbox: function () {
-      return "";
-    },
-    listitem: function (text, task, checked) {
-      if (task)
-        return `<li class="checklist--item${
-          checked ? " checked" : ""
-        }">${text}</li>`;
-      return false;
-    },
-    list: function (body) {
-      if (CHECKLIST_ITEM_REGEX.test(body)) {
-        return `<ul class="checklist">${body}</ul>`;
-      }
-      return false;
-    },
-    code: function (code, language, _isEscaped) {
-      return `<pre class="language-${language?.toLowerCase()}"><code class="language-${language?.toLowerCase()}">${encodeHTML5(
-        code
-      )
-        .replace(/(\r\n)+/gm, "<br/>")
-        .replace(/\n+/gm, "<br/>")
-        .replace(/&NewLine;/gm, "<br/>")}</code></pre>`;
-    }
-  }
-});
+import { encodeNonAsciiHTML } from "entities";
+import { remark } from "remark";
+import remarkGfm from "remark-gfm";
+import remarkRehype from "remark-rehype";
+import rehypeStringify from "rehype-stringify";
+import { Plugin, Transformer } from "unified";
+import { visit } from "unist-util-visit";
+import type { Root as HastRoot } from "remark-rehype/node_modules/@types/hast";
+import type { Root } from "mdast";
+import { isElement } from "hast-util-is-element";
+import remarkMath from "remark-math";
+import remarkSubSuper from "remark-supersub";
+import { Data, Literal, Node, Parent } from "unist";
 
 export function markdowntoHTML(src: string) {
-  return marked(src, { gfm: true, breaks: true });
+  const result = remark()
+    .use(remarkGfm, { singleTilde: false })
+    .use(remarkMath)
+    .use(remarkSubSuper)
+    .use(remarkHighlight)
+    .use(removeComments)
+    .use(convertFileEmbeds)
+    .use(remarkRehype)
+    .use(escapeCode)
+    .use(fixChecklistClasses)
+    .use(liftLanguageToPreFromCode)
+    .use(collapseMultilineParagraphs)
+    .use(rehypeStringify, {
+      tightSelfClosing: true,
+      closeSelfClosing: true,
+      closeEmptyElements: true
+    })
+    .processSync(src);
+  return result.value as string;
 }
+
+const fixChecklistClasses: Plugin = function () {
+  return (tree) => {
+    visit(tree, (node) => {
+      if (
+        !isElement(node, "ul") ||
+        !node.properties ||
+        !(node.properties?.className as string[])?.includes(
+          "contains-task-list"
+        )
+      )
+        return;
+
+      node.properties.className = ["checklist"];
+
+      for (const child of node.children) {
+        if (!isElement(child) || !child.properties) continue;
+
+        const isChecked =
+          isElement(child.children[0]) && child.children[0].properties?.checked;
+
+        child.properties.className = ["checklist--item"];
+        if (isChecked) child.properties.className.push("checked");
+
+        child.children = child.children?.slice(-1);
+      }
+    });
+  };
+};
+
+const liftLanguageToPreFromCode: Plugin = function () {
+  return (tree) => {
+    visit(tree, (node) => {
+      if (!isElement(node, "pre") || !isElement(node.children[0], "code"))
+        return;
+      node.properties = node.children[0].properties;
+    });
+  };
+};
+
+const removeComments: Plugin<[], Root, Root> = function () {
+  return (tree: Root) => {
+    visit(tree, "text", (node) => {
+      node.value = node.value.replace(/%%.+%%\s/, "");
+    });
+
+    let isBlockCommentOpen = false;
+    visit(tree, (node, index, parent) => {
+      if (node.type === "paragraph") {
+        const first = node.children[0];
+        const last = node.children[node.children.length - 1];
+
+        const isOpening = first.type === "text" && first.value.startsWith("%%");
+        const isClosing = last.type === "text" && last.value.endsWith("%%");
+
+        const remove =
+          (isOpening && isClosing) ||
+          (!isBlockCommentOpen && isOpening) ||
+          (isBlockCommentOpen && isClosing) ||
+          isBlockCommentOpen;
+
+        if (isOpening && !isBlockCommentOpen) isBlockCommentOpen = true;
+        if (isBlockCommentOpen && isClosing) isBlockCommentOpen = false;
+
+        if (remove && index) {
+          parent?.children.splice(index, 1);
+          return ["skip", index];
+        }
+      } else if (isBlockCommentOpen && index) {
+        parent?.children.splice(index, 1);
+        return ["skip", index];
+      }
+    });
+  };
+};
+
+const fileEmbedRule = /!\[\[(.+)\]\]/;
+const convertFileEmbeds: Plugin<[], Root, Root> = function () {
+  return (tree: Root) => {
+    visit(tree, "text", (node, index, parent) => {
+      const match = fileEmbedRule.exec(node.value);
+      if (match && index !== undefined) {
+        const [href, dimensions] = match[1].split("|");
+        const [width, height] = dimensions ? dimensions.split("x") : [];
+        const [filename, _] = href.split("#");
+        parent?.children.splice(
+          index,
+          1,
+          {
+            type: "text",
+            value: node.value.slice(0, match.index)
+          },
+          {
+            type: "link",
+            url: filename,
+            children: [],
+            data: {
+              hProperties: {
+                width: width && !isNaN(parseInt(width)) ? width : null,
+                height: height && !isNaN(parseInt(height)) ? height : null
+              }
+            }
+          },
+          {
+            type: "text",
+            value: node.value.slice(match.index + match[0].length)
+          }
+        );
+        return ["skip", index];
+      }
+    });
+  };
+};
+
+const remarkHighlight: () => Transformer = () => (tree) => {
+  visit(tree, ["text"], (node, index, parent) => {
+    const { value } = node as Literal<string>;
+
+    const values = value.split(/==/);
+    if (values.length === 1 || values.length % 2 === 0) {
+      return;
+    }
+
+    const children: Node<Data>[] = values.map((str, i) =>
+      i % 2 === 0
+        ? {
+            type: "text",
+            value: str
+          }
+        : {
+            type: "highlight",
+            data: {
+              hName: "span",
+              hProperties: {
+                style: `background-color: rgb(255, 255, 0);`
+              }
+            },
+            children: [
+              {
+                type: "text",
+                value: str
+              }
+            ]
+          }
+    );
+    (parent as Parent).children.splice(index!, 1, ...children);
+    return ["skip", index];
+  });
+};
+
+const escapeCode: Plugin<[], HastRoot, HastRoot> = function () {
+  return (tree: HastRoot) => {
+    visit(tree, "element", (node) => {
+      if (!isElement(node, "code")) return;
+      if (node.children[0]?.type === "text") {
+        node.children[0].value = encodeNonAsciiHTML(
+          node.children[0].value.trim()
+        ).replace(/[\r\n]/gm, "<br/>");
+      }
+    });
+  };
+};
+
+const collapseMultilineParagraphs: Plugin<[], HastRoot, HastRoot> =
+  function () {
+    return (tree: HastRoot) => {
+      visit(tree, "text", (node) => {
+        if (node.value.length > 1)
+          node.value = node.value.replace(/[\r\n]/gm, " "); //.trim();
+      });
+    };
+  };
 
 export function textToHTML(src: string) {
   return src
-    .split("\n")
+    .split(/[\r\n]/)
     .map((line) =>
       line
         ? `<p data-spacing="single">${encodeLine(line)}</p>`
-        : `<p data-spacing="single"><br/></p>`
+        : `<p data-spacing="single"></p>`
     )
     .join("");
 }
 
 function encodeLine(line: string) {
-  line = encodeHTML5(line);
+  line = encodeNonAsciiHTML(line);
   line = line.replace(/(^ +)|( {2,})/g, (sub, ...args) => {
     const [starting, inline] = args;
     if (starting) return "&nbsp;".repeat(starting.length);

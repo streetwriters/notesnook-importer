@@ -1,0 +1,13 @@
+diff --git a/node_modules/hast-util-to-html/lib/handle/text.js b/node_modules/hast-util-to-html/lib/handle/text.js
+index 58d03d4..30bb860 100644
+--- a/node_modules/hast-util-to-html/lib/handle/text.js
++++ b/node_modules/hast-util-to-html/lib/handle/text.js
+@@ -25,7 +25,7 @@ export function text(node, _, parent, state) {
+   // Check if content of `node` should be escaped.
+   return parent &&
+     parent.type === 'element' &&
+-    (parent.tagName === 'script' || parent.tagName === 'style')
++    (parent.tagName === 'script' || parent.tagName === 'style' || parent.tagName === "code")
+     ? node.value
+     : stringifyEntities(
+         node.value,
