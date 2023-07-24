@@ -104,7 +104,7 @@ export async function* parse(enex: ReadableStream<string> | string) {
       lowerCaseAttributeNames: false,
       recognizeSelfClosing: true,
       recognizeCDATA: true,
-      decodeEntities: false
+      decodeEntities: true
     }
   );
 

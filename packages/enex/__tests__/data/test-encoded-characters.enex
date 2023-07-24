@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-export SYSTEM "http://xml.evernote.com/pub/evernote-export4.dtd">
+<en-export export-date="20230824T180106Z" application="Evernote" version="10.58.8">
+  <note>
+    <title>My title&apos;s name contains an apostrophe &amp; other characters &lt;&gt; &quot;</title>
+    <created>20230724T175200Z</created>
+    <updated>20230724T180042Z</updated>
+    <note-attributes>
+    </note-attributes>
+    <content>
+      <![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd"><en-note><div>My message's content also contains an apostrophe.</div></en-note>      ]]>
+    </content>
+  </note>
+</en-export>
