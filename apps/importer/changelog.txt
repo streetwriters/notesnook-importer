@@ -4,3 +4,4 @@
 4. Add Help links to all providers.
 5. Fix issue where linked attachments with spaces in their paths wouldn't import.
 6. Fix various other issues with the Markdown importer.
+7. Fix `input must be string` error when importing Evernote web clips
