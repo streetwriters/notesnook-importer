@@ -29,9 +29,9 @@ import { getAttributeValue } from "domutils";
 export class ENWebClip extends BaseHandler {
   async process(element: Element): Promise<string | undefined> {
     const {
-      ["clipped-content"]: clipType,
-      ["clipped-source-url"]: clipSourceUrl,
-      ["clipped-source-title"]: clipSourceTitle
+      ["clipped-content"]: clipType = "unknown",
+      ["clipped-source-url"]: clipSourceUrl = "#",
+      ["clipped-source-title"]: clipSourceTitle = "Untitled"
     } = element.attribs;
 
     const clipFooter = `<hr></hr><p>Clipped from: <a href="${clipSourceUrl}">${clipSourceTitle}</a></p>`;
@@ -87,9 +87,12 @@ export class ENWebClip extends BaseHandler {
         const dataHash = await this.hasher.hash(data);
         const attachment: Attachment = {
           data: data,
-          filename: `${sanitizeFilename(clipSourceUrl, {
-            replacement: "-"
-          })}.clip`,
+          filename: `${sanitizeFilename(
+            clipSourceTitle || clipSourceUrl || dataHash,
+            {
+              replacement: "-"
+            }
+          )}.clip`,
           size: data.length,
           hash: dataHash,
           hashType: this.hasher.type,
