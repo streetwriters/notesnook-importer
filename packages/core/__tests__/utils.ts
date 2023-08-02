@@ -30,7 +30,7 @@ import { unified } from "disparity";
 import { Note } from "../src/models";
 import format from "html-format";
 
-const UPDATE_SNAPSHOTS = false;
+const UPDATE_SNAPSHOTS = true;
 
 export function getFiles(dir: string): IFile[] {
   const output = new fdir()

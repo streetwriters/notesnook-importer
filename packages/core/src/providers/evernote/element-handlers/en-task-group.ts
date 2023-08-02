@@ -17,16 +17,15 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Task, TaskStatus } from "@notesnook-importer/enex";
+import { Task } from "@notesnook-importer/enex";
 import { BaseHandler } from "./base";
 import { Element } from "domhandler";
 import { getAttributeValue } from "domutils";
 
 export class ENTaskGroup extends BaseHandler {
   async process(element: Element): Promise<string | undefined> {
-    if (!this.enNote.tasks) return;
     const taskGroupId = getAttributeValue(element, "task-group-id");
-    if (!taskGroupId) return;
+    if (!this.enNote.tasks || !taskGroupId) return;
     const tasks = this.enNote.tasks.filter(
       (t) => t.taskGroupNoteLevelID === taskGroupId
     );
@@ -38,7 +37,7 @@ function tasksToHTML(tasks: Task[]) {
   return `<ul class="checklist">
         ${tasks
           .map((t) =>
-            t.taskStatus === TaskStatus.COMPLETED
+            t.taskStatus === "completed"
               ? `<li class="checked">${t.title}</li>`
               : `<li>${t.title}</li>`
           )
