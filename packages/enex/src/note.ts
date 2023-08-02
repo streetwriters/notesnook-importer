@@ -27,5 +27,5 @@ export type Note = {
   tags: string[];
   content?: string;
   resources: Resource[];
-  tasks?: Task[];
+  tasks: Task[];
 };

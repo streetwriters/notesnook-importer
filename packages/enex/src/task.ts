@@ -20,26 +20,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import { Reminder } from "./reminder";
 import { DateUIOption } from "./types";
 
-export enum TaskStatus {
-  OPEN = "open",
-  COMPLETED = "completed"
-}
-
 export type Task = {
-  title: string;
-  created: Date;
-  updated: Date;
-  taskStatus: TaskStatus;
-  inNote: boolean;
-  taskFlag: string;
-  sortWeight: string;
-  noteLevelID: string;
-  taskGroupNoteLevelID: string;
-  dueDate: Date | null;
-  dueDateUIOption: DateUIOption | null;
-  timeZone: string | null;
-  statusUpdated: Date | null;
-  creator: string | null;
-  lastEditor: string | null;
-  reminder: Reminder | null;
+  title?: string;
+  created?: Date;
+  updated?: Date;
+  taskStatus?: "open" | "completed";
+  inNote?: boolean;
+  taskFlag?: string;
+  sortWeight?: string;
+  noteLevelID?: string;
+  taskGroupNoteLevelID?: string;
+  dueDate?: Date | null;
+  dueDateUIOption?: DateUIOption | null;
+  timeZone?: string | null;
+  statusUpdated?: Date | null;
+  creator?: string | null;
+  lastEditor?: string | null;
+  reminder?: Reminder | null;
 };

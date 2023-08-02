@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-export SYSTEM "http://xml.evernote.com/pub/evernote-export4.dtd">
+<en-export export-date="20230820T064433Z" application="Evernote" version="10.59.5">
+  <note>
+    <title>Testnote-Title</title>
+    <created>20230720T063044Z</created>
+    <updated>20230720T063119Z</updated>
+    <note-attributes>
+      <author>Markus Tempelmann</author>
+    </note-attributes>
+    <content>
+      <![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd"><en-note><div>Some text</div><div style="--en-task-group:true; --en-id:11e1bd93-c617-47f4-838b-728562012c76;--en-content-hash:44a7c7752193188f801cbd549b962c91;-webkit-user-modify:read-only;-moz-user-modify:read-only;user-modify:read-only;border-radius:3px;border:1px solid rgba(182,182,182,0.09);background:rgba(174,174,174,0.09);overflow:hidden;color:#868686"><div style="background:rgba(182,182,182,0.09) no-repeat 6px 6px url(&quot;data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzg2ODY4NiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE5LjcyNTEgMjBDMjAuMTgxIDIwIDIwLjYwMTEgMTkuNzU2IDIwLjgyOSAxOS4zNkMyMS4wNTcgMTguOTY0IDIxLjA1NyAxOC40NzYgMjAuODI5IDE4LjA4TDEzLjEwMzEgNC42Mzk5OUMxMi44NzYgNC4yNDM5OSAxMi40NTUxIDQgMTIgNEMxMS41NDQ5IDQgMTEuMTI0IDQuMjQzOTkgMTAuODk2MSA0LjYzOTk5TDMuMTcwOTggMTguMDhDMi45NDMwMSAxOC40NzYgMi45NDMwMSAxOC45NjQgMy4xNzA5OCAxOS4zNkMzLjM5ODEgMTkuNzU2IDMuODE4OTMgMjAgNC4yNzQwOCAyMEgxOS43MjUxWk00Ljg2NDg5IDE4LjRMMTIgNS45ODc5OEwxOS4xMzUxIDE4LjRINC44NjQ4OVoiLz4KPHBhdGggZD0iTTEyLjc1IDEwLjU3NTJDMTIuNzUgMTAuMTYxIDEyLjQxNDIgOS44MjUyMyAxMiA5LjgyNTIzQzExLjU4NTggOS44MjUyMyAxMS4yNSAxMC4xNjEgMTEuMjUgMTAuNTc1MlYxMy4yOTc5QzExLjI1IDEzLjcxMjEgMTEuNTg1OCAxNC4wNDc5IDEyIDE0LjA0NzlDMTIuNDE0MiAxNC4wNDc5IDEyLjc1IDEzLjcxMjEgMTIuNzUgMTMuMjk3OVYxMC41NzUyWiIvPgo8cGF0aCBkPSJNMTIuODc1IDE1Ljk1MTFDMTIuODc1IDE2LjQzNDQgMTIuNDgzMiAxNi44MjYxIDEyIDE2LjgyNjFDMTEuNTE2OCAxNi44MjYxIDExLjEyNSAxNi40MzQ0IDExLjEyNSAxNS45NTExQzExLjEyNSAxNS40Njc5IDExLjUxNjggMTUuMDc2MSAxMiAxNS4wNzYxQzEyLjQ4MzIgMTUuMDc2MSAxMi44NzUgMTUuNDY3OSAxMi44NzUgMTUuOTUxMVoiLz4KPC9zdmc+Cg==&quot;);padding:8px 38px;font-weight:600">Inhalt nicht unterstützt</div><div style="padding:2px 6px;margin: 1em">Dieser Block dient als Platzhalter für die Aufgabenfunktionalität, die mit der neuesten Version von Evernote offiziell freigegeben wurde und von dieser Version nicht mehr unterstützt wird. Wenn du den Block löschst oder verschiebst, kann dies in neueren Versionen zu unerwartetem Verhalten führen.</div></div><div><br/></div></en-note>      ]]>
+    </content>
+    <task>
+      <title>Task 1</title>
+      <created>20230720T063107Z</created>
+      <updated>20230720T063112Z</updated>
+      <taskStatus>open</taskStatus>
+      <taskFlag>false</taskFlag>
+      <sortWeight>B</sortWeight>
+      <noteLevelID>8e092880-e046-4de8-90da-a184c94b0c84</noteLevelID>
+      <taskGroupNoteLevelID>11e1bd93-c617-47f4-838b-728562012c76</taskGroupNoteLevelID>
+      <dueDate>2757600913T000000Z</dueDate>
+      <statusUpdated>20230720T063107Z</statusUpdated>
+      <creator>7495784</creator>
+      <lastEditor>7495784</lastEditor>
+    </task>
+    <task>
+      <title>Task 2</title>
+      <created>20230720T063112Z</created>
+      <updated>20230720T063112Z</updated>
+      <taskStatus>open</taskStatus>
+      <taskFlag>false</taskFlag>
+      <sortWeight>J</sortWeight>
+      <noteLevelID>13f2eb56-a5b8-4790-bb9d-559aac0e8e2f</noteLevelID>
+      <taskGroupNoteLevelID>11e1bd93-c617-47f4-838b-728562012c76</taskGroupNoteLevelID>
+      <dueDate>2757600913T000000Z</dueDate>
+      <statusUpdated>20230720T063112Z</statusUpdated>
+      <creator>7495784</creator>
+      <lastEditor>7495784</lastEditor>
+    </task>
+  </note>
+</en-export>

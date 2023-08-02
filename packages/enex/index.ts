@@ -23,6 +23,7 @@ import { Parser as HTMLParser2 } from "htmlparser2";
 import { MimeTypes, Resource } from "./src/resource";
 import { toByteArray } from "base64-js";
 import SparkMD5 from "spark-md5";
+import { Task } from "./src/task";
 
 class Parser extends HTMLParser2 {
   public notes: Note[] = [];
@@ -37,16 +38,23 @@ export type ParsedEnex = {
 };
 
 const VALID_TAGS = [
+  // note
   "title",
   "created",
   "updated",
   "tag",
   "content",
+
+  // resource
   "data",
   "mime",
   "width",
   "height",
-  "file-name"
+  "file-name",
+
+  // tasks
+  "taskGroupNoteLevelID",
+  "taskStatus"
 ];
 
 const WHITESPACE_REGEX = /\s+/gm;
@@ -58,13 +66,15 @@ export async function* parse(enex: ReadableStream<string> | string) {
       onopentagname(name) {
         reset(state);
 
-        if (name === "note") state.note = { tags: [], resources: [] };
+        if (name === "note")
+          state.note = { tags: [], resources: [], tasks: [] };
         if (name === "resource") state.resource = {};
+        if (name === "task") state.task = {};
         if (VALID_TAGS.includes(name)) state.ignore = false;
       },
       onclosetag(name) {
         if (state.note) {
-          if (name === "title") state.note.title = state.text;
+          if (name === "title" && !state.task) state.note.title = state.text;
           if (name === "created")
             state.note.created = ISO8601DateTime.toDate(state.text);
           if (name === "updated")
@@ -73,8 +83,20 @@ export async function* parse(enex: ReadableStream<string> | string) {
           if (name === "content") state.note.content = state.text;
           if (name === "resource" && state.resource) {
             state.note.resources.push(state.resource);
-            state.resource = {};
+            state.resource = undefined;
           }
+          if (name === "task" && state.task) {
+            state.note.tasks.push(state.task);
+            state.task = undefined;
+          }
+        }
+
+        if (state.task) {
+          if (name === "title") state.task.title = state.text;
+          if (name === "taskGroupNoteLevelID")
+            state.task.taskGroupNoteLevelID = state.text;
+          if (name === "taskStatus")
+            state.task.taskStatus = state.text as "open" | "completed";
         }
 
         if (state.resource) {
@@ -137,6 +159,7 @@ export * from "./src/types";
 type ParseState = {
   note?: Note;
   resource?: Resource;
+  task?: Task;
   ignore: boolean;
   text: string;
   attributes: Record<string, string>;
