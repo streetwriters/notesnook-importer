@@ -6,3 +6,4 @@
 6. Fix various other issues with the Markdown importer.
 7. Fix `input must be string` error when importing Evernote web clips
 8. Fix import of Evernote Tasks
+9. Fix codeblocks from Evernote that have special characters. 
