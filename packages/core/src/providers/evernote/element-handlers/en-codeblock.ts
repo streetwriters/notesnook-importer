@@ -20,11 +20,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import { BaseHandler } from "./base";
 import { Element } from "domhandler";
 import { textContent } from "domutils";
+import { encodeNonAsciiHTML } from "entities";
 
 export class ENCodeblock extends BaseHandler {
   async process(element: Element): Promise<string | undefined> {
     return `<pre>${element.childNodes
-      .map((n) => textContent(n))
+      .map((n) =>
+        encodeNonAsciiHTML(textContent(n).trim()).replace(/[\r\n]/gm, "<br/>")
+      )
       .join("<br/>")}</pre>`;
   }
 }
