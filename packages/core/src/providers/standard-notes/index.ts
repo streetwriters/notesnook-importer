@@ -133,13 +133,18 @@ export class StandardNotes implements IFileProvider {
   }
 
   getTags(item: SNNote, tags: SNTag[]): string[] {
-    if (!item.content.references || !item.content.references.length) return [];
-
     const noteTags: string[] = [];
-    for (const reference of item.content.references) {
+    for (const reference of item.content.references || []) {
       const tag = tags.find((tag) => tag.uuid === reference.uuid);
       if (!tag) continue;
       noteTags.push(tag.content.title);
+    }
+
+    for (const tag of tags) {
+      const isReferenced =
+        tag.content.references.findIndex((ref) => ref.uuid === item.uuid) > -1;
+      if (isReferenced && !noteTags.includes(tag.content.title))
+        noteTags.push(tag.content.title);
     }
     return noteTags;
   }
