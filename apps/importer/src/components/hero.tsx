@@ -93,7 +93,7 @@ export function Hero() {
           borderRadius: "default"
         }}
       >
-        <Text variant="subtitle">What's new in v{appVersion}</Text>
+        <Text variant="subtitle">Change log</Text>
         <Text variant="body" sx={{ whiteSpace: "pre-wrap" }}>
           {process.env.REACT_APP_CHANGELOG}
         </Text>

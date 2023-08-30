@@ -1,9 +1,25 @@
+
+v2.0.4
+
+1. Fix issue where Standard Notes importer was ignoring majority of the tags.
+
+v2.0.3
+
+1. Fix import of codeblocks from Evernote that have special characters. 
+
+v2.0.2
+
+1. Fix import of Evernote Tasks
+
+v2.0.1
+
+1. Fix `input must be string` error when importing Evernote web clips
+
+v2.0.0
+
 1. Add support for Obsidian (supporting file embeds, comments & other syntax).
 2. Improve markdown syntax support (highlight, subscript, superscript, math all get imported now).
 3. Add support for Evernote web clips (full page, screenshot, bookmark, article, simplified article are all supported).
 4. Add Help links to all providers.
 5. Fix issue where linked attachments with spaces in their paths wouldn't import.
 6. Fix various other issues with the Markdown importer.
-7. Fix `input must be string` error when importing Evernote web clips
-8. Fix import of Evernote Tasks
-9. Fix codeblocks from Evernote that have special characters. 
