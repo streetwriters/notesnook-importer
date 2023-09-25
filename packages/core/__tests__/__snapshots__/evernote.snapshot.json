@@ -47,6 +47,22 @@
     }
   },
   {
+    "title": "Test of ComponentFixture<ContactFormComponent> with NBSP",
+    "tags": [],
+    "dateCreated": 1654178972000,
+    "dateEdited": 1695659820000,
+    "attachments": [],
+    "notebooks": [
+      {
+        "notebook": "codeblock-with-spaces"
+      }
+    ],
+    "content": {
+      "data": "<div><br /></div><pre>describe(&apos;ContactFormComponent&apos;, () =&gt; {<br/>&#xa0; let component: ContactFormComponent;<br/>&#xa0; let fixture: ComponentFixture&lt;ContactFormComponent&gt;;<br/>&#xa0; &#xa0; component.contactForm.setValue({<br/>&#xa0; &#xa0; &#xa0; &quot;name&quot;: &quot;&quot;, <br/>});</pre><div><br /></div>",
+      "type": "html"
+    }
+  },
+  {
     "title": "test - checklist",
     "tags": [],
     "dateCreated": 1626223656000,
@@ -58,7 +74,7 @@
       }
     ],
     "content": {
-      "data": "<pre>klkmklmk<br/>;mkmk<br/>#include &lt;Servo.h&gt;<br/>#include &lt;LiquidCrystal.h&gt;<br/>kmkmkl</pre>",
+      "data": "<pre>klkmklmk<br/>;mkmk<br/>#include &lt;Servo.h&gt;<br/><br/>#include &lt;LiquidCrystal.h&gt;<br/><br/>kmkmkl</pre>",
       "type": "html"
     }
   },
