@@ -94,7 +94,10 @@ export function Hero() {
         }}
       >
         <Text variant="subtitle">Change log</Text>
-        <Text variant="body" sx={{ whiteSpace: "pre-wrap" }}>
+        <Text
+          variant="body"
+          sx={{ whiteSpace: "pre-wrap", maxHeight: 300, overflowY: "auto" }}
+        >
           {process.env.REACT_APP_CHANGELOG}
         </Text>
       </Flex>
