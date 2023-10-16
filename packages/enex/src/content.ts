@@ -22,6 +22,7 @@ import { parseDocument } from "htmlparser2";
 import { selectAll } from "css-select";
 import { render } from "dom-serializer";
 import { removeElement, replaceElement, getElementsByTagName } from "domutils";
+import { Note } from "./note";
 
 /**
  * List of invalid attributes we should remove part of our
@@ -60,6 +61,13 @@ const invalidElements: string[] = [
   "en-codeblock",
   "en-task-group"
 ];
+const ELEMENT_TYPES = [
+  "en-codeblock",
+  "en-task-group",
+  "en-crypt",
+  "en-todo",
+  "en-webclip"
+];
 const cssSelector: string = [
   ...validAttributes.map((attr) => `[${attr}]`),
   ...invalidAttributes.map((attr) => `[${attr}]`),
@@ -72,8 +80,46 @@ export interface IElementHandler {
 
 export async function processContent(
   content: string,
-  handler?: IElementHandler
+  handler?: IElementHandler,
+  note?: Note
 ): Promise<string> {
+  const contentElement = parseDocument(content, { xmlMode: true });
+  let [noteElement] = getElementsByTagName("en-note", contentElement, true, 1);
+  if (!noteElement) throw new Error("Could not find a valid en-note tag.");
+
+  let hasWebClip = false;
+  for (const element of selectAll(cssSelector, noteElement)) {
+    const type = await processElement(element, ELEMENT_TYPES, handler);
+    hasWebClip = hasWebClip || type === "en-webclip";
+  }
+
+  const clippedElement =
+    !hasWebClip && (await processClippedPage(content, handler, note));
+
+  if (hasWebClip || !clippedElement) {
+    for (const element of selectAll(cssSelector, noteElement)) {
+      await processElement(element, ["img-dataurl", "en-media"], handler);
+    }
+  } else noteElement = clippedElement;
+
+  return render(noteElement.childNodes, {
+    xmlMode: true
+  });
+}
+
+async function processClippedPage(
+  content: string,
+  handler?: IElementHandler,
+  note?: Note
+) {
+  if (
+    !note ||
+    !handler ||
+    !note.sourceURL ||
+    note.sourceApplication !== "webclipper.evernote"
+  )
+    return;
+
   const contentElement = parseDocument(content, { xmlMode: true });
   const [noteElement] = getElementsByTagName(
     "en-note",
@@ -81,23 +127,11 @@ export async function processContent(
     true,
     1
   );
-  if (!noteElement) throw new Error("Could not find a valid en-note tag.");
 
-  for (const element of selectAll(cssSelector, noteElement)) {
-    await processElement(
-      element,
-      ["en-codeblock", "en-task-group", "en-crypt", "en-todo", "en-webclip"],
-      handler
-    );
-  }
-
-  for (const element of selectAll(cssSelector, noteElement)) {
-    await processElement(element, ["img-dataurl", "en-media"], handler);
-  }
-
-  return render(noteElement.childNodes, {
-    xmlMode: true
-  });
+  noteElement.attribs["clipped-content"] = "fullPage";
+  noteElement.attribs["clipped-source-url"] = note.sourceURL;
+  const result = await handler.process("en-webclip", noteElement);
+  if (result) return parseDocument(result);
 }
 
 async function processElement(
@@ -116,6 +150,7 @@ async function processElement(
       } else removeElement(element);
     } else removeElement(element);
   }
+  return elementType;
 }
 
 function filterAttributes(element: Element): string | null {

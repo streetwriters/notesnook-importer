@@ -60,7 +60,11 @@ export class Evernote implements IFileProvider {
             settings.hasher
           );
 
-          const html = await processContent(enNote.content, elementHandler);
+          const html = await processContent(
+            enNote.content,
+            elementHandler,
+            enNote
+          );
           note.content = {
             data: html.trim(),
             type: ContentType.HTML

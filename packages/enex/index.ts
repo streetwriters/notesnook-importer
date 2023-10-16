@@ -44,6 +44,7 @@ const VALID_TAGS = [
   "updated",
   "tag",
   "content",
+  "source-application",
 
   // resource
   "data",
@@ -51,6 +52,7 @@ const VALID_TAGS = [
   "width",
   "height",
   "file-name",
+  "source-url",
 
   // tasks
   "taskGroupNoteLevelID",
@@ -85,6 +87,10 @@ export async function* parse(enex: ReadableStream<string> | string) {
             state.note.resources.push(state.resource);
             state.resource = undefined;
           }
+          if (name === "source-url" && !state.resource)
+            state.note.sourceURL = state.text;
+          if (name === "source-application" && !state.resource)
+            state.note.sourceApplication = state.text;
           if (name === "task" && state.task) {
             state.note.tasks.push(state.task);
             state.task = undefined;
@@ -107,6 +113,7 @@ export async function* parse(enex: ReadableStream<string> | string) {
           }
           if (name === "mime") state.resource.mime = state.text as MimeTypes;
           if (name === "file-name") state.resource.filename = state.text;
+          if (name === "source-url") state.resource.sourceURL = state.text;
           if (name === "width") state.resource.width = parseInt(state.text);
           if (name === "height") state.resource.height = parseInt(state.text);
         }

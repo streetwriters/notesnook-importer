@@ -27,20 +27,27 @@ import { sanitizeFilename } from "../../../utils/filename";
 import { getAttributeValue } from "domutils";
 
 export class ENWebClip extends BaseHandler {
+  static buildFooter(url?: string, title?: string): string {
+    if (!url && !title) return "";
+
+    return `<hr></hr><p>Clipped from: <a href="${url}">${title || url}</a></p>`;
+  }
+
   async process(element: Element): Promise<string | undefined> {
     const {
       ["clipped-content"]: clipType = "unknown",
-      ["clipped-source-url"]: clipSourceUrl = "#",
-      ["clipped-source-title"]: clipSourceTitle = "Untitled"
+      ["clipped-source-url"]: clipSourceUrl = this.enNote.sourceURL,
+      ["clipped-source-title"]: clipSourceTitle
     } = element.attribs;
 
-    const clipFooter = `<hr></hr><p>Clipped from: <a href="${clipSourceUrl}">${clipSourceTitle}</a></p>`;
+    const clipFooter = ENWebClip.buildFooter(clipSourceUrl, clipSourceTitle);
 
     switch (clipType) {
       case "simplified":
         return `${render(element.childNodes)}${clipFooter}`;
       case "bookmark":
         return `<p>${clipSourceTitle}</p><p><a href="${clipSourceUrl}">${clipSourceUrl}</a></p>`;
+      case "contextMenuImage":
       case "screenshot": {
         const enMedia = findOne(
           (e) => e.tagName === "en-media",
@@ -77,22 +84,38 @@ export class ENWebClip extends BaseHandler {
           )
             continue;
 
+          // find and remove attachment if we already extracted it
+          // because in full page clips everything is embedded.
+          // This is redundant work, but there's no alternative.
+          const xxh64Hash = await this.hasher.hash(resource.data);
+          const attachmentIndex = this.note.attachments?.findIndex(
+            (a) => a.hash === xxh64Hash
+          );
+          if (attachmentIndex && attachmentIndex > -1) {
+            this.note.attachments?.splice(attachmentIndex, 1);
+          }
+
           resourceElement.tagName = "img";
           resourceElement.attribs.src = `data:${type};base64,${Buffer.from(
             resource.data.buffer
           ).toString("base64")}`;
         }
 
-        const data = new TextEncoder().encode(render(element.childNodes));
+        const data = new TextEncoder().encode(
+          render(element.childNodes, {
+            xmlMode: false,
+            decodeEntities: true,
+            encodeEntities: false,
+            selfClosingTags: true
+          })
+        );
         const dataHash = await this.hasher.hash(data);
+        const title = clipSourceTitle || clipSourceUrl || dataHash;
         const attachment: Attachment = {
-          data: data,
-          filename: `${sanitizeFilename(
-            clipSourceTitle || clipSourceUrl || dataHash,
-            {
-              replacement: "-"
-            }
-          )}.clip`,
+          data,
+          filename: `${sanitizeFilename(title, {
+            replacement: "-"
+          })}.clip`,
           size: data.length,
           hash: dataHash,
           hashType: this.hasher.type,
@@ -102,7 +125,7 @@ export class ENWebClip extends BaseHandler {
         return `${attachmentToHTML(
           attachment,
           clipSourceUrl,
-          clipSourceTitle
+          title
         )}${clipFooter}`;
       }
     }

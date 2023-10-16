@@ -34,6 +34,7 @@ export type Resource = {
   hash?: string;
   width?: number | null;
   height?: number | null;
+  sourceURL?: string;
   // duration: number | null;
   // alternateData: string | null;
   // attributes?: ResourceAttributes;
