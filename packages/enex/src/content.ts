@@ -84,7 +84,12 @@ export async function processContent(
   note?: Note
 ): Promise<string> {
   const contentElement = parseDocument(content, { xmlMode: true });
-  let [noteElement] = getElementsByTagName("en-note", contentElement, true, 1);
+  const [noteElement] = getElementsByTagName(
+    "en-note",
+    contentElement,
+    true,
+    1
+  );
   if (!noteElement) throw new Error("Could not find a valid en-note tag.");
 
   let hasWebClip = false;
@@ -100,11 +105,14 @@ export async function processContent(
     for (const element of selectAll(cssSelector, noteElement)) {
       await processElement(element, ["img-dataurl", "en-media"], handler);
     }
-  } else noteElement = clippedElement;
-
-  return render(noteElement.childNodes, {
-    xmlMode: true
-  });
+    return render(noteElement.childNodes, {
+      xmlMode: true
+    });
+  } else {
+    return render(clippedElement.childNodes, {
+      xmlMode: true
+    });
+  }
 }
 
 async function processClippedPage(
@@ -131,7 +139,9 @@ async function processClippedPage(
   noteElement.attribs["clipped-content"] = "fullPage";
   noteElement.attribs["clipped-source-url"] = note.sourceURL;
   const result = await handler.process("en-webclip", noteElement);
-  if (result) return parseDocument(result);
+  if (result) {
+    return parseDocument(result);
+  }
 }
 
 async function processElement(
