@@ -1,4 +1,9 @@
 
+v2.0.5
+
+1. Add support for importing web clipped images
+2. Fix web clip detection in some type of notes
+
 v2.0.4
 
 1. Fix issue where Standard Notes importer was ignoring majority of the tags.
