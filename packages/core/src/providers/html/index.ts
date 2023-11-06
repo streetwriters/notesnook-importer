@@ -27,7 +27,8 @@ import {
   findAll,
   removeElement,
   replaceElement,
-  getAttributeValue
+  getAttributeValue,
+  getElementsByTagName
 } from "domutils";
 import { render } from "dom-serializer";
 import { Document } from "domhandler";
@@ -96,8 +97,44 @@ export class HTML implements IFileProvider {
         data: body ? render(body.childNodes) : render(document.childNodes)
       }
     };
+    HTML.setNoteMetadata(note, document);
 
     return note;
+  }
+
+  private static setNoteMetadata(note: Note, document: Document) {
+    const metaTags = getElementsByTagName("meta", document, true);
+    for (const tag of metaTags) {
+      const name = getAttributeValue(tag, "name");
+      if (!name) continue;
+
+      const content = getAttributeValue(tag, "content");
+      if (!content) continue;
+
+      switch (name) {
+        case "created-on":
+        case "created-at":
+        case "created":
+          note.dateCreated = new Date(content).getTime();
+          break;
+        case "last-edited-on":
+        case "edited-at":
+        case "edited":
+        case "updated-at":
+        case "updated":
+          note.dateEdited = new Date(content).getTime();
+          break;
+        case "pinned":
+          note.pinned = content === "true";
+          break;
+        case "favorite":
+          note.favorite = content === "true";
+          break;
+        case "color":
+          note.color = content;
+          break;
+      }
+    }
   }
 
   private static async extractResources(
@@ -166,3 +203,18 @@ const EXTENSION_TO_MIMETYPE: Record<string, string> = {
   ".svgz": "image/svg+xml",
   ".pdf": "application/pdf"
 };
+
+// const META_TO_METADATA: Record<string, keyof Note> = {
+// "created-on": "dateCreated",
+// "created-at": "dateCreated",
+// created: "dateCreated",
+// "last-edited-on": "dateEdited",
+// "edited-at": "dateEdited",
+// edited: "dateEdited",
+// "updated-at": "dateEdited",
+// updated: "dateEdited",
+
+//   favorite: "favorite",
+//   pinned: "pinned",
+//   color: "color"
+// };
