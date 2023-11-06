@@ -1,4 +1,11 @@
 
+v2.1.0
+
+1. Improve note type detection in Standard Notes
+2. Fix issue where importer collapsed all newlines in SN plain text notes
+3. Add date created & date edited support in markdown frontmatter
+4. Add date created & date edited support HTML meta tags
+
 v2.0.5
 
 1. Add support for importing web clipped images
