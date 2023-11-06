@@ -36,7 +36,7 @@ import {
   Spreadsheet
 } from "./types";
 import { buildTable, Cell, Row } from "../../utils/dom-utils";
-import { markdowntoHTML } from "../../utils/to-html";
+import { markdowntoHTML, textToHTML } from "../../utils/to-html";
 
 const defaultEditorDescription = (item: SNNote): EditorDescription => {
   const isHtml =
@@ -108,10 +108,10 @@ export class StandardNotes implements IFileProvider {
     }
   }
 
-  getEditor(item: SNNote, components: SNComponent[]): EditorDescription {
+  getEditor(item: SNNote, components: SNComponent[]): EditorDescription | null {
     const componentData = item.content.appData[ComponentDataDomain] || {};
     const componentId = Object.keys(componentData).pop();
-    if (!componentId) return defaultEditorDescription(item);
+    if (!componentId) return null;
 
     const component = components.find(
       (c) =>
@@ -119,7 +119,7 @@ export class StandardNotes implements IFileProvider {
         (c.content.area === ComponentArea.Editor ||
           c.content.area === ComponentArea.EditorStack)
     );
-    if (!component) return defaultEditorDescription(item);
+    if (!component) return null;
     const editor = <EditorDescription>component.content.package_info;
     if (
       editor.note_type === NoteType.Code &&
@@ -160,16 +160,20 @@ export class StandardNotes implements IFileProvider {
 
   parseContent(item: SNNote, components: SNComponent[]): Content {
     const editor = this.getEditor(item, components);
+    const noteType =
+      editor?.note_type ||
+      item.content.noteType ||
+      defaultEditorDescription(item).note_type;
 
     const data = item.content.text;
-    switch (editor.note_type) {
+    switch (noteType) {
       case NoteType.RichText:
         return {
           data: data,
           type: ContentType.HTML
         };
       case NoteType.Code: {
-        let language = editor.language || "plaintext";
+        let language = editor?.language || "plaintext";
         if (language === "htmlmixed") language = "html";
         else if (language === "markdown")
           return { type: ContentType.HTML, data: markdowntoHTML(data) };
@@ -234,6 +238,11 @@ export class StandardNotes implements IFileProvider {
           type: ContentType.HTML
         };
       }
+      case NoteType.Plain:
+        return {
+          data: textToHTML(data),
+          type: ContentType.HTML
+        };
       case NoteType.Task:
       case NoteType.Markdown:
       default:
