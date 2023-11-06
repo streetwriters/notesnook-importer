@@ -32,6 +32,21 @@ export interface Result {
     tags?: string | string[];
     pinned?: boolean;
     favorite?: boolean;
+
+    created_at?: string;
+    updated_at?: string;
+    edited_at?: string;
+    created?: string;
+    updated?: string;
+    edited?: string;
+    ["created-at"]?: string;
+    ["updated-at"]?: string;
+    ["edited-at"]?: string;
+    ["date created"]?: string;
+    ["date updated"]?: string;
+    ["date edited"]?: string;
+
+    color?: string;
   };
   content: string;
 }

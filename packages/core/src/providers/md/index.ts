@@ -43,12 +43,40 @@ export class Markdown implements IFileProvider {
     const note = await HTML.processHTML(file, files, settings.hasher, html);
     if (frontmatter) {
       note.title = frontmatter.title || note.title;
-      note.tags = Array.isArray(frontmatter.tags)
-        ? frontmatter.tags
-        : frontmatter.tags?.split(",");
+      note.tags = cleanupTags(
+        Array.isArray(frontmatter.tags)
+          ? frontmatter.tags
+          : frontmatter.tags?.split(",") || []
+      );
       note.pinned = frontmatter.pinned;
       note.favorite = frontmatter.favorite;
+      note.dateCreated = getPropertyWithFallbacks(
+        frontmatter,
+        ["created", "created_at", "date created"],
+        note.dateCreated
+      );
+      note.dateEdited = getPropertyWithFallbacks(
+        frontmatter,
+        ["updated", "updated_at", "date updated"],
+        note.dateEdited
+      );
+      note.color = frontmatter.color;
     }
     yield note;
   }
+}
+
+function getPropertyWithFallbacks<T, R>(
+  obj: T,
+  properties: (keyof T)[],
+  fallback: R
+): R {
+  for (const property of properties) {
+    if (obj[property]) return obj[property] as R;
+  }
+  return fallback;
+}
+
+function cleanupTags(tags: string[]) {
+  return tags.map((tag) => tag.replace("#", "").trim());
 }
