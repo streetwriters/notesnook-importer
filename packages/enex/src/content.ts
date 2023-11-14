@@ -206,7 +206,12 @@ function filterAttributes(element: Element): string | null {
               break;
             }
           }
-          if (validStyles.indexOf(style) === -1) delete styles[style];
+
+          if (
+            validStyles.indexOf(style) === -1 ||
+            (style === "color" && isBlack(styles[style]))
+          )
+            delete styles[style];
         }
         const newStyle = objectToStyles(styles);
         if (newStyle) element.attribs[attr] = newStyle;
@@ -239,4 +244,14 @@ function objectToStyles(input: Record<string, string>): string {
     output.push(`${key}:${input[key]}`);
   }
   return output.join(";");
+}
+
+function isBlack(value: string) {
+  value = value.replace(/\s+/g, "");
+  return (
+    value === "#000" ||
+    value === "#000000" ||
+    value === "#000000FF" ||
+    value === "rgb(0,0,0)"
+  );
 }
