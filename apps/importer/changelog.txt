@@ -1,4 +1,8 @@
 
+v2.1.1
+
+1. Strip pure black text color in Evernote Import
+
 v2.1.0
 
 1. Improve note type detection in Standard Notes
