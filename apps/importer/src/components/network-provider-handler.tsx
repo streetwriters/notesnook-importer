@@ -22,48 +22,48 @@ import { StepContainer } from "./step-container";
 import {
   INetworkProvider,
   ProviderSettings,
-  OneNote
+  OneNote,
+  OneNoteSettings,
+  transform
 } from "@notesnook-importer/core";
 import { xxhash64 } from "hash-wasm";
-import { useCallback, useState } from "react";
+import { useRef, useState } from "react";
 import { BrowserStorage } from "@notesnook-importer/storage/dist/browser";
 import { TransformResult } from "../types";
+import { Accordion } from "./accordion";
 
 type NetworkProviderHandlerProps = {
-  provider: INetworkProvider<unknown>;
+  provider: INetworkProvider<ProviderSettings>;
   onTransformFinished: (result: TransformResult) => void;
 };
 
-const settings: ProviderSettings = {
-  clientType: "browser",
-  hasher: { type: "xxh64", hash: (data) => xxhash64(data) },
-  storage: new BrowserStorage("temp"),
-  reporter: () => {}
+type Progress = {
+  total: number;
+  done: number;
 };
+
+function getProviderSettings(
+  provider: INetworkProvider<ProviderSettings>,
+  settings: ProviderSettings
+) {
+  if (provider instanceof OneNote) {
+    return {
+      ...settings,
+      cache: false,
+      clientId: "6c32bdbd-c6c6-4cda-bcf0-0c8ec17e5804",
+      redirectUri:
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:3000"
+          : "https://importer.notesnook.com"
+    } as OneNoteSettings;
+  }
+}
 
 export function NetworkProviderHandler(props: NetworkProviderHandlerProps) {
   const { provider, onTransformFinished } = props;
-  const [progress, setProgress] = useState<string | null>();
-
-  const startImport = useCallback(() => {
-    (async () => {
-      if (!provider) return;
-      if (provider instanceof OneNote) {
-        setProgress(null);
-        const errors = await provider.process({
-          ...settings,
-          clientId: "4952c7cf-9c02-4fb7-b867-b87727bb52d8",
-          redirectUri:
-            process.env.NODE_ENV === "development"
-              ? "http://localhost:3000"
-              : "https://importer.notesnook.com",
-          report: setProgress
-        });
-        onTransformFinished({ totalNotes: 0, errors });
-        setProgress(null);
-      }
-    })();
-  }, [onTransformFinished, provider]);
+  const [progress, setProgress] = useState<Progress>();
+  const [_, setCounter] = useState<number>(0);
+  const logs = useRef<string[]>([]);
 
   return (
     <StepContainer
@@ -75,20 +75,30 @@ export function NetworkProviderHandler(props: NetworkProviderHandlerProps) {
       {progress ? (
         <>
           <Text variant="title">Importing your notes from {provider.name}</Text>
-          <Text
-            as="pre"
-            variant="body"
-            sx={{
-              textAlign: "center",
-              my: 4,
-              bg: "bgSecondary",
-              p: 4,
-              fontFamily: "monospace",
-              whiteSpace: "pre-wrap"
-            }}
-          >
-            {progress}
+          <Text variant="body" sx={{ mt: 4 }}>
+            Found {progress.done} {progress.total ? `of ${progress.total}` : ""}{" "}
+            notes
           </Text>
+          {logs.current.length > 0 && (
+            <Accordion title="Logs" isOpened>
+              <Text
+                as="pre"
+                variant="body"
+                sx={{
+                  fontFamily: "monospace",
+                  maxHeight: 250,
+                  overflowY: "auto"
+                }}
+              >
+                {logs.current.map((c, index) => (
+                  <>
+                    <span key={index.toString()}>{c}</span>
+                    <br />
+                  </>
+                ))}
+              </Text>
+            </Accordion>
+          )}
         </>
       ) : (
         <>
@@ -101,7 +111,38 @@ export function NetworkProviderHandler(props: NetworkProviderHandlerProps) {
           </Text>
           <Button
             variant="primary"
-            onClick={startImport}
+            onClick={async () => {
+              let totalNotes = 0;
+              const settings = getProviderSettings(provider, {
+                clientType: "browser",
+                hasher: { type: "xxh64", hash: xxhash64 },
+                storage: new BrowserStorage(provider.name),
+                log: (message) => {
+                  logs.current.push(
+                    `[${new Date(message.date).toLocaleString()}] ${
+                      message.text
+                    }`
+                  );
+                  setCounter((s) => ++s);
+                },
+                reporter: (current, total) => {
+                  setProgress({ done: current, total: total || 0 });
+                  ++totalNotes;
+                }
+              });
+              if (!settings) return;
+
+              await settings.storage.clear();
+
+              setProgress({ total: 0, done: 0 });
+
+              const errors = await transform(provider, settings);
+              console.log(errors);
+              onTransformFinished({
+                totalNotes,
+                errors
+              });
+            }}
             sx={{ my: 4, alignSelf: "center" }}
           >
             Start importing

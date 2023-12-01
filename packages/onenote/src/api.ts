@@ -18,13 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import {
-  Entity,
   OnenotePage,
   Notebook as OnenoteNotebook,
   OnenoteSection,
   SectionGroup as OnenoteSectionGroup
 } from "@microsoft/microsoft-graph-types-beta";
-import { GraphAPIResponse, IProgressReporter, ItemType } from "./types";
+import { GraphAPIResponse, ItemType } from "./types";
 import { Client, GraphError } from "@microsoft/microsoft-graph-client";
 import { Content } from "./content";
 import { AuthConfig } from "./auth/config";
@@ -38,104 +37,82 @@ const defaultProperties = [
 
 export class OneNoteClient {
   #client: Client;
-  #reporter?: IProgressReporter;
-  constructor(authConfig: AuthConfig, reporter?: IProgressReporter) {
-    this.#reporter = reporter;
+  constructor(authConfig: AuthConfig) {
     this.#client = Client.init({
       authProvider: async (done) => {
-        if ("window" in global) {
-          const { authenticate } = await import("./auth/browser");
-          const result = await authenticate(authConfig);
-          if (result) done(null, result.accessToken);
-          else done("Could not get access token", null);
-        } else {
-          const { authenticate } = await import("./auth/node");
-          const result = await authenticate(authConfig);
-          if (result) done(null, result.accessToken);
-          else done("Could not get access token", null);
+        try {
+          if ("window" in global) {
+            const { authenticate } = await import("./auth/browser");
+            const result = await authenticate(authConfig);
+            if (result) done(null, result.accessToken);
+            else done("Could not get access token", null);
+          } else {
+            const { authenticate } = await import("./auth/node");
+            const result = await authenticate(authConfig);
+            if (result) done(null, result.accessToken);
+            else done("Could not get access token", null);
+          }
+        } catch (e) {
+          console.error(e);
+          done(e, null);
         }
       }
     });
   }
 
-  async getNotebooks(): Promise<OnenoteNotebook[]> {
-    const notebooks: OnenoteNotebook[] = await this.#getAll(
+  async *getNotebooks() {
+    for await (const notebooks of this.#getAll<OnenoteNotebook>(
       `/me/onenote/notebooks`,
       "notebook",
-      defaultProperties
-    );
+      defaultProperties,
+      ["sections", `sectionGroups($expand=sections,sectionGroups)`]
+    )) {
+      for (const notebook of notebooks) {
+        if (!notebook.id) continue;
 
-    return await this.#processAll(
-      notebooks,
-      "notebook",
-      async (notebook: OnenoteNotebook) => {
-        if (!notebook.id) return;
-
-        notebook.sections = await this.#getSections(notebook, "notebooks");
-        notebook.sectionGroups = await this.#getSectionGroups(
-          notebook,
-          "sectionGroups"
-        );
+        this.#processSections(notebook, "notebooks");
+        this.#processSectionGroups(notebook, "sectionGroups");
+        yield notebook;
       }
-    );
+    }
   }
 
-  async #getSections(
+  #processSections(
     parent: OnenoteNotebook | OnenoteSectionGroup,
     parentType: "notebooks" | "sectionGroups"
-  ): Promise<OnenoteSection[]> {
-    const sections: OnenoteSection[] = await this.#getAll(
-      `/me/onenote/${parentType}/${parent.id}/sections`,
-      "section",
-      defaultProperties
-    );
+  ) {
+    if (!parent.sections) return;
 
-    return await this.#processAll(sections, "section", async (section) => {
-      if (!section.id) return;
+    for (const section of parent.sections) {
+      if (!section.id) continue;
       if (parentType === "notebooks")
         section.parentNotebook = this.#getParent(parent);
       else if (parentType === "sectionGroups")
         section.parentSectionGroup = this.#getParent(parent);
-
-      section.pages = await this.#getPages(section);
-    });
+    }
   }
 
-  async #getSectionGroups(
+  #processSectionGroups(
     parent: OnenoteNotebook | OnenoteSectionGroup,
     parentType: "notebooks" | "sectionGroups"
-  ): Promise<OnenoteSectionGroup[]> {
-    const sectionGroups: OnenoteSectionGroup[] = await this.#getAll(
-      `/me/onenote/${parentType}/${parent.id}/sectionGroups`,
-      "sectionGroup",
-      defaultProperties
-    );
+  ) {
+    if (!parent.sectionGroups) return;
 
-    return await this.#processAll(
-      sectionGroups,
-      "sectionGroup",
-      async (sectionGroup) => {
-        if (!sectionGroup.id) return;
+    for (const sectionGroup of parent.sectionGroups) {
+      if (!sectionGroup.id) continue;
 
-        if (parentType === "notebooks")
-          sectionGroup.parentNotebook = this.#getParent(parent);
-        else if (parentType === "sectionGroups")
-          sectionGroup.parentSectionGroup = this.#getParent(parent);
+      if (parentType === "notebooks")
+        sectionGroup.parentNotebook = this.#getParent(parent);
+      else if (parentType === "sectionGroups")
+        sectionGroup.parentSectionGroup = this.#getParent(parent);
 
-        sectionGroup.sections = await this.#getSections(
-          sectionGroup,
-          "sectionGroups"
-        );
-        sectionGroup.sectionGroups = await this.#getSectionGroups(
-          sectionGroup,
-          "sectionGroups"
-        );
-      }
-    );
+      this.#processSections(sectionGroup, "sectionGroups");
+      this.#processSectionGroups(sectionGroup, "sectionGroups");
+    }
   }
 
-  async #getPages(section: OnenoteSection): Promise<OnenotePage[]> {
-    const pages: OnenotePage[] = await this.#getAll(
+  async *getPages(section: OnenoteSection) {
+    for await (const pages of this.#getAll<OnenotePage>(
       `/me/onenote/sections/${section.id}/pages`,
       "page",
       [
@@ -147,21 +124,21 @@ export class OneNoteClient {
         "order",
         "userTags"
       ]
-    );
-
-    return await this.#processAll(pages, "page", async (page) => {
-      if (!page.id) return;
-      page.parentSection = {
-        parentSectionGroup: section.parentSectionGroup,
-        parentNotebook: section.parentNotebook,
-        id: section.id,
-        displayName: section.displayName
-      };
-      page.content = await this.#getPageContent(page);
-    });
+    )) {
+      for (const page of pages) {
+        if (!page.id) continue;
+        page.parentSection = {
+          parentSectionGroup: section.parentSectionGroup,
+          parentNotebook: section.parentNotebook,
+          id: section.id,
+          displayName: section.displayName
+        };
+        yield page;
+      }
+    }
   }
 
-  async #getPageContent(page: OnenotePage): Promise<Content | null> {
+  async getPageContent(page: OnenotePage): Promise<Content | null> {
     try {
       const stream = <NodeJS.ReadableStream | null>(
         await this.#client
@@ -185,57 +162,28 @@ export class OneNoteClient {
     return null;
   }
 
-  async #processAll<T extends Entity>(
-    items: T[],
-    type: ItemType,
-    process: (item: T) => Promise<void>
-  ): Promise<T[]> {
-    this.#reporter?.report({
-      op: "process",
-      type,
-      total: items.length,
-      current: 0
-    });
-
-    for (let i = 0; i < items.length; ++i) {
-      const item = items[i];
-      await process(item);
-
-      this.#reporter?.report({
-        op: "process",
-        type,
-        total: items.length,
-        current: i + 1
-      });
-    }
-    return items;
-  }
-
-  async #getAll<T, TKeys extends keyof T>(
+  async *#getAll<T, TKeys extends keyof T = keyof T>(
     url: string,
     type: ItemType,
-    properties: readonly TKeys[]
-  ): Promise<T[]> {
+    properties: readonly TKeys[],
+    expand?: string | string[]
+  ) {
     const items: T[] = [];
 
     let response: GraphAPIResponse<T[]> | undefined = undefined;
     let skip = 0;
     const limit = 100;
     while (!response || !!response["@odata.nextLink"]) {
-      this.#reporter?.report({
-        op: "fetch",
-        type,
-        total: skip + limit,
-        current: skip
-      });
-
+      console.log("EHREE");
       response = <GraphAPIResponse<T[]>>await this.#client
         .api(url)
         .top(limit)
         .skip(skip)
         .select(<string[]>(<unknown>properties))
+        .expand(expand || [])
         .get()
         .catch(async (e) => {
+          console.log(e);
           const error = <Error>e;
           const errorMessage = `Failed to get ${type}`;
           this.#handleError(error, errorMessage);
@@ -243,16 +191,9 @@ export class OneNoteClient {
         });
 
       if (!response || !response.value) break;
-      items.push(...response.value);
+      yield response.value;
       skip += limit;
     }
-
-    this.#reporter?.report({
-      op: "fetch",
-      type,
-      total: items.length,
-      current: items.length
-    });
     return items;
   }
 
@@ -282,9 +223,10 @@ export class OneNoteClient {
     let errorMessage = message;
     if (error.message) errorMessage += ` (original error: ${error.message}).`;
     if (error instanceof GraphError) {
+      if (error.statusCode === 404) return;
       errorMessage += ` (Request failed with status code: ${error.statusCode}).`;
     }
-    this.#reporter?.error(new Error(errorMessage));
+    throw new Error(errorMessage);
   }
 
   #getParent(parent: OnenoteNotebook | OnenoteSectionGroup) {

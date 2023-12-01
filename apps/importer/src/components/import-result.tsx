@@ -66,6 +66,21 @@ export function ImportResult(props: ImportResultProps) {
     }
   }, [provider]);
 
+  if (result.totalNotes <= 0) {
+    return (
+      <StepContainer sx={{ flexDirection: "column", alignItems: "stretch" }}>
+        <Text variant="title">Import unsuccessful</Text>
+        <Text variant="body" sx={{ mt: 2 }}>
+          We failed to import the selected files. Please try again.
+        </Text>
+        {result.errors.length > 0 && <ImportErrors errors={result.errors} />}
+        <Button onClick={onReset} sx={{ alignSelf: "center", mt: 2, px: 4 }}>
+          Start over
+        </Button>
+      </StepContainer>
+    );
+  }
+
   if (isDone && !error) {
     return (
       <StepContainer sx={{ flexDirection: "column", alignItems: "stretch" }}>

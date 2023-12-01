@@ -36,6 +36,7 @@ import { TransformResult } from "./types";
 function App() {
   const [selectedProvider, setSelectedProvider] = useState<IProvider>();
   const [transformResult, setTransformResult] = useState<TransformResult>();
+  const [instanceKey, setInstanceKey] = useState<string>(`${Math.random()}`);
 
   useEffect(() => {
     if (selectedProvider && transformResult) {
@@ -65,16 +66,18 @@ function App() {
             }}
           />
 
-          {selectedProvider && !transformResult ? (
+          {selectedProvider ? (
             <>
               <StepSeperator />
               {selectedProvider.type === "file" ? (
                 <FileProviderHandler
+                  key={instanceKey}
                   provider={selectedProvider}
                   onTransformFinished={setTransformResult}
                 />
               ) : selectedProvider.type === "network" ? (
                 <NetworkProviderHandler
+                  key={instanceKey}
                   provider={selectedProvider}
                   onTransformFinished={setTransformResult}
                 />
@@ -89,6 +92,7 @@ function App() {
                 provider={selectedProvider}
                 onReset={() => {
                   setTransformResult(undefined);
+                  setInstanceKey(`${Math.random()}`);
                 }}
               />
             </>

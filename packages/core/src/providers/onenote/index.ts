@@ -17,23 +17,29 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { INetworkProvider, ProviderSettings } from "../provider";
+import {
+  INetworkProvider,
+  ProviderLogMessage,
+  ProviderMessage,
+  ProviderSettings
+} from "../provider";
 import { OneNoteClient } from "@notesnook-importer/onenote";
-import { Content, ProgressPayload } from "@notesnook-importer/onenote";
+import { Content } from "@notesnook-importer/onenote";
 import { ContentType, Note, Notebook } from "../../models/note";
 import {
   SectionGroup,
   OnenoteSection,
-  OnenotePage
+  OnenotePage,
+  Notebook as OnenoteNotebook
 } from "@microsoft/microsoft-graph-types-beta";
 import { ElementHandler } from "./elementhandlers";
 import { parseDocument } from "htmlparser2";
 import { findOne, textContent } from "domutils";
 
-type OneNoteSettings = ProviderSettings & {
+export type OneNoteSettings = ProviderSettings & {
   clientId: string;
   redirectUri?: string;
-  report?: (message: string) => void;
+  cache?: boolean;
 };
 
 export class OneNote implements INetworkProvider<OneNoteSettings> {
@@ -43,56 +49,54 @@ export class OneNote implements INetworkProvider<OneNoteSettings> {
   public helpLink =
     "https://help.notesnook.com/importing-notes/import-notes-from-onenote";
 
-  async process(settings: OneNoteSettings) {
-    const errors: Error[] = [];
+  async *process(
+    settings: OneNoteSettings
+  ): AsyncGenerator<ProviderMessage, void, unknown> {
+    const client = new OneNoteClient(settings);
 
-    const progressCache: Record<string, ProgressPayload> = {};
-    const client = new OneNoteClient(
-      { clientId: settings.clientId, redirectUri: settings.redirectUri },
-      {
-        error: (e) => {
-          errors.push(e);
-        },
-        report: (progress) => {
-          progressCache[progress.type] = progress;
-          if (settings.report)
-            settings.report(structuredMessage(progressCache));
-        }
-      }
-    );
+    yield log("Fetching notebooks...");
+    for await (const notebook of client.getNotebooks()) {
+      if (!notebook.sections) continue;
 
-    const notebooks = await client.getNotebooks();
-    for (const notebook of notebooks) {
-      for (const section of notebook.sections ?? []) {
-        const sectionNotebooks = this.getNotebooks(section);
-        if (!section.pages) continue;
+      yield log(`Processing notebook: ${notebook.displayName}`);
+      yield* this.processNotebook(client, settings, notebook);
+    }
+  }
 
-        for (let i = 0; i < section.pages.length; ++i) {
-          const page = section.pages[i];
-          if (settings.report)
-            settings.report(
-              `Transforming pages (${i + 1}/${section.pages.length})`
-            );
+  private async *processNotebook(
+    client: OneNoteClient,
+    settings: OneNoteSettings,
+    notebook: OnenoteNotebook | SectionGroup
+  ): AsyncGenerator<ProviderMessage, void, unknown> {
+    if (!notebook.sections) return;
+    for (const section of notebook.sections) {
+      const sectionNotebooks = this.getNotebooks(section);
 
-          const note = await this.pageToNote(
-            page,
-            sectionNotebooks,
-            settings
-          ).catch((e: Error) => {
-            e.message = `${e.message} (page: ${page.title})`;
-            errors.push(e);
-            console.error(e);
-            return null;
-          });
-          if (!note) continue;
+      for await (const page of client.getPages(section)) {
+        yield log(
+          `Getting page content: ${page.title || "Untitled note"} (id: ${
+            page.id
+          })`
+        );
+        page.content = await client.getPageContent(page);
 
-          await settings.storage.write(note);
-        }
+        yield log(
+          `Converting page to note: ${page.title || "Untitled note"} (id: ${
+            page.id
+          })`
+        );
+        const note = await this.pageToNote(page, sectionNotebooks, settings);
+        if (!note) continue;
+
+        yield { type: "note", note };
       }
     }
 
-    if (settings.report) settings.report(`Done!`);
-    return errors;
+    if (notebook.sectionGroups)
+      for (const sectionGroup of notebook.sectionGroups) {
+        yield log(`Processing section group: ${sectionGroup.displayName}`);
+        yield* this.processNotebook(client, settings, sectionGroup);
+      }
   }
 
   private async pageToNote(
@@ -170,43 +174,6 @@ export class OneNote implements INetworkProvider<OneNoteSettings> {
   }
 }
 
-function structuredMessage(cache: Record<string, ProgressPayload>): string {
-  const sequence = ["notebook", "sectionGroup", "section", "page"];
-  const parts: string[] = [];
-  for (const key of sequence) {
-    const value = cache[key];
-    if (!value || value.total == value.current) continue;
-    parts.push(progressToString(value));
-  }
-  return parts.join(" => ");
-}
-
-function progressToString(payload: ProgressPayload): string {
-  const parts: string[] = [];
-  switch (payload.op) {
-    case "fetch":
-      parts.push("Fetching");
-      break;
-    case "process":
-      parts.push("Processing");
-      break;
-  }
-
-  switch (payload.type) {
-    case "notebook":
-      parts.push("notebooks");
-      break;
-    case "page":
-      parts.push("pages");
-      break;
-    case "section":
-      parts.push("sections");
-      break;
-    case "sectionGroup":
-      parts.push("section groups");
-      break;
-  }
-
-  parts.push(`(${payload.current + 1}/${payload.total})`);
-  return parts.join(" ");
+function log(message: string): ProviderLogMessage {
+  return { type: "log", date: Date.now(), text: message };
 }

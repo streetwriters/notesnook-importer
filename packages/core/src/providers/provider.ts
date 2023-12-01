@@ -31,6 +31,11 @@ interface IBaseProvider<T extends ProviderType> {
   helpLink: string;
 }
 
+export type ProviderLogMessage = { type: "log"; text: string; date: number };
+export type ProviderNoteMessage = { type: "note"; note: Note };
+
+export type ProviderMessage = ProviderLogMessage | ProviderNoteMessage;
+
 export interface IFileProvider<TPreProcessResult = unknown>
   extends IBaseProvider<"file"> {
   supportedExtensions: string[];
@@ -45,16 +50,18 @@ export interface IFileProvider<TPreProcessResult = unknown>
   ): AsyncGenerator<Note, void, unknown>;
 }
 
-export interface INetworkProvider<TSettings> extends IBaseProvider<"network"> {
-  process(settings: TSettings): Promise<Error[]>;
+export interface INetworkProvider<TSettings extends ProviderSettings>
+  extends IBaseProvider<"network"> {
+  process(settings: TSettings): AsyncGenerator<ProviderMessage, void, unknown>;
 }
 
-export type IProvider = IFileProvider | INetworkProvider<unknown>;
+export type IProvider = IFileProvider | INetworkProvider<ProviderSettings>;
 
 export interface ProviderSettings {
   clientType: "browser" | "node";
   hasher: IHasher;
   storage: IStorage<Note>;
+  log?: (message: ProviderLogMessage) => void;
   reporter: (current: number, total?: number) => void;
 }
 

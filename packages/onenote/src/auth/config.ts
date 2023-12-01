@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 export type AuthConfig = {
   clientId: string;
   redirectUri?: string;
+  cache?: boolean;
 };
 
 export const SCOPES = ["User.Read", "Notes.Read.All", "Notes.Read"];

@@ -55,7 +55,8 @@ export function NotesList(props: NotesListProps) {
         data={items}
         endReached={async () => {
           const storage = new BrowserStorage<Note>(provider.name);
-          setItems(await storage.get(items.length, items.length + 20));
+          const nextPage = await storage.get(items.length, items.length + 20);
+          setItems((s) => [...s, ...nextPage]);
         }}
         itemContent={(index, note) => (
           <Flex

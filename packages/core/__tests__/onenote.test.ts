@@ -19,12 +19,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import "./globals";
 import { test, afterEach } from "vitest";
-import { Note } from "../index";
+import { Note, transform } from "../index";
 import { ProviderFactory } from "../src/providers/provider-factory";
 import { hasher, matchArraySnapshot, matchNotesSnapshot } from "./utils";
 import sinon from "sinon";
 import { OneNoteClient } from "@notesnook-importer/onenote";
-import { Notebook } from "@microsoft/microsoft-graph-types-beta";
+import {
+  Notebook,
+  OnenotePage,
+  OnenoteSection
+} from "@microsoft/microsoft-graph-types-beta";
 import Data from "./data/onenote/notebooks.json";
 import { Content } from "@notesnook-importer/onenote";
 import fs from "fs";
@@ -64,40 +68,64 @@ test(`transform & pack OneNote data to Notesnook importer compatible format`, as
 
 async function importFromOnenote() {
   const provider = ProviderFactory.getProvider("onenote");
-  sinon.replace(OneNoteClient.prototype, "getNotebooks", async () => {
-    for (const notebook of notebooks) {
-      for (const section of notebook.sections ?? []) {
-        if (!section.pages) continue;
+  sinon.replace(
+    OneNoteClient.prototype,
+    "getNotebooks",
+    async function* getNotebooks() {
+      for (const notebook of notebooks) {
+        yield notebook;
+      }
+    }
+  );
 
-        for (let i = 0; i < section.pages.length; ++i) {
-          const page = section.pages[i];
-          if (typeof page.content === "string")
-            page.content = new Content(page.content, {
-              attachmentResolver: async (url) => {
-                const filePath = path.join(
-                  __dirname,
-                  "data",
-                  "onenote",
-                  md5(url)
-                );
-                return fs.readFileSync(filePath);
-              }
-            });
+  sinon.replace(
+    OneNoteClient.prototype,
+    "getPages",
+    async function* getPages(query: OnenoteSection) {
+      for (const notebook of notebooks) {
+        for (const section of notebook.sections ?? []) {
+          if (section.id !== query.id) continue;
+          if (!section.pages) continue;
+
+          for (let i = 0; i < section.pages.length; ++i) {
+            const page = section.pages[i];
+            if (typeof page.content === "string")
+              page.content = new Content(page.content, {
+                attachmentResolver: async (url) => {
+                  const filePath = path.join(
+                    __dirname,
+                    "data",
+                    "onenote",
+                    md5(url)
+                  );
+                  return fs.readFileSync(filePath);
+                }
+              });
+
+            yield page;
+          }
         }
       }
     }
-    return notebooks;
-  });
+  );
+
+  sinon.replace(
+    OneNoteClient.prototype,
+    "getPageContent",
+    async function getPageContent(page: OnenotePage) {
+      return page.content;
+    }
+  );
 
   const storage = new MemoryStorage<Note>();
-  const output = await provider.process({
+  const errors = await transform(provider, {
     clientId: "",
     clientType: "node",
     hasher,
     reporter() {},
     storage
   });
-  return { errors: output, notes: Object.values(storage.storage), storage };
+  return { errors, notes: Object.values(storage.storage), storage };
 }
 
 function md5(str: string) {

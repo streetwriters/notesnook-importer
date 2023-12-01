@@ -32,11 +32,13 @@ function getClient(config: AuthConfig): PublicClientApplication {
         clientId: config.clientId,
         redirectUri: config.redirectUri
       },
-      cache: {
-        cacheLocation: "localStorage",
-        storeAuthStateInCookie: false,
-        secureCookies: false
-      }
+      cache: config.cache
+        ? {
+            cacheLocation: "localStorage",
+            storeAuthStateInCookie: false,
+            secureCookies: false
+          }
+        : undefined
     });
   return client;
 }

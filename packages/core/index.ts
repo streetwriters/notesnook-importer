@@ -17,23 +17,75 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { IFileProvider, ProviderSettings } from "./src/providers/provider";
+import {
+  IFileProvider,
+  INetworkProvider,
+  ProviderSettings
+} from "./src/providers/provider";
 import { unpack } from "./src/utils/archiver";
 import { IFile } from "./src/utils/file";
 
+export async function transform<TSettings extends ProviderSettings>(
+  provider: INetworkProvider<TSettings>,
+  settings: TSettings
+): Promise<Error[]>;
 export async function transform(
+  provider: IFileProvider,
+  files: IFile[],
+  settings: ProviderSettings
+): Promise<Error[]>;
+export async function transform<TSettings extends ProviderSettings>(
+  provider: IFileProvider | INetworkProvider<TSettings>,
+  filesOrSettings: IFile[] | TSettings,
+  settings?: ProviderSettings
+): Promise<Error[]> {
+  if (provider.type === "file") {
+    if (Array.isArray(filesOrSettings) && settings)
+      return transformFiles(provider, filesOrSettings, settings);
+  } else if (provider.type === "network") {
+    if (!Array.isArray(filesOrSettings))
+      return transformNetwork(provider, filesOrSettings);
+  }
+  return [new Error("Invalid usage. Please specify a valid provider.")];
+}
+
+async function transformNetwork<TSettings extends ProviderSettings>(
+  provider: INetworkProvider<TSettings>,
+  settings: TSettings
+): Promise<Error[]> {
+  const errors: Error[] = [];
+  let count = 0;
+  try {
+    for await (const message of provider.process(settings)) {
+      if (message.type === "log" && settings.log) {
+        settings.log(message);
+      } else if (message.type === "note") {
+        await settings.storage.write(message.note);
+        settings.reporter(++count);
+      }
+    }
+  } catch (e) {
+    console.error(e);
+    if (isQuotaExceeded(e)) {
+      errors.push(new Error(`You are out of storage space.`));
+    } else {
+      errors.push(<Error>e);
+    }
+  }
+  return errors;
+}
+
+async function transformFiles(
   provider: IFileProvider,
   files: IFile[],
   settings: ProviderSettings
 ): Promise<Error[]> {
   const errors: Error[] = [];
-
   const allFiles = await unpack(files);
   const preprocessData = await provider.preprocess?.(allFiles);
   let count = 0;
   for (const file of allFiles) {
     if (!provider.filter(file)) continue;
-
     try {
       for await (const note of provider.process(
         file,
@@ -41,14 +93,6 @@ export async function transform(
         allFiles,
         preprocessData
       )) {
-        // NOTE: this needs to be done temporarily because Notesnook converts all \n
-        // characters to paragraphs. While that has been fixed we should keep this here
-        // for a while until the new version has propagated everywhere.
-        if (note.content?.data)
-          note.content.data = note.content.data
-            .replace(/\n+/gm, "")
-            .replace(/(\r\n)+/gm, "");
-
         await settings.storage.write(note);
         settings.reporter(++count);
       }
