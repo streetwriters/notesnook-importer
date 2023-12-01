@@ -1,4 +1,8 @@
 
+v2.1.2
+
+1. Fix OneNote importer
+
 v2.1.1
 
 1. Strip pure black text color in Evernote Import
