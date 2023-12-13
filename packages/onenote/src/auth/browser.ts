@@ -47,6 +47,7 @@ export async function authenticate(
   config: AuthConfig
 ): Promise<AuthenticationResult | null> {
   const client = getClient(config);
+  await client.initialize();
   const accounts = client.getAllAccounts();
   return await client
     .acquireTokenSilent({
