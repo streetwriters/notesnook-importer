@@ -283,7 +283,10 @@ function getBigInt64(view: DataView, position: number, littleEndian = false) {
   return value;
 }
 
-export async function Reader(file: Blob) {
+export async function Reader(file: Blob): Promise<{
+  read: () => AsyncGenerator<Entry, void, unknown>;
+  totalFiles: number;
+}> {
   if (file instanceof Entry) {
     // handle nested zip. This is suboptimal and requires moving
     // everything into memory.
