@@ -17,12 +17,12 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import {
+import type {
   OnenotePage,
   Notebook as OnenoteNotebook,
   OnenoteSection,
   SectionGroup as OnenoteSectionGroup
-} from "@microsoft/microsoft-graph-types-beta";
+} from "@microsoft/microsoft-graph-types-beta/microsoft-graph";
 import { GraphAPIResponse, ItemType } from "./types";
 import { Client, GraphError } from "@microsoft/microsoft-graph-client";
 import { Content } from "./content";
@@ -39,6 +39,7 @@ export class OneNoteClient {
   #client: Client;
   constructor(authConfig: AuthConfig) {
     this.#client = Client.init({
+      defaultVersion: "beta",
       authProvider: async (done) => {
         try {
           if ("window" in global) {
