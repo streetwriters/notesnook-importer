@@ -284,6 +284,12 @@ function getBigInt64(view: DataView, position: number, littleEndian = false) {
 }
 
 export async function Reader(file: Blob) {
+  if (file instanceof Entry) {
+    // handle nested zip. This is suboptimal and requires moving
+    // everything into memory.
+    // TODO: find a better way to handle this.
+    return await Reader(new Blob([await file.arrayBuffer()]));
+  }
   // Seek EOCDR - "End of central directory record" is the last part of a zip archive, and is at least 22 bytes long.
   // Zip file comment is the last part of EOCDR and has max length of 64KB,
   // so we only have to search the last 64K + 22 bytes of a archive for EOCDR signature (0x06054b50).
