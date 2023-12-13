@@ -48,10 +48,11 @@ export class OneNoteClient {
             if (result) done(null, result.accessToken);
             else done("Could not get access token", null);
           } else {
-            const { authenticate } = await import("./auth/node");
-            const result = await authenticate(authConfig);
-            if (result) done(null, result.accessToken);
-            else done("Could not get access token", null);
+            // const { authenticate } = await import("./auth/node");
+            // const result = await authenticate(authConfig);
+            // if (result) done(null, result.accessToken);
+            // else
+            done("Could not get access token", null);
           }
         } catch (e) {
           console.error(e);
