@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Element } from "domhandler";
+import { CDATA, ChildNode, Document, Element, isTag } from "domhandler";
 import { parseDocument } from "htmlparser2";
 import { selectAll } from "css-select";
 import { render } from "dom-serializer";
@@ -92,6 +92,18 @@ export async function processContent(
   );
   if (!noteElement) throw new Error("Could not find a valid en-note tag.");
 
+  // convert all div tags to paragraphs
+  visit(noteElement, (child) => {
+    if (
+      !isTag(child) ||
+      child.tagName.toLowerCase() !== "div" ||
+      findElementType(child, true)
+    )
+      return false;
+    child.tagName = "p";
+    return true;
+  });
+
   let hasWebClip = false;
   for (const element of selectAll(cssSelector, noteElement)) {
     const type = await processElement(element, ELEMENT_TYPES, handler);
@@ -149,8 +161,7 @@ async function processElement(
   elementTypes: string[],
   handler?: IElementHandler
 ) {
-  const elementType =
-    filterAttributes(element) || element.tagName.toLowerCase();
+  const elementType = findElementType(element) || element.tagName.toLowerCase();
 
   if (elementTypes.includes(elementType)) {
     if (handler) {
@@ -163,7 +174,7 @@ async function processElement(
   return elementType;
 }
 
-function filterAttributes(element: Element): string | null {
+function findElementType(element: Element, passthrough = false): string | null {
   let elementType: string | null = null;
 
   for (const attr of invalidAttributes) {
@@ -173,7 +184,7 @@ function filterAttributes(element: Element): string | null {
   for (const attr of validAttributes) {
     if (!element.attribs[attr]) continue;
     const value = element.attribs[attr];
-    if (!value) {
+    if (!value && !passthrough) {
       delete element.attribs[attr];
       continue;
     }
@@ -196,6 +207,7 @@ function filterAttributes(element: Element): string | null {
               element.attribs[style.replace("--en-", "")] = styles[style];
               elementType = "en-webclip";
               break;
+            case "-en-codeblock":
             case "--en-codeblock":
               elementType = "en-codeblock";
               break;
@@ -208,11 +220,14 @@ function filterAttributes(element: Element): string | null {
           }
 
           if (
-            validStyles.indexOf(style) === -1 ||
-            (style === "color" && isBlack(styles[style]))
+            !passthrough &&
+            (validStyles.indexOf(style) === -1 ||
+              (style === "color" && isBlack(styles[style])))
           )
             delete styles[style];
         }
+        if (passthrough) break;
+
         const newStyle = objectToStyles(styles);
         if (newStyle) element.attribs[attr] = newStyle;
         else delete element.attribs[attr];
@@ -254,4 +269,14 @@ function isBlack(value: string) {
     value === "#000000FF" ||
     value === "rgb(0,0,0)"
   );
+}
+
+function visit(
+  element: Element | Document | CDATA,
+  cb: (child: ChildNode) => boolean
+) {
+  for (const child of element.childNodes) {
+    if (!cb(child)) continue;
+    if ("childNodes" in child) visit(child, cb);
+  }
 }
