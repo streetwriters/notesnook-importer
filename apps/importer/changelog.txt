@@ -1,4 +1,10 @@
 
+v2.1.4
+
+1. Fix "Invalid string. Length must be a multiple of 4" error when importing from Evernote
+2. Treat all Evernote notes with source url in them as web clips (this is the default behavior on Evernote)
+3. Preserve created date when importing from Google Keep
+
 v2.1.3
 
 1. Use beta endpoint for OneNote API (might help in finding missing notes?)
