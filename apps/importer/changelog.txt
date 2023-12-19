@@ -1,4 +1,9 @@
 
+v2.2.0
+
+1. The importer will no longer abort on error but continue until all notes have been processed. The errored notes will be listed.
+2. All importers now show a list of log messages for debugging purposes
+
 v2.1.4
 
 1. Fix "Invalid string. Length must be a multiple of 4" error when importing from Evernote
