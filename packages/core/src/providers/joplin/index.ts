@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import { ContentType, Note, Notebook } from "../../models/note";
 import { File } from "../../utils/file";
-import { IFileProvider, ProviderSettings } from "../provider";
+import { IFileProvider, ProviderMessage, ProviderSettings } from "../provider";
 import {
   NoteEntity,
   FolderEntity,
@@ -98,7 +98,7 @@ export class Joplin implements IFileProvider<JoplinData> {
     settings: ProviderSettings,
     files: File[],
     data?: JoplinData
-  ) {
+  ): AsyncGenerator<ProviderMessage, void, unknown> {
     if (!data) return;
     const note = data.notes.find(
       (note) => file.nameWithoutExtension === note.id
@@ -139,7 +139,7 @@ export class Joplin implements IFileProvider<JoplinData> {
         type: ContentType.HTML
       }
     };
-    yield _note;
+    yield { type: "note", note: _note };
   }
 
   private resolveTags(

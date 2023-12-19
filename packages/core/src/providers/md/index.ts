@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { IFileProvider, ProviderSettings } from "../provider";
+import { IFileProvider, ProviderMessage, ProviderSettings } from "../provider";
 import { File } from "../../utils/file";
 import { markdowntoHTML } from "../../utils/to-html";
 import { HTML } from "../html";
@@ -36,7 +36,11 @@ export class Markdown implements IFileProvider {
     return this.supportedExtensions.includes(file.extension);
   }
 
-  async *process(file: File, settings: ProviderSettings, files: File[]) {
+  async *process(
+    file: File,
+    settings: ProviderSettings,
+    files: File[]
+  ): AsyncGenerator<ProviderMessage, void, unknown> {
     const text = await file.text();
     const { content, frontmatter } = parseFrontmatter(text);
     const html = markdowntoHTML(content);
@@ -62,7 +66,7 @@ export class Markdown implements IFileProvider {
       );
       note.color = frontmatter.color;
     }
-    yield note;
+    yield { type: "note", note };
   }
 }
 

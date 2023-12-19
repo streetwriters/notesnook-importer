@@ -32,9 +32,13 @@ interface IBaseProvider<T extends ProviderType> {
 }
 
 export type ProviderLogMessage = { type: "log"; text: string; date: number };
+export type ProviderErrorMessage = { type: "error"; error: Error };
 export type ProviderNoteMessage = { type: "note"; note: Note };
 
-export type ProviderMessage = ProviderLogMessage | ProviderNoteMessage;
+export type ProviderMessage =
+  | ProviderLogMessage
+  | ProviderNoteMessage
+  | ProviderErrorMessage;
 
 export interface IFileProvider<TPreProcessResult = unknown>
   extends IBaseProvider<"file"> {
@@ -47,7 +51,7 @@ export interface IFileProvider<TPreProcessResult = unknown>
     settings: ProviderSettings,
     files: File[],
     data?: TPreProcessResult
-  ): AsyncGenerator<Note, void, unknown>;
+  ): AsyncGenerator<ProviderMessage, void, unknown>;
 }
 
 export interface INetworkProvider<TSettings extends ProviderSettings>
@@ -69,3 +73,20 @@ export type ProviderResult = {
   errors: Error[];
   notes: Note[];
 };
+
+export function log(message: string): ProviderLogMessage {
+  return { type: "log", date: Date.now(), text: message };
+}
+
+export function error(
+  error: unknown,
+  ref?: { file?: File; note?: Note }
+): ProviderErrorMessage {
+  let message = error instanceof Error ? error.message : JSON.stringify(error);
+  if (ref?.note) message += ` (note: ${ref?.note.title})`;
+  if (ref?.file) message += ` (file: ${ref?.file.name})`;
+  return {
+    type: "error",
+    error: new Error(message)
+  };
+}

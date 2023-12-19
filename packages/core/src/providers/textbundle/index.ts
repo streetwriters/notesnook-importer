@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { IFileProvider, ProviderSettings } from "../provider";
+import { IFileProvider, ProviderMessage, ProviderSettings } from "../provider";
 import { File } from "../../utils/file";
 import { Markdown } from "../md";
 import { HTML } from "../html";
@@ -47,7 +47,11 @@ export class TextBundle implements IFileProvider {
     return false;
   }
 
-  async *process(file: File, settings: ProviderSettings, files: File[]) {
+  async *process(
+    file: File,
+    settings: ProviderSettings,
+    files: File[]
+  ): AsyncGenerator<ProviderMessage, void, unknown> {
     for (const provider of this.supportedProviders) {
       if (!provider.filter(file)) continue;
       yield* provider.process(file, settings, files);

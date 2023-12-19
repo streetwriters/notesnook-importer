@@ -61,6 +61,7 @@ function App() {
         >
           <ProviderSelector
             onProviderChanged={(provider) => {
+              setInstanceKey(`${Math.random()}`);
               setSelectedProvider(provider);
               setTransformResult(undefined);
             }}

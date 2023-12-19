@@ -19,7 +19,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import { ContentType, Note } from "../../models/note";
 import { SimplenoteNote } from "./types";
-import { IFileProvider, ProviderSettings } from "../provider";
+import {
+  IFileProvider,
+  ProviderErrorMessage,
+  ProviderMessage,
+  ProviderSettings,
+  error
+} from "../provider";
 import { File } from "../../utils/file";
 import { markdowntoHTML, textToHTML } from "../../utils/to-html";
 import { JSONParser } from "@streamparser/json";
@@ -37,13 +43,18 @@ export class Simplenote implements IFileProvider {
     return [".json"].includes(file.extension);
   }
 
-  async *process(file: File, _settings: ProviderSettings, _files: File[]) {
+  async *process(
+    file: File,
+    _settings: ProviderSettings,
+    _files: File[]
+  ): AsyncGenerator<ProviderMessage, void, unknown> {
     const parser = new JSONParser({
       stringBufferSize: undefined,
       paths: ["$.activeNotes.*"]
     });
 
     const notes: Note[] = [];
+    const errors: ProviderErrorMessage[] = [];
     parser.onValue = (value, key, parent, stack) => {
       if (stack.length === 1) return;
       // By default, the parser keeps all the child elements in memory until the root parent is emitted.
@@ -52,9 +63,15 @@ export class Simplenote implements IFileProvider {
 
       const activeNote = value as SimplenoteNote;
       if (!activeNote.creationDate || !activeNote.lastModified) {
-        throw new Error(
-          `Invalid note. creationDate & lastModified properties are required. (File: ${file.name})`
+        errors.push(
+          error(
+            new Error(
+              `Invalid note. creationDate & lastModified properties are required.`
+            ),
+            { file }
+          )
         );
+        return;
       }
 
       const lines = (activeNote.content || "").split(/\r\n|\n/);
@@ -84,9 +101,15 @@ export class Simplenote implements IFileProvider {
 
       parser.write(value);
 
-      for (const note of notes) {
-        yield note;
+      for (const error of errors) {
+        yield error;
       }
+
+      for (const note of notes) {
+        yield { type: "note", note };
+      }
+
+      errors.length = 0;
       notes.length = 0;
     }
   }

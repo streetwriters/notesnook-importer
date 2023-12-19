@@ -19,7 +19,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import { ContentType, Note, Notebook } from "../../models/note";
 import { File } from "../../utils/file";
-import { IFileProvider, ProviderSettings } from "../provider";
+import {
+  IFileProvider,
+  ProviderMessage,
+  ProviderSettings,
+  error
+} from "../provider";
 import { path } from "../../utils/path";
 import { ZNotebook } from "./types";
 import { Znel } from "@notesnook-importer/znel";
@@ -38,7 +43,11 @@ export class ZohoNotebook implements IFileProvider {
     return [".znel"].includes(file.extension);
   }
 
-  async *process(file: File, settings: ProviderSettings, files: File[]) {
+  async *process(
+    file: File,
+    settings: ProviderSettings,
+    files: File[]
+  ): AsyncGenerator<ProviderMessage, void, unknown> {
     const notebook = await this.getNotebook(file, files);
     const znel = new Znel(await file.text());
     const note: Note = {
@@ -58,10 +67,10 @@ export class ZohoNotebook implements IFileProvider {
         type: ContentType.HTML
       };
     } catch (e) {
-      console.error(e);
+      yield error(e, { note });
     }
 
-    yield note;
+    yield { type: "note", note };
   }
 
   private async getNotebook(

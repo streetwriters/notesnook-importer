@@ -19,7 +19,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import { ContentType, Note } from "../../models/note";
 import { File } from "../../utils/file";
-import { IFileProvider, ProviderSettings } from "../provider";
+import {
+  IFileProvider,
+  ProviderMessage,
+  ProviderSettings,
+  error
+} from "../provider";
 import { parseDocument } from "htmlparser2";
 import {
   textContent,
@@ -50,9 +55,20 @@ export class HTML implements IFileProvider {
     return this.supportedExtensions.includes(file.extension);
   }
 
-  async *process(file: File, settings: ProviderSettings, files: File[]) {
+  async *process(
+    file: File,
+    settings: ProviderSettings,
+    files: File[]
+  ): AsyncGenerator<ProviderMessage, void, unknown> {
     const data = await file.text();
-    yield await HTML.processHTML(file, files, settings.hasher, data);
+    try {
+      yield {
+        type: "note",
+        note: await HTML.processHTML(file, files, settings.hasher, data)
+      };
+    } catch (e) {
+      yield error(e, { file });
+    }
   }
 
   static async processHTML(

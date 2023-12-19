@@ -20,11 +20,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import {
   IFileProvider,
   INetworkProvider,
-  ProviderSettings
+  ProviderMessage,
+  ProviderSettings,
+  log
 } from "./src/providers/provider";
 import { unpack } from "./src/utils/archiver";
 import { IFile } from "./src/utils/file";
 
+type Counter = { count: number };
 export async function transform<TSettings extends ProviderSettings>(
   provider: INetworkProvider<TSettings>,
   settings: TSettings
@@ -54,15 +57,10 @@ async function transformNetwork<TSettings extends ProviderSettings>(
   settings: TSettings
 ): Promise<Error[]> {
   const errors: Error[] = [];
-  let count = 0;
+  const counter: Counter = { count: 0 };
   try {
     for await (const message of provider.process(settings)) {
-      if (message.type === "log" && settings.log) {
-        settings.log(message);
-      } else if (message.type === "note") {
-        await settings.storage.write(message.note);
-        settings.reporter(++count);
-      }
+      await processProviderMessage(message, settings, counter, errors);
     }
   } catch (e) {
     console.error(e);
@@ -81,20 +79,32 @@ async function transformFiles(
   settings: ProviderSettings
 ): Promise<Error[]> {
   const errors: Error[] = [];
+  const counter: Counter = { count: 0 };
+
+  settings.log?.(log(`Unpacking ${files.length} file(s)...`));
+
   const allFiles = await unpack(files);
+
+  settings.log?.(log(`Unpacked into ${allFiles.length}...`));
+
   const preprocessData = await provider.preprocess?.(allFiles);
-  let count = 0;
+
+  settings.log?.(log(`Preprocessing complete...`));
+
   for (const file of allFiles) {
-    if (!provider.filter(file)) continue;
+    if (!provider.filter(file)) {
+      settings.log?.(log(`Skipping ${file.name}...`));
+      continue;
+    }
+    settings.log?.(log(`Processing ${file.name}...`));
     try {
-      for await (const note of provider.process(
+      for await (const message of provider.process(
         file,
         settings,
         allFiles,
         preprocessData
       )) {
-        await settings.storage.write(note);
-        settings.reporter(++count);
+        await processProviderMessage(message, settings, counter, errors);
       }
     } catch (e) {
       console.error(e);
@@ -106,6 +116,26 @@ async function transformFiles(
     }
   }
   return errors;
+}
+
+async function processProviderMessage(
+  message: ProviderMessage,
+  settings: ProviderSettings,
+  counter: Counter,
+  errors: Error[]
+) {
+  switch (message.type) {
+    case "error":
+      errors.push(message.error);
+      break;
+    case "log":
+      settings.log?.(message);
+      break;
+    case "note":
+      await settings.storage.write(message.note);
+      settings.reporter(++counter.count);
+      break;
+  }
 }
 
 export * from "./src/utils/archiver";

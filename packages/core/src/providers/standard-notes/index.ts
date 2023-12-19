@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import { Content, ContentType, Note } from "../../models/note";
 import { File } from "../../utils/file";
-import { IFileProvider, ProviderSettings } from "../provider";
+import { IFileProvider, ProviderMessage, ProviderSettings } from "../provider";
 import {
   SNNote,
   SNComponent,
@@ -62,7 +62,11 @@ export class StandardNotes implements IFileProvider {
     return [".txt"].includes(file.extension);
   }
 
-  async *process(file: File, _settings: ProviderSettings, _files: File[]) {
+  async *process(
+    file: File,
+    _settings: ProviderSettings,
+    _files: File[]
+  ): AsyncGenerator<ProviderMessage, void, unknown> {
     if (file.name !== "Standard Notes Backup and Import File.txt") return;
 
     const data: SNBackup = <SNBackup>JSON.parse(await file.text());
@@ -104,7 +108,7 @@ export class StandardNotes implements IFileProvider {
         content
       };
 
-      yield note;
+      yield { type: "note", note };
     }
   }
 

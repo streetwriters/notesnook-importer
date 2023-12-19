@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import { ContentType, Note } from "../../models/note";
 import { KeepNote, listToHTML } from "./types";
-import { IFileProvider, ProviderSettings } from "../provider";
+import { IFileProvider, ProviderMessage, ProviderSettings } from "../provider";
 import { File } from "../../utils/file";
 import { Attachment, attachmentToHTML } from "../../models/attachment";
 import { markdowntoHTML } from "../../utils/to-html";
@@ -52,7 +52,11 @@ export class GoogleKeep implements IFileProvider {
     return [".json"].includes(file.extension);
   }
 
-  async *process(file: File, settings: ProviderSettings, files: File[]) {
+  async *process(
+    file: File,
+    settings: ProviderSettings,
+    files: File[]
+  ): AsyncGenerator<ProviderMessage, void, unknown> {
     const data = await file.text();
     const keepNote = <KeepNote>JSON.parse(data);
 
@@ -98,7 +102,7 @@ export class GoogleKeep implements IFileProvider {
         note.attachments.push(attachment);
       }
     }
-    yield note;
+    yield { type: "note", note };
   }
 
   private getContent(keepNote: KeepNote): string {

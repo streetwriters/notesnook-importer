@@ -34,7 +34,7 @@ export function Accordion({
   isOpened = false,
   ...restProps
 }: PropsWithChildren<AccordionProps>) {
-  const [isContentHidden, setIsContentHidden] = useState<boolean>(isOpened);
+  const [isContentHidden, setIsContentHidden] = useState<boolean>(!isOpened);
   return (
     <Flex sx={{ flexDirection: "column", ...sx }} {...restProps}>
       <Flex

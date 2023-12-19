@@ -19,9 +19,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import {
   INetworkProvider,
-  ProviderLogMessage,
   ProviderMessage,
-  ProviderSettings
+  ProviderSettings,
+  log
 } from "../provider";
 import { OneNoteClient } from "@notesnook-importer/onenote";
 import { Content } from "@notesnook-importer/onenote";
@@ -172,8 +172,4 @@ export class OneNote implements INetworkProvider<OneNoteSettings> {
       );
     return parts;
   }
-}
-
-function log(message: string): ProviderLogMessage {
-  return { type: "log", date: Date.now(), text: message };
 }

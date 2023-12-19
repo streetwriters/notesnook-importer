@@ -18,7 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import { parse, processContent } from "@notesnook-importer/enex";
-import { IFileProvider, ProviderSettings } from "../provider";
+import {
+  IFileProvider,
+  ProviderMessage,
+  ProviderSettings,
+  error,
+  log
+} from "../provider";
 import { ContentType, Note, Notebook } from "../../models/note";
 import { ElementHandler } from "./element-handlers";
 import { File } from "../../utils/file";
@@ -36,7 +42,10 @@ export class Evernote implements IFileProvider {
     return this.supportedExtensions.includes(file.extension);
   }
 
-  async *process(file: File, settings: ProviderSettings) {
+  async *process(
+    file: File,
+    settings: ProviderSettings
+  ): AsyncGenerator<ProviderMessage, void, unknown> {
     const notebook: Notebook = {
       notebook: file.nameWithoutExtension
     };
@@ -45,6 +54,8 @@ export class Evernote implements IFileProvider {
       file.stream.pipeThrough(new TextDecoderStream())
     )) {
       for (const enNote of chunk) {
+        yield log(`Found ${enNote.title}...`);
+
         const note: Note = {
           title: enNote.title || "",
           tags: enNote.tags,
@@ -60,18 +71,22 @@ export class Evernote implements IFileProvider {
             settings.hasher
           );
 
-          const html = await processContent(
-            enNote.content,
-            elementHandler,
-            enNote
-          );
-          note.content = {
-            data: html.trim(),
-            type: ContentType.HTML
-          };
+          try {
+            const html = await processContent(
+              enNote.content,
+              elementHandler,
+              enNote
+            );
+            note.content = {
+              data: html.trim(),
+              type: ContentType.HTML
+            };
+          } catch (e) {
+            yield error(e, { note });
+          }
         }
 
-        yield note;
+        yield { type: "note", note };
       }
     }
   }

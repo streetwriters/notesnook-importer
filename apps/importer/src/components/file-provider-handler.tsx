@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import { Flex, Input, Text, Button } from "@theme-ui/components";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { StepContainer } from "./step-container";
 import { Accordion } from "./accordion";
@@ -54,6 +54,8 @@ export function FileProviderHandler(props: FileProviderHandlerProps) {
     done: 0,
     total: 0
   });
+  const [_, setCounter] = useState<number>(0);
+  const logs = useRef<string[]>([]);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     setFiles((files) => {
@@ -81,6 +83,26 @@ export function FileProviderHandler(props: FileProviderHandlerProps) {
           Found {progress.done} {progress.total ? `of ${progress.total}` : ""}{" "}
           notes
         </Text>
+        {logs.current.length > 0 && (
+          <Accordion title="Logs" isOpened>
+            <Text
+              as="pre"
+              variant="body"
+              sx={{
+                fontFamily: "monospace",
+                maxHeight: 250,
+                overflowY: "auto"
+              }}
+            >
+              {logs.current.map((c, index) => (
+                <>
+                  <span key={index.toString()}>{c}</span>
+                  <br />
+                </>
+              ))}
+            </Text>
+          </Accordion>
+        )}
       </StepContainer>
     );
   }
@@ -199,6 +221,14 @@ export function FileProviderHandler(props: FileProviderHandlerProps) {
                 clientType: "browser",
                 hasher: { type: "xxh64", hash: xxhash64 },
                 storage: new BrowserStorage(provider.name),
+                log: (message) => {
+                  logs.current.push(
+                    `[${new Date(message.date).toLocaleString()}] ${
+                      message.text
+                    }`
+                  );
+                  setCounter((s) => ++s);
+                },
                 reporter: (current, total) => {
                   setProgress({ done: current, total: total || 0 });
                   ++totalNotes;
