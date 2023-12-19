@@ -135,8 +135,8 @@ async function processClippedPage(
   if (
     !note ||
     !handler ||
-    !note.sourceURL ||
-    note.sourceApplication !== "webclipper.evernote"
+    // evernote notes with source-url tag are most probably webclips
+    !note.sourceURL
   )
     return;
 
