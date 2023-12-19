@@ -32,7 +32,7 @@ export class IMGDataurl extends BaseHandler {
     const dataurl = parseDataurl(src);
     if (!dataurl) return;
 
-    const data = toByteArray(dataurl.data);
+    const data = toByteArray(decodeURIComponent(dataurl.data));
     const dataHash = await this.hasher.hash(data);
     const attachment: Attachment = {
       data,

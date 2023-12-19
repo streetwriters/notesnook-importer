@@ -107,7 +107,9 @@ export async function* parse(enex: ReadableStream<string> | string) {
 
         if (state.resource) {
           if (name === "data") {
-            const data = toByteArray(state.text.replace(WHITESPACE_REGEX, ""));
+            const data = toByteArray(
+              decodeURIComponent(state.text).replace(WHITESPACE_REGEX, "")
+            );
             state.resource.data = data;
             state.resource.hash = SparkMD5.ArrayBuffer.hash(data);
           }
