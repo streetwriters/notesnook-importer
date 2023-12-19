@@ -56,10 +56,13 @@ export class GoogleKeep implements IFileProvider {
     const data = await file.text();
     const keepNote = <KeepNote>JSON.parse(data);
 
-    const dateEdited = this.usToMilliseconds(keepNote.userEditedTimestampUsec);
+    const dateEdited = this.usToMs(keepNote.userEditedTimestampUsec);
+    const dateCreated = keepNote.createdTimestampUsec
+      ? this.usToMs(keepNote.createdTimestampUsec)
+      : dateEdited;
     const note: Note = {
       title: keepNote.title || file.nameWithoutExtension,
-      dateCreated: dateEdited,
+      dateCreated: dateCreated,
       dateEdited,
       pinned: keepNote.isPinned,
       color: colorMap[keepNote.color?.toLowerCase() || "default"],
@@ -106,7 +109,7 @@ export class GoogleKeep implements IFileProvider {
       : "";
   }
 
-  private usToMilliseconds(us: number) {
+  private usToMs(us: number) {
     return us / 1000;
   }
 }

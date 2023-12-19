@@ -24,10 +24,12 @@ export interface KeepNote {
   isPinned?: boolean;
   isArchived?: boolean;
   textContent?: string;
+  textContentHtml?: string;
   listContent?: ListItem[];
   annotations?: Annotation[];
   title?: string;
   userEditedTimestampUsec: number;
+  createdTimestampUsec?: number;
   labels?: Label[];
 }
 
@@ -49,6 +51,7 @@ export interface Label {
 
 export interface ListItem {
   text: string;
+  textHtml?: string;
   isChecked: boolean;
 }
 
