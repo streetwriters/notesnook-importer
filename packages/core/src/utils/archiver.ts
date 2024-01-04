@@ -24,7 +24,7 @@ import { Tar, TarFile } from "./tar";
 import { IStorage } from "@notesnook-importer/storage";
 import { unzip } from "./unzip-stream";
 import { NoteStream } from "./note-stream";
-import { ZipStream } from "./zip-stream";
+import { createZipStream } from "./zip-stream";
 
 type Unpacker = (file: IFile) => IFile[] | Promise<IFile[]>;
 
@@ -66,7 +66,7 @@ export function pack(
   storage: IStorage<Note>,
   report: (done: number) => void = () => {}
 ) {
-  return new NoteStream(storage, report).pipeThrough(new ZipStream());
+  return new NoteStream(storage, report).pipeThrough(createZipStream());
 }
 
 async function untar(file: IFile): Promise<IFile[]> {
