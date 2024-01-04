@@ -27,7 +27,9 @@ export type ZipFile = { path: string; data: Uint8Array };
 export function createZipStream() {
   const written = new Set<string>();
   const ts = new TransformStream<Uint8Array, Uint8Array>();
-  const writer = new ZipWriter<Uint8Array>(ts.writable);
+  const writer = new ZipWriter<Uint8Array>(ts.writable, {
+    zip64: true
+  });
   const entryWriter = new WritableStream<ZipFile>({
     start() {},
     async write(chunk, c) {
@@ -44,7 +46,7 @@ export function createZipStream() {
       written.add(chunk.path);
     },
     async close() {
-      await writer.close(undefined, { zip64: true });
+      await writer.close();
       await ts.writable.close();
     },
     async abort(reason) {
