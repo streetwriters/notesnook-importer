@@ -1,4 +1,8 @@
 
+v2.2.1
+
+1. Improved support for reading/writing zip archives larger than 4GB
+
 v2.2.0
 
 1. The importer will no longer abort on error but continue until all notes have been processed. The errored notes will be listed.
