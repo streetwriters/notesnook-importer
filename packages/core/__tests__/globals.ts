@@ -20,11 +20,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import {
   ReadableStream,
   TransformStream,
-  TextDecoderStream
+  TextDecoderStream,
+  WritableStream
 } from "node:stream/web";
 import { Blob } from "buffer";
 
 (globalThis as any).ReadableStream = ReadableStream;
 (globalThis as any).TransformStream = TransformStream;
 (globalThis as any).TextDecoderStream = TextDecoderStream;
+(globalThis as any).WritableStream = WritableStream;
 (globalThis as any).Blob = Blob;
