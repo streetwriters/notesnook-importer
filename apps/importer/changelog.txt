@@ -1,4 +1,8 @@
 
+v2.2.2
+
+1. Fix issue where embedded HTML inside markdown was being ignored
+
 v2.2.1
 
 1. Improved support for reading/writing zip archives larger than 4GB
