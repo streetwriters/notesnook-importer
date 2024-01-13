@@ -39,12 +39,13 @@ export function markdowntoHTML(src: string) {
     .use(remarkHighlight)
     .use(removeComments)
     .use(convertFileEmbeds)
-    .use(remarkRehype)
+    .use(remarkRehype, { allowDangerousHtml: true })
     .use(escapeCode)
     .use(fixChecklistClasses)
     .use(liftLanguageToPreFromCode)
     .use(collapseMultilineParagraphs)
     .use(rehypeStringify, {
+      allowDangerousHtml: true,
       tightSelfClosing: true,
       closeSelfClosing: true,
       closeEmptyElements: true

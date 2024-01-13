@@ -35,8 +35,7 @@ import { markdowntoHTML } from "../../utils/to-html";
 import { parseDocument } from "htmlparser2";
 import { Document } from "domhandler";
 import { render } from "dom-serializer";
-import { selectAll } from "css-select";
-import { textContent, replaceElement } from "domutils";
+import { textContent, replaceElement, findAll, findOne } from "domutils";
 
 type JoplinData = {
   notes: NoteEntity[];
@@ -45,6 +44,8 @@ type JoplinData = {
   tags: TagEntity[];
   resources: ResourceEntity[];
 };
+
+const headingTags = ["h1", "h2", "h3", "h4", "h5", "h6"];
 
 export class Joplin implements IFileProvider<JoplinData> {
   public type = "file" as const;
@@ -114,7 +115,14 @@ export class Joplin implements IFileProvider<JoplinData> {
 
     const title =
       note.title ||
-      textContent(selectAll("h1,h2", document)[0]) ||
+      (() => {
+        const heading = findOne(
+          (e) => headingTags.includes(e.tagName.toLowerCase()),
+          document.childNodes,
+          false
+        );
+        return heading ? textContent(heading) : undefined;
+      })() ||
       "Untitled note";
     const attachments = await this.resolveResources(
       data.resources,
@@ -163,15 +171,21 @@ export class Joplin implements IFileProvider<JoplinData> {
     hasher: IHasher
   ) {
     const attachments: Attachment[] = [];
+    const elements = Object.fromEntries(
+      findAll(
+        (elem) =>
+          (!!elem.attribs.src && elem.attribs.src.startsWith(":/")) ||
+          (!!elem.attribs.href && elem.attribs.href.startsWith(":/")),
+        document.childNodes
+      ).map((e) => [e.attribs.src || e.attribs.href, e])
+    );
+
     for (const resource of resources) {
       if (!resource.id) continue;
-      const element = selectAll(
-        `[src=":/${resource.id}"],[href=":/${resource.id}"]`,
-        document
-      )[0];
+      const element = elements[`:/${resource.id}`];
       if (!element) continue;
       const resourceFile = files.find((f) =>
-        f.path?.includes(`resources/${resource.id!}`)
+        f.path?.includes(`resources/${resource.id}`)
       );
       if (!resourceFile) continue;
 
