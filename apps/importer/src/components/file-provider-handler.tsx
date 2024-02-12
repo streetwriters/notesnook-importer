@@ -109,7 +109,7 @@ export function FileProviderHandler(props: FileProviderHandlerProps) {
 
   return (
     <StepContainer sx={{ flexDirection: "column", alignItems: "stretch" }}>
-      <Text variant="title">Select {provider?.name} files</Text>
+      <Text variant="title">Select {provider.name} files</Text>
       <Text variant="body" sx={{ color: "fontTertiary", mt: [2, 0] }}>
         Check out our step-by-step guide on{" "}
         <a href={provider.helpLink} target="_blank" rel="noreferrer">
@@ -212,6 +212,22 @@ export function FileProviderHandler(props: FileProviderHandlerProps) {
             {bytesToSize(files.reduce((prev, file) => prev + file.size, 0))} of
             free space before proceeding.
           </Text>
+          {provider.requiresNetwork ? (
+            <Text
+              variant="body"
+              sx={{
+                bg: "errorBg",
+                color: "error",
+                mt: 2,
+                borderRadius: 5,
+                p: 1
+              }}
+            >
+              Please make sure you have good Internet access before proceeding.
+              The importer may send network requests in order to download media
+              resources such as images, files, and other attachments.
+            </Text>
+          ) : null}
           <Button
             sx={{ alignSelf: "center", mt: 2, px: 4 }}
             onClick={async () => {
