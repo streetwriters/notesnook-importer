@@ -1,4 +1,9 @@
 
+v2.3.0
+
+1. Add Skiff Pages importer
+2. Add file type detection for attachments & images. 
+
 v2.2.2
 
 1. Fix issue where embedded HTML inside markdown was being ignored
