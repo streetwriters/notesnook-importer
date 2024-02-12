@@ -29,6 +29,7 @@ import { Joplin } from "./joplin";
 import { TextBundle } from "./textbundle";
 import { Text } from "./txt";
 import { Obsidian } from "./dummies/obsidian";
+import { SkiffPages } from "./skiff-pages";
 
 const providerMap = {
   evernote: Evernote,
@@ -42,6 +43,7 @@ const providerMap = {
   zohonotebook: ZohoNotebook,
   joplin: Joplin,
   textbundle: TextBundle,
+  skiffpages: SkiffPages,
 
   // Dummies
   obsidian: Obsidian

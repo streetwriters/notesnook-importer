@@ -42,6 +42,7 @@ export type ProviderMessage =
 
 export interface IFileProvider<TPreProcessResult = unknown>
   extends IBaseProvider<"file"> {
+  requiresNetwork?: boolean;
   supportedExtensions: string[];
   examples?: string[];
   filter(file: File): boolean;

@@ -17,6 +17,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import { path } from "./path";
+
 /*jshint node:true*/
 
 /**
@@ -73,4 +75,11 @@ export function sanitizeFilename(
 ) {
   const replacement = (options && options.replacement) || "";
   return sanitize(input, replacement);
+}
+
+export function appendExtension(filename: string, ext?: string) {
+  if (!ext) return filename;
+  const extension = path.extname(filename);
+  if (extension) return filename;
+  return [filename, ext].join(".");
 }

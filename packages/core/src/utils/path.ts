@@ -228,4 +228,10 @@ function extname(path: string) {
     : "";
 }
 
-export const path = { extname, join, dirname, basename, normalize };
+export const path = {
+  extname,
+  join,
+  dirname,
+  basename,
+  normalize
+};

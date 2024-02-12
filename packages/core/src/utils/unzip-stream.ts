@@ -13,7 +13,6 @@ import { Deflate, Inflate } from "./fflate-shim";
 import {
   BlobReader,
   Entry,
-  TextWriter,
   Uint8ArrayWriter,
   ZipReader,
   configure
@@ -52,9 +51,7 @@ class ZipEntry extends Blob {
   }
 
   async text(): Promise<string> {
-    const writer = new TextWriter("utf-8");
-    await this.entry.getData?.(writer);
-    return await writer.getData();
+    return new TextDecoder().decode(await this.arrayBuffer());
   }
 
   get size() {

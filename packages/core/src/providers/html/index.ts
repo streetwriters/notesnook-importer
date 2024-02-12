@@ -36,10 +36,14 @@ import {
   getElementsByTagName
 } from "domutils";
 import { render } from "dom-serializer";
-import { Document } from "domhandler";
+import { Document, Element } from "domhandler";
 import { IHasher } from "../../utils/hasher";
 import { Attachment, attachmentToHTML } from "../../models";
 import { path } from "../../utils/path";
+import { appendExtension } from "../../utils/filename";
+import { detectFileType } from "../../utils/file-type";
+
+type ResourceHandler = (resource: Element) => Promise<File | undefined>;
 
 const RESOURCE_TAGS = ["img", "video", "audio", "a"];
 export class HTML implements IFileProvider {
@@ -75,7 +79,8 @@ export class HTML implements IFileProvider {
     file: File,
     files: File[],
     hasher: IHasher,
-    html: string
+    html: string,
+    processResource?: ResourceHandler
   ): Promise<Note> {
     const document = parseDocument(html);
 
@@ -100,7 +105,8 @@ export class HTML implements IFileProvider {
       document,
       file,
       files,
-      hasher
+      hasher,
+      processResource
     );
 
     const note: Note = {
@@ -157,7 +163,8 @@ export class HTML implements IFileProvider {
     document: Document,
     file: File,
     files: File[],
-    hasher: IHasher
+    hasher: IHasher,
+    processResource?: ResourceHandler
   ) {
     const resources = findAll(
       (elem) => RESOURCE_TAGS.includes(elem.tagName.toLowerCase()),
@@ -166,33 +173,30 @@ export class HTML implements IFileProvider {
 
     const attachments: Attachment[] = [];
     for (const resource of resources) {
-      const src =
-        getAttributeValue(resource, "src") ||
-        getAttributeValue(resource, "href");
-      const fullPath =
-        src &&
-        file?.path &&
-        decodeURIComponent(path.join(path.dirname(file.path), src));
-      if (!fullPath) continue;
-
-      const resourceFile = files.find((file) => file.path === fullPath);
+      const resourceFile =
+        (await processResource?.(resource)?.catch(() => undefined)) ||
+        (await defaultResourceHandler(resource, file, files));
       if (!resourceFile) continue;
 
       const data = await resourceFile.bytes();
       if (!data) continue;
 
       const dataHash = await hasher.hash(data);
+      const mimeType = detectFileType(data);
+      const filename =
+        resource.attribs.title ||
+        resource.attribs.filename ||
+        resourceFile.name ||
+        dataHash;
+
       const attachment: Attachment = {
         data,
         size: data.byteLength,
         hash: dataHash,
-        filename:
-          resource.attribs.title ||
-          resource.attribs.filename ||
-          resourceFile.name ||
-          dataHash,
+        filename: appendExtension(filename, mimeType?.ext),
         hashType: hasher.type,
         mime:
+          mimeType?.mime ||
           resource.attribs.mime ||
           EXTENSION_TO_MIMETYPE[resourceFile.extension] ||
           `application/octet-stream`
@@ -203,6 +207,22 @@ export class HTML implements IFileProvider {
     }
     return attachments;
   }
+}
+
+async function defaultResourceHandler(
+  resource: Element,
+  file: File,
+  files: File[]
+) {
+  const src =
+    getAttributeValue(resource, "src") || getAttributeValue(resource, "href");
+  const fullPath =
+    src &&
+    file?.path &&
+    decodeURIComponent(path.join(path.dirname(file.path), src));
+  if (!fullPath) return;
+
+  return files.find((file) => file.path === fullPath);
 }
 
 const EXTENSION_TO_MIMETYPE: Record<string, string> = {

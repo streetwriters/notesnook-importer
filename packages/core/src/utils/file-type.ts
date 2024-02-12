@@ -17,14 +17,13 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-export * from "./evernote";
-export * from "./html";
-export * from "./joplin";
-export * from "./keep";
-export * from "./md";
-export * from "./onenote";
-export * from "./simplenote";
-export * from "./standard-notes";
-export * from "./zoho-notebook";
-export * from "./textbundle";
-export * from "./skiff-pages";
+import filetypeinfo from "magic-bytes.js";
+
+export function detectFileType(data: Uint8Array) {
+  const type = filetypeinfo(data).at(0);
+  if (!type) return;
+  return {
+    ext: type.extension,
+    mime: type.mime
+  };
+}

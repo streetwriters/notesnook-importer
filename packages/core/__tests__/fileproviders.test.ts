@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import "./globals";
-import { test } from "vitest";
+import { test, vi } from "vitest";
 import { transform, Note, pack } from "../index";
 import {
   getFiles,
@@ -27,17 +27,33 @@ import {
   matchNotesSnapshot
 } from "./utils";
 import { ProviderFactory } from "../src/providers/provider-factory";
-// import { unzipSync } from "fflate";
 import { ProviderSettings } from "../src/providers/provider";
 import { MemoryStorage } from "@notesnook-importer/storage/dist/memory";
 import { unzip } from "../src/utils/unzip-stream";
 import { toBlob } from "../src/utils/stream";
+import createFetchMock from "vitest-fetch-mock";
+import { existsSync, readFileSync } from "fs";
+import path from "path";
+
+const fetchMocker = createFetchMock(vi).doMock((req) => {
+  const filePath = path.join(
+    __dirname,
+    "__mock_responses__",
+    path.basename(new URL(req.url).pathname)
+  );
+  if (!existsSync(filePath)) throw new Error(`File not found for ${req.url}.`);
+  return {
+    body: readFileSync(filePath) as unknown as string,
+    status: 200
+  };
+});
+fetchMocker.enableMocks();
 
 for (const providerName of ProviderFactory.getAvailableProviders()) {
   const provider = ProviderFactory.getProvider(providerName);
   if (provider.type === "network") continue;
 
-  test(`transform ${providerName} files to notesnook importer compatible format`, async (t) => {
+  test(`transform ${providerName} files to notesnook importer compatible format`, async () => {
     const files = getFiles(providerName);
     if (files.length <= 0) return;
 
