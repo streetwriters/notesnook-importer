@@ -20,8 +20,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import { Attachment, attachmentToHTML } from "../../../models/attachment";
 import { BaseHandler } from "./base";
 import { parseAttributeValue } from "../../../utils/dom-utils";
-import { toByteArray } from "base64-js";
 import { Element } from "domhandler";
+import { detectFileType } from "../../../utils/file-type";
 
 export class AttachmentHandler extends BaseHandler {
   async process(element: Element): Promise<string | undefined> {
@@ -35,7 +35,7 @@ export class AttachmentHandler extends BaseHandler {
     ]);
     const name = getAttributeValue(element, ["data-attachment"]);
 
-    const data = toByteArray(base64data);
+    const data = Buffer.from(base64data, "base64");
     const dataHash = await this.hasher.hash(data);
     const attachment: Attachment = {
       data,
@@ -43,7 +43,7 @@ export class AttachmentHandler extends BaseHandler {
       hash: dataHash,
       filename: name ?? dataHash,
       hashType: this.hasher.type,
-      mime: type ?? "application/octet-stream",
+      mime: type || detectFileType(data)?.mime || "application/octet-stream",
       width: parseAttributeValue(element.attribs.width, "number"),
       height: parseAttributeValue(element.attribs.height, "number")
     };

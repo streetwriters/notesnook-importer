@@ -22,6 +22,7 @@ import { BaseHandler } from "./base";
 import { Element } from "domhandler";
 import { parseAttributeValue } from "../../../utils/dom-utils";
 import { getAttributeValue } from "domutils";
+import { detectFileType } from "../../../utils/file-type";
 
 export class ENMedia extends BaseHandler {
   async process(element: Element): Promise<string | undefined> {
@@ -40,7 +41,10 @@ export class ENMedia extends BaseHandler {
       size: resource.data.length,
       hash: dataHash,
       hashType: this.hasher.type,
-      mime: resource.mime || "application/octet-stream",
+      mime:
+        resource.mime ||
+        detectFileType(resource.data)?.mime ||
+        "application/octet-stream",
       width: parseAttributeValue(getAttributeValue(element, "width"), "number"),
       height: parseAttributeValue(
         getAttributeValue(element, "height"),

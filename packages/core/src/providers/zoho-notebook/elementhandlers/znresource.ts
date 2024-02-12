@@ -22,6 +22,7 @@ import { BaseHandler } from "./base";
 import { parseAttributeValue } from "../../../utils/dom-utils";
 import { Element } from "domhandler";
 import { getAttributeValue } from "domutils";
+import { detectFileType } from "../../../utils/file-type";
 
 export class ZNResource extends BaseHandler {
   async process(element: Element): Promise<string | undefined> {
@@ -35,7 +36,10 @@ export class ZNResource extends BaseHandler {
     if (!data) return;
 
     const hash = await this.hasher.hash(data);
-    const type = getAttributeValue(element, "type");
+    const mimeType =
+      getAttributeValue(element, "type") ||
+      detectFileType(data)?.mime ||
+      "application/octet-stream";
 
     const attachment: Attachment = {
       data,
@@ -43,7 +47,7 @@ export class ZNResource extends BaseHandler {
       size: data.length,
       hash,
       hashType: this.hasher.type,
-      mime: type || "application/octet-stream",
+      mime: mimeType,
       width: parseAttributeValue(getAttributeValue(element, "width"), "number"),
       height: parseAttributeValue(
         getAttributeValue(element, "height"),

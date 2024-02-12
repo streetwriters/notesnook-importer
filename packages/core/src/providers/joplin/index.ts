@@ -36,6 +36,7 @@ import { parseDocument } from "htmlparser2";
 import { Document } from "domhandler";
 import { render } from "dom-serializer";
 import { textContent, replaceElement, findAll, findOne } from "domutils";
+import { detectFileType } from "../../utils/file-type";
 
 type JoplinData = {
   notes: NoteEntity[];
@@ -199,7 +200,10 @@ export class Joplin implements IFileProvider<JoplinData> {
         hash: dataHash,
         filename: resource.title || resource.filename || dataHash,
         hashType: hasher.type,
-        mime: resource.mime || "application/octet-stream"
+        mime:
+          resource.mime ||
+          detectFileType(data)?.mime ||
+          "application/octet-stream"
       };
       attachments.push(attachment);
       replaceElement(element, parseDocument(attachmentToHTML(attachment)));
