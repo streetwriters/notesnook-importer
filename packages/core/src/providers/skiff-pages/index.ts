@@ -26,7 +26,6 @@ import {
   IFileProvider,
   ProviderMessage,
   ProviderSettings,
-  error,
   log
 } from "../provider";
 import { z } from "zod";
@@ -60,7 +59,9 @@ export class SkiffPages implements IFileProvider {
   ): AsyncGenerator<ProviderMessage, void, unknown> {
     const text = await file.text();
     const { content } = parseFrontmatter(text);
-    const html = markdowntoHTML(content);
+    const lines = content.split("\n");
+    const title = lines[0].startsWith("#") ? lines[0].slice(1) : undefined;
+    const html = markdowntoHTML(title ? lines.slice(1).join("\n") : content);
     const note = await HTML.processHTML(
       file,
       files,
@@ -114,6 +115,7 @@ export class SkiffPages implements IFileProvider {
         }
       }
     );
+    note.title = title || note.title;
 
     yield { type: "note", note };
   }
