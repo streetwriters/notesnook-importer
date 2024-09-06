@@ -15,8 +15,8 @@
     ],
     "notebooks": [
       {
-        "notebook": "Welcome! (Desktop)",
-        "topic": "All notes"
+        "title": "Welcome! (Desktop)",
+        "children": []
       }
     ],
     "content": {
@@ -32,8 +32,8 @@
     "attachments": [],
     "notebooks": [
       {
-        "notebook": "Welcome! (Desktop)",
-        "topic": "All notes"
+        "title": "Welcome! (Desktop)",
+        "children": []
       }
     ],
     "content": {
@@ -49,8 +49,8 @@
     "attachments": [],
     "notebooks": [
       {
-        "notebook": "Welcome! (Desktop)",
-        "topic": "All notes"
+        "title": "Welcome! (Desktop)",
+        "children": []
       }
     ],
     "content": {
@@ -74,8 +74,8 @@
     ],
     "notebooks": [
       {
-        "notebook": "Welcome! (Desktop)",
-        "topic": "All notes"
+        "title": "Welcome! (Desktop)",
+        "children": []
       }
     ],
     "content": {
@@ -110,8 +110,13 @@
     ],
     "notebooks": [
       {
-        "notebook": "Welcome! (Desktop)",
-        "topic": "helo"
+        "title": "Welcome! (Desktop)",
+        "children": [
+          {
+            "title": "helo",
+            "children": []
+          }
+        ]
       }
     ],
     "content": {
@@ -139,8 +144,8 @@
     ],
     "notebooks": [
       {
-        "notebook": "Welcome! (Desktop)",
-        "topic": "All notes"
+        "title": "Welcome! (Desktop)",
+        "children": []
       }
     ],
     "content": {

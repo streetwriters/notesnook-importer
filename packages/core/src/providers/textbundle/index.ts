@@ -54,7 +54,10 @@ export class TextBundle implements IFileProvider {
   ): AsyncGenerator<ProviderMessage, void, unknown> {
     for (const provider of this.supportedProviders) {
       if (!provider.filter(file)) continue;
-      yield* provider.process(file, settings, files);
+      for await (const message of provider.process(file, settings, files)) {
+        if (message.type === "note") message.note.notebooks = [];
+        yield message;
+      }
     }
   }
 }

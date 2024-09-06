@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import { Attachment } from "./attachment";
 
 export type Note = {
+  id?: string;
   title: string;
   dateCreated?: number;
   dateEdited?: number;
@@ -43,6 +44,6 @@ export enum ContentType {
 }
 
 export type Notebook = {
-  notebook: string;
-  topic?: string;
+  title: string;
+  children: Notebook[];
 };

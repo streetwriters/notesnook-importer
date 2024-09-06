@@ -92,7 +92,7 @@ export class ZohoNotebook implements IFileProvider {
     let notebook: Notebook | undefined;
     if (notebookFile) {
       const zohoNotebook: ZNotebook = JSON.parse(await notebookFile.text());
-      notebook = { notebook: zohoNotebook.name };
+      notebook = { title: zohoNotebook.name, children: [] };
     }
     return notebook;
   }

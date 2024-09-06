@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { ContentType, Note } from "../../models/note";
+import { ContentType, Note, Notebook } from "../../models/note";
 import { File } from "../../utils/file";
 import {
   IFileProvider,
@@ -109,11 +109,24 @@ export class HTML implements IFileProvider {
       processResource
     );
 
+    let rootNotebook: Notebook | undefined = undefined;
+    if (file.parent && file.path) {
+      const path = file.path.replace(file.name, "").split(/[\\/]/g).slice(1);
+      for (let i = path.length - 1; i >= 1; i--) {
+        if (!path[i]) continue;
+        rootNotebook = {
+          title: path[i],
+          children: rootNotebook ? [rootNotebook] : []
+        };
+      }
+    }
+
     const note: Note = {
       title: title,
       dateCreated: file.createdAt,
       dateEdited: file.modifiedAt,
       attachments: [...resources],
+      notebooks: rootNotebook ? [rootNotebook] : [],
       content: {
         type: ContentType.HTML,
         data: body ? render(body.childNodes) : render(document.childNodes)

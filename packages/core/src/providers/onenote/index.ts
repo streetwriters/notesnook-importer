@@ -141,23 +141,21 @@ export class OneNote implements INetworkProvider<OneNoteSettings> {
 
   private getNotebooks(section: OnenoteSection): Notebook[] {
     const notebooks: Notebook[] = [];
-    const topic = section?.displayName || undefined;
 
     if (section?.parentNotebook?.displayName) {
-      notebooks.push({
-        topic,
-        notebook: section.parentNotebook.displayName
-      });
-      if (section?.parentSectionGroup) {
-        const flattenedSectionGroupsTitle = this.getFlattenedSectionGroupsTitle(
-          section.parentSectionGroup
-        );
-        const notebookTitle = flattenedSectionGroupsTitle.reverse().join(">");
-        notebooks.push({
-          topic: notebookTitle,
-          notebook: section.parentNotebook.displayName
-        });
+      const parents = section?.parentSectionGroup
+        ? this.getFlattenedSectionGroupsTitle(section.parentSectionGroup)
+        : [];
+      if (section.displayName) parents.push(section.displayName);
+      parents.push(section.parentNotebook.displayName);
+      let rootNotebook: Notebook | undefined = undefined;
+      for (let i = parents.length - 1; i >= 0; i--) {
+        rootNotebook = {
+          title: parents[i],
+          children: rootNotebook ? [rootNotebook] : []
+        };
       }
+      if (rootNotebook) notebooks.push(rootNotebook);
     }
 
     return notebooks;

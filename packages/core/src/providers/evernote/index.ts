@@ -47,7 +47,8 @@ export class Evernote implements IFileProvider {
     settings: ProviderSettings
   ): AsyncGenerator<ProviderMessage, void, unknown> {
     const notebook: Notebook = {
-      notebook: file.nameWithoutExtension
+      title: file.nameWithoutExtension,
+      children: []
     };
 
     for await (const chunk of parse(

@@ -2,6 +2,7 @@
   {
     "title": "test",
     "attachments": [],
+    "notebooks": [],
     "content": {
       "type": "html",
       "data": "<img src=\"forkit.gif\" id=\"octocat\" alt>\n\n<!-- Feel free to change this text here -->\n<p>Fork me? Fork you, @octocat!</p>\n<p>Sean made a change</p>\n"

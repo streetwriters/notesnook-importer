@@ -214,7 +214,7 @@ export class Joplin implements IFileProvider<JoplinData> {
   private resolveFolders(
     folders: FolderEntity[],
     parentFolder: FolderEntity
-  ): Notebook | null {
+  ): Notebook | undefined {
     let folder: FolderEntity | undefined = parentFolder;
     const path: string[] = [parentFolder.title!];
     while (folder?.parent_id) {
@@ -222,11 +222,14 @@ export class Joplin implements IFileProvider<JoplinData> {
       if (!folder) break;
       path.push(folder.title!);
     }
-    const topMost = path.pop();
-    if (!topMost) return null;
-    return {
-      notebook: topMost,
-      topic: path.reverse().join(".") || "All notes"
-    };
+
+    let rootNotebook: Notebook | undefined = undefined;
+    for (let i = 0; i < path.length; i++) {
+      rootNotebook = {
+        title: path[i],
+        children: rootNotebook ? [rootNotebook] : []
+      };
+    }
+    return rootNotebook;
   }
 }
