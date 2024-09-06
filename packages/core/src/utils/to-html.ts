@@ -24,14 +24,20 @@ import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
 import { Plugin, Transformer } from "unified";
 import { visit } from "unist-util-visit";
-import type { Root as HastRoot } from "remark-rehype/node_modules/@types/hast";
+import type {
+  Root as HastRoot,
+  ElementContent
+} from "remark-rehype/node_modules/@types/hast";
 import type { Root } from "mdast";
 import { isElement } from "hast-util-is-element";
 import remarkMath from "remark-math";
 import remarkSubSuper from "remark-supersub";
 import { Data, Literal, Node, Parent } from "unist";
 
-export function markdowntoHTML(src: string) {
+export function markdowntoHTML(
+  src: string,
+  options: { allowDangerousHtml: boolean } = { allowDangerousHtml: true }
+) {
   const result = remark()
     .use(remarkGfm, { singleTilde: false })
     .use(remarkMath)
@@ -39,13 +45,13 @@ export function markdowntoHTML(src: string) {
     .use(remarkHighlight)
     .use(removeComments)
     .use(convertFileEmbeds)
-    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(remarkRehype, { allowDangerousHtml: options.allowDangerousHtml })
     .use(escapeCode)
     .use(fixChecklistClasses)
     .use(liftLanguageToPreFromCode)
     .use(collapseMultilineParagraphs)
     .use(rehypeStringify, {
-      allowDangerousHtml: true,
+      allowDangerousHtml: options.allowDangerousHtml,
       tightSelfClosing: true,
       closeSelfClosing: true,
       closeEmptyElements: true
@@ -207,11 +213,25 @@ const escapeCode: Plugin<[], HastRoot, HastRoot> = function () {
   return (tree: HastRoot) => {
     visit(tree, "element", (node) => {
       if (!isElement(node, "code")) return;
-      if (node.children[0]?.type === "text") {
-        node.children[0].value = encodeNonAsciiHTML(
-          node.children[0].value.trim()
-        ).replace(/[\r\n]/gm, "<br/>");
-      }
+      const children: ElementContent[] = [];
+      node.children.forEach((child) => {
+        if (child.type === "text") {
+          const lines = child.value.split(/\r\n|\n/gm);
+          lines.forEach((line, i) => {
+            children.push({
+              type: "text",
+              value: encodeNonAsciiHTML(line)
+            });
+            if (i !== lines.length - 1)
+              children.push({
+                type: "element",
+                children: [],
+                tagName: "br"
+              });
+          });
+        }
+      });
+      node.children = children;
     });
   };
 };
