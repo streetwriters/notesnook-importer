@@ -20,9 +20,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 export function randomBytes(size: number): Buffer {
   const crypto =
     globalThis.crypto ||
-    (typeof require === "function" ? require("node:crypto") : null);
+    (typeof require === "function" ? require("crypto") : null);
   if (!crypto) throw new Error("Crypto is not supported on this platform.");
+  // @ts-ignore
   if ("randomBytes" in crypto && typeof crypto.randomBytes === "function")
+    // @ts-ignore
     return crypto.randomBytes(size);
 
   if (!crypto.getRandomValues)

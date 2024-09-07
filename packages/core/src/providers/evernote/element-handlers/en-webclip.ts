@@ -58,7 +58,8 @@ export class ENWebClip extends BaseHandler {
         const result = await new ENMedia(
           this.note,
           this.enNote,
-          this.hasher
+          this.hasher,
+          this.ids
         ).process(enMedia);
         if (!result) return;
         return `${result}${clipFooter}`;
