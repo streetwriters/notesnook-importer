@@ -33,7 +33,7 @@ const invalidAttributes: string[] = ["lang", "dir", "accessKey", "tabIndex"];
  * This list includes attributes we want to further operate
  * on but which should otherwise be left alone.
  */
-const validAttributes: string[] = ["style", "src"];
+const validAttributes: string[] = ["style", "src", "href"];
 /**
  * HTML output from Evernote is relatively clean but there
  * are a lot of domain-specific inline styles. This list serves
@@ -66,7 +66,8 @@ const ELEMENT_TYPES = [
   "en-task-group",
   "en-crypt",
   "en-todo",
-  "en-webclip"
+  "en-webclip",
+  "en-internal-link"
 ];
 const cssSelector: string = [
   ...validAttributes.map((attr) => `[${attr}]`),
@@ -117,13 +118,9 @@ export async function processContent(
     for (const element of selectAll(cssSelector, noteElement)) {
       await processElement(element, ["img-dataurl", "en-media"], handler);
     }
-    return render(noteElement.childNodes, {
-      xmlMode: true
-    });
+    return render(noteElement.childNodes);
   } else {
-    return render(clippedElement.childNodes, {
-      xmlMode: true
-    });
+    return render(clippedElement.childNodes);
   }
 }
 
@@ -195,6 +192,10 @@ function findElementType(element: Element, passthrough = false): string | null {
         elementType = "img-dataurl";
         break;
       }
+      case "href": {
+        if (isEvernoteLink(value)) elementType = "en-internal-link";
+        break;
+      }
       case "style": {
         const styles = stylesToObject(value);
         for (const style in styles) {
@@ -215,6 +216,12 @@ function findElementType(element: Element, passthrough = false): string | null {
               elementType = "en-task-group";
               const taskGroupId = styles["--en-id"];
               if (taskGroupId) element.attribs["task-group-id"] = taskGroupId;
+              break;
+            }
+            case "--en-richlink": {
+              elementType = "en-internal-link";
+              const title = styles["--en-title"];
+              if (title) element.attribs["note-title"] = title;
               break;
             }
           }
@@ -279,4 +286,30 @@ function visit(
     if (!cb(child)) continue;
     if ("childNodes" in child) visit(child, cb);
   }
+}
+
+// Taken from: https://github.com/akosbalasko/yarle/blob/master/src/utils/turndown-rules/internal-links-rule.ts
+function isEvernoteLink(value: string): boolean {
+  let url;
+  try {
+    url = new URL(value);
+  } catch (e) {
+    return false;
+  }
+  // NOTE: URL automatically converts to lowercase
+  if (url.protocol === "evernote:") {
+    // Internal link format: evernote:///view/92167309/s714/00ba720b-e3f1-49fd-9b43-5d915a3bca8a/00ba720b-e3f1-49fd-9b43-5d915a3bca8a/
+    const pathSpl = url.pathname.split("/").filter(Boolean); // Split and removes empty strings
+    if (pathSpl[0] !== "view" || pathSpl.length < 4) return false;
+    return true;
+  } else if (
+    (url.protocol === "http:" || url.protocol === "https:") &&
+    url.host === "www.evernote.com"
+  ) {
+    // External link format: https://www.evernote.com/shard/s714/nl/92167309/00ba720b-e3f1-49fd-9b43-5d915a3bca8a/
+    const pathSpl = url.pathname.split("/").filter(Boolean); // Removes empty strings
+    if (pathSpl[0] !== "shard" || pathSpl.length < 5) return false;
+    return true;
+  }
+  return false;
 }
