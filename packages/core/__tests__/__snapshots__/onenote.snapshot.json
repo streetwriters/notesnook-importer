@@ -6,8 +6,13 @@
     "tags": [],
     "notebooks": [
       {
-        "topic": "designs",
-        "notebook": "Abdullah Atta's Notebook"
+        "title": "Abdullah Atta's Notebook",
+        "children": [
+          {
+            "title": "designs",
+            "children": []
+          }
+        ]
       }
     ],
     "attachments": [],
@@ -23,8 +28,13 @@
     "tags": [],
     "notebooks": [
       {
-        "topic": "designs",
-        "notebook": "Abdullah Atta's Notebook"
+        "title": "Abdullah Atta's Notebook",
+        "children": [
+          {
+            "title": "designs",
+            "children": []
+          }
+        ]
       }
     ],
     "attachments": [],
@@ -40,8 +50,13 @@
     "tags": [],
     "notebooks": [
       {
-        "topic": "designs",
-        "notebook": "Abdullah Atta's Notebook"
+        "title": "Abdullah Atta's Notebook",
+        "children": [
+          {
+            "title": "designs",
+            "children": []
+          }
+        ]
       }
     ],
     "attachments": [],
@@ -57,8 +72,13 @@
     "tags": [],
     "notebooks": [
       {
-        "topic": "designs",
-        "notebook": "Abdullah Atta's Notebook"
+        "title": "Abdullah Atta's Notebook",
+        "children": [
+          {
+            "title": "designs",
+            "children": []
+          }
+        ]
       }
     ],
     "attachments": [],
@@ -74,8 +94,13 @@
     "tags": [],
     "notebooks": [
       {
-        "topic": "Gone",
-        "notebook": "Abdullah Atta's Notebook"
+        "title": "Abdullah Atta's Notebook",
+        "children": [
+          {
+            "title": "Gone",
+            "children": []
+          }
+        ]
       }
     ],
     "attachments": [
@@ -101,8 +126,13 @@
     "tags": [],
     "notebooks": [
       {
-        "topic": "Quick Notes",
-        "notebook": "Abdullah Atta's Notebook"
+        "title": "Abdullah Atta's Notebook",
+        "children": [
+          {
+            "title": "Quick Notes",
+            "children": []
+          }
+        ]
       }
     ],
     "attachments": [],
@@ -118,8 +148,13 @@
     "tags": [],
     "notebooks": [
       {
-        "topic": "Quick Notes",
-        "notebook": "Abdullah Atta's Notebook"
+        "title": "Abdullah Atta's Notebook",
+        "children": [
+          {
+            "title": "Quick Notes",
+            "children": []
+          }
+        ]
       }
     ],
     "attachments": [],
@@ -135,8 +170,13 @@
     "tags": [],
     "notebooks": [
       {
-        "topic": "Quick Notes",
-        "notebook": "Abdullah Atta's Notebook"
+        "title": "Abdullah Atta's Notebook",
+        "children": [
+          {
+            "title": "Quick Notes",
+            "children": []
+          }
+        ]
       }
     ],
     "attachments": [],
@@ -152,8 +192,13 @@
     "tags": [],
     "notebooks": [
       {
-        "topic": "Quick Notes",
-        "notebook": "My notebook"
+        "title": "My notebook",
+        "children": [
+          {
+            "title": "Quick Notes",
+            "children": []
+          }
+        ]
       }
     ],
     "attachments": [],
@@ -169,8 +214,13 @@
     "tags": [],
     "notebooks": [
       {
-        "topic": "AHAHA",
-        "notebook": "TestNotebook"
+        "title": "TestNotebook",
+        "children": [
+          {
+            "title": "AHAHA",
+            "children": []
+          }
+        ]
       }
     ],
     "attachments": [],
@@ -186,8 +236,13 @@
     "tags": [],
     "notebooks": [
       {
-        "topic": "New Section",
-        "notebook": "TestNotebook"
+        "title": "TestNotebook",
+        "children": [
+          {
+            "title": "New Section",
+            "children": []
+          }
+        ]
       }
     ],
     "attachments": [],
@@ -203,8 +258,13 @@
     "tags": [],
     "notebooks": [
       {
-        "topic": "Section1",
-        "notebook": "TestNotebook"
+        "title": "TestNotebook",
+        "children": [
+          {
+            "title": "Section1",
+            "children": []
+          }
+        ]
       }
     ],
     "attachments": [],
