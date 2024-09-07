@@ -11,10 +11,10 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
-    "@notesnook-importer/enex": "^1.7.0",
-    "@notesnook-importer/onenote": "^1.7.0",
-    "@notesnook-importer/storage": "^1.7.0",
-    "@notesnook-importer/znel": "^1.7.0",
+    "@notesnook-importer/enex": "file:../enex",
+    "@notesnook-importer/onenote": "file:../onenote",
+    "@notesnook-importer/storage": "file:../storage",
+    "@notesnook-importer/znel": "file:../znel",
     "@skiff-org/skiff-crypto": "^1.0.3",
     "@stablelib/chacha20poly1305": "^1.0.1",
     "@standardnotes/features": "1.58.0",
