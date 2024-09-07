@@ -31,7 +31,9 @@ test("enex should be parsed correctly", async () => {
     .filter((p) => p.endsWith(".enex"))
     .crawl(dataDirectoryPath)
     .withPromise();
-  for (const filePath of <string[]>enexFiles) {
+  for (const filePath of (enexFiles as string[]).sort((a, b) =>
+    a.localeCompare(b)
+  )) {
     const enexFile = fs.readFileSync(filePath, "utf-8");
     const notes: Note[] = [];
     for await (const note of parse(enexFile)) notes.push(...note);
