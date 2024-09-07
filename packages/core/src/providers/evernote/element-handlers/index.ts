@@ -27,6 +27,7 @@ import { IHasher } from "../../../utils/hasher";
 import { ENTodo } from "./en-todo";
 import { ENCodeblock } from "./en-codeblock";
 import { ENWebClip } from "./en-webclip";
+import { ENInternalLink } from "./en-internal-link";
 
 const elementMap = {
   "en-media": ENMedia,
@@ -34,7 +35,8 @@ const elementMap = {
   "en-task-group": ENTaskGroup,
   "en-todo": ENTodo,
   "en-codeblock": ENCodeblock,
-  "en-webclip": ENWebClip
+  "en-webclip": ENWebClip,
+  "en-internal-link": ENInternalLink
 };
 type Keys = keyof typeof elementMap;
 
@@ -42,7 +44,8 @@ export class ElementHandler implements IElementHandler {
   constructor(
     private readonly note: Note,
     private readonly enNote: ENNote,
-    private readonly hasher: IHasher
+    private readonly hasher: IHasher,
+    private readonly ids: Record<string, string>
   ) {}
 
   async process(
@@ -52,8 +55,11 @@ export class ElementHandler implements IElementHandler {
     const elementHandler = elementMap[elementType];
     if (!elementHandler) return;
 
-    return new elementHandler(this.note, this.enNote, this.hasher).process(
-      element
-    );
+    return new elementHandler(
+      this.note,
+      this.enNote,
+      this.hasher,
+      this.ids
+    ).process(element);
   }
 }

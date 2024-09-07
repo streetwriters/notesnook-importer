@@ -37,6 +37,7 @@ export class Evernote implements IFileProvider {
   public name = "Evernote";
   public helpLink =
     "https://help.notesnook.com/importing-notes/import-notes-from-evernote";
+  private ids: Record<string, string> = {};
 
   filter(file: File) {
     return this.supportedExtensions.includes(file.extension);
@@ -58,6 +59,7 @@ export class Evernote implements IFileProvider {
         yield log(`Found ${enNote.title}...`);
 
         const note: Note = {
+          id: this.ids[enNote.title || ""],
           title: enNote.title || "",
           tags: enNote.tags,
           dateCreated: enNote.created?.getTime(),
@@ -69,7 +71,8 @@ export class Evernote implements IFileProvider {
           const elementHandler = new ElementHandler(
             note,
             enNote,
-            settings.hasher
+            settings.hasher,
+            this.ids
           );
 
           try {
