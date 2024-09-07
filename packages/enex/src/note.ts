@@ -26,6 +26,7 @@ export type Note = {
   updated?: Date | null;
   tags: string[];
   content?: string;
+  source?: string;
   sourceURL?: string;
   sourceApplication?: string;
   resources: Resource[];

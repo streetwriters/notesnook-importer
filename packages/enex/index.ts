@@ -45,6 +45,7 @@ const VALID_TAGS = [
   "tag",
   "content",
   "source-application",
+  "source",
 
   // resource
   "data",
@@ -87,6 +88,9 @@ export async function* parse(enex: ReadableStream<string> | string) {
             state.note.resources.push(state.resource);
             state.resource = undefined;
           }
+
+          if (name === "source" && !state.resource)
+            state.note.source = state.text;
           if (name === "source-url" && !state.resource)
             state.note.sourceURL = state.text;
           if (name === "source-application" && !state.resource)
@@ -130,7 +134,7 @@ export async function* parse(enex: ReadableStream<string> | string) {
       }
     },
     {
-      xmlMode: false,
+      xmlMode: true,
       lowerCaseTags: false,
       lowerCaseAttributeNames: false,
       recognizeSelfClosing: true,

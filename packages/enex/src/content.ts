@@ -95,11 +95,7 @@ export async function processContent(
 
   // convert all div tags to paragraphs
   visit(noteElement, (child) => {
-    if (
-      !isTag(child) ||
-      child.tagName.toLowerCase() !== "div" ||
-      findElementType(child, true)
-    )
+    if (!isTag(child) || child.name !== "div" || findElementType(child, true))
       return false;
     child.tagName = "p";
     return true;
@@ -118,10 +114,16 @@ export async function processContent(
     for (const element of selectAll(cssSelector, noteElement)) {
       await processElement(element, ["img-dataurl", "en-media"], handler);
     }
-    return render(noteElement.childNodes);
-  } else {
-    return render(clippedElement.childNodes);
+    return render(noteElement.childNodes, {
+      decodeEntities: true,
+      encodeEntities: false
+    });
   }
+
+  return render(clippedElement.childNodes, {
+    decodeEntities: true,
+    encodeEntities: false
+  });
 }
 
 async function processClippedPage(
@@ -132,8 +134,8 @@ async function processClippedPage(
   if (
     !note ||
     !handler ||
-    // evernote notes with source-url tag are most probably webclips
-    !note.sourceURL
+    (!note.sourceApplication?.includes("webclipper") &&
+      !note.source?.includes("web.clip"))
   )
     return;
 
@@ -146,7 +148,7 @@ async function processClippedPage(
   );
 
   noteElement.attribs["clipped-content"] = "fullPage";
-  noteElement.attribs["clipped-source-url"] = note.sourceURL;
+  noteElement.attribs["clipped-source-url"] = note.sourceURL || "";
   const result = await handler.process("en-webclip", noteElement);
   if (result) {
     return parseDocument(result);
