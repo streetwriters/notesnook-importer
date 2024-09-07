@@ -123,7 +123,7 @@ function google() {
 <co-co>hello</co-co>
 \`\`\``)
   ).toBe(
-    `<pre class="language-javascript"><code class="language-javascript">function google() {<br/>}<br/><br/>&lt;html&gt;good&lt;/html&gt;<br/>&lt;COmponent&gt;{() =&gt; {}}&lt;/Component&gt;<br/>&lt;co-co&gt;hello&lt;/co-co&gt;</code></pre>`
+    `<pre class="language-javascript"><code class="language-javascript">function google() {<br/>}<br/><br/>&lt;html&gt;good&lt;/html&gt;<br/>&lt;COmponent&gt;{() =&gt; {}}&lt;/Component&gt;<br/>&lt;co-co&gt;hello&lt;/co-co&gt;<br/></code></pre>`
   );
 });
 
