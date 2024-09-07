@@ -17,17 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import "./polyfills";
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import { register } from "./utils/stream-saver/mitm";
-import App from "./app";
-
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root"),
-  () => register()
-);
+import { Buffer } from "buffer/";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+globalThis.Buffer = Buffer;

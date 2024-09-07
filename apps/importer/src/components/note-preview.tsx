@@ -21,9 +21,8 @@ import { Button, Flex, Text } from "@theme-ui/components";
 import { IoStarOutline } from "react-icons/io5";
 import { GrPin } from "react-icons/gr";
 import { MdCircle, MdClose, MdOutlineBook } from "react-icons/md";
-import { Markup } from "interweave";
 import Modal from "react-modal";
-import { Note } from "@notesnook-importer/core";
+import { Note, Notebook } from "@notesnook-importer/core";
 Modal.setAppElement("#root");
 
 type NotePreviewProps = {
@@ -119,7 +118,7 @@ export function NotePreview(props: NotePreviewProps) {
         <Flex my={1}>
           {notebooks?.map((notebook) => (
             <Flex
-              key={notebook.notebook + notebook.topic}
+              key={notebook.title}
               sx={{
                 alignItems: "center",
                 bg: "bgSecondary",
@@ -133,7 +132,7 @@ export function NotePreview(props: NotePreviewProps) {
             >
               <MdOutlineBook size={11} />
               <Text variant="subBody" sx={{ ml: "2px" }}>
-                {notebook.notebook} &gt; {notebook.topic}
+                {flattenNotebook(notebook).join(" > ")}
               </Text>
             </Flex>
           ))}
@@ -170,9 +169,8 @@ export function NotePreview(props: NotePreviewProps) {
               margin-top: 0px;
             }
           `}
-        >
-          <Markup content={content?.data} />
-        </Text>
+          dangerouslySetInnerHTML={{ __html: content?.data || "" }}
+        />
       </Flex>
     </Modal>
   );
@@ -183,4 +181,17 @@ function formatDate(date: number) {
     dateStyle: "short",
     timeStyle: "short"
   });
+}
+
+function flattenNotebook(notebook: Notebook) {
+  const path: string[] = [notebook.title];
+  for (const nb of notebook.children) {
+    path.push(nb.title);
+    if (nb.children.length > 0) {
+      for (const child of nb.children) {
+        path.push(...flattenNotebook(child));
+      }
+    }
+  }
+  return path;
 }
