@@ -17,6 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import { COMPATIBILITY_VERSION } from "./src/models";
 import {
   IFileProvider,
   INetworkProvider,
@@ -60,7 +61,13 @@ async function transformNetwork<TSettings extends ProviderSettings>(
   const counter: Counter = { count: 0 };
   try {
     for await (const message of provider.process(settings)) {
-      await processProviderMessage(message, settings, counter, errors);
+      await processProviderMessage(
+        message,
+        settings,
+        counter,
+        errors,
+        provider
+      );
     }
   } catch (e) {
     console.error(e);
@@ -104,7 +111,13 @@ async function transformFiles(
         allFiles,
         preprocessData
       )) {
-        await processProviderMessage(message, settings, counter, errors);
+        await processProviderMessage(
+          message,
+          settings,
+          counter,
+          errors,
+          provider
+        );
       }
     } catch (e) {
       console.error(e);
@@ -122,7 +135,8 @@ async function processProviderMessage(
   message: ProviderMessage,
   settings: ProviderSettings,
   counter: Counter,
-  errors: Error[]
+  errors: Error[],
+  provider: IFileProvider | INetworkProvider<ProviderSettings>
 ) {
   switch (message.type) {
     case "error":
@@ -132,6 +146,8 @@ async function processProviderMessage(
       settings.log?.(message);
       break;
     case "note":
+      message.note.compatibilityVersion = COMPATIBILITY_VERSION;
+      message.note.source = provider.id;
       await settings.storage.write(message.note);
       settings.reporter(++counter.count);
       break;

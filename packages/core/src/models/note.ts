@@ -17,7 +17,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import { Providers } from "../providers/provider-factory";
 import { Attachment } from "./attachment";
+
+export const COMPATIBILITY_VERSION = 2;
 
 export type Note = {
   id?: string;
@@ -29,8 +32,11 @@ export type Note = {
   favorite?: boolean;
   pinned?: boolean;
   color?: string;
-  notebooks?: Notebook[];
+  notebooks?: LegacyNotebook[] | Notebook[];
   attachments?: Attachment[];
+
+  compatibilityVersion?: number;
+  source?: Providers;
 };
 
 export type Content = {
@@ -42,6 +48,14 @@ export enum ContentType {
   HTML = "html",
   TEXT = "text"
 }
+
+/**
+ * @deprecated
+ */
+export type LegacyNotebook = {
+  notebook: string;
+  topic?: string;
+};
 
 export type Notebook = {
   title: string;
