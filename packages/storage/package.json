@@ -1,7 +1,7 @@
 {
   "name": "@notesnook-importer/storage",
   "private": false,
-  "version": "1.8.0",
+  "version": "1.8.1",
   "main": "dist/index.js",
   "devDependencies": {
     "@types/node": "^16.11.10",

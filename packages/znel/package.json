@@ -1,7 +1,7 @@
 {
   "name": "@notesnook-importer/znel",
   "private": false,
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "A fully tested type-safe Zoho Notebook .znel parser used in Notesnook Importer.",
   "main": "dist/index.js",
   "devDependencies": {
