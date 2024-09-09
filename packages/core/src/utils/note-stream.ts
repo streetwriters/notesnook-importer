@@ -24,34 +24,22 @@ import { path } from "./path";
 import { ZipFile } from "./zip-stream";
 
 export const NOTE_DATA_FILENAME = "note.json";
-export const METADATA_FILENAME = "metadata.json";
 export const ATTACHMENTS_DIRECTORY_NAME = "attachments";
 
 export type NoteFiles = {
   files: Record<string, Uint8Array>;
   hash: string;
 };
-export type PackageMetadata = {
-  version: string;
-  notes: string[];
-};
 
 export class NoteStream extends ReadableStream<ZipFile> {
   constructor(storage: IStorage<Note>, report: (done: number) => void) {
     const notes = storage.iterate();
-    const metadata: PackageMetadata = {
-      version: "1.0.0",
-      notes: []
-    };
+    let count = 0;
 
     super({
       async pull(controller) {
         const { value: note, done } = await notes.next();
         if (done) {
-          controller.enqueue({
-            path: METADATA_FILENAME,
-            data: new TextEncoder().encode(JSON.stringify(metadata))
-          });
           await storage.clear();
           return controller.close();
         }
@@ -64,8 +52,7 @@ export class NoteStream extends ReadableStream<ZipFile> {
             data: files[key]
           });
         }
-        metadata.notes.push(hash);
-        report(metadata.notes.length);
+        report(++count);
       }
     });
   }
