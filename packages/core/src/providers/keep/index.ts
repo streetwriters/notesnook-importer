@@ -23,6 +23,7 @@ import { IFileProvider, ProviderMessage, ProviderSettings } from "../provider";
 import { File } from "../../utils/file";
 import { Attachment, attachmentToHTML } from "../../models/attachment";
 import { markdowntoHTML } from "../../utils/to-html";
+import { Providers } from "../provider-factory";
 
 const colorMap: Record<string, string | undefined> = {
   default: undefined,
@@ -40,12 +41,13 @@ const colorMap: Record<string, string | undefined> = {
 };
 
 export class GoogleKeep implements IFileProvider {
-  public type = "file" as const;
-  public supportedExtensions = [".zip"];
-  public examples = ["takeout.zip"];
-  public version = "1.0.0";
-  public name = "Google Keep";
-  public helpLink =
+  id: Providers = "keep";
+  type = "file" as const;
+  supportedExtensions = [".zip"];
+  examples = ["takeout.zip"];
+  version = "1.0.0";
+  name = "Google Keep";
+  helpLink =
     "https://help.notesnook.com/importing-notes/import-notes-from-googlekeep";
 
   filter(file: File) {
@@ -109,8 +111,8 @@ export class GoogleKeep implements IFileProvider {
     return keepNote.textContent
       ? markdowntoHTML(keepNote.textContent)
       : keepNote.listContent
-      ? listToHTML(keepNote.listContent)
-      : "";
+        ? listToHTML(keepNote.listContent)
+        : "";
   }
 
   private usToMs(us: number) {

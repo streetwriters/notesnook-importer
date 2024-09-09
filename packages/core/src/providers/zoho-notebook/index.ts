@@ -29,14 +29,16 @@ import { path } from "../../utils/path";
 import { ZNotebook } from "./types";
 import { Znel } from "@notesnook-importer/znel";
 import { ElementHandler } from "./elementhandlers";
+import { Providers } from "../provider-factory";
 
 export class ZohoNotebook implements IFileProvider {
-  public type = "file" as const;
-  public supportedExtensions = [".zip"];
-  public version = "1.0.0";
-  public name = "Zoho Notebook";
-  public examples = ["Notebook_02Mar2022_0441.zip"];
-  public helpLink =
+  id: Providers = "zohonotebook";
+  type = "file" as const;
+  supportedExtensions = [".zip"];
+  version = "1.0.0";
+  name = "Zoho Notebook";
+  examples = ["Notebook_02Mar2022_0441.zip"];
+  helpLink =
     "https://help.notesnook.com/importing-notes/import-notes-from-zoho-notebook";
 
   filter(file: File) {

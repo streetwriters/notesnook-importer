@@ -29,14 +29,16 @@ import {
 import { File } from "../../utils/file";
 import { markdowntoHTML, textToHTML } from "../../utils/to-html";
 import { JSONParser } from "@streamparser/json";
+import { Providers } from "../provider-factory";
 
 export class Simplenote implements IFileProvider {
-  public type = "file" as const;
-  public supportedExtensions = [".zip"];
-  public version = "1.0.0";
-  public name = "Simplenote";
-  public examples = ["notes.zip"];
-  public helpLink =
+  id: Providers = "simplenote";
+  type = "file" as const;
+  supportedExtensions = [".zip"];
+  version = "1.0.0";
+  name = "Simplenote";
+  examples = ["notes.zip"];
+  helpLink =
     "https://help.notesnook.com/importing-notes/import-notes-from-simplenote";
 
   filter(file: File) {

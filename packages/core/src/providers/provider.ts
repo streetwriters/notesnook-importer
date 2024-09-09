@@ -21,12 +21,14 @@ import { Note } from "../models/note";
 import { File } from "../utils/file";
 import { IHasher } from "../utils/hasher";
 import { IStorage } from "@notesnook-importer/storage";
+import { Providers } from "./provider-factory";
 
 export type ProviderType = "network" | "file";
 
-interface IBaseProvider<T extends ProviderType> {
-  type: T;
+interface IBaseProvider {
+  type: ProviderType;
   version: string;
+  id: Providers;
   name: string;
   helpLink: string;
 }
@@ -41,7 +43,8 @@ export type ProviderMessage =
   | ProviderErrorMessage;
 
 export interface IFileProvider<TPreProcessResult = unknown>
-  extends IBaseProvider<"file"> {
+  extends IBaseProvider {
+  type: "file";
   requiresNetwork?: boolean;
   supportedExtensions: string[];
   examples?: string[];
@@ -56,7 +59,8 @@ export interface IFileProvider<TPreProcessResult = unknown>
 }
 
 export interface INetworkProvider<TSettings extends ProviderSettings>
-  extends IBaseProvider<"network"> {
+  extends IBaseProvider {
+  type: "network";
   process(settings: TSettings): AsyncGenerator<ProviderMessage, void, unknown>;
 }
 

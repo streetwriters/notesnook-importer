@@ -35,6 +35,7 @@ import {
 import { ElementHandler } from "./elementhandlers";
 import { parseDocument } from "htmlparser2";
 import { findOne, textContent } from "domutils";
+import { Providers } from "../provider-factory";
 
 export type OneNoteSettings = ProviderSettings & {
   clientId: string;
@@ -43,10 +44,11 @@ export type OneNoteSettings = ProviderSettings & {
 };
 
 export class OneNote implements INetworkProvider<OneNoteSettings> {
-  public type = "network" as const;
-  public version = "1.0.0";
-  public name = "OneNote";
-  public helpLink =
+  id: Providers = "onenote";
+  type = "network" as const;
+  version = "1.0.0";
+  name = "OneNote";
+  helpLink =
     "https://help.notesnook.com/importing-notes/import-notes-from-onenote";
 
   async *process(

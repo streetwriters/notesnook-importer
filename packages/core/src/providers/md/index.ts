@@ -22,14 +22,16 @@ import { File } from "../../utils/file";
 import { markdowntoHTML } from "../../utils/to-html";
 import { HTML } from "../html";
 import { parseFrontmatter } from "../../utils/frontmatter";
+import { Providers } from "../provider-factory";
 
 export class Markdown implements IFileProvider {
-  public type = "file" as const;
-  public supportedExtensions = [".md", ".markdown", ".mdown"];
-  public version = "1.0.0";
-  public name = "Markdown";
-  public examples = ["document.md"];
-  public helpLink =
+  id: Providers = "md";
+  type = "file" as const;
+  supportedExtensions = [".md", ".markdown", ".mdown"];
+  version = "1.0.0";
+  name = "Markdown";
+  examples = ["document.md"];
+  helpLink =
     "https://help.notesnook.com/importing-notes/import-notes-from-markdown-files";
 
   filter(file: File) {

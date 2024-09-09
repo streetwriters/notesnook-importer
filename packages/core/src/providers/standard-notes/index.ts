@@ -37,6 +37,7 @@ import {
 } from "./types";
 import { buildTable, Cell, Row } from "../../utils/dom-utils";
 import { markdowntoHTML, textToHTML } from "../../utils/to-html";
+import { Providers } from "../provider-factory";
 
 const defaultEditorDescription = (item: SNNote): EditorDescription => {
   const isHtml =
@@ -48,14 +49,13 @@ const defaultEditorDescription = (item: SNNote): EditorDescription => {
 };
 
 export class StandardNotes implements IFileProvider {
-  public type = "file" as const;
-  public supportedExtensions = [".zip"];
-  public version = "1.0.0";
-  public name = "Standard Notes";
-  public examples = [
-    "Standard Notes Backup - Fri Jan 14 2022 10_31_29 GMT+0500.zip"
-  ];
-  public helpLink =
+  id: Providers = "standardnotes";
+  type = "file" as const;
+  supportedExtensions = [".zip"];
+  version = "1.0.0";
+  name = "Standard Notes";
+  examples = ["Standard Notes Backup - Fri Jan 14 2022 10_31_29 GMT+0500.zip"];
+  helpLink =
     "https://help.notesnook.com/importing-notes/import-notes-from-standardnotes";
 
   filter(file: File) {
@@ -262,14 +262,14 @@ export class StandardNotes implements IFileProvider {
       typeof note.created_at === "string"
         ? new Date(note.created_at).getTime()
         : note.created_at_timestamp
-        ? note.created_at_timestamp / 1000
-        : undefined;
+          ? note.created_at_timestamp / 1000
+          : undefined;
     let updatedAt =
       typeof note.updated_at === "string"
         ? new Date(note.updated_at).getTime()
         : note.updated_at_timestamp
-        ? note.updated_at_timestamp / 1000
-        : undefined;
+          ? note.updated_at_timestamp / 1000
+          : undefined;
 
     if (updatedAt === 0) updatedAt = undefined;
     if (createdAt === 0) createdAt = undefined;

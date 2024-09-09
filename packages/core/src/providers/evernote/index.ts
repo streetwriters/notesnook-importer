@@ -28,14 +28,16 @@ import {
 import { ContentType, Note, Notebook } from "../../models/note";
 import { ElementHandler } from "./element-handlers";
 import { File } from "../../utils/file";
+import { Providers } from "../provider-factory";
 
 export class Evernote implements IFileProvider {
-  public type = "file" as const;
-  public supportedExtensions = [".enex"];
-  public examples = ["First Notebook.enex", "checklist.enex"];
-  public version = "1.0.0";
-  public name = "Evernote";
-  public helpLink =
+  id: Providers = "evernote";
+  type = "file" as const;
+  supportedExtensions = [".enex"];
+  examples = ["First Notebook.enex", "checklist.enex"];
+  version = "1.0.0";
+  name = "Evernote";
+  helpLink =
     "https://help.notesnook.com/importing-notes/import-notes-from-evernote";
   private ids: Record<string, string> = {};
 

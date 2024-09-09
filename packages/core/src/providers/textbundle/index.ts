@@ -22,14 +22,16 @@ import { File } from "../../utils/file";
 import { Markdown } from "../md";
 import { HTML } from "../html";
 import { Text } from "../txt";
+import { Providers } from "../provider-factory";
 
 export class TextBundle implements IFileProvider {
-  public type = "file" as const;
-  public supportedExtensions = [".textbundle", ".textpack"];
-  public version = "1.0.0";
-  public name = "TextBundle";
-  public examples = ["example.textbundle", "example.textpack"];
-  public helpLink =
+  id: Providers = "textbundle";
+  type = "file" as const;
+  supportedExtensions = [".textbundle", ".textpack"];
+  version = "1.0.0";
+  name = "TextBundle";
+  examples = ["example.textbundle", "example.textpack"];
+  helpLink =
     "https://help.notesnook.com/importing-notes/import-notes-from-textbundle-files";
 
   private readonly supportedProviders = [

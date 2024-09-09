@@ -31,6 +31,7 @@ import {
 import { z } from "zod";
 import { AADMeta } from "@skiff-org/skiff-crypto";
 import { ChaCha20Poly1305 } from "@stablelib/chacha20poly1305";
+import { Providers } from "../provider-factory";
 
 const CacheElementMetadata = z.object({
   cacheID: z.string(),
@@ -39,13 +40,14 @@ const CacheElementMetadata = z.object({
 });
 
 export class SkiffPages implements IFileProvider {
-  public requiresNetwork = true;
-  public type = "file" as const;
-  public supportedExtensions = [".md", ".markdown", ".mdown"];
-  public version = "1.0.0";
-  public name = "Skiff Pages";
-  public examples = ["Skiff.zip"];
-  public helpLink =
+  id: Providers = "skiffpages";
+  requiresNetwork = true;
+  type = "file" as const;
+  supportedExtensions = [".md", ".markdown", ".mdown"];
+  version = "1.0.0";
+  name = "Skiff Pages";
+  examples = ["Skiff.zip"];
+  helpLink =
     "https://help.notesnook.com/importing-notes/import-notes-from-skiff-pages";
 
   filter(file: File) {

@@ -21,14 +21,16 @@ import { IFileProvider, ProviderMessage, ProviderSettings } from "../provider";
 import { File } from "../../utils/file";
 import { textToHTML } from "../../utils/to-html";
 import { HTML } from "../html";
+import { Providers } from "../provider-factory";
 
 export class Text implements IFileProvider {
-  public type = "file" as const;
-  public supportedExtensions = [".txt"];
-  public version = "1.0.0";
-  public name = "Text";
-  public examples = ["import-help.txt"];
-  public helpLink =
+  id: Providers = "txt";
+  type = "file" as const;
+  supportedExtensions = [".txt"];
+  version = "1.0.0";
+  name = "Text";
+  examples = ["import-help.txt"];
+  helpLink =
     "https://help.notesnook.com/importing-notes/import-notes-from-plaintext-files";
 
   filter(file: File) {

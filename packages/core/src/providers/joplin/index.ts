@@ -37,6 +37,7 @@ import { Document } from "domhandler";
 import { render } from "dom-serializer";
 import { textContent, replaceElement, findAll, findOne } from "domutils";
 import { detectFileType } from "../../utils/file-type";
+import { Providers } from "../provider-factory";
 
 type JoplinData = {
   notes: NoteEntity[];
@@ -49,12 +50,13 @@ type JoplinData = {
 const headingTags = ["h1", "h2", "h3", "h4", "h5", "h6"];
 
 export class Joplin implements IFileProvider<JoplinData> {
-  public type = "file" as const;
-  public supportedExtensions = [".jex"];
-  public examples = ["3_10_22.jex", "5_12_21.jex"];
-  public version = "1.0.0";
-  public name = "Joplin";
-  public helpLink =
+  id: Providers = "joplin";
+  type = "file" as const;
+  supportedExtensions = [".jex"];
+  examples = ["3_10_22.jex", "5_12_21.jex"];
+  version = "1.0.0";
+  name = "Joplin";
+  helpLink =
     "https://help.notesnook.com/importing-notes/import-notes-from-joplin";
 
   filter(file: File) {

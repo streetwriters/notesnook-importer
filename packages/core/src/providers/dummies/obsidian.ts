@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import { Markdown } from "../md";
+import { Providers } from "../provider-factory";
 
 /**
  * This is just a dummy class for holding metadata.
@@ -25,11 +26,12 @@ import { Markdown } from "../md";
  * by the Markdown processor.
  */
 export class Obsidian extends Markdown {
-  public type = "file" as const;
-  public supportedExtensions = [".md", ".markdown", ".mdown"];
-  public version = "1.0.0";
-  public name = "Obsidian";
-  public examples = ["document.md"];
-  public helpLink =
+  id: Providers = "obsidian";
+  type = "file" as const;
+  supportedExtensions = [".md", ".markdown", ".mdown"];
+  version = "1.0.0";
+  name = "Obsidian";
+  examples = ["document.md"];
+  helpLink =
     "https://help.notesnook.com/importing-notes/import-notes-from-obsidian";
 }

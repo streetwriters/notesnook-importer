@@ -42,17 +42,19 @@ import { Attachment, attachmentToHTML } from "../../models";
 import { path } from "../../utils/path";
 import { appendExtension } from "../../utils/filename";
 import { detectFileType } from "../../utils/file-type";
+import { Providers } from "../provider-factory";
 
 type ResourceHandler = (resource: Element) => Promise<File | undefined>;
 
 const RESOURCE_TAGS = ["img", "video", "audio", "a"];
 export class HTML implements IFileProvider {
-  public type = "file" as const;
-  public supportedExtensions = [".html", ".htm"];
-  public examples = ["Import.html"];
-  public version = "1.0.0";
-  public name = "HTML";
-  public helpLink =
+  id: Providers = "html";
+  type = "file" as const;
+  supportedExtensions = [".html", ".htm"];
+  examples = ["Import.html"];
+  version = "1.0.0";
+  name = "HTML";
+  helpLink =
     "https://help.notesnook.com/importing-notes/import-notes-from-html-files";
 
   filter(file: File) {

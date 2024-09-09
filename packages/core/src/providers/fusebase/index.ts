@@ -45,6 +45,7 @@ import { IHasher } from "../../utils/hasher";
 import { detectFileType } from "../../utils/file-type";
 import { sanitizeFilename } from "../../utils/filename";
 import { createObjectId } from "../../utils/object-id";
+import { Providers } from "../provider-factory";
 
 const colorMap: Record<string, string | undefined> = {
   ed5454: "red",
@@ -75,12 +76,13 @@ const BOOKMARK = compile(".nimbus-bookmark");
 const MENTION = compile("mention.mention");
 
 export class Fusebase implements IFileProvider {
-  public type = "file" as const;
-  public supportedExtensions = [".json"];
-  public version = "1.0.0";
-  public name = "Fusebase (formerly Nimbus Note)";
-  public examples = ["nimbus-export.zip"];
-  public helpLink =
+  id: Providers = "fusebase";
+  type = "file" as const;
+  supportedExtensions = [".json"];
+  version = "1.0.0";
+  name = "Fusebase (formerly Nimbus Note)";
+  examples = ["nimbus-export.zip"];
+  helpLink =
     "https://help.notesnook.com/importing-notes/import-notes-from-fusebase";
   private ids: Record<string, string> = {};
 
