@@ -46,7 +46,6 @@ module.exports = {
     "react",
     "@typescript-eslint",
     "unused-imports",
-    "jest",
     "header",
     "react-hooks"
   ],
@@ -67,7 +66,6 @@ module.exports = {
       }
     ],
     "linebreak-style": ["error", "unix"],
-    "jest/no-mocks-import": 0,
     "@typescript-eslint/no-var-requires": 0,
     quotes: [
       "error",

@@ -16,25 +16,28 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+
 import glob from "fast-glob";
 import fs from "fs/promises";
 import { existsSync } from "fs";
 import path from "path";
-import Listr from "listr";
+import { Listr } from "listr2";
 
 const allPackages = await glob(["packages/**", "apps/**", "extensions/**"], {
   deep: 1,
   onlyDirectories: true
 });
 
-const tasks = new Listr({ concurrent: 4, exitOnError: false });
+const tasks = new Listr([], { concurrent: 4, exitOnError: false });
 for (const pkg of allPackages) {
-  const node_modules = path.join(pkg, "node_modules");
-  if (!existsSync(node_modules)) continue;
-  tasks.add({
-    title: "Cleaning " + node_modules,
-    task: () => fs.rm(node_modules, { recursive: true, force: true })
-  });
+  for (const dirname of ["node_modules", "dist", "build", "out"]) {
+    const dir = path.join(pkg, dirname);
+    if (existsSync(dir))
+      tasks.add({
+        title: "Cleaning " + dir,
+        task: () => fs.rm(dir, { recursive: true, force: true })
+      });
+  }
 }
 
 console.time("Took");
