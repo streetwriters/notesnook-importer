@@ -116,26 +116,29 @@ export function NotePreview(props: NotePreviewProps) {
           )}
         </Flex>
         <Flex my={1}>
-          {notebooks?.map((notebook) => (
-            <Flex
-              key={notebook.title}
-              sx={{
-                alignItems: "center",
-                bg: "bgSecondary",
-                mr: 1,
-                p: 1,
-                py: "2px",
-                border: "1px solid var(--theme-ui-colors-border)",
-                borderRadius: "default",
-                color: "fontTertiary"
-              }}
-            >
-              <MdOutlineBook size={11} />
-              <Text variant="subBody" sx={{ ml: "2px" }}>
-                {flattenNotebook(notebook).join(" > ")}
-              </Text>
-            </Flex>
-          ))}
+          {notebooks?.map(
+            (notebook) =>
+              "title" in notebook && (
+                <Flex
+                  key={notebook.title}
+                  sx={{
+                    alignItems: "center",
+                    bg: "bgSecondary",
+                    mr: 1,
+                    p: 1,
+                    py: "2px",
+                    border: "1px solid var(--theme-ui-colors-border)",
+                    borderRadius: "default",
+                    color: "fontTertiary"
+                  }}
+                >
+                  <MdOutlineBook size={11} />
+                  <Text variant="subBody" sx={{ ml: "2px" }}>
+                    {flattenNotebook(notebook).join(" > ")}
+                  </Text>
+                </Flex>
+              )
+          )}
           {tags?.map((tag) => (
             <Text
               key={tag}
