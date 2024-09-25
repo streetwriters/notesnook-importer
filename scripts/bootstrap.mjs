@@ -22,6 +22,7 @@ import { readFile } from "fs/promises";
 import path from "path";
 import os from "os";
 import parser from "yargs-parser";
+import glob from "fast-glob";
 import { fdir } from "fdir";
 import { Listr } from "listr2";
 
@@ -29,31 +30,11 @@ const args = parser(process.argv, { alias: { scope: ["s"], offline: ["o"] } });
 const IS_CI = process.env.CI;
 const THREADS = Math.max(4, process.env.THREADS || os.cpus().length / 2);
 const scopes = {
-  mobile: "apps/mobile",
-  web: "apps/web",
-  vericrypt: "apps/vericrypt",
-  desktop: "apps/desktop",
-  core: "packages/core",
-  editor: "packages/editor",
-  themes: "servers/themes",
-  themebuilder: "apps/theme-builder"
+  importer: "apps/importer",
+  core: "packages/core"
 };
 // packages that we shouldn't run npm rebuild for
-const IGNORED_NATIVE_PACKAGES = [
-  // these get built by electron-builder automatically.
-  ...(args.scope === "desktop"
-    ? ["better-sqlite3-multiple-ciphers", "sodium-native"]
-    : []),
-  "electron",
-
-  // optional dependency of pdfjs-dist, we can ignore
-  // it because it's only needed in non-browser environments
-  "canvas",
-  // optional dependency only used on Node.js platform
-  "@azure/msal-node-runtime",
-  // not needed on mobile
-  ...(args.scope === "mobile" ? ["esbuild"] : [])
-];
+const IGNORED_NATIVE_PACKAGES = [];
 
 if (args.scope && !scopes[args.scope])
   throw new Error(`Scope must be one of ${Object.keys(scopes).join(", ")}`);
@@ -61,14 +42,10 @@ if (args.scope && !scopes[args.scope])
 const IS_BOOTSTRAP_ALL = !args.scope;
 
 if (IS_BOOTSTRAP_ALL) {
-  const allPackages = (
-    await new fdir()
-      .onlyDirs()
-      .withMaxDepth(2)
-      .glob("packages/**", "apps/**", "extensions/**", "servers/**")
-      .crawl(".")
-      .withPromise()
-  ).slice(4);
+  const allPackages = await glob(["packages/**", "apps/**"], {
+    deep: 1,
+    onlyDirectories: true
+  });
 
   const dependencies = Array.from(
     new Set(
