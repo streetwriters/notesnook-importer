@@ -64,48 +64,6 @@
     "source": "md"
   },
   {
-    "title": "obsidian",
-    "dateEdited": 1689780544000,
-    "attachments": [
-      {
-        "size": 1794418,
-        "hash": "76c48e9bf6629698",
-        "filename": "Pasted image 20230625105750.jpg",
-        "hashType": "xxh64",
-        "mime": "image/jpeg"
-      },
-      {
-        "size": 1794418,
-        "hash": "76c48e9bf6629698",
-        "filename": "Pasted image 20230625105750.jpg",
-        "hashType": "xxh64",
-        "mime": "image/jpeg"
-      },
-      {
-        "size": 1794418,
-        "hash": "76c48e9bf6629698",
-        "filename": "Pasted image 20230625105750.jpg",
-        "hashType": "xxh64",
-        "mime": "image/jpeg"
-      },
-      {
-        "size": 1794418,
-        "hash": "76c48e9bf6629698",
-        "filename": "Pasted image 20230625105750.jpg",
-        "hashType": "xxh64",
-        "mime": "image/jpeg"
-      }
-    ],
-    "notebooks": [],
-    "content": {
-      "type": "html",
-      "data": "<p>#ppm #servicenow</p>\n<ul>\n <li>Project Workspace\n  <ul>\n   <li>Planning Console <img class=\"attachment\"\n     data-filename=\"Pasted image 20230625105750.jpg\"\n     data-size=\"1794418\" data-hash=\"76c48e9bf6629698\"\n     data-mime=\"image/jpeg\"\n     alt=\"Pasted image 20230625105750.jpg\"></li>\n   <li>Project Workbench <img class=\"attachment\"\n     data-filename=\"Pasted image 20230625105750.jpg\"\n     data-size=\"1794418\" data-hash=\"76c48e9bf6629698\"\n     data-mime=\"image/jpeg\"\n     alt=\"Pasted image 20230625105750.jpg\"></li>\n   <li>Resource Allocation Workbench</li>\n   <li>Financial Summary <img class=\"attachment\"\n     data-filename=\"Pasted image 20230625105750.jpg\"\n     data-size=\"1794418\" data-hash=\"76c48e9bf6629698\"\n     data-mime=\"image/jpeg\"\n     alt=\"Pasted image 20230625105750.jpg\"></li>\n   <li>Status Report <img class=\"attachment\"\n     data-filename=\"Pasted image 20230625105750.jpg\"\n     data-size=\"1794418\" data-hash=\"76c48e9bf6629698\"\n     data-mime=\"image/jpeg\"\n     alt=\"Pasted image 20230625105750.jpg\"></li>\n  </ul>\n </li>\n <li>New Project Workspace</li>\n <li>Demand Workbench</li>\n <li>Demand Roadmap</li>\n <li>Time Sheet Portal</li>\n</ul>"
-    },
-    "tags": [],
-    "compatibilityVersion": 2,
-    "source": "md"
-  },
-  {
     "title": "An h1 header",
     "attachments": [],
     "notebooks": [],

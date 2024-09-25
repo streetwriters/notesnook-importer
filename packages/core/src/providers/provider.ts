@@ -42,8 +42,10 @@ export type ProviderMessage =
   | ProviderNoteMessage
   | ProviderErrorMessage;
 
-export interface IFileProvider<TPreProcessResult = unknown>
-  extends IBaseProvider {
+export interface IFileProvider<
+  TPreProcessResult = unknown,
+  TSettings extends ProviderSettings = ProviderSettings
+> extends IBaseProvider {
   type: "file";
   requiresNetwork?: boolean;
   supportedExtensions: string[];
@@ -52,19 +54,20 @@ export interface IFileProvider<TPreProcessResult = unknown>
   preprocess?: (files: File[]) => Promise<TPreProcessResult>;
   process(
     currentFile: File,
-    settings: ProviderSettings,
+    settings: TSettings,
     files: File[],
     data?: TPreProcessResult
   ): AsyncGenerator<ProviderMessage, void, unknown>;
 }
 
-export interface INetworkProvider<TSettings extends ProviderSettings>
-  extends IBaseProvider {
+export interface INetworkProvider<
+  TSettings extends ProviderSettings = ProviderSettings
+> extends IBaseProvider {
   type: "network";
   process(settings: TSettings): AsyncGenerator<ProviderMessage, void, unknown>;
 }
 
-export type IProvider = IFileProvider | INetworkProvider<ProviderSettings>;
+export type IProvider = IFileProvider | INetworkProvider;
 
 export interface ProviderSettings {
   clientType: "browser" | "node";

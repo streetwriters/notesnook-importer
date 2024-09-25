@@ -17,7 +17,9 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Markdown } from "../md";
+import { File } from "../../utils/file";
+import { Markdown, MarkdownSettings } from "../md";
+import { ProviderMessage } from "../provider";
 import { Providers } from "../provider-factory";
 
 /**
@@ -34,4 +36,13 @@ export class Obsidian extends Markdown {
   examples = ["document.md"];
   helpLink =
     "https://help.notesnook.com/importing-notes/import-notes-from-obsidian";
+
+  async *process(
+    file: File,
+    settings: MarkdownSettings,
+    files: File[]
+  ): AsyncGenerator<ProviderMessage, void, unknown> {
+    settings.filenameAsTitle = true;
+    yield* super.process(file, settings, files);
+  }
 }

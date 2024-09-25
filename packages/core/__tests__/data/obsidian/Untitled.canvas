@@ -1,0 +1,12 @@
+{
+	"nodes":[
+		{"type":"text","text":"","id":"f0f298f608fbe792","x":-420,"y":70,"width":250,"height":60},
+		{"type":"file","file":"2023-editoed.md","id":"e9cb3b08ffb4e41f","x":500,"y":-640,"width":660,"height":560},
+		{"type":"text","text":"advsadlkv","id":"c85694ea070476bb","x":-420,"y":-420,"width":250,"height":60}
+	],
+	"edges":[
+		{"id":"5b5eaa244ab885aa","fromNode":"c85694ea070476bb","fromSide":"bottom","toNode":"f0f298f608fbe792","toSide":"top"},
+		{"id":"a825619fb8f2d19e","fromNode":"e9cb3b08ffb4e41f","fromSide":"bottom","toNode":"f0f298f608fbe792","toSide":"top"},
+		{"id":"27421714e53dd487","fromNode":"e9cb3b08ffb4e41f","fromSide":"left","toNode":"c85694ea070476bb","toSide":"bottom"}
+	]
+}

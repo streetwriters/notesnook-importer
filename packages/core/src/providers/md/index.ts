@@ -24,7 +24,11 @@ import { HTML } from "../html";
 import { parseFrontmatter } from "../../utils/frontmatter";
 import { Providers } from "../provider-factory";
 
-export class Markdown implements IFileProvider {
+export type MarkdownSettings = ProviderSettings & {
+  filenameAsTitle?: boolean;
+};
+
+export class Markdown implements IFileProvider<MarkdownSettings> {
   id: Providers = "md";
   type = "file" as const;
   supportedExtensions = [".md", ".markdown", ".mdown"];
@@ -40,13 +44,16 @@ export class Markdown implements IFileProvider {
 
   async *process(
     file: File,
-    settings: ProviderSettings,
+    settings: MarkdownSettings,
     files: File[]
   ): AsyncGenerator<ProviderMessage, void, unknown> {
     const text = await file.text();
     const { content, frontmatter } = parseFrontmatter(text);
     const html = markdowntoHTML(content);
     const note = await HTML.processHTML(file, files, settings.hasher, html);
+    note.title = settings.filenameAsTitle
+      ? file.nameWithoutExtension
+      : note.title;
     if (frontmatter) {
       note.title = frontmatter.title || note.title;
       note.tags = cleanupTags(
