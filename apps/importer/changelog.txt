@@ -1,4 +1,12 @@
 
+v2.4.0
+
+1. Add support for importing internal links (only Evernote is supported currently)
+2. Improve web clip detection when importing from Evernote
+3. Add Nimbus Note importer
+4. Add support for importing folders and nested notebooks
+5. Use filename as note title when importing from Obsidian
+
 v2.3.0
 
 1. Add Skiff Pages importer
