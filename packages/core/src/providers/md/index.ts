@@ -63,16 +63,22 @@ export class Markdown implements IFileProvider<MarkdownSettings> {
       );
       note.pinned = frontmatter.pinned;
       note.favorite = frontmatter.favorite;
-      note.dateCreated = getPropertyWithFallbacks(
+      const dateCreated = getPropertyWithFallbacks(
         frontmatter,
         ["created", "created_at", "date created"],
         note.dateCreated
       );
-      note.dateEdited = getPropertyWithFallbacks(
+      if (dateCreated !== undefined) {
+        note.dateCreated = new Date(dateCreated).getTime();
+      }
+      const dateEdited = getPropertyWithFallbacks(
         frontmatter,
         ["updated", "updated_at", "date updated"],
         note.dateEdited
       );
+      if (dateEdited !== undefined) {
+        note.dateEdited = new Date(dateEdited).getTime();
+      }
       note.color = frontmatter.color;
     }
     yield { type: "note", note };
