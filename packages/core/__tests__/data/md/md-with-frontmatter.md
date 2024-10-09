@@ -3,6 +3,8 @@ title: A beautiful morning
 tags: wonderful,journal
 pinned: true
 favorite: true
+created_at: 2013-06-06T09:00:00.001Z
+updated_at: 2014-05-16T10:30:00.001Z
 ---
 
 # An h1 header
