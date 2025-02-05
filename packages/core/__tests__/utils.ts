@@ -30,7 +30,7 @@ import { unified } from "disparity";
 import { Note } from "../src/models";
 import format from "html-format";
 
-const UPDATE_SNAPSHOTS = process.env.UPDATE_SNAPSHOTS !== "false";
+const UPDATE_SNAPSHOTS = process.env.UPDATE_SNAPSHOTS === "true";
 
 export function getFiles(dir: string): IFile[] {
   const output = new fdir()
@@ -79,12 +79,12 @@ export async function matchArraySnapshot(filename: string, actual: string[]) {
 
   if (expected.length !== actual.length)
     throw new Error(
-      `Expected ${expected.length} notes but got ${actual.length} notes. Did you forget to update the snapshot?`
+      `Expected ${expected.length} notes but got ${actual.length} notes. Did you forget to update the snapshot? (${filename})`
     );
 
   for (const str of expected) {
     if (actual.includes(str)) continue;
-    throw new Error(`Could not find "${str}".`);
+    throw new Error(`Could not find "${str}" (${filename}).`);
   }
   return true;
 }
