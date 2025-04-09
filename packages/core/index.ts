@@ -26,7 +26,7 @@ import {
   log
 } from "./src/providers/provider";
 import { unpack } from "./src/utils/archiver";
-import { IFile } from "./src/utils/file";
+import { IFile, File } from "./src/utils/file";
 
 type Counter = { count: number };
 export async function transform<TSettings extends ProviderSettings>(
@@ -99,6 +99,9 @@ async function transformFiles(
   settings.log?.(log(`Preprocessing complete...`));
 
   for (const file of allFiles) {
+    // ignore all hidden files
+    if (isHidden(file)) continue;
+
     if (!provider.filter(file)) {
       settings.log?.(log(`Skipping ${file.name}...`));
       continue;
@@ -166,4 +169,14 @@ function isQuotaExceeded(e: unknown) {
     (e instanceof Error && e.name === "QuotaExceededError") ||
     (e as { inner?: Error }).inner?.name === "QuotaExceededError"
   );
+}
+
+function isHidden(file: File) {
+  if (file.name.startsWith(".")) return true;
+  const parts = file.path?.split("/");
+  if (!parts) return false;
+  for (const part of parts) {
+    if (part.startsWith(".")) return true;
+  }
+  return false;
 }
