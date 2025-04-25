@@ -49,6 +49,7 @@ const defaultEditorDescription = (item: SNNote): EditorDescription => {
 };
 
 export class StandardNotes implements IFileProvider {
+  // @ts-ignore
   id: Providers = "standardnotes";
   type = "file" as const;
   supportedExtensions = [".zip"];

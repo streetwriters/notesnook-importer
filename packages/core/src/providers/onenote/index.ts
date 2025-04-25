@@ -44,6 +44,7 @@ export type OneNoteSettings = ProviderSettings & {
 };
 
 export class OneNote implements INetworkProvider<OneNoteSettings> {
+  // @ts-ignore
   id: Providers = "onenote";
   type = "network" as const;
   version = "1.0.0";
