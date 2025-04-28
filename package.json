@@ -5,8 +5,6 @@
   "scripts": {
     "prepare": "husky install && npm run bootstrap",
     "bootstrap": "node ./scripts/bootstrap.mjs",
-    "start": "nx start @notesnook-importer/web",
-    "build": "nx build @notesnook-importer/web",
     "test:core": "nx test @notesnook-importer/core",
     "watch:core": "nx build @notesnook-importer/core -- --watch",
     "test:enex": "nx test @notesnook-importer/enex"

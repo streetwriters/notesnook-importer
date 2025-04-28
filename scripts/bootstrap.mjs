@@ -30,7 +30,6 @@ const args = parser(process.argv, { alias: { scope: ["s"], offline: ["o"] } });
 const IS_CI = process.env.CI;
 const THREADS = Math.max(4, process.env.THREADS || os.cpus().length / 2);
 const scopes = {
-  importer: "apps/importer",
   core: "packages/core"
 };
 // packages that we shouldn't run npm rebuild for
