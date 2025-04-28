@@ -4,6 +4,7 @@
     "dateCreated": 1629964212062,
     "dateEdited": 1629964212062,
     "pinned": false,
+    "archived": false,
     "content": {
       "type": "html",
       "data": "<p>another note</p>"
@@ -16,6 +17,7 @@
     "dateCreated": 1629964242424,
     "dateEdited": 1629964242424,
     "pinned": false,
+    "archived": false,
     "color": "blue",
     "tags": [
       "cats",
@@ -33,6 +35,7 @@
     "dateCreated": 1629964346280,
     "dateEdited": 1629964346280,
     "pinned": false,
+    "archived": false,
     "color": "red",
     "content": {
       "type": "html",
@@ -55,6 +58,7 @@
     "dateCreated": 1629964207042,
     "dateEdited": 1629964207042,
     "pinned": false,
+    "archived": false,
     "content": {
       "type": "html",
       "data": "<p>hello world</p>"
@@ -67,6 +71,7 @@
     "dateCreated": 1629964316377,
     "dateEdited": 1629964316377,
     "pinned": false,
+    "archived": false,
     "content": {
       "type": "html",
       "data": "<p>a simple drawing</p><img class=\"attachment\"\n data-filename=\"1629964295873.139657380.png\"\n data-size=\"41348\" data-hash=\"c52fdb48c0f1b106\"\n data-mime=\"image/png\" alt=\"1629964295873.139657380.png\" />"
@@ -88,6 +93,7 @@
     "dateCreated": 1492509392182,
     "dateEdited": 1492509461455,
     "pinned": false,
+    "archived": false,
     "tags": [
       "theySay"
     ],
@@ -112,6 +118,7 @@
     "dateCreated": 1492509392182,
     "dateEdited": 1492509461455,
     "pinned": false,
+    "archived": false,
     "tags": [
       "theySay"
     ],
@@ -136,6 +143,7 @@
     "dateCreated": 1606333755274,
     "dateEdited": 1606333758949,
     "pinned": false,
+    "archived": false,
     "tags": [
       "Ответы"
     ],
@@ -160,6 +168,7 @@
     "dateCreated": 1629964212062,
     "dateEdited": 1629964212062,
     "pinned": false,
+    "archived": false,
     "content": {
       "type": "html",
       "data": "<p>another note</p>"
@@ -172,6 +181,7 @@
     "dateCreated": 1629964207042,
     "dateEdited": 1629964207042,
     "pinned": false,
+    "archived": false,
     "content": {
       "type": "html",
       "data": "<p>hello world</p>"
@@ -184,6 +194,7 @@
     "dateCreated": 1629964346280,
     "dateEdited": 1629964346280,
     "pinned": false,
+    "archived": false,
     "color": "red",
     "content": {
       "type": "html",
@@ -206,6 +217,7 @@
     "dateCreated": 1629964242424,
     "dateEdited": 1629964242424,
     "pinned": false,
+    "archived": false,
     "color": "blue",
     "tags": [
       "cats",
@@ -223,6 +235,7 @@
     "dateCreated": 1629964316377,
     "dateEdited": 1629964316377,
     "pinned": false,
+    "archived": false,
     "content": {
       "type": "html",
       "data": "<p>a simple drawing</p><img class=\"attachment\"\n data-filename=\"1629964295873.139657380.png\"\n data-size=\"41348\" data-hash=\"c52fdb48c0f1b106\"\n data-mime=\"image/png\" alt=\"1629964295873.139657380.png\" />"

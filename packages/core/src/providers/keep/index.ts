@@ -71,6 +71,7 @@ export class GoogleKeep implements IFileProvider {
       dateCreated: dateCreated,
       dateEdited,
       pinned: keepNote.isPinned,
+      archived: keepNote.isArchived,
       color: colorMap[keepNote.color?.toLowerCase() || "default"],
       tags: keepNote.labels?.map((label) => label.name),
       content: {

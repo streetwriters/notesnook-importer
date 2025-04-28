@@ -31,8 +31,9 @@ export type Note = {
   tags?: string[];
   favorite?: boolean;
   pinned?: boolean;
+  archived?: boolean;
   color?: string;
-  notebooks?: LegacyNotebook[] | Notebook[];
+  notebooks?: Notebook[];
   attachments?: Attachment[];
 
   compatibilityVersion?: number;
@@ -48,14 +49,6 @@ export enum ContentType {
   HTML = "html",
   TEXT = "text"
 }
-
-/**
- * @deprecated
- */
-export type LegacyNotebook = {
-  notebook: string;
-  topic?: string;
-};
 
 export type Notebook = {
   title: string;
