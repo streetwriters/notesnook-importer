@@ -17,7 +17,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import "isomorphic-fetch"; // or import the fetch polyfill you installed
 export * from "./src/api";
 export * from "./src/content";
 export * from "./src/types";

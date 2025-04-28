@@ -30,8 +30,7 @@
     "domhandler": "^5.0.3",
     "domutils": "^3.0.1",
     "dotenv": "^16.0.0",
-    "htmlparser2": "^8.0.1",
-    "isomorphic-fetch": "^3.0.0"
+    "htmlparser2": "^8.0.1"
   },
   "optionalDependencies": {
     "@azure/msal-browser": "^3.6.0",
