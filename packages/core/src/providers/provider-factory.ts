@@ -17,6 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import { StandardNotes } from "./standard-notes";
 import { Evernote } from "./evernote";
 import { Markdown } from "./md";
 import { HTML } from "./html";
@@ -39,6 +40,8 @@ const providerMap = {
   html: HTML,
   keep: GoogleKeep,
   simplenote: Simplenote,
+  // onenote: OneNote,
+  standardnotes: StandardNotes,
   zohonotebook: ZohoNotebook,
   joplin: Joplin,
   textbundle: TextBundle,
