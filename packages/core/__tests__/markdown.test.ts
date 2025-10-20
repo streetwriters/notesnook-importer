@@ -123,7 +123,7 @@ function google() {
 <co-co>hello</co-co>
 \`\`\``)
   ).toBe(
-    `<pre class="language-javascript"><code class="language-javascript">function google() {<br/>}<br/><br/>&lt;html&gt;good&lt;/html&gt;<br/>&lt;COmponent&gt;{() =&gt; {}}&lt;/Component&gt;<br/>&lt;co-co&gt;hello&lt;/co-co&gt;<br/></code></pre>`
+    `<pre class="language-javascript"><code class="language-javascript">function google() {<br/>}<br/><br/>&lt;html>good&lt;/html><br/>&lt;COmponent>{() => {}}&lt;/Component><br/>&lt;co-co>hello&lt;/co-co><br/></code></pre>`
   );
 });
 
@@ -173,5 +173,21 @@ test("parse subscript & superscript", (t) => {
 test("parse highlight", (t) => {
   t.expect(markdowntoHTML(`I am ==highlighted== **again**.`)).toBe(
     `<p>I am <span style="background-color: rgb(255, 255, 0);">highlighted</span> <strong>again</strong>.</p>`
+  );
+});
+
+test("do not double encode html entities", async (t) => {
+  t.expect(
+    markdowntoHTML(`I am some code with entities:
+
+\`\`\`
+I am damn happy to here & and < > what else.
+\`\`\`
+
+And **something** else.`)
+  ).toBe(
+    `<p>I am some code with entities:</p>
+<pre><code>I am damn happy to here &#38; and &lt; > what else.<br/></code></pre>
+<p>And <strong>something</strong> else.</p>`
   );
 });

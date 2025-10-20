@@ -49,7 +49,7 @@ export function markdowntoHTML(
     .use(removeComments)
     .use(convertFileEmbeds)
     .use(remarkRehype, { allowDangerousHtml: options.allowDangerousHtml })
-    .use(escapeCode, { encodeHtmlEntities: options.encodeHtmlEntities })
+    .use(escapeCode)
     .use(fixChecklistClasses)
     .use(liftLanguageToPreFromCode)
     .use(collapseMultilineParagraphs)
@@ -57,7 +57,10 @@ export function markdowntoHTML(
       allowDangerousHtml: options.allowDangerousHtml,
       tightSelfClosing: true,
       closeSelfClosing: true,
-      closeEmptyElements: true
+      closeEmptyElements: true,
+      characterReferences: {
+        useShortestReferences: true
+      }
     })
     .processSync(src);
   return result.value as string;
@@ -188,32 +191,31 @@ const remarkHighlight: () => Transformer = () => (tree) => {
     const children: Node<Data>[] = values.map((str, i) =>
       i % 2 === 0
         ? {
-          type: "text",
-          value: str
-        }
+            type: "text",
+            value: str
+          }
         : {
-          type: "highlight",
-          data: {
-            hName: "span",
-            hProperties: {
-              style: `background-color: rgb(255, 255, 0);`
-            }
-          },
-          children: [
-            {
-              type: "text",
-              value: str
-            }
-          ]
-        }
+            type: "highlight",
+            data: {
+              hName: "span",
+              hProperties: {
+                style: `background-color: rgb(255, 255, 0);`
+              }
+            },
+            children: [
+              {
+                type: "text",
+                value: str
+              }
+            ]
+          }
     );
     (parent as Parent).children.splice(index!, 1, ...children);
     return ["skip", index];
   });
 };
 
-const escapeCode: Plugin<[{ encodeHtmlEntities?: boolean }?], HastRoot, HastRoot> = function (options = {}) {
-  const { encodeHtmlEntities = true } = options;
+const escapeCode: Plugin<[], HastRoot, HastRoot> = function () {
   return (tree: HastRoot) => {
     visit(tree, "element", (node) => {
       if (!isElement(node, "code")) return;
@@ -224,7 +226,7 @@ const escapeCode: Plugin<[{ encodeHtmlEntities?: boolean }?], HastRoot, HastRoot
           lines.forEach((line, i) => {
             children.push({
               type: "text",
-              value: encodeHtmlEntities ? encodeNonAsciiHTML(line) : line
+              value: line
             });
             if (i !== lines.length - 1)
               children.push({
