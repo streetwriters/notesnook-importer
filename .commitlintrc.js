@@ -13,7 +13,6 @@ const SCOPES = [
   "importer",
   "core",
   "enex",
-  "onenote",
   "storage",
   "znel",
   "config",

@@ -7,17 +7,13 @@
   "scripts": {
     "test": "vitest run",
     "build": "tsc",
-    "prepublishOnly": "npm run build",
-    "postinstall": "patch-package"
+    "prepublishOnly": "npm run test && npm run build"
   },
   "dependencies": {
     "@notesnook-importer/enex": "file:../enex",
-    "@notesnook-importer/onenote": "file:../onenote",
     "@notesnook-importer/storage": "file:../storage",
     "@notesnook-importer/znel": "file:../znel",
     "@stablelib/chacha20poly1305": "^1.0.1",
-    "@standardnotes/features": "1.58.0",
-    "@standardnotes/models": "1.42.0",
     "@streamparser/json": "^0.0.10",
     "@zip.js/zip.js": "^2.7.32",
     "css-select": "^5.1.0",
@@ -45,7 +41,6 @@
   },
   "devDependencies": {
     "@types/varint": "^6.0.3",
-    "@microsoft/microsoft-graph-types-beta": "^0.29.0-preview",
     "@node-rs/xxhash": "^1.0.1",
     "@types/kendo-ui": "^2022.1.0",
     "@types/mdast": "^4.0.0",

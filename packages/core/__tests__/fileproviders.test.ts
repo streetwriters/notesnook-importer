@@ -51,7 +51,7 @@ fetchMocker.enableMocks();
 
 for (const providerName of ProviderFactory.getAvailableProviders()) {
   const provider = ProviderFactory.getProvider(providerName);
-  if (provider.type === "network") continue;
+  // if (provider.type === "network") continue;
 
   test(`transform ${providerName} files to notesnook importer compatible format`, async () => {
     const files = getFiles(providerName);

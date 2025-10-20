@@ -7,7 +7,5 @@ Supported providers:
 3. Google Keep
 4. HTML
 5. Markdown/Text
-6. Standard Notes
-7. OneNote
-8. Zoho Notebook
-9. Joplin
+6. Zoho Notebook
+7. Joplin
