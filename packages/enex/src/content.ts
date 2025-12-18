@@ -226,6 +226,12 @@ function findElementType(element: Element, passthrough = false): string | null {
               if (title) element.attribs["note-title"] = title;
               break;
             }
+            case "--en-naturalWidth":
+              element.attribs["naturalWidth"] = styles[style];
+              break;
+            case "--en-naturalHeight":
+              element.attribs["naturalHeight"] = styles[style];
+              break;
           }
 
           if (
