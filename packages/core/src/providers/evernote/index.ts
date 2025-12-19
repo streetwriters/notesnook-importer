@@ -41,6 +41,47 @@ export class Evernote implements IFileProvider {
     "https://help.notesnook.com/importing-notes/import-notes-from-evernote";
   private ids: Record<string, string> = {};
 
+  private parseNestedTags(
+    tags: string[],
+    separator?: string
+  ): { notebooks: Notebook[]; filteredTags: string[] } {
+    const notebooks: Notebook[] = [];
+    const filteredTags: string[] = [];
+
+    if (!separator) {
+      return { notebooks, filteredTags: tags };
+    }
+
+    for (const tag of tags) {
+      if (!tag.includes(separator)) {
+        filteredTags.push(tag);
+        continue;
+      }
+
+      const parts = tag.split(separator).filter((part) => part.trim());
+      if (parts.length <= 1) {
+        filteredTags.push(tag);
+        continue;
+      }
+
+      let rootNotebook: Notebook | undefined = undefined;
+      for (let i = parts.length - 1; i >= 0; i--) {
+        const isLeafNotebook = i === parts.length - 1;
+        rootNotebook = {
+          title: parts[i].trim(),
+          children: rootNotebook ? [rootNotebook] : [],
+          skipApplyingToNote: isLeafNotebook ? undefined : true
+        };
+      }
+
+      if (rootNotebook) {
+        notebooks.push(rootNotebook);
+      }
+    }
+
+    return { notebooks, filteredTags };
+  }
+
   filter(file: File) {
     return this.supportedExtensions.includes(file.extension);
   }
@@ -60,14 +101,22 @@ export class Evernote implements IFileProvider {
       for (const enNote of chunk) {
         yield log(`Found ${enNote.title}...`);
 
+        const { notebooks: tagBasedNotebooks, filteredTags } =
+          this.parseNestedTags(
+            enNote.tags || [],
+            settings.options?.nestedTagToNotebookSeparator
+          );
+
+        const allNotebooks = [notebook, ...tagBasedNotebooks];
+
         const note: Note = {
           id: this.ids[enNote.title || ""],
           title: enNote.title || "",
-          tags: enNote.tags,
+          tags: filteredTags,
           dateCreated: enNote.created?.getTime(),
           dateEdited: enNote.updated?.getTime(),
           attachments: [],
-          notebooks: [notebook]
+          notebooks: allNotebooks
         };
         if (enNote.content) {
           const elementHandler = new ElementHandler(

@@ -53,4 +53,5 @@ export enum ContentType {
 export type Notebook = {
   title: string;
   children: Notebook[];
+  skipApplyingToNote?: boolean;
 };
