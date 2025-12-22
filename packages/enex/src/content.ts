@@ -221,9 +221,12 @@ function findElementType(element: Element, passthrough = false): string | null {
               break;
             }
             case "--en-richlink": {
-              elementType = "en-internal-link";
-              const title = styles["--en-title"];
-              if (title) element.attribs["note-title"] = title;
+              const href = styles["--en-href"];
+              if (href && isEvernoteLink(href)) {
+                elementType = "en-internal-link";
+                const title = styles["--en-title"];
+                if (title) element.attribs["note-title"] = title;
+              }
               break;
             }
           }

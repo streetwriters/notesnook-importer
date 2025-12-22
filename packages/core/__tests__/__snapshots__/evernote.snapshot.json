@@ -84,7 +84,7 @@
       }
     ],
     "content": {
-      "data": "<pre>klkmklmk<br>;mkmk<br>#include <Servo.h><br><br><br>#include <LiquidCrystal.h><br><br><br>kmkmkl</pre>",
+      "data": "<pre>klkmklmk<br>;mkmk<br>#include <Servo.h><br><br>#include <LiquidCrystal.h><br><br>kmkmkl</pre>",
       "type": "html"
     },
     "compatibilityVersion": 2,
@@ -227,8 +227,8 @@
     "attachments": [
       {
         "filename": "-http---www.theguardian.com-world-2015-jul-27-dying-for-christianity-millions-at-risk-amid-rise-in-persecution-across-the-globe-.clip",
-        "size": 1460469,
-        "hash": "3fe04cccf9201f76",
+        "size": 1456702,
+        "hash": "539f86d6261aac41",
         "hashType": "xxh64",
         "mime": "application/vnd.notesnook.web-clip"
       }
@@ -240,7 +240,7 @@
       }
     ],
     "content": {
-      "data": "<iframe class=\"web-clip\"\n data-filename=\"-http---www.theguardian.com-world-2015-jul-27-dying-for-christianity-millions-at-risk-amid-rise-in-persecution-across-the-globe-.clip\"\n data-size=\"1460469\" data-hash=\"3fe04cccf9201f76\"\n data-mime=\"application/vnd.notesnook.web-clip\" src=\"\r\n        http://www.theguardian.com/world/2015/jul/27/dying-for-christianity-millions-at-risk-amid-rise-in-persecution-across-the-globe\r\n      \" title=\"\r\n        http://www.theguardian.com/world/2015/jul/27/dying-for-christianity-millions-at-risk-amid-rise-in-persecution-across-the-globe\r\n      \"> </iframe><hr><p>Clipped from: <a href=\"\r\n        http://www.theguardian.com/world/2015/jul/27/dying-for-christianity-millions-at-risk-amid-rise-in-persecution-across-the-globe\r\n      \">\n  http://www.theguardian.com/world/2015/jul/27/dying-for-christianity-millions-at-risk-amid-rise-in-persecution-across-the-globe\n </a></p>",
+      "data": "<iframe class=\"web-clip\"\n data-filename=\"-http---www.theguardian.com-world-2015-jul-27-dying-for-christianity-millions-at-risk-amid-rise-in-persecution-across-the-globe-.clip\"\n data-size=\"1456702\" data-hash=\"539f86d6261aac41\"\n data-mime=\"application/vnd.notesnook.web-clip\" src=\"\n        http://www.theguardian.com/world/2015/jul/27/dying-for-christianity-millions-at-risk-amid-rise-in-persecution-across-the-globe\n      \" title=\"\n        http://www.theguardian.com/world/2015/jul/27/dying-for-christianity-millions-at-risk-amid-rise-in-persecution-across-the-globe\n      \"> </iframe><hr><p>Clipped from: <a href=\"\n        http://www.theguardian.com/world/2015/jul/27/dying-for-christianity-millions-at-risk-amid-rise-in-persecution-across-the-globe\n      \">\n  http://www.theguardian.com/world/2015/jul/27/dying-for-christianity-millions-at-risk-amid-rise-in-persecution-across-the-globe\n </a></p>",
       "type": "html"
     },
     "compatibilityVersion": 2,
@@ -342,6 +342,25 @@
     ],
     "content": {
       "data": "<p>I am awesome.</p><p>dvasvasdv</p><p>asdvasd</p><p>vasdv</p>",
+      "type": "html"
+    },
+    "compatibilityVersion": 2,
+    "source": "evernote"
+  },
+  {
+    "title": "Google documents",
+    "tags": [],
+    "dateCreated": 1766003109000,
+    "dateEdited": 1766003310000,
+    "attachments": [],
+    "notebooks": [
+      {
+        "title": "rich-links",
+        "children": []
+      }
+    ],
+    "content": {
+      "data": "<p> </p><p><a\n  href=\"https://docs.google.com/spreadsheets/d/f1c71cc2a1a60203348408e8e7a707d28d700996898e204f2a883bb152355387/edit\"\n  rev=\"en_rl_small\">Evernote alternatives</a></p><p> </p><p><a\n  href=\"https://drive.google.com/file/d/c8d9d813c37712f8e1ab0708e01c938386758ae82690fd9e00ae1fc5b5af96f7/view\"\n  rev=\"en_rl_small\">Final</a></p><p><br></p>",
       "type": "html"
     },
     "compatibilityVersion": 2,
@@ -632,8 +651,8 @@
     "attachments": [
       {
         "filename": "https---unsplash.com-photos-3ym6i13y9lu.clip",
-        "size": 11318,
-        "hash": "61d44e78afd2b2f5",
+        "size": 11304,
+        "hash": "1f243764c8e2e51b",
         "hashType": "xxh64",
         "mime": "application/vnd.notesnook.web-clip"
       }
@@ -645,7 +664,7 @@
       }
     ],
     "content": {
-      "data": "<iframe class=\"web-clip\"\n data-filename=\"https---unsplash.com-photos-3ym6i13y9lu.clip\"\n data-size=\"11318\" data-hash=\"61d44e78afd2b2f5\"\n data-mime=\"application/vnd.notesnook.web-clip\"\n src=\"https://unsplash.com/photos/3ym6i13Y9LU\"\n title=\"https://unsplash.com/photos/3ym6i13Y9LU\"> </iframe><hr><p>Clipped\n from: <a href=\"https://unsplash.com/photos/3ym6i13Y9LU\">https://unsplash.com/photos/3ym6i13Y9LU</a></p>",
+      "data": "<iframe class=\"web-clip\"\n data-filename=\"https---unsplash.com-photos-3ym6i13y9lu.clip\"\n data-size=\"11304\" data-hash=\"1f243764c8e2e51b\"\n data-mime=\"application/vnd.notesnook.web-clip\"\n src=\"https://unsplash.com/photos/3ym6i13Y9LU\"\n title=\"https://unsplash.com/photos/3ym6i13Y9LU\"> </iframe><hr><p>Clipped\n from: <a href=\"https://unsplash.com/photos/3ym6i13Y9LU\">https://unsplash.com/photos/3ym6i13Y9LU</a></p>",
       "type": "html"
     },
     "compatibilityVersion": 2,
@@ -1654,8 +1673,8 @@
     "attachments": [
       {
         "filename": "yarle-evernote.clip",
-        "size": 41104,
-        "hash": "76f389b0ffe10810",
+        "size": 41102,
+        "hash": "22ddf88e6047839a",
         "hashType": "xxh64",
         "mime": "application/vnd.notesnook.web-clip"
       }
@@ -1667,7 +1686,7 @@
       }
     ],
     "content": {
-      "data": "<iframe class=\"web-clip\" data-filename=\"yarle-evernote.clip\"\n data-size=\"41104\" data-hash=\"76f389b0ffe10810\"\n data-mime=\"application/vnd.notesnook.web-clip\"\n src=\"https://www.google.com/search?sxsrf=ALeKk03bpXQ9mBvZPr4siq9b90rD9F_scA%253A1603005812287&ei=dO2LX9qUEcX1qwGn5brgBQ&q=yarle+evernote&oq=yarle+evernote&gs_lcp=CgZwc3ktYWIQAzIECCMQJzoHCCMQsAMQJzoHCAAQsAMQQzoHCC4QsAMQQzoJCAAQsAMQBxAeOgcIABCwAxAKOgUIABDJAzoCCAA6BAgAEAo6BAguEAo6BwguEMkDEA06BggAEA0QCjoGCAAQDRAeOggIABANEAoQHjoICAAQDRAFEB46CAgAEBYQChAeOgUIIRCgAToHCAAQyQMQDToECAAQDVDdEViJKmD_MGgDcAB4AYAB7gSIAf0RkgEJMC45LjEuNS0xmAEAoAEBqgEHZ3dzLXdpesgBCsABAQ&sclient=psy-ab&ved=0ahUKEwjano6Azr3sAhXF-ioKHaeyDlwQ4dUDCA0&uact=5\"\n title=\"yarle evernote\"> </iframe><hr><p>Clipped from: <a\n  href=\"https://www.google.com/search?sxsrf=ALeKk03bpXQ9mBvZPr4siq9b90rD9F_scA%253A1603005812287&ei=dO2LX9qUEcX1qwGn5brgBQ&q=yarle+evernote&oq=yarle+evernote&gs_lcp=CgZwc3ktYWIQAzIECCMQJzoHCCMQsAMQJzoHCAAQsAMQQzoHCC4QsAMQQzoJCAAQsAMQBxAeOgcIABCwAxAKOgUIABDJAzoCCAA6BAgAEAo6BAguEAo6BwguEMkDEA06BggAEA0QCjoGCAAQDRAeOggIABANEAoQHjoICAAQDRAFEB46CAgAEBYQChAeOgUIIRCgAToHCAAQyQMQDToECAAQDVDdEViJKmD_MGgDcAB4AYAB7gSIAf0RkgEJMC45LjEuNS0xmAEAoAEBqgEHZ3dzLXdpesgBCsABAQ&sclient=psy-ab&ved=0ahUKEwjano6Azr3sAhXF-ioKHaeyDlwQ4dUDCA0&uact=5\">yarle\n  evernote</a></p>",
+      "data": "<iframe class=\"web-clip\" data-filename=\"yarle-evernote.clip\"\n data-size=\"41102\" data-hash=\"22ddf88e6047839a\"\n data-mime=\"application/vnd.notesnook.web-clip\"\n src=\"https://www.google.com/search?sxsrf=ALeKk03bpXQ9mBvZPr4siq9b90rD9F_scA%253A1603005812287&ei=dO2LX9qUEcX1qwGn5brgBQ&q=yarle+evernote&oq=yarle+evernote&gs_lcp=CgZwc3ktYWIQAzIECCMQJzoHCCMQsAMQJzoHCAAQsAMQQzoHCC4QsAMQQzoJCAAQsAMQBxAeOgcIABCwAxAKOgUIABDJAzoCCAA6BAgAEAo6BAguEAo6BwguEMkDEA06BggAEA0QCjoGCAAQDRAeOggIABANEAoQHjoICAAQDRAFEB46CAgAEBYQChAeOgUIIRCgAToHCAAQyQMQDToECAAQDVDdEViJKmD_MGgDcAB4AYAB7gSIAf0RkgEJMC45LjEuNS0xmAEAoAEBqgEHZ3dzLXdpesgBCsABAQ&sclient=psy-ab&ved=0ahUKEwjano6Azr3sAhXF-ioKHaeyDlwQ4dUDCA0&uact=5\"\n title=\"yarle evernote\"> </iframe><hr><p>Clipped from: <a\n  href=\"https://www.google.com/search?sxsrf=ALeKk03bpXQ9mBvZPr4siq9b90rD9F_scA%253A1603005812287&ei=dO2LX9qUEcX1qwGn5brgBQ&q=yarle+evernote&oq=yarle+evernote&gs_lcp=CgZwc3ktYWIQAzIECCMQJzoHCCMQsAMQJzoHCAAQsAMQQzoHCC4QsAMQQzoJCAAQsAMQBxAeOgcIABCwAxAKOgUIABDJAzoCCAA6BAgAEAo6BAguEAo6BwguEMkDEA06BggAEA0QCjoGCAAQDRAeOggIABANEAoQHjoICAAQDRAFEB46CAgAEBYQChAeOgUIIRCgAToHCAAQyQMQDToECAAQDVDdEViJKmD_MGgDcAB4AYAB7gSIAf0RkgEJMC45LjEuNS0xmAEAoAEBqgEHZ3dzLXdpesgBCsABAQ&sclient=psy-ab&ved=0ahUKEwjano6Azr3sAhXF-ioKHaeyDlwQ4dUDCA0&uact=5\">yarle\n  evernote</a></p>",
       "type": "html"
     },
     "compatibilityVersion": 2,
