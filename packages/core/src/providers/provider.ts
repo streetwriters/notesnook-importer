@@ -75,6 +75,9 @@ export interface ProviderSettings {
   storage: IStorage<Note>;
   log?: (message: ProviderLogMessage) => void;
   reporter: (current: number, total?: number) => void;
+  options?: {
+    nestedTagToNotebookSeparator?: string;
+  };
 }
 
 export type ProviderResult = {

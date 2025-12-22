@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-export SYSTEM "http://xml.evernote.com/pub/evernote-export4.dtd">
+<en-export export-date="20251218T102850Z" application="Evernote" version="10.167.1">
+  <note>
+    <title>anote</title>
+    <created>20251205T073302Z</created>
+    <updated>20251218T102759Z</updated>
+    <tag>toplevel/leaf</tag>
+    <tag>diary</tag>
+    <note-attributes>
+      <author>test</author>
+    </note-attributes>
+    <content>
+      <![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd"><en-note><div style="display:none;--en-chs:&quot;eyJpc0VtcHR5IjpmYWxzZSwiaDEiOnsiZm9udEZhbWlseSI6ImluaGVyaXQiLCJmb250U2l6ZSI6IjI1cHgiLCJjb2xvciI6ImluaGVyaXQiLCJmb250V2VpZ2h0IjoiNjAwIiwiZm9udFN0eWxlIjoiaW5oZXJpdCIsInRleHREZWNvcmF0aW9uIjoiaW5oZXJpdCJ9LCJoMiI6eyJmb250RmFtaWx5IjoiaW5oZXJpdCIsImZvbnRTaXplIjoiMjBweCIsImNvbG9yIjoiaW5oZXJpdCIsImZvbnRXZWlnaHQiOiI2MDAiLCJmb250U3R5bGUiOiJpbmhlcml0IiwidGV4dERlY29yYXRpb24iOiJpbmhlcml0In0sImgzIjp7ImZvbnRGYW1pbHkiOiJpbmhlcml0IiwiZm9udFNpemUiOiIxOHB4IiwiY29sb3IiOiJpbmhlcml0IiwiZm9udFdlaWdodCI6IjYwMCIsImZvbnRTdHlsZSI6ImluaGVyaXQiLCJ0ZXh0RGVjb3JhdGlvbiI6ImluaGVyaXQifSwicCI6eyJmb250RmFtaWx5IjoiaW5oZXJpdCIsImZvbnRTaXplIjoiaW5oZXJpdCIsImNvbG9yIjoiaW5oZXJpdCIsImZvbnRXZWlnaHQiOiJpbmhlcml0IiwiZm9udFN0eWxlIjoiaW5oZXJpdCIsInRleHREZWNvcmF0aW9uIjoiaW5oZXJpdCJ9fQ==&quot;"> </div><div>a note</div><div><a href="evernote:///view/306557416/s476/a70d92fc-bc7d-eba0-e446-dc1ce6fa3aa0/38fb81ee-966a-41b4-802d-6f66bdd62619">link</a></div></en-note>      ]]>
+    </content>
+  </note>
+  <note>
+    <title>coding xyz</title>
+    <created>20251205T100356Z</created>
+    <updated>20251205T100405Z</updated>
+    <tag>coding/javascript/variables</tag>
+    <note-attributes>
+      <author>test</author>
+    </note-attributes>
+    <content>
+      <![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd"><en-note><div style="display:none;--en-chs:&quot;eyJpc0VtcHR5IjpmYWxzZSwiaDEiOnsiZm9udEZhbWlseSI6ImluaGVyaXQiLCJmb250U2l6ZSI6IjI1cHgiLCJjb2xvciI6ImluaGVyaXQiLCJmb250V2VpZ2h0IjoiNjAwIiwiZm9udFN0eWxlIjoiaW5oZXJpdCIsInRleHREZWNvcmF0aW9uIjoiaW5oZXJpdCJ9LCJoMiI6eyJmb250RmFtaWx5IjoiaW5oZXJpdCIsImZvbnRTaXplIjoiMjBweCIsImNvbG9yIjoiaW5oZXJpdCIsImZvbnRXZWlnaHQiOiI2MDAiLCJmb250U3R5bGUiOiJpbmhlcml0IiwidGV4dERlY29yYXRpb24iOiJpbmhlcml0In0sImgzIjp7ImZvbnRGYW1pbHkiOiJpbmhlcml0IiwiZm9udFNpemUiOiIxOHB4IiwiY29sb3IiOiJpbmhlcml0IiwiZm9udFdlaWdodCI6IjYwMCIsImZvbnRTdHlsZSI6ImluaGVyaXQiLCJ0ZXh0RGVjb3JhdGlvbiI6ImluaGVyaXQifSwicCI6eyJmb250RmFtaWx5IjoiaW5oZXJpdCIsImZvbnRTaXplIjoiaW5oZXJpdCIsImNvbG9yIjoiaW5oZXJpdCIsImZvbnRXZWlnaHQiOiJpbmhlcml0IiwiZm9udFN0eWxlIjoiaW5oZXJpdCIsInRleHREZWNvcmF0aW9uIjoiaW5oZXJpdCJ9fQ==&quot;"> </div><div><br/></div></en-note>      ]]>
+    </content>
+  </note>
+  <note>
+    <title>this is javascript</title>
+    <created>20251205T100330Z</created>
+    <updated>20251205T100342Z</updated>
+    <tag>coding/javascript</tag>
+    <note-attributes>
+      <author>test</author>
+    </note-attributes>
+    <content>
+      <![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd"><en-note><div style="display:none;--en-chs:&quot;eyJpc0VtcHR5IjpmYWxzZSwiaDEiOnsiZm9udEZhbWlseSI6ImluaGVyaXQiLCJmb250U2l6ZSI6IjI1cHgiLCJjb2xvciI6ImluaGVyaXQiLCJmb250V2VpZ2h0IjoiNjAwIiwiZm9udFN0eWxlIjoiaW5oZXJpdCIsInRleHREZWNvcmF0aW9uIjoiaW5oZXJpdCJ9LCJoMiI6eyJmb250RmFtaWx5IjoiaW5oZXJpdCIsImZvbnRTaXplIjoiMjBweCIsImNvbG9yIjoiaW5oZXJpdCIsImZvbnRXZWlnaHQiOiI2MDAiLCJmb250U3R5bGUiOiJpbmhlcml0IiwidGV4dERlY29yYXRpb24iOiJpbmhlcml0In0sImgzIjp7ImZvbnRGYW1pbHkiOiJpbmhlcml0IiwiZm9udFNpemUiOiIxOHB4IiwiY29sb3IiOiJpbmhlcml0IiwiZm9udFdlaWdodCI6IjYwMCIsImZvbnRTdHlsZSI6ImluaGVyaXQiLCJ0ZXh0RGVjb3JhdGlvbiI6ImluaGVyaXQifSwicCI6eyJmb250RmFtaWx5IjoiaW5oZXJpdCIsImZvbnRTaXplIjoiaW5oZXJpdCIsImNvbG9yIjoiaW5oZXJpdCIsImZvbnRXZWlnaHQiOiJpbmhlcml0IiwiZm9udFN0eWxlIjoiaW5oZXJpdCIsInRleHREZWNvcmF0aW9uIjoiaW5oZXJpdCJ9fQ==&quot;"> </div><div>best language of all time</div></en-note>      ]]>
+    </content>
+  </note>
+</en-export>
