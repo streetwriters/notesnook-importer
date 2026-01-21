@@ -30,6 +30,7 @@ import { Obsidian } from "./dummies/obsidian";
 import { SkiffPages } from "./skiff-pages";
 import { Fusebase } from "./fusebase";
 import { ColorNote } from "./colornote";
+import { UpNote } from "./upnote";
 
 const providerMap = {
   evernote: Evernote,
@@ -44,6 +45,7 @@ const providerMap = {
   skiffpages: SkiffPages,
   fusebase: Fusebase,
   colornote: ColorNote,
+  upnote: UpNote,
 
   // Dummies
   obsidian: Obsidian
