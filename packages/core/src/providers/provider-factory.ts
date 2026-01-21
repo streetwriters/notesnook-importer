@@ -29,6 +29,7 @@ import { Text } from "./txt";
 import { Obsidian } from "./dummies/obsidian";
 import { SkiffPages } from "./skiff-pages";
 import { Fusebase } from "./fusebase";
+import { UpNote } from "./upnote";
 
 const providerMap = {
   evernote: Evernote,
@@ -42,6 +43,7 @@ const providerMap = {
   textbundle: TextBundle,
   skiffpages: SkiffPages,
   fusebase: Fusebase,
+  upnote: UpNote,
 
   // Dummies
   obsidian: Obsidian

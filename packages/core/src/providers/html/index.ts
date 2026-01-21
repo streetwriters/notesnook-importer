@@ -174,7 +174,7 @@ export class HTML implements IFileProvider {
     }
   }
 
-  private static async extractResources(
+  static async extractResources(
     document: Document,
     file: File,
     files: File[],
