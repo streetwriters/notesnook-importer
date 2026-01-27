@@ -1,0 +1,200 @@
+[
+  {
+    "title": "simple note",
+    "dateCreated": 1769405196549,
+    "dateEdited": 1769490388161,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\">&nbsp;content</p><p\n data-spacing=\"single\"></p><p data-spacing=\"single\">hello</p>"
+    },
+    "color": "yellow",
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "grocery",
+    "dateCreated": 1769405232195,
+    "dateEdited": 1769424959037,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\">[V] a</p><p data-spacing=\"single\">[V]\n egg</p><p data-spacing=\"single\">[ ] milk</p><p\n data-spacing=\"single\">[ ] fruit</p><p data-spacing=\"single\"></p>"
+    },
+    "color": "blue",
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "deadline",
+    "dateCreated": 1769405293769,
+    "dateEdited": 1769405299544,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\">deadline</p>"
+    },
+    "color": "yellow",
+    "reminder": {
+      "title": "deadline",
+      "description": "<p data-spacing=\"single\">deadline</p>",
+      "date": 1769299200000,
+      "mode": "once"
+    },
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "notneeded",
+    "dateCreated": 1769425036169,
+    "dateEdited": 1769425041535,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\">notneeded</p>"
+    },
+    "color": "gray",
+    "archived": true,
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "trashing",
+    "dateCreated": 1769488647608,
+    "dateEdited": 1769488651607,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\"></p>"
+    },
+    "color": "yellow",
+    "trashed": true,
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "weekly reminder",
+    "dateCreated": 1769493708955,
+    "dateEdited": 1769493714555,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\">weekly reminder</p>"
+    },
+    "color": "yellow",
+    "reminder": {
+      "title": "weekly reminder",
+      "description": "<p data-spacing=\"single\">weekly reminder</p>",
+      "date": 1769494693265,
+      "mode": "repeat",
+      "recurringMode": "week",
+      "selectedDays": [
+        2
+      ]
+    },
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "monthly reminder",
+    "dateCreated": 1769493796341,
+    "dateEdited": 1769493802769,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\"></p>"
+    },
+    "color": "yellow",
+    "reminder": {
+      "title": "monthly reminder",
+      "description": "<p data-spacing=\"single\"></p>",
+      "date": 1769558400000,
+      "mode": "repeat",
+      "recurringMode": "month",
+      "selectedDays": [
+        28
+      ]
+    },
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "daily reminder",
+    "dateCreated": 1769494132483,
+    "dateEdited": 1769494168973,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\"></p>"
+    },
+    "color": "yellow",
+    "reminder": {
+      "title": "daily reminder",
+      "description": "<p data-spacing=\"single\"></p>",
+      "date": 1769644800000,
+      "mode": "repeat",
+      "recurringMode": "day"
+    },
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "monthlyreminder2",
+    "dateCreated": 1769499171278,
+    "dateEdited": 1769499177527,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\"></p>"
+    },
+    "color": "yellow",
+    "reminder": {
+      "title": "monthlyreminder2",
+      "description": "<p data-spacing=\"single\"></p>",
+      "date": 1769500092370,
+      "mode": "repeat",
+      "recurringMode": "month",
+      "selectedDays": [
+        27
+      ]
+    },
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "weeklyreminder2",
+    "dateCreated": 1769499198671,
+    "dateEdited": 1769499210851,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\">weekly reminder </p>"
+    },
+    "color": "yellow",
+    "reminder": {
+      "title": "weeklyreminder2",
+      "description": "<p data-spacing=\"single\">weekly reminder </p>",
+      "date": 1769558400000,
+      "mode": "repeat",
+      "recurringMode": "week",
+      "selectedDays": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "yearly reminder",
+    "dateCreated": 1769499235722,
+    "dateEdited": 1769499242606,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\"></p>"
+    },
+    "color": "yellow",
+    "reminder": {
+      "title": "yearly reminder",
+      "description": "<p data-spacing=\"single\"></p>",
+      "date": 1769558400000,
+      "mode": "repeat",
+      "recurringMode": "year"
+    },
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  }
+]
