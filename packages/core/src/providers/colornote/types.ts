@@ -20,13 +20,33 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 export type ColornoteNote = {
   title: string;
   note: string;
+  note_ext?: string;
   encrypted: number;
   modified_date: number;
   active_state: number;
   space: number;
+  type: number;
+  folder_id: number;
   color_index: number;
   created_date: number;
   reminder_repeat: number;
   reminder_date: number;
   reminder_base: number;
+};
+
+export type ColornoteFormat = {
+  format: string;
+  start: number;
+  end: number;
+  attribute?: string;
+};
+
+export type ColornoteNoteExt = {
+  format_list?: ColornoteFormat[];
+  version?: number;
+};
+
+export type ColornoteFolderData = {
+  folder_state?: number;
+  folder_id: number;
 };

@@ -41,7 +41,6 @@ export type Note = {
   favorite?: boolean;
   pinned?: boolean;
   archived?: boolean;
-  trashed?: boolean;
   color?: string;
   notebooks?: Notebook[];
   attachments?: Attachment[];

@@ -1,5 +1,107 @@
 [
   {
+    "title": "Nevrmind",
+    "dateCreated": 1769584786405,
+    "dateEdited": 1769584910679,
+    "content": {
+      "type": "html",
+      "data": "<p>Nevrmind</p><p>What is <strong>this</strong>?</p><p> •\n jejeje</p><p> • djdjd</p><p> • djfjf</p><p> • m</p><p>I <s>don't</s>\n <em>know what</em> to <u>do</u>?</p><h1>Ejejeue</h1><p>Rjjrjr</p><p>..</p><h2>Rhrhrhrjr</h2><p>Fhrjrjjrf</p><p>.fjfjf</p><p>.<a\n  href=\"https://google.com\">djd</a></p><p><span\n  style=\"background-color: purple\">Hdhrhrjrjrjrjrbf</span></p><p><span\n  style=\"background-color: purple\">Fnfnfnfnf</span></p><p><span\n  style=\"background-color: purple\">Ffnjfjf</span></p><p><span\n  style=\"background-color: purple\">..</span></p>"
+    },
+    "color": "yellow",
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "Hello world",
+    "dateCreated": 1769585038080,
+    "dateEdited": 1769585043127,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\">Hello world</p>"
+    },
+    "color": "yellow",
+    "notebooks": [
+      {
+        "title": "i am a golden",
+        "children": []
+      }
+    ],
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "No note up",
+    "dateCreated": 1769585049561,
+    "dateEdited": 1769585054337,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\">No note up</p>"
+    },
+    "color": "yellow",
+    "notebooks": [
+      {
+        "title": "another folder",
+        "children": []
+      }
+    ],
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "Just a remind",
+    "dateCreated": 1769585129159,
+    "dateEdited": 1769585134252,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\">Just a remind</p>"
+    },
+    "color": "yellow",
+    "reminder": {
+      "title": "Just a remind",
+      "description": "<p data-spacing=\"single\">Just a remind</p>",
+      "date": 1769558400000,
+      "mode": "once"
+    },
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "To do list",
+    "dateCreated": 1769585138934,
+    "dateEdited": 1769585151541,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\">[ ] Pick up laundry</p><p\n data-spacing=\"single\">[ ] Buy groceries</p><p\n data-spacing=\"single\"></p>"
+    },
+    "color": "yellow",
+    "reminder": {
+      "title": "To do list",
+      "description": "<p data-spacing=\"single\">[ ] Pick up laundry</p><p data-spacing=\"single\">[ ] Buy groceries</p><p data-spacing=\"single\"></p>",
+      "date": 1769558400000,
+      "mode": "once"
+    },
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "Laundry",
+    "dateCreated": 1769585164809,
+    "dateEdited": 1769585247108,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\">[V] euhshd</p><p\n data-spacing=\"single\">[ ] yehshshs</p><p\n data-spacing=\"single\">[ ] Uhshshsh</p><p\n data-spacing=\"single\"></p>"
+    },
+    "color": "red",
+    "reminder": {
+      "title": "Laundry",
+      "description": "<p data-spacing=\"single\">[V] euhshd</p><p data-spacing=\"single\">[ ] yehshshs</p><p data-spacing=\"single\">[ ] Uhshshsh</p><p data-spacing=\"single\"></p>",
+      "date": -1,
+      "mode": "once"
+    },
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
     "title": "simple note",
     "dateCreated": 1769405196549,
     "dateEdited": 1769490388161,
@@ -51,19 +153,6 @@
     },
     "color": "gray",
     "archived": true,
-    "compatibilityVersion": 2,
-    "source": "colornote"
-  },
-  {
-    "title": "trashing",
-    "dateCreated": 1769488647608,
-    "dateEdited": 1769488651607,
-    "content": {
-      "type": "html",
-      "data": "<p data-spacing=\"single\"></p>"
-    },
-    "color": "yellow",
-    "trashed": true,
     "compatibilityVersion": 2,
     "source": "colornote"
   },

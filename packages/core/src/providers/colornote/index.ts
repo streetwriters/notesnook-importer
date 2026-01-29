@@ -17,18 +17,27 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import { JSONParser } from "@streamparser/json";
 import { ContentType, Note, Reminder } from "../../models/note";
-import { ColornoteNote } from "./types";
+import { File } from "../../utils/file";
+import { textToHTML } from "../../utils/to-html";
 import {
   IFileProvider,
   ProviderErrorMessage,
   ProviderMessage,
   error
 } from "../provider";
-import { File } from "../../utils/file";
-import { textToHTML } from "../../utils/to-html";
-import { JSONParser } from "@streamparser/json";
 import { Providers } from "../provider-factory";
+import {
+  ColornoteFolderData,
+  ColornoteFormat,
+  ColornoteNote,
+  ColornoteNoteExt
+} from "./types";
+
+type ColorNotePreprocessData = {
+  folderMap: Map<number, string>;
+};
 
 const COLOR_INDEX_MAP: Record<number, string> = {
   1: "red",
@@ -42,7 +51,7 @@ const COLOR_INDEX_MAP: Record<number, string> = {
   9: "white"
 };
 
-export class ColorNote implements IFileProvider {
+export class ColorNote implements IFileProvider<ColorNotePreprocessData> {
   id: Providers = "colornote";
   type = "file" as const;
   supportedExtensions = [".json"];
@@ -56,7 +65,41 @@ export class ColorNote implements IFileProvider {
     return this.supportedExtensions.includes(file.extension);
   }
 
-  async *process(file: File): AsyncGenerator<ProviderMessage, void, unknown> {
+  async preprocess(files: File[]) {
+    const folderMap = new Map<number, string>();
+
+    for (const file of files) {
+      if (!this.supportedExtensions.includes(file.extension)) continue;
+
+      try {
+        const text = await file.text();
+        const items = JSON.parse(text) as ColornoteNote[];
+
+        for (const item of items) {
+          // item.type === 128 is a folder
+          if (item.type === 128 && item.note) {
+            try {
+              const folderData = JSON.parse(item.note) as ColornoteFolderData;
+              if (folderData.folder_id && item.title) {
+                folderMap.set(folderData.folder_id, item.title);
+              }
+            } catch {}
+          }
+        }
+      } catch {}
+    }
+
+    return {
+      folderMap
+    };
+  }
+
+  async *process(
+    file: File,
+    _settings: unknown,
+    _files: File[],
+    preprocessData?: ColorNotePreprocessData
+  ): AsyncGenerator<ProviderMessage, void, unknown> {
     const parser = new JSONParser({
       stringBufferSize: undefined
     });
@@ -73,12 +116,16 @@ export class ColorNote implements IFileProvider {
 
       const colornote = value as ColornoteNote;
 
+      // skip non-note types (settings = 256, folders = 128)
+      if (colornote.type === 256 || colornote.type === 128) {
+        return;
+      }
       // skip encrypted notes
       if (colornote.encrypted !== 0) {
         return;
       }
-      // skip deleted notes
-      if (colornote.active_state === 32) {
+      // skip deleted and trashed notes
+      if (colornote.active_state === 32 || colornote.active_state === 16) {
         return;
       }
 
@@ -94,8 +141,9 @@ export class ColorNote implements IFileProvider {
         return;
       }
 
-      const content = textToHTML(colornote.note || "");
-      const color = COLOR_INDEX_MAP[colornote.color_index];
+      const content = colornote.note_ext
+        ? applyFormatting(colornote.note || "", colornote.note_ext)
+        : textToHTML(colornote.note || "");
       const note: Note = {
         title: colornote.title || "Untitled note",
         dateCreated: colornote.created_date,
@@ -106,6 +154,7 @@ export class ColorNote implements IFileProvider {
         }
       };
 
+      const color = COLOR_INDEX_MAP[colornote.color_index];
       if (color) {
         note.color = color;
       }
@@ -115,14 +164,14 @@ export class ColorNote implements IFileProvider {
         note.archived = true;
       }
 
-      // set trashed if active_state === 16
-      if (colornote.active_state === 16) {
-        note.trashed = true;
-      }
-
       const reminder = parseReminder(colornote);
       if (reminder) {
         note.reminder = reminder;
+      }
+
+      const folderName = preprocessData?.folderMap?.get(colornote.folder_id);
+      if (folderName) {
+        note.notebooks = [{ title: folderName, children: [] }];
       }
 
       notes.push(note);
@@ -235,4 +284,180 @@ function parseReminder(colornote: ColornoteNote): Reminder | undefined {
     date: reminderBase,
     mode: "once"
   };
+}
+
+const formatOrder = [
+  "headline1",
+  "headline2",
+  "bold",
+  "italic",
+  "underline",
+  "strike",
+  "bg_color",
+  "url"
+];
+
+function applyFormatting(text: string, noteExtJson: string) {
+  let noteExt: ColornoteNoteExt;
+  try {
+    noteExt = JSON.parse(noteExtJson) as ColornoteNoteExt;
+  } catch {
+    return textToHTML(text);
+  }
+
+  const formatList = noteExt.format_list;
+  if (!formatList || formatList.length === 0) {
+    return textToHTML(text);
+  }
+
+  const boundaries = new Set<number>();
+  boundaries.add(0);
+  boundaries.add(text.length);
+
+  for (const format of formatList) {
+    if (format.start >= 0 && format.start <= text.length) {
+      boundaries.add(format.start);
+    }
+    if (format.end >= 0 && format.end <= text.length) {
+      boundaries.add(format.end);
+    }
+  }
+
+  const sortedBoundaries = Array.from(boundaries).sort((a, b) => a - b);
+  const segments: { start: number; end: number; formats: ColornoteFormat[] }[] =
+    [];
+
+  for (let i = 0; i < sortedBoundaries.length - 1; i++) {
+    const start = sortedBoundaries[i];
+    const end = sortedBoundaries[i + 1];
+    const activeFormats = formatList.filter(
+      (format) => format.start <= start && format.end >= end
+    );
+    segments.push({ start, end, formats: activeFormats });
+  }
+
+  let html = "";
+  let inParagraph = false;
+  let inHeadline: "h1" | "h2" | null = null;
+  let headlineContent = "";
+
+  for (const segment of segments) {
+    const segmentText = text.slice(segment.start, segment.end);
+    const headlineFormat = segment.formats.find(
+      (f) => f.format === "headline1" || f.format === "headline2"
+    );
+    const currentHeadlineTag = headlineFormat
+      ? headlineFormat.format === "headline1"
+        ? "h1"
+        : "h2"
+      : null;
+
+    const lines = segmentText.split("\n");
+
+    for (let lineIndex = 0; lineIndex < lines.length; lineIndex++) {
+      const line = lines[lineIndex];
+
+      if (lineIndex > 0) {
+        if (inHeadline) {
+          html += `<${inHeadline}>${headlineContent}</${inHeadline}>`;
+          headlineContent = "";
+          inHeadline = null;
+        }
+        if (inParagraph) {
+          html += "</p>";
+          inParagraph = false;
+        }
+      }
+
+      if (line.length === 0) {
+        continue;
+      }
+
+      // all formats are treated as inline format except for headlines
+      // and they are sorted so that formats are applied "inside-out"
+      const inlineFormats = segment.formats
+        .filter((f) => f.format !== "headline1" && f.format !== "headline2")
+        .sort(
+          (a, b) =>
+            formatOrder.indexOf(a.format) - formatOrder.indexOf(b.format)
+        );
+      let formattedLine = line;
+
+      for (const format of inlineFormats.reverse()) {
+        formattedLine = wrapWithInlineFormat(formattedLine, format);
+      }
+
+      if (currentHeadlineTag) {
+        if (inParagraph) {
+          html += "</p>";
+          inParagraph = false;
+        }
+
+        if (inHeadline && inHeadline !== currentHeadlineTag) {
+          html += `<${inHeadline}>${headlineContent}</${inHeadline}>`;
+          headlineContent = "";
+        }
+
+        inHeadline = currentHeadlineTag;
+        headlineContent += formattedLine;
+      } else {
+        if (inHeadline) {
+          html += `<${inHeadline}>${headlineContent}</${inHeadline}>`;
+          headlineContent = "";
+          inHeadline = null;
+        }
+
+        if (!inParagraph) {
+          html += "<p>";
+          inParagraph = true;
+        }
+
+        html += formattedLine;
+      }
+    }
+  }
+
+  if (inHeadline) {
+    html += `<${inHeadline}>${headlineContent}</${inHeadline}>`;
+  }
+
+  if (inParagraph) {
+    html += "</p>";
+  }
+
+  return html || "<p></p>";
+}
+
+function wrapWithInlineFormat(content: string, fmt: ColornoteFormat) {
+  switch (fmt.format) {
+    case "bold":
+      return `<strong>${content}</strong>`;
+    case "italic":
+      return `<em>${content}</em>`;
+    case "underline":
+      return `<u>${content}</u>`;
+    case "strike":
+      return `<s>${content}</s>`;
+    case "url":
+      if (fmt.attribute) {
+        return `<a href="${fmt.attribute}">${content}</a>`;
+      }
+      return content;
+    case "bg_color":
+      if (fmt.attribute) {
+        const cssColor = highlighToColor(fmt.attribute);
+        return `<span style="background-color: ${cssColor}">${content}</span>`;
+      }
+      return content;
+    default:
+      return content;
+  }
+}
+
+const HIGHLIGHT_COLOR_MAP: Record<string, string> = {
+  highlight_purple: "purple"
+};
+
+function highlighToColor(highlight: string) {
+  return HIGHLIGHT_COLOR_MAP[highlight] || highlight;
 }
