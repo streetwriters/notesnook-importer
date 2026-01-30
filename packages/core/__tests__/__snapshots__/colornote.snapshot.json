@@ -71,7 +71,7 @@
     "dateEdited": 1769585151541,
     "content": {
       "type": "html",
-      "data": "<p data-spacing=\"single\">[ ] Pick up laundry</p><p\n data-spacing=\"single\">[ ] Buy groceries</p><p\n data-spacing=\"single\"></p>"
+      "data": "<ul class=\"simple-checklist\"><li\n  class=\"simple-checklist--item\">Pick up laundry</li><li\n  class=\"simple-checklist--item\">Buy groceries</li></ul>"
     },
     "color": "yellow",
     "reminder": {
@@ -89,7 +89,7 @@
     "dateEdited": 1769585247108,
     "content": {
       "type": "html",
-      "data": "<p data-spacing=\"single\">[V] euhshd</p><p\n data-spacing=\"single\">[ ] yehshshs</p><p\n data-spacing=\"single\">[ ] Uhshshsh</p><p\n data-spacing=\"single\"></p>"
+      "data": "<ul class=\"simple-checklist\"><li\n  class=\"simple-checklist--item checked\">euhshd</li><li\n  class=\"simple-checklist--item\">yehshshs</li><li\n  class=\"simple-checklist--item\">Uhshshsh</li></ul>"
     },
     "color": "red",
     "reminder": {
@@ -119,7 +119,7 @@
     "dateEdited": 1769424959037,
     "content": {
       "type": "html",
-      "data": "<p data-spacing=\"single\">[V] a</p><p data-spacing=\"single\">[V]\n egg</p><p data-spacing=\"single\">[ ] milk</p><p\n data-spacing=\"single\">[ ] fruit</p><p data-spacing=\"single\"></p>"
+      "data": "<ul class=\"simple-checklist\"><li\n  class=\"simple-checklist--item checked\">a</li><li\n  class=\"simple-checklist--item checked\">egg</li><li\n  class=\"simple-checklist--item\">milk</li><li\n  class=\"simple-checklist--item\">fruit</li></ul>"
     },
     "color": "blue",
     "compatibilityVersion": 2,
@@ -282,6 +282,42 @@
       "date": 1769558400000,
       "mode": "repeat",
       "recurringMode": "year"
+    },
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "Untitled note",
+    "dateCreated": 1769499706943,
+    "dateEdited": 1769499706943,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\"></p>"
+    },
+    "color": "yellow",
+    "reminder": {
+      "title": "Reminder",
+      "description": "<p data-spacing=\"single\"></p>",
+      "date": 1769472000000,
+      "mode": "once"
+    },
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "Untitled note",
+    "dateCreated": 1769501734980,
+    "dateEdited": 1769501734980,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\"></p>"
+    },
+    "color": "yellow",
+    "reminder": {
+      "title": "Reminder",
+      "description": "<p data-spacing=\"single\"></p>",
+      "date": 1769472000000,
+      "mode": "once"
     },
     "compatibilityVersion": 2,
     "source": "colornote"

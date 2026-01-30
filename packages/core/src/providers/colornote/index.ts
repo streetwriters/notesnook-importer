@@ -17,7 +17,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { JSONParser } from "@streamparser/json";
 import { ContentType, Note, Reminder } from "../../models/note";
 import { File } from "../../utils/file";
 import { textToHTML } from "../../utils/to-html";
@@ -25,19 +24,17 @@ import {
   IFileProvider,
   ProviderErrorMessage,
   ProviderMessage,
+  ProviderSettings,
   error
 } from "../provider";
 import { Providers } from "../provider-factory";
+import { decryptBackup } from "./decrypt-backup";
 import {
   ColornoteFolderData,
   ColornoteFormat,
   ColornoteNote,
   ColornoteNoteExt
 } from "./types";
-
-type ColorNotePreprocessData = {
-  folderMap: Map<number, string>;
-};
 
 const COLOR_INDEX_MAP: Record<number, string> = {
   1: "red",
@@ -51,13 +48,17 @@ const COLOR_INDEX_MAP: Record<number, string> = {
   9: "white"
 };
 
-export class ColorNote implements IFileProvider<ColorNotePreprocessData> {
+const HIGHLIGHT_COLOR_MAP: Record<string, string> = {
+  highlight_purple: "purple"
+};
+
+export class ColorNote implements IFileProvider {
   id: Providers = "colornote";
   type = "file" as const;
-  supportedExtensions = [".json"];
+  supportedExtensions = [".backup", ".db", ".dat"];
   version = "1.0.0";
   name = "ColorNote";
-  examples = ["notes.json"];
+  examples = ["colornote.backup"];
   helpLink =
     "https://help.notesnook.com/importing-notes/import-notes-from-colornote";
 
@@ -65,136 +66,121 @@ export class ColorNote implements IFileProvider<ColorNotePreprocessData> {
     return this.supportedExtensions.includes(file.extension);
   }
 
-  async preprocess(files: File[]) {
-    const folderMap = new Map<number, string>();
-
-    for (const file of files) {
-      if (!this.supportedExtensions.includes(file.extension)) continue;
-
-      try {
-        const text = await file.text();
-        const items = JSON.parse(text) as ColornoteNote[];
-
-        for (const item of items) {
-          // item.type === 128 is a folder
-          if (item.type === 128 && item.note) {
-            try {
-              const folderData = JSON.parse(item.note) as ColornoteFolderData;
-              if (folderData.folder_id && item.title) {
-                folderMap.set(folderData.folder_id, item.title);
-              }
-            } catch {}
-          }
-        }
-      } catch {}
-    }
-
-    return {
-      folderMap
-    };
-  }
-
   async *process(
     file: File,
-    _settings: unknown,
-    _files: File[],
-    preprocessData?: ColorNotePreprocessData
+    settings: ProviderSettings,
+    _files: File[]
   ): AsyncGenerator<ProviderMessage, void, unknown> {
-    const parser = new JSONParser({
-      stringBufferSize: undefined
-    });
+    const rawBytes = await file.bytes();
+    if (!rawBytes) {
+      yield error(new Error("Failed to read backup file"), { file });
+      return;
+    }
 
-    const notes: Note[] = [];
-    const errors: ProviderErrorMessage[] = [];
+    let items: ColornoteNote[];
+    try {
+      items = await decryptBackup(
+        new Uint8Array(rawBytes),
+        settings?.options?.colornote?.password
+      );
+    } catch (e) {
+      yield error(e instanceof Error ? e : new Error("Decryption failed"), {
+        file
+      });
+      return;
+    }
 
-    parser.onValue = (value, key, parent, stack) => {
-      if (stack.length !== 1) return;
-      // By default, the parser keeps all the child elements in memory until the root parent is emitted.
-      // Let's delete the objects after processing them in order to optimize memory.
-      if (parent && key !== undefined)
-        delete (parent as Record<string | number, unknown>)[key];
-
-      const colornote = value as ColornoteNote;
-
-      // skip non-note types (settings = 256, folders = 128)
-      if (colornote.type === 256 || colornote.type === 128) {
-        return;
+    const folderMap = new Map<number, string>();
+    for (const item of items) {
+      if (item.type === 128 && item.note) {
+        try {
+          const folderData = JSON.parse(item.note) as ColornoteFolderData;
+          if (folderData.folder_id && item.title) {
+            folderMap.set(folderData.folder_id, item.title);
+          }
+        } catch {}
       }
-      // skip encrypted notes
-      if (colornote.encrypted !== 0) {
-        return;
-      }
-      // skip deleted and trashed notes
-      if (colornote.active_state === 32 || colornote.active_state === 16) {
-        return;
-      }
+    }
 
+    for (const colornote of items) {
       if (!colornote.created_date || !colornote.modified_date) {
-        errors.push(
-          error(
-            new Error(
-              `Invalid note. created_date & modified_date properties are required.`
-            ),
-            { file }
-          )
+        yield error(
+          new Error(
+            "Invalid note. created_date & modified_date properties are required."
+          ),
+          { file }
         );
-        return;
       }
 
-      const content = colornote.note_ext
-        ? applyFormatting(colornote.note || "", colornote.note_ext)
-        : textToHTML(colornote.note || "");
-      const note: Note = {
-        title: colornote.title || "Untitled note",
-        dateCreated: colornote.created_date,
-        dateEdited: colornote.modified_date,
-        content: {
-          type: ContentType.HTML,
-          data: content
+      const result = this.processNote(colornote, folderMap);
+      if (result) {
+        if ("type" in result && result.type === "error") {
+          yield result;
+        } else {
+          yield { type: "note", note: result as Note };
         }
-      };
-
-      const color = COLOR_INDEX_MAP[colornote.color_index];
-      if (color) {
-        note.color = color;
       }
+    }
+  }
 
-      // set archived if space === 16
-      if (colornote.space === 16) {
-        note.archived = true;
+  private processNote(
+    colornote: ColornoteNote,
+    folderMap: Map<number, string>
+  ): Note | ProviderErrorMessage | null {
+    // skip non-note types (settings = 256, folders = 128)
+    if (colornote.type === 256 || colornote.type === 128) {
+      return null;
+    }
+    // skip encrypted notes
+    if (colornote.encrypted !== 0) {
+      return null;
+    }
+    // skip deleted (active_state = 32) and trashed notes (active_state = 16)
+    if (colornote.active_state === 32 || colornote.active_state === 16) {
+      return null;
+    }
+
+    let content: string;
+    // checklist note
+    if (colornote.type === 16) {
+      content = checklistToHTML(colornote.note || "");
+    } else if (colornote.note_ext) {
+      content = applyFormatting(colornote.note || "", colornote.note_ext);
+    } else {
+      content = textToHTML(colornote.note || "");
+    }
+
+    const note: Note = {
+      title: colornote.title || "Untitled note",
+      dateCreated: colornote.created_date,
+      dateEdited: colornote.modified_date,
+      content: {
+        type: ContentType.HTML,
+        data: content
       }
-
-      const reminder = parseReminder(colornote);
-      if (reminder) {
-        note.reminder = reminder;
-      }
-
-      const folderName = preprocessData?.folderMap?.get(colornote.folder_id);
-      if (folderName) {
-        note.notebooks = [{ title: folderName, children: [] }];
-      }
-
-      notes.push(note);
     };
 
-    const reader = file.stream.pipeThrough(new TextDecoderStream()).getReader();
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-
-      parser.write(value);
-
-      for (const err of errors) {
-        yield err;
-      }
-
-      for (const note of notes) {
-        yield { type: "note", note };
-      }
-
-      errors.length = 0;
-      notes.length = 0;
+    const color = COLOR_INDEX_MAP[colornote.color_index];
+    if (color) {
+      note.color = color;
     }
+
+    // set archived if space = 16
+    if (colornote.space === 16) {
+      note.archived = true;
+    }
+
+    const reminder = parseReminder(colornote);
+    if (reminder) {
+      note.reminder = reminder;
+    }
+
+    const folderName = folderMap.get(colornote.folder_id);
+    if (folderName) {
+      note.notebooks = [{ title: folderName, children: [] }];
+    }
+
+    return note;
   }
 }
 
@@ -428,8 +414,8 @@ function applyFormatting(text: string, noteExtJson: string) {
   return html || "<p></p>";
 }
 
-function wrapWithInlineFormat(content: string, fmt: ColornoteFormat) {
-  switch (fmt.format) {
+function wrapWithInlineFormat(content: string, format: ColornoteFormat) {
+  switch (format.format) {
     case "bold":
       return `<strong>${content}</strong>`;
     case "italic":
@@ -439,13 +425,14 @@ function wrapWithInlineFormat(content: string, fmt: ColornoteFormat) {
     case "strike":
       return `<s>${content}</s>`;
     case "url":
-      if (fmt.attribute) {
-        return `<a href="${fmt.attribute}">${content}</a>`;
+      if (format.attribute) {
+        return `<a href="${format.attribute}">${content}</a>`;
       }
       return content;
     case "bg_color":
-      if (fmt.attribute) {
-        const cssColor = highlighToColor(fmt.attribute);
+      if (format.attribute) {
+        const cssColor =
+          HIGHLIGHT_COLOR_MAP[format.attribute] || format.attribute;
         return `<span style="background-color: ${cssColor}">${content}</span>`;
       }
       return content;
@@ -454,10 +441,29 @@ function wrapWithInlineFormat(content: string, fmt: ColornoteFormat) {
   }
 }
 
-const HIGHLIGHT_COLOR_MAP: Record<string, string> = {
-  highlight_purple: "purple"
-};
+function checklistToHTML(text: string): string {
+  const lines = text.split(/\r?\n/);
+  const items: string[] = [];
 
-function highlighToColor(highlight: string) {
-  return HIGHLIGHT_COLOR_MAP[highlight] || highlight;
+  for (const line of lines) {
+    // Match [V] for checked or [ ] for unchecked
+    const checkedMatch = line.match(/^\[V\]\s*(.*)/);
+    const uncheckedMatch = line.match(/^\[ \]\s*(.*)/);
+
+    if (checkedMatch) {
+      items.push(
+        `<li class="simple-checklist--item checked">${checkedMatch[1]}</li>`
+      );
+    } else if (uncheckedMatch) {
+      items.push(
+        `<li class="simple-checklist--item">${uncheckedMatch[1]}</li>`
+      );
+    }
+  }
+
+  if (items.length === 0) {
+    return "<p></p>";
+  }
+
+  return `<ul class="simple-checklist">${items.join("")}</ul>`;
 }

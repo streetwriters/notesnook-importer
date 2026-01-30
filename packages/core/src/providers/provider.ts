@@ -75,6 +75,13 @@ export interface ProviderSettings {
   storage: IStorage<Note>;
   log?: (message: ProviderLogMessage) => void;
   reporter: (current: number, total?: number) => void;
+  options?: {
+    colornote?: ColorNoteOptions;
+  };
+}
+
+export interface ColorNoteOptions {
+  password?: string;
 }
 
 export type ProviderResult = {
