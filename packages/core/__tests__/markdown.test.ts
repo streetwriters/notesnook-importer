@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { test } from "vitest";
+import { test, describe } from "vitest";
 import { markdowntoHTML } from "../src/utils/to-html";
 
 test("parse wikiLinkFile", (t) => {
@@ -134,12 +134,6 @@ i am here`)
   ).toBe(`<p>hello world i am here</p>`);
 
   t.expect(
-    markdowntoHTML(`hello world  
-i am here`)
-  ).toBe(`<p>hello world<br/>
-i am here</p>`);
-
-  t.expect(
     markdowntoHTML(`The killer feature of \`markdown-it\` is very effective support of
 syntax plugins.`)
   ).toBe(
@@ -190,4 +184,42 @@ And **something** else.`)
 <pre><code>I am damn happy to here &#38; and &lt; > what else.<br/></code></pre>
 <p>And <strong>something</strong> else.</p>`
   );
+});
+
+describe("parse hard line breaks", () => {
+  const hardLineBreakTests = [
+    {
+      name: "trailing spaces",
+      input: `
+line 1  
+line 2  
+line 3
+  
+line 4`,
+      expected: `<p data-spacing="single">line 1</p>
+<p data-spacing="single">line 2</p>
+<p data-spacing="single">line 3</p>
+<p>line 4</p>`
+    },
+    {
+      name: "trailing backslashes",
+      input: `
+line 1\\
+line 2\\
+line 3
+  
+line 4`,
+      expected: `<p data-spacing="single">line 1</p>
+<p data-spacing="single">line 2</p>
+<p data-spacing="single">line 3</p>
+<p>line 4</p>`
+    }
+  ];
+
+  for (const { name, input, expected } of hardLineBreakTests) {
+    test(name, async (t) => {
+      const result = markdowntoHTML(input);
+      t.expect(result).toBe(expected);
+    });
+  }
 });

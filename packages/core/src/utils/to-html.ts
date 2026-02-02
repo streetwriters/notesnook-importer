@@ -28,7 +28,7 @@ import type {
   Root as HastRoot,
   ElementContent
 } from "remark-rehype/node_modules/@types/hast";
-import type { Root } from "mdast";
+import type { Paragraph, Root, PhrasingContent } from "mdast";
 import { isElement } from "hast-util-is-element";
 import remarkMath from "remark-math";
 import remarkSubSuper from "remark-supersub";
@@ -48,6 +48,7 @@ export function markdowntoHTML(
     .use(remarkHighlight)
     .use(removeComments)
     .use(convertFileEmbeds)
+    .use(convertHardLineBreaks)
     .use(remarkRehype, { allowDangerousHtml: options.allowDangerousHtml })
     .use(escapeCode)
     .use(fixChecklistClasses)
@@ -273,3 +274,46 @@ function encodeLine(line: string) {
   });
   return line;
 }
+
+const convertHardLineBreaks: Plugin<[], Root, Root> = function () {
+  return (tree) => {
+    visit(tree, "paragraph", (node, index, parent) => {
+      if (
+        !parent ||
+        typeof index !== "number" ||
+        !Array.isArray(node.children)
+      ) {
+        return;
+      }
+
+      const hasBreak = node.children.some(
+        (c: PhrasingContent) => c.type === "break"
+      );
+      if (!hasBreak) return;
+
+      const parts: PhrasingContent[][] = [];
+      let current: PhrasingContent[] = [];
+      for (const child of node.children) {
+        if (child.type === "break") {
+          parts.push(current);
+          current = [];
+        } else {
+          current.push(child);
+        }
+      }
+      parts.push(current);
+
+      const newParagraphs: Paragraph[] = parts.map((children) => ({
+        type: "paragraph",
+        children: children.length ? children : [{ type: "text", value: "" }],
+        data: {
+          hProperties: {
+            "data-spacing": "single"
+          }
+        }
+      }));
+      parent.children.splice(index, 1, ...newParagraphs);
+      return index + newParagraphs.length;
+    });
+  };
+};
