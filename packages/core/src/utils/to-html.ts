@@ -82,7 +82,7 @@ const fixChecklistClasses: Plugin = function () {
       node.properties.className = ["checklist"];
 
       for (const child of node.children) {
-        if (!isElement(child) || !child.properties) continue;
+        if (!isElement(child, "li") || !child.properties) continue;
 
         const isChecked =
           isElement(child.children[0]) && child.children[0].properties?.checked;
@@ -90,7 +90,12 @@ const fixChecklistClasses: Plugin = function () {
         child.properties.className = ["checklist--item"];
         if (isChecked) child.properties.className.push("checked");
 
-        child.children = child.children?.slice(-1);
+        child.children = child.children?.slice(1);
+
+        // remove leading space from the first text node if present
+        if (child.children.length > 0 && child.children[0].type === "text") {
+          child.children[0].value = child.children[0].value.replace(/^ /, "");
+        }
       }
     });
   };

@@ -112,6 +112,39 @@ test("parse checklist", (t) => {
   );
 });
 
+test("parse nested checklist", (t) => {
+  t.expect(
+    markdowntoHTML(`- [x] Task 1
+- [ ] Task 2
+  - [ ] Subtask 2a
+  - [ ] Subtask 2b
+- [ ] Task 3
+  - [x] Subtask 3a
+    - [ ] Sub-subtask 3a1
+  - [ ] Subtask 3b`)
+  ).toBe(
+    `<ul class="checklist">
+<li class="checklist--item checked">Task 1</li>
+<li class="checklist--item">Task 2
+<ul class="checklist">
+<li class="checklist--item">Subtask 2a</li>
+<li class="checklist--item">Subtask 2b</li>
+</ul>
+</li>
+<li class="checklist--item">Task 3
+<ul class="checklist">
+<li class="checklist--item checked">Subtask 3a
+<ul class="checklist">
+<li class="checklist--item">Sub-subtask 3a1</li>
+</ul>
+</li>
+<li class="checklist--item">Subtask 3b</li>
+</ul>
+</li>
+</ul>`
+  );
+});
+
 test("parse codeblock", (t) => {
   t.expect(
     markdowntoHTML(`\`\`\`javascript
