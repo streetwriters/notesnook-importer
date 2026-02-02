@@ -197,7 +197,7 @@ function parseReminder(colornote: ColornoteNote): Reminder | undefined {
   if (reminderRepeat === 0) {
     return {
       title: colornote.title || "Reminder",
-      description: textToHTML(colornote.note || ""),
+      description: colornote.note,
       date: reminderBase,
       mode: "once"
     };
@@ -207,7 +207,7 @@ function parseReminder(colornote: ColornoteNote): Reminder | undefined {
   if (reminderRepeat === 16) {
     return {
       title: colornote.title || "Reminder",
-      description: textToHTML(colornote.note || ""),
+      description: colornote.note,
       date: reminderBase,
       mode: "repeat",
       recurringMode: "day"
@@ -218,7 +218,7 @@ function parseReminder(colornote: ColornoteNote): Reminder | undefined {
   if (reminderRepeat === 32) {
     return {
       title: colornote.title || "Reminder",
-      description: textToHTML(colornote.note || ""),
+      description: colornote.note,
       date: reminderBase,
       mode: "repeat",
       recurringMode: "week",
@@ -231,7 +231,7 @@ function parseReminder(colornote: ColornoteNote): Reminder | undefined {
     const dayOfWeek = baseDate.getDay();
     return {
       title: colornote.title || "Reminder",
-      description: textToHTML(colornote.note || ""),
+      description: colornote.note,
       date: reminderBase,
       mode: "repeat",
       recurringMode: "week",
@@ -244,7 +244,7 @@ function parseReminder(colornote: ColornoteNote): Reminder | undefined {
     const dayOfMonth = baseDate.getDate();
     return {
       title: colornote.title || "Reminder",
-      description: textToHTML(colornote.note || ""),
+      description: colornote.note,
       date: reminderBase,
       mode: "repeat",
       recurringMode: "month",
@@ -256,7 +256,7 @@ function parseReminder(colornote: ColornoteNote): Reminder | undefined {
   if (reminderRepeat === 112) {
     return {
       title: colornote.title || "Reminder",
-      description: textToHTML(colornote.note || ""),
+      description: colornote.note,
       date: reminderBase,
       mode: "repeat",
       recurringMode: "year"
@@ -266,7 +266,7 @@ function parseReminder(colornote: ColornoteNote): Reminder | undefined {
   // unknown reminder type
   return {
     title: colornote.title || "Reminder",
-    description: textToHTML(colornote.note || ""),
+    description: colornote.note,
     date: reminderBase,
     mode: "once"
   };
