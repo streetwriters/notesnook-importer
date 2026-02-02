@@ -35,6 +35,26 @@ export class ENMedia extends BaseHandler {
     if (!resource || !resource.data) return;
 
     const dataHash = await this.hasher.hash(resource.data);
+
+    const width = parseAttributeValue<number>(
+      getAttributeValue(element, "width"),
+      "number"
+    );
+    const height = parseAttributeValue<number>(
+      getAttributeValue(element, "height"),
+      "number"
+    );
+    const naturalWidth = parseAttributeValue<number>(
+      getAttributeValue(element, "naturalWidth"),
+      "number"
+    );
+    const naturalHeight = parseAttributeValue<number>(
+      getAttributeValue(element, "naturalHeight"),
+      "number"
+    );
+    const { width: finalWidth, height: finalHeight } =
+      calculateMissingDimension(width, height, naturalWidth, naturalHeight);
+
     const attachment: Attachment = {
       data: resource.data,
       filename: resource?.filename || dataHash,
@@ -45,13 +65,35 @@ export class ENMedia extends BaseHandler {
         resource.mime ||
         detectFileType(resource.data)?.mime ||
         "application/octet-stream",
-      width: parseAttributeValue(getAttributeValue(element, "width"), "number"),
-      height: parseAttributeValue(
-        getAttributeValue(element, "height"),
-        "number"
-      )
+      width: finalWidth,
+      height: finalHeight
     };
     this.note.attachments?.push(attachment);
     return attachmentToHTML(attachment);
   }
+}
+
+function calculateMissingDimension(
+  width: number | undefined,
+  height: number | undefined,
+  naturalWidth: number | undefined,
+  naturalHeight: number | undefined
+): { width?: number; height?: number } {
+  if ((width && height) || (!width && !height)) {
+    return { width, height };
+  }
+  if (!naturalWidth || !naturalHeight) {
+    return { width, height };
+  }
+
+  const aspectRatio = naturalWidth / naturalHeight;
+
+  if (width && !height) {
+    return { width, height: Math.round(width / aspectRatio) };
+  }
+  if (height && !width) {
+    return { width: Math.round(height * aspectRatio), height };
+  }
+
+  return { width, height };
 }

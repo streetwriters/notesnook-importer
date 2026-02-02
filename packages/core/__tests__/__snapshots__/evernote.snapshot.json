@@ -272,6 +272,35 @@
     "source": "evernote"
   },
   {
+    "title": "Image size test",
+    "tags": [],
+    "dateCreated": 1766004865000,
+    "dateEdited": 1766004885000,
+    "attachments": [
+      {
+        "filename": "1000028474.jpg",
+        "size": 4122879,
+        "hash": "e96deceee81c3420",
+        "hashType": "xxh64",
+        "mime": "image/jpeg",
+        "width": 10,
+        "height": 9
+      }
+    ],
+    "notebooks": [
+      {
+        "title": "image-height-missing",
+        "children": []
+      }
+    ],
+    "content": {
+      "data": "<p> </p><img class=\"attachment\"\n data-filename=\"1000028474.jpg\" data-size=\"4122879\"\n data-hash=\"e96deceee81c3420\" data-mime=\"image/jpeg\"\n width=\"10\" height=\"9\" alt=\"1000028474.jpg\"><p><br></p>",
+      "type": "html"
+    },
+    "compatibilityVersion": 2,
+    "source": "evernote"
+  },
+  {
     "title": "ll",
     "tags": [],
     "dateCreated": 1638000074000,
@@ -283,7 +312,8 @@
         "hash": "4f6544c889080dec",
         "hashType": "xxh64",
         "mime": "image/png",
-        "width": 541
+        "width": 541,
+        "height": 212
       },
       {
         "filename": "27.11.2021, 12.59.17.webm",
@@ -300,7 +330,7 @@
       }
     ],
     "content": {
-      "data": "<p>;;</p><pre>klkmklmk<br>;mkmk<br>kmkmkl</pre><p><br></p><img\n class=\"attachment\"\n data-filename=\"Sketch 27/11/2021 12:59.png\"\n data-size=\"137254\" data-hash=\"4f6544c889080dec\"\n data-mime=\"image/png\" width=\"541\"\n alt=\"Sketch 27/11/2021 12:59.png\"><span class=\"attachment\"\n data-filename=\"27.11.2021, 12.59.17.webm\" data-size=\"1477\"\n data-hash=\"90c8f0b0b6f9fb53\" data-mime=\"audio/webm\"\n contenteditable=\"false\" title=\"27.11.2021, 12.59.17.webm\">\n <em> </em>\n <span class=\"filename\">27.11.2021, 12.59.17.webm</span>\n</span><ul style class=\"checklist\"><li style><div>lk<span\n    style=\"background-color: #fec1d0\">mk;mklm</span>l</div></li><li\n  style class=\"checked\"><div>lk lmk klm</div></li><li style\n  class=\"checked\"><div>\\m</div></li><li style><div>;;;;</div></li></ul><p><br></p><hr><p><span\n  style=\"background-color: #fec1d0\"><span><br></span></span></p><table\n width=\"376px\"><colgroup><col><col></colgroup><tbody><tr><td><div>lll</div></td><td><div>ll</div></td></tr><tr><td><div>kllk</div></td><td><div>ll</div></td></tr></tbody></table><ul\n class=\"checklist\">\n <li class=\"checked\">l;;lllllllllklklkl</li><li>jjmkoi</li><li>klmklm</li>\n</ul><p><br></p><p>Text test:</p><p><br></p><p>I am a big <b>paragraph</b>.\n I <span style=\"color:rgb(229, 158, 37)\">am a big paragraph</span>.\n I <i>am a big paragraph</i>. I <u>am a big paragraph</u>. I\n <a href=\"https://google.com/\">am a big paragraph</a>. I\n <sub>am a big paragraph</sub>. I <sup>am</sup> a big <s>paragraph</s>.</p><p><br></p><p\n style=\"text-align:center\">CENTERED ALIGNED TEXT</p><p\n style=\"text-align:center\"><br></p><h1\n style=\"text-align:center\">HEADER 2</h1><h2>HEADER 3</h2><p><br></p><h3>HEADER\n 4</h3><p><br></p><p><span\n  style=\"font-family: Kalam,cursive,handwritten\">HANDWRITTEN\n  FONT!</span></p><p><span\n  style=\"font-family: Kalam,cursive,handwritten\"><span><br></span></span></p><p><span\n  style=\"font-family: Kalam,cursive,handwritten\"><span\n   style=\"font-size: 36px\">DONT SIZE</span></span></p><ul><li><div><span\n    style=\"font-size: 16px\">dot list</span></div></li><li><div><span\n    style=\"font-size: 16px\">iw</span></div></li><ul><li><div><span\n     style=\"font-size: 16px\">jkdsv</span></div></li><li><div><span\n     style=\"font-size: 16px\">dsvlknds</span></div></li></ul><li><div><span\n    style=\"font-size: 16px\">sdvldsvkn</span></div></li><ul><ul><li><div><span\n      style=\"font-size: 16px\">dsjvbndjsv</span></div></li><ul><li><div><span\n       style=\"font-size: 16px\">sdvnjlsnd</span></div></li></ul></ul></ul></ul><p><span\n  style=\"font-size: 16px\"><span><br></span></span></p><ol><li><div><span\n    style=\"font-size: 16px\">Number list</span></div></li><ol><li><div><span\n     style=\"font-size: 16px\">dsjvsd</span></div></li><li><div><span\n     style=\"font-size: 16px\">dsvjdsv</span></div></li><ol><ol><li><div><span\n       style=\"font-size: 16px\">dsfjvbnds</span></div></li><li><div><span\n       style=\"font-size: 16px\">djvsvds</span></div></li><li><div><span\n       style=\"font-size: 16px\">dsvjksdbv</span></div></li></ol></ol></ol></ol><p><span\n  style=\"font-size: 16px\"><span><br></span></span></p><p><span\n  style=\"font-size: 16px\"><span><br></span></span></p>",
+      "data": "<p>;;</p><pre>klkmklmk<br>;mkmk<br>kmkmkl</pre><p><br></p><img\n class=\"attachment\"\n data-filename=\"Sketch 27/11/2021 12:59.png\"\n data-size=\"137254\" data-hash=\"4f6544c889080dec\"\n data-mime=\"image/png\" width=\"541\" height=\"212\"\n alt=\"Sketch 27/11/2021 12:59.png\"><span class=\"attachment\"\n data-filename=\"27.11.2021, 12.59.17.webm\" data-size=\"1477\"\n data-hash=\"90c8f0b0b6f9fb53\" data-mime=\"audio/webm\"\n contenteditable=\"false\" title=\"27.11.2021, 12.59.17.webm\">\n <em> </em>\n <span class=\"filename\">27.11.2021, 12.59.17.webm</span>\n</span><ul style class=\"checklist\"><li style><div>lk<span\n    style=\"background-color: #fec1d0\">mk;mklm</span>l</div></li><li\n  style class=\"checked\"><div>lk lmk klm</div></li><li style\n  class=\"checked\"><div>\\m</div></li><li style><div>;;;;</div></li></ul><p><br></p><hr><p><span\n  style=\"background-color: #fec1d0\"><span><br></span></span></p><table\n width=\"376px\"><colgroup><col><col></colgroup><tbody><tr><td><div>lll</div></td><td><div>ll</div></td></tr><tr><td><div>kllk</div></td><td><div>ll</div></td></tr></tbody></table><ul\n class=\"checklist\">\n <li class=\"checked\">l;;lllllllllklklkl</li><li>jjmkoi</li><li>klmklm</li>\n</ul><p><br></p><p>Text test:</p><p><br></p><p>I am a big <b>paragraph</b>.\n I <span style=\"color:rgb(229, 158, 37)\">am a big paragraph</span>.\n I <i>am a big paragraph</i>. I <u>am a big paragraph</u>. I\n <a href=\"https://google.com/\">am a big paragraph</a>. I\n <sub>am a big paragraph</sub>. I <sup>am</sup> a big <s>paragraph</s>.</p><p><br></p><p\n style=\"text-align:center\">CENTERED ALIGNED TEXT</p><p\n style=\"text-align:center\"><br></p><h1\n style=\"text-align:center\">HEADER 2</h1><h2>HEADER 3</h2><p><br></p><h3>HEADER\n 4</h3><p><br></p><p><span\n  style=\"font-family: Kalam,cursive,handwritten\">HANDWRITTEN\n  FONT!</span></p><p><span\n  style=\"font-family: Kalam,cursive,handwritten\"><span><br></span></span></p><p><span\n  style=\"font-family: Kalam,cursive,handwritten\"><span\n   style=\"font-size: 36px\">DONT SIZE</span></span></p><ul><li><div><span\n    style=\"font-size: 16px\">dot list</span></div></li><li><div><span\n    style=\"font-size: 16px\">iw</span></div></li><ul><li><div><span\n     style=\"font-size: 16px\">jkdsv</span></div></li><li><div><span\n     style=\"font-size: 16px\">dsvlknds</span></div></li></ul><li><div><span\n    style=\"font-size: 16px\">sdvldsvkn</span></div></li><ul><ul><li><div><span\n      style=\"font-size: 16px\">dsjvbndjsv</span></div></li><ul><li><div><span\n       style=\"font-size: 16px\">sdvnjlsnd</span></div></li></ul></ul></ul></ul><p><span\n  style=\"font-size: 16px\"><span><br></span></span></p><ol><li><div><span\n    style=\"font-size: 16px\">Number list</span></div></li><ol><li><div><span\n     style=\"font-size: 16px\">dsjvsd</span></div></li><li><div><span\n     style=\"font-size: 16px\">dsvjdsv</span></div></li><ol><ol><li><div><span\n       style=\"font-size: 16px\">dsfjvbnds</span></div></li><li><div><span\n       style=\"font-size: 16px\">djvsvds</span></div></li><li><div><span\n       style=\"font-size: 16px\">dsvjksdbv</span></div></li></ol></ol></ol></ol><p><span\n  style=\"font-size: 16px\"><span><br></span></span></p><p><span\n  style=\"font-size: 16px\"><span><br></span></span></p>",
       "type": "html"
     },
     "compatibilityVersion": 2,

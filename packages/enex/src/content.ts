@@ -229,6 +229,12 @@ function findElementType(element: Element, passthrough = false): string | null {
               }
               break;
             }
+            case "--en-naturalWidth":
+              element.attribs["naturalWidth"] = styles[style];
+              break;
+            case "--en-naturalHeight":
+              element.attribs["naturalHeight"] = styles[style];
+              break;
           }
 
           if (
