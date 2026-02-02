@@ -62,7 +62,12 @@ for (const providerName of ProviderFactory.getAvailableProviders()) {
       hasher,
       clientType: "node",
       reporter() {},
-      storage
+      storage,
+      options: {
+        colornote: {
+          password: "abcd"
+        }
+      }
     };
 
     await transform(provider, files, settings);
@@ -85,7 +90,12 @@ for (const providerName of ProviderFactory.getAvailableProviders()) {
       hasher,
       clientType: "node",
       reporter() {},
-      storage
+      storage,
+      options: {
+        colornote: {
+          password: "abcd"
+        }
+      }
     };
 
     await transform(provider, files, settings);

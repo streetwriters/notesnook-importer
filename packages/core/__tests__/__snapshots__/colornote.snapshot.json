@@ -1,0 +1,325 @@
+[
+  {
+    "title": "Nevrmind",
+    "dateCreated": 1769584786405,
+    "dateEdited": 1769584910679,
+    "content": {
+      "type": "html",
+      "data": "<p>Nevrmind</p><p>What is <strong>this</strong>?</p><p> •\n jejeje</p><p> • djdjd</p><p> • djfjf</p><p> • m</p><p>I <s>don't</s>\n <em>know what</em> to <u>do</u>?</p><h1>Ejejeue</h1><p>Rjjrjr</p><p>..</p><h2>Rhrhrhrjr</h2><p>Fhrjrjjrf</p><p>.fjfjf</p><p>.<a\n  href=\"https://google.com\">djd</a></p><p><span\n  style=\"background-color: purple\">Hdhrhrjrjrjrjrbf</span></p><p><span\n  style=\"background-color: purple\">Fnfnfnfnf</span></p><p><span\n  style=\"background-color: purple\">Ffnjfjf</span></p><p><span\n  style=\"background-color: purple\">..</span></p>"
+    },
+    "color": "yellow",
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "Hello world",
+    "dateCreated": 1769585038080,
+    "dateEdited": 1769585043127,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\">Hello world</p>"
+    },
+    "color": "yellow",
+    "notebooks": [
+      {
+        "title": "i am a golden",
+        "children": []
+      }
+    ],
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "No note up",
+    "dateCreated": 1769585049561,
+    "dateEdited": 1769585054337,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\">No note up</p>"
+    },
+    "color": "yellow",
+    "notebooks": [
+      {
+        "title": "another folder",
+        "children": []
+      }
+    ],
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "Just a remind",
+    "dateCreated": 1769585129159,
+    "dateEdited": 1769585134252,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\">Just a remind</p>"
+    },
+    "color": "yellow",
+    "reminder": {
+      "title": "Just a remind",
+      "description": "<p data-spacing=\"single\">Just a remind</p>",
+      "date": 1769558400000,
+      "mode": "once"
+    },
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "To do list",
+    "dateCreated": 1769585138934,
+    "dateEdited": 1769585151541,
+    "content": {
+      "type": "html",
+      "data": "<ul class=\"simple-checklist\"><li\n  class=\"simple-checklist--item\">Pick up laundry</li><li\n  class=\"simple-checklist--item\">Buy groceries</li></ul>"
+    },
+    "color": "yellow",
+    "reminder": {
+      "title": "To do list",
+      "description": "<p data-spacing=\"single\">[ ] Pick up laundry</p><p data-spacing=\"single\">[ ] Buy groceries</p><p data-spacing=\"single\"></p>",
+      "date": 1769558400000,
+      "mode": "once"
+    },
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "Laundry",
+    "dateCreated": 1769585164809,
+    "dateEdited": 1769585247108,
+    "content": {
+      "type": "html",
+      "data": "<ul class=\"simple-checklist\"><li\n  class=\"simple-checklist--item checked\">euhshd</li><li\n  class=\"simple-checklist--item\">yehshshs</li><li\n  class=\"simple-checklist--item\">Uhshshsh</li></ul>"
+    },
+    "color": "red",
+    "reminder": {
+      "title": "Laundry",
+      "description": "<p data-spacing=\"single\">[V] euhshd</p><p data-spacing=\"single\">[ ] yehshshs</p><p data-spacing=\"single\">[ ] Uhshshsh</p><p data-spacing=\"single\"></p>",
+      "date": -1,
+      "mode": "once"
+    },
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "simple note",
+    "dateCreated": 1769405196549,
+    "dateEdited": 1769490388161,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\">&nbsp;content</p><p\n data-spacing=\"single\"></p><p data-spacing=\"single\">hello</p>"
+    },
+    "color": "yellow",
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "grocery",
+    "dateCreated": 1769405232195,
+    "dateEdited": 1769424959037,
+    "content": {
+      "type": "html",
+      "data": "<ul class=\"simple-checklist\"><li\n  class=\"simple-checklist--item checked\">a</li><li\n  class=\"simple-checklist--item checked\">egg</li><li\n  class=\"simple-checklist--item\">milk</li><li\n  class=\"simple-checklist--item\">fruit</li></ul>"
+    },
+    "color": "blue",
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "deadline",
+    "dateCreated": 1769405293769,
+    "dateEdited": 1769405299544,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\">deadline</p>"
+    },
+    "color": "yellow",
+    "reminder": {
+      "title": "deadline",
+      "description": "<p data-spacing=\"single\">deadline</p>",
+      "date": 1769299200000,
+      "mode": "once"
+    },
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "notneeded",
+    "dateCreated": 1769425036169,
+    "dateEdited": 1769425041535,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\">notneeded</p>"
+    },
+    "color": "gray",
+    "archived": true,
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "weekly reminder",
+    "dateCreated": 1769493708955,
+    "dateEdited": 1769493714555,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\">weekly reminder</p>"
+    },
+    "color": "yellow",
+    "reminder": {
+      "title": "weekly reminder",
+      "description": "<p data-spacing=\"single\">weekly reminder</p>",
+      "date": 1769494693265,
+      "mode": "repeat",
+      "recurringMode": "week",
+      "selectedDays": [
+        2
+      ]
+    },
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "monthly reminder",
+    "dateCreated": 1769493796341,
+    "dateEdited": 1769493802769,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\"></p>"
+    },
+    "color": "yellow",
+    "reminder": {
+      "title": "monthly reminder",
+      "description": "<p data-spacing=\"single\"></p>",
+      "date": 1769558400000,
+      "mode": "repeat",
+      "recurringMode": "month",
+      "selectedDays": [
+        28
+      ]
+    },
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "daily reminder",
+    "dateCreated": 1769494132483,
+    "dateEdited": 1769494168973,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\"></p>"
+    },
+    "color": "yellow",
+    "reminder": {
+      "title": "daily reminder",
+      "description": "<p data-spacing=\"single\"></p>",
+      "date": 1769644800000,
+      "mode": "repeat",
+      "recurringMode": "day"
+    },
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "monthlyreminder2",
+    "dateCreated": 1769499171278,
+    "dateEdited": 1769499177527,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\"></p>"
+    },
+    "color": "yellow",
+    "reminder": {
+      "title": "monthlyreminder2",
+      "description": "<p data-spacing=\"single\"></p>",
+      "date": 1769500092370,
+      "mode": "repeat",
+      "recurringMode": "month",
+      "selectedDays": [
+        27
+      ]
+    },
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "weeklyreminder2",
+    "dateCreated": 1769499198671,
+    "dateEdited": 1769499210851,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\">weekly reminder </p>"
+    },
+    "color": "yellow",
+    "reminder": {
+      "title": "weeklyreminder2",
+      "description": "<p data-spacing=\"single\">weekly reminder </p>",
+      "date": 1769558400000,
+      "mode": "repeat",
+      "recurringMode": "week",
+      "selectedDays": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "yearly reminder",
+    "dateCreated": 1769499235722,
+    "dateEdited": 1769499242606,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\"></p>"
+    },
+    "color": "yellow",
+    "reminder": {
+      "title": "yearly reminder",
+      "description": "<p data-spacing=\"single\"></p>",
+      "date": 1769558400000,
+      "mode": "repeat",
+      "recurringMode": "year"
+    },
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "Untitled note",
+    "dateCreated": 1769499706943,
+    "dateEdited": 1769499706943,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\"></p>"
+    },
+    "color": "yellow",
+    "reminder": {
+      "title": "Reminder",
+      "description": "<p data-spacing=\"single\"></p>",
+      "date": 1769472000000,
+      "mode": "once"
+    },
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  },
+  {
+    "title": "Untitled note",
+    "dateCreated": 1769501734980,
+    "dateEdited": 1769501734980,
+    "content": {
+      "type": "html",
+      "data": "<p data-spacing=\"single\"></p>"
+    },
+    "color": "yellow",
+    "reminder": {
+      "title": "Reminder",
+      "description": "<p data-spacing=\"single\"></p>",
+      "date": 1769472000000,
+      "mode": "once"
+    },
+    "compatibilityVersion": 2,
+    "source": "colornote"
+  }
+]

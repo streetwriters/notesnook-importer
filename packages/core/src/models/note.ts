@@ -22,6 +22,15 @@ import { Attachment } from "./attachment";
 
 export const COMPATIBILITY_VERSION = 2;
 
+export type Reminder = {
+  title: string;
+  description?: string;
+  date: number;
+  mode: "repeat" | "once";
+  recurringMode?: "day" | "week" | "month" | "year";
+  selectedDays?: number[];
+};
+
 export type Note = {
   id?: string;
   title: string;
@@ -35,6 +44,7 @@ export type Note = {
   color?: string;
   notebooks?: Notebook[];
   attachments?: Attachment[];
+  reminder?: Reminder;
 
   compatibilityVersion?: number;
   source?: Providers;
