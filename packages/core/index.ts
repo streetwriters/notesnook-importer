@@ -103,7 +103,6 @@ async function transformFiles(
     if (isHidden(file)) continue;
 
     if (!provider.filter(file)) {
-      settings.log?.(log(`Skipping ${file.name}...`));
       continue;
     }
     settings.log?.(log(`Processing ${file.name}...`));
