@@ -110,7 +110,7 @@ export class GoogleKeep implements IFileProvider {
 
   private getContent(keepNote: KeepNote): string {
     return keepNote.textContent
-      ? markdowntoHTML(keepNote.textContent)
+      ? markdowntoHTML(this.insertHardLineBreaks(keepNote.textContent))
       : keepNote.listContent
         ? listToHTML(keepNote.listContent)
         : "";
@@ -118,5 +118,9 @@ export class GoogleKeep implements IFileProvider {
 
   private usToMs(us: number) {
     return us / 1000;
+  }
+
+  private insertHardLineBreaks(text: string) {
+    return text.replace(/\r\n/g, "\n").replace(/(?<!\n)\n(?!\n)/g, "  \n");
   }
 }
