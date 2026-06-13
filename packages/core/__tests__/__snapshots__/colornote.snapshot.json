@@ -58,7 +58,7 @@
     "color": "yellow",
     "reminder": {
       "title": "Just a remind",
-      "description": "<p data-spacing=\"single\">Just a remind</p>",
+      "description": "Just a remind",
       "date": 1769558400000,
       "mode": "once"
     },
@@ -76,7 +76,7 @@
     "color": "yellow",
     "reminder": {
       "title": "To do list",
-      "description": "<p data-spacing=\"single\">[ ] Pick up laundry</p><p data-spacing=\"single\">[ ] Buy groceries</p><p data-spacing=\"single\"></p>",
+      "description": "[ ] Pick up laundry\n[ ] Buy groceries\n",
       "date": 1769558400000,
       "mode": "once"
     },
@@ -94,7 +94,7 @@
     "color": "red",
     "reminder": {
       "title": "Laundry",
-      "description": "<p data-spacing=\"single\">[V] euhshd</p><p data-spacing=\"single\">[ ] yehshshs</p><p data-spacing=\"single\">[ ] Uhshshsh</p><p data-spacing=\"single\"></p>",
+      "description": "[V] euhshd\n[ ] yehshshs\n[ ] Uhshshsh\n",
       "date": -1,
       "mode": "once"
     },
@@ -136,7 +136,7 @@
     "color": "yellow",
     "reminder": {
       "title": "deadline",
-      "description": "<p data-spacing=\"single\">deadline</p>",
+      "description": "deadline",
       "date": 1769299200000,
       "mode": "once"
     },
@@ -167,7 +167,7 @@
     "color": "yellow",
     "reminder": {
       "title": "weekly reminder",
-      "description": "<p data-spacing=\"single\">weekly reminder</p>",
+      "description": "weekly reminder",
       "date": 1769494693265,
       "mode": "repeat",
       "recurringMode": "week",
@@ -189,7 +189,7 @@
     "color": "yellow",
     "reminder": {
       "title": "monthly reminder",
-      "description": "<p data-spacing=\"single\"></p>",
+      "description": "",
       "date": 1769558400000,
       "mode": "repeat",
       "recurringMode": "month",
@@ -211,7 +211,7 @@
     "color": "yellow",
     "reminder": {
       "title": "daily reminder",
-      "description": "<p data-spacing=\"single\"></p>",
+      "description": "",
       "date": 1769644800000,
       "mode": "repeat",
       "recurringMode": "day"
@@ -230,7 +230,7 @@
     "color": "yellow",
     "reminder": {
       "title": "monthlyreminder2",
-      "description": "<p data-spacing=\"single\"></p>",
+      "description": "",
       "date": 1769500092370,
       "mode": "repeat",
       "recurringMode": "month",
@@ -252,7 +252,7 @@
     "color": "yellow",
     "reminder": {
       "title": "weeklyreminder2",
-      "description": "<p data-spacing=\"single\">weekly reminder </p>",
+      "description": "weekly reminder ",
       "date": 1769558400000,
       "mode": "repeat",
       "recurringMode": "week",
@@ -278,7 +278,7 @@
     "color": "yellow",
     "reminder": {
       "title": "yearly reminder",
-      "description": "<p data-spacing=\"single\"></p>",
+      "description": "",
       "date": 1769558400000,
       "mode": "repeat",
       "recurringMode": "year"
@@ -297,7 +297,7 @@
     "color": "yellow",
     "reminder": {
       "title": "Reminder",
-      "description": "<p data-spacing=\"single\"></p>",
+      "description": "",
       "date": 1769472000000,
       "mode": "once"
     },
@@ -315,7 +315,7 @@
     "color": "yellow",
     "reminder": {
       "title": "Reminder",
-      "description": "<p data-spacing=\"single\"></p>",
+      "description": "",
       "date": 1769472000000,
       "mode": "once"
     },
