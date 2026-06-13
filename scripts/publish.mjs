@@ -32,12 +32,15 @@ import parser from "yargs-parser";
 import { Listr } from "listr2";
 import { existsSync } from "fs";
 
-const args = parser(process.argv, { alias: { scope: ["s"], version: ["v"] } });
+const args = parser(process.argv, {
+  alias: { scope: ["s"], version: ["v"], otp: ["o"] }
+});
 const allPackages = await glob("packages/*", {
   onlyDirectories: true
 });
 
 if (!args.version) throw new Error("version is required.");
+if (!args.otp) throw new Error("otp is required.");
 
 const packages = Array.from(
   new Set(
@@ -140,7 +143,7 @@ async function unresolveLocalPackages(cwd) {
 }
 
 async function publishPackage(cwd, dryRun, outputs) {
-  const publishCmd = `npm publish --access public${dryRun ? " --dry-run" : ""}`;
+  const publishCmd = `npm publish --access public --otp ${args.otp} ${dryRun ? " --dry-run" : ""}`;
   await execute(publishCmd, cwd, outputs);
 }
 
