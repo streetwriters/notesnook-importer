@@ -77,12 +77,13 @@ export class ColorNote implements IFileProvider {
       return;
     }
 
+    const password = await settings?.options?.colornote?.getPassword?.(
+      file.name
+    );
+
     let items: ColornoteNote[];
     try {
-      items = await decryptBackup(
-        new Uint8Array(rawBytes),
-        settings?.options?.colornote?.password
-      );
+      items = await decryptBackup(new Uint8Array(rawBytes), password);
     } catch (e) {
       yield error(e instanceof Error ? e : new Error("Decryption failed"), {
         file

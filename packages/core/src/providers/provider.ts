@@ -81,7 +81,9 @@ export interface ProviderSettings {
 }
 
 export interface ColorNoteOptions {
-  password?: string;
+  getPassword?: (
+    filename: string
+  ) => Promise<string | undefined> | string | undefined;
 }
 
 export type ProviderResult = {

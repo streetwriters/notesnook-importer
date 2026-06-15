@@ -65,7 +65,7 @@ for (const providerName of ProviderFactory.getAvailableProviders()) {
       storage,
       options: {
         colornote: {
-          password: "abcd"
+          getPassword: () => "abcd"
         }
       }
     };
@@ -93,7 +93,7 @@ for (const providerName of ProviderFactory.getAvailableProviders()) {
       storage,
       options: {
         colornote: {
-          password: "abcd"
+          getPassword: () => "abcd"
         }
       }
     };
