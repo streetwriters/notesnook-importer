@@ -1,0 +1,116 @@
+[
+  {
+    "id": "000000000000000000000000",
+    "title": "Daily Plan - {{date}}",
+    "dateEdited": 1768971419000,
+    "tags": [],
+    "attachments": [],
+    "notebooks": [],
+    "content": {
+      "type": "html",
+      "data": "<div class=\"shine-editor\"><h2>Daily Plan - {{date}}</h2>\n <div><br></div>\n <div class=\"callout\" data-callout-type=\"info\"><h3>Things to\n   do:</h3>\n  <ul class=\"checklist\">\n   <li class=\"checklist--item\"><br></li>\n   <li class=\"checklist--item\"><br></li>\n  </ul>\n </div>\n <div><br></div>\n <div class=\"callout\" data-callout-type=\"info\"><h3>Reflection</h3>\n  <div>I&#x2019;m grateful for:</div>\n  <ul>\n   <li><br></li>\n  </ul>\n  <div><br></div>\n  <div>What I did well today:</div>\n  <ul>\n   <li><br></li>\n  </ul>\n  <div><br></div>\n  <div>What I&#x2019;ve learned today:</div>\n  <ul>\n   <li><br></li>\n  </ul>\n  <div><br></div>\n </div>\n <div><br></div>\n</div>"
+    },
+    "compatibilityVersion": 2,
+    "source": "upnote"
+  },
+  {
+    "id": "000000000000000000000000",
+    "title": "Explore UpNote features",
+    "dateEdited": 1768971419000,
+    "tags": [
+      "UpNote"
+    ],
+    "attachments": [],
+    "notebooks": [
+      {
+        "title": "Get Started",
+        "children": []
+      }
+    ],
+    "content": {
+      "type": "html",
+      "data": "<div class=\"shine-editor\"><h2>Explore UpNote features</h2>\n <div>There are many useful features in UpNote to help you\n  stay organized and productive.</div>\n <div><br></div>\n\n <div class=\"callout\" data-callout-type=\"info\"><h3>Add notes\n   to notebooks &#x1f4da;</h3>\n  <ul>\n   <li>Add your notes of the same topic into one or multiple\n    notebooks</li>\n   <li>Create <a\n     title=\"https://medium.com/upnote/organize-your-notes-with-nested-notebooks-dd807b0b2289\"\n     href=\"https://medium.com/upnote/organize-your-notes-with-nested-notebooks-dd807b0b2289\">nested\n     notebooks</a> to better organize your notes</li>\n  </ul>\n </div>\n\n <div><br></div>\n\n <div class=\"callout\" data-callout-type=\"info\"><h3>Organize\n   with hashtags #&#xfe0f;&#x20e3;</h3>\n  <ul>\n   <li>Simply type <code spellcheck=\"false\">#</code> to add\n    hashtags anywhere in your note <a title=\"#UpNote\"\n     data-upnote-tag=\"#UpNote\" spellcheck=\"false\"\n     data-non-editable=\"true\"\n     href=\"upnote://x-callback-url/tag/view?tag=UpNote\">#UpNote</a><br></li>\n   <li>All hashtags will show up on the side bar and in the\n    note&#x2019;s info panel</li>\n   <li>Hide unused tags and notebooks from the side bar to\n    keep your workspace clean. Click on the Tags/Notebooks\n    labels to view all Tags and Notebooks</li>\n  </ul>\n </div>\n\n <div><br></div>\n\n <div class=\"callout\" data-callout-type=\"info\"><h3>Find your\n   notes quickly</h3>\n  <ul>\n   <li>Pin a note to the top of the note list &#x1f4cc;</li>\n   <li>Add your notes to Quick Access &#x2b50;&#xfe0f;so you\n    can refer to them anytime</li>\n  </ul>\n </div>\n\n <div><br></div>\n\n <div class=\"callout\" data-callout-type=\"info\"><h3>Writing\n   with Markdown &#x1f4dd;</h3>\n  <ul>\n   <li>Check out this <a\n     href=\"https://medium.com/upnote/how-to-use-markdown-with-upnote-1899b82abd56\">article</a>\n    for the full Markdown syntax used in UpNote</li>\n   <li>You can paste from Markdown source into UpNote by\n    right click &gt; select <code spellcheck=\"false\">Paste\n     with Markdown</code> </li>\n  </ul>\n </div>\n\n <div><br></div>\n\n <div class=\"callout\" data-callout-type=\"info\"><h3>View your\n   note&#x2019;s info</h3>\n  <div>\n   <ul>\n    <li>Click on the <code spellcheck=\"false\">Info</code>\n     icon to show your notes&#x2019; info: date, word count,\n     backlinks, tags and table of contents</li>\n   </ul>\n  </div>\n </div>\n\n <div><br></div>\n <h2>For Mac, Windows and Linux apps</h2>\n <div><br></div>\n\n <div class=\"callout\" data-callout-type=\"info\"><h3>Stay\n   focused when writing &#x1f3f9;</h3>\n  <ul>\n   <li>Write without any distraction with Focus Mode. Use\n    shortcut <code spellcheck=\"false\">Cmd + Shift + F</code>\n    to quickly toggle the mode<br></li>\n   <li>Turn on <a\n     href=\"https://medium.com/upnote/typewriter-mode-in-upnote-604286eb1133\">Typewriter\n     Mode</a> when you write a long note to keep the text in\n    the middle of the screen. Use the shortcut <code\n     spellcheck=\"false\">Cmd + Shift + T</code> to toggle\n    between normal and typewriter mode<br></li>\n  </ul>\n </div>\n\n <div><br></div>\n\n <div class=\"callout\" data-callout-type=\"info\"><h3>Keep\n   window on top &#x1f4cd;</h3>\n  <ul>\n   <li>Take note while reading or learning online\n    conveniently by sticking the app on top of your browser\n    windows</li>\n   <li>Click on the icon at the top right of your notes\n    window or use the shortcut <code spellcheck=\"false\">Cmd\n     + Shift + K</code> </li>\n  </ul>\n </div>\n\n <div><br></div>\n\n <div class=\"callout\" data-callout-type=\"info\"><h3>Import\n   &amp; Export &#x1f4c3;</h3>\n  <ul>\n   <li><a\n     href=\"https://medium.com/upnote/import-notes-to-upnote-16282a74cd48\">Import\n     your notes</a> from Evernote or other file types\n    including Markdown, HTML, RFT/RTFD, Doc/Docx and TXT\n   </li>\n   <li><a\n     href=\"https://medium.com/upnote/export-your-notes-3d8d6f7739d7\">Export\n     your notes</a> to various formats: PDF, Text, HTML and\n    Markdown</li>\n  </ul>\n </div>\n\n <div><br></div>\n\n <div class=\"callout\" data-callout-type=\"info\"><h3>Web\n   clipper extension &#x1f4cb;</h3>\n  <ul>\n   <li>Quickly save links and content to UpNote when you\n    browse and research on the web</li>\n   <li>Download Web clipper extension for <a\n     href=\"https://chrome.google.com/webstore/detail/upnote-web-clipper/nloebbaneekjiakbhafchdlfjmildnni\">Chrome</a>,\n    <a\n     href=\"https://addons.mozilla.org/en-US/firefox/addon/upnote-web-clipper/\">Firefox</a>\n    and <a\n     href=\"https://apps.apple.com/us/app/upnote-web-clipper/id1566998257?mt=12\">Safari</a></li>\n  </ul>\n </div>\n\n <div><br></div>\n <div>For more information and updates about UpNote, please\n  see <a a title=\"https://help.getupnote.com/\"\n   href=\"https://help.getupnote.com/\">UpNote user guide</a>,\n  visit <a title=\"https://upnote.medium.com/\"\n   href=\"https://upnote.medium.com/\">our blog</a> and follow\n  <a title=\"https://x.com/upnote_app\"\n   href=\"https://x.com/upnote_app\">UpNote on x.com</a>. We\n  hope you will enjoy using UpNote! &#x1f603;</div>\n</div>"
+    },
+    "compatibilityVersion": 2,
+    "source": "upnote"
+  },
+  {
+    "id": "000000000000000000000000",
+    "title": "Welcome to UpNote!",
+    "dateEdited": 1768971419000,
+    "tags": [],
+    "attachments": [
+      {
+        "size": 98224,
+        "hash": "bc56a7201f575e09",
+        "filename": "upnote_sample_image.png",
+        "hashType": "xxh64",
+        "mime": "image/png"
+      }
+    ],
+    "notebooks": [],
+    "content": {
+      "type": "html",
+      "data": "<div class=\"shine-editor\"><h2>Welcome to UpNote!</h2>\n <div>Thank you for choosing UpNote &#x2014; we hope you\n  enjoy the app.</div>\n <div><br></div>\n <div>UpNote helps you take notes quickly and stay\n  organized. Notes are saved automatically, and you can view\n  past edits with <a\n   href=\"https://help.getupnote.com/more/restore-a-note-version\">version\n   history</a>.</div>\n <div><br></div>\n <div>Here are some tips to get the most out of UpNote.</div>\n <div><br></div>\n <h3>Get Started with UpNote:</h3>\n <ul class=\"checklist\">\n  <li class=\"checklist--item checked\"><a\n    href=\"https://getupnote.com/#download\">Download UpNote</a>\n   on your phone, tablet, and computer.</li>\n  <li class=\"checklist--item\">Create a free account and sign\n   in on all your devices.</li>\n  <li class=\"checklist--item\">Start writing your first note.</li>\n  <li class=\"checklist--item\">Explore our <a\n    href=\"https://help.getupnote.com\">User Guide</a> to\n   learn about UpNote&#x2019;s features.</li>\n </ul>\n <div><br></div>\n <h3>Write your thoughts with rich formatting:</h3>\n <ul>\n  <li>Use list and nested list, like this:</li>\n  <ul>\n   <li>Write text in <b><span style=\"color: #396FEF;\">bold,</span></b>\n    <i><span style=\"color: #E54739;\">italic,</span></i>\n    <span style=\"color: #5CA033;\"><u>underline</u></span>,\n    <span style=\"color: #805AF6;\"><strike>strike-through</strike></span>.</li>\n   <li>Highlight text in multiple colors: <span\n     style=\"background-color: #FAE5CE;\">orange</span>, <span\n     style=\"background-color: #F9DFDE;\">red</span>, <span\n     style=\"background-color: #DBEBFB;\">blue</span>, <span\n     style=\"background-color: #FEF8B0;\">yellow</span>, <span\n     class=\"shine-highlight\">green</span> and <span\n     style=\"background-color: #EADDFC;\">purple</span>.</li>\n  </ul>\n  <li>Select your preferred font in Settings.</li>\n </ul>\n <div><br></div>\n <h3>Add an image</h3>\n <div><img class=\"attachment\"\n   data-filename=\"upnote_sample_image.png\" data-size=\"98224\"\n   data-hash=\"bc56a7201f575e09\" data-mime=\"image/png\"\n   alt=\"upnote_sample_image.png\"><br></div>\n <div><br></div>\n <h3>Add a quote</h3>\n <blockquote>\n  Knowing yourself is the beginning of all wisdom.\n  <br>\n  <b>&#x2015;Aristotle</b>\n </blockquote>\n <div><br></div>\n <h3>Add a code block (Premium&#x2b50;)</h3>\n <pre spellcheck=\"false\">const message = &apos;Hello World&apos;<br>console.log(message)</pre>\n <div><br></div>\n <h3>Organize note content into table (Premium &#x2b50;)</h3>\n <div>\n  <div class=\"shine-table-wrapper\">\n   <table>\n    <colgroup>\n     <col style=\"width: 105px;\">\n     <col style=\"width: 134px;\">\n     <col style=\"width: 98px;\">\n    </colgroup>\n    <tbody>\n     <tr>\n      <td rowspan=\"1\" colspan=\"2\" class><b>Subject</b></td>\n      <td class><b>Grade</b></td>\n     </tr>\n     <tr>\n      <td rowspan=\"2\" colspan=\"1\" class>Physics</td>\n      <td class>\n       <div>Practical</div>\n      </td>\n      <td class>A</td>\n     </tr>\n     <tr>\n      <td class>\n       <div>Theory</div>\n      </td>\n      <td class>B+</td>\n     </tr>\n    </tbody>\n   </table>\n  </div>\n </div>\n <div><br></div>\n <h3>Write an equation</h3>\n <div><span data-formula-width-em=\"10.375\"\n   data-upnote-formula=\"x=\\frac{-b\\pm \\sqrt{b^2-4ac}}{2a}\"\n   data-non-editable=\"true\">x=\\frac{-b\\pm\n   \\sqrt{b^2-4ac}}{2a}</span></div>\n <div><br></div>\n <h3>Link between notes &#x1f517;</h3>\n <ul>\n  <li>You can link to other notes, for example see <a\n    href=\"nn://note/000000000000000000000000\">Explore UpNote\n    features</a>.</li>\n  <li>To link to another note, simply type <code class\n    spellcheck=\"false\">[[</code> and you can select the note\n   you want to refer to. (You can find out more about note\n   linking <a\n    href=\"https://medium.com/upnote/bi-directional-links-in-upnote-63631bd36b2a\">here</a>).</li>\n </ul>\n <div><br></div>\n <h3>Unlock full power of UpNote with Premium</h3>\n <div>\n  <ul>\n   <li>Upgrade once and use on all devices.</li>\n   <li>Check out Settings &gt; Premium for more details\n    &#x2b50;.</li>\n  </ul>\n </div>\n <div><br></div>\n <h3>Thank you for trying UpNote!</h3>\n <div>We hope UpNote will be useful for you. If you enjoy\n  UpNote, please take a moment to rate it on the Apple App\n  Store, Google Play Store or Microsoft Store. We greatly\n  appreciate your support!</div>\n</div>"
+    },
+    "compatibilityVersion": 2,
+    "source": "upnote"
+  },
+  {
+    "id": "000000000000000000000000",
+    "title": "Welcome to UpNote!",
+    "dateEdited": 1781507677000,
+    "tags": [],
+    "attachments": [
+      {
+        "size": 98224,
+        "hash": "bc56a7201f575e09",
+        "filename": "upnote_sample_image.png",
+        "hashType": "xxh64",
+        "mime": "image/png"
+      }
+    ],
+    "notebooks": [],
+    "content": {
+      "type": "html",
+      "data": "<div class=\"shine-editor\"><h2>Welcome to UpNote!</h2>\n <div>Thank you for choosing UpNote &#x2014; we hope you\n  find it useful.</div>\n <div><br></div>\n <div>UpNote helps you take notes quickly and keep them\n  organized. UpNote is available on Mac, Windows, Linux,\n  iOS, and Android, making it easy to access your notes\n  across all your devices.</div>\n <div><br></div>\n <div>Here are a few tips to help you get started with\n  UpNote.</div>\n <div><br></div>\n <h3>Get Started with UpNote:</h3>\n <ul class=\"checklist\"><li class=\"checklist--item\">Create a\n   free account and sign in on all your devices.</li><li\n   class=\"checklist--item\">Start writing your first note.</li><li\n   class=\"checklist--item\">View past edits using <a\n    href=\"https://help.getupnote.com/more/restore-a-note-version\">version\n    history</a>.</li><li class=\"checklist--item\">Explore our\n   <a href=\"https://help.getupnote.com\">User Guide</a> to\n   learn more about UpNote&#x2019;s features.</li></ul><div><br></div>\n <h3>Write with rich formatting</h3>\n <ul><li>Use multi-level lists like this:</li><ul><li>Write\n    text in <b><span style=\"color: #396FEF;\">bold</span></b>,\n    <i><span style=\"color: #E54739;\">italic</span></i>, <u><span\n      style=\"color: #5CA033;\">underline</span></u>, or\n    <strike><span style=\"color: #805AF6;\">strike-through</span></strike>.</li><li>Highlight\n    <span style=\"color: #CDAE61;\">text</span> in <span\n     style=\"color: #EA8D34;\">different</span> colors: <span\n     style=\"background-color: #FAE5CE;\">orange</span>, <span\n     style=\"background-color: #F9DFDE;\">red</span>, <span\n     style=\"background-color: #DBEBFB;\">blue</span>, <span\n     style=\"background-color: #FEF8B0;\">yellow</span>, <span\n     class=\"shine-highlight\">green</span>, and <span\n     style=\"background-color: #EADDFC;\">purple</span>.</li></ul><li><span\n    style=\"color: #757575;\">Select</span> your <span\n    style=\"background-color: #EAEAEA;\">preferred</span>\n   <span style=\"background-color: #FAE5F9;\">font</span> in\n   <span style=\"color: #D362DB;\">Settings</span>.</li></ul><div><br></div>\n <h3>Add an image</h3>\n <div><img class=\"attachment\"\n   data-filename=\"upnote_sample_image.png\" data-size=\"98224\"\n   data-hash=\"bc56a7201f575e09\" data-mime=\"image/png\"\n   alt=\"upnote_sample_image.png\"><br></div>\n <div><br></div>\n <h3>Add a quote</h3>\n <blockquote>\n  Knowing yourself is the beginning of all wisdom.\n  <br>\n  <b>&#x2015; Aristotle</b>\n </blockquote>\n <div><br></div>\n <h3>Add a code block (Premium &#x2b50;)</h3>\n <pre spellcheck=\"false\">const message = &apos;Hello World&apos;\nconsole.log(message)</pre>\n <div><br></div>\n <h3>Organize note content into a table (Premium &#x2b50;)</h3>\n\n <div class=\"shine-table-wrapper\">\n  <table>\n   <colgroup>\n    <col style=\"width: 105px;\">\n    <col style=\"width: 134px;\">\n    <col style=\"width: 98px;\">\n   </colgroup>\n   <tbody>\n    <tr>\n     <td colspan=\"2\"><b>Subject</b></td>\n     <td><b>Grade</b></td>\n    </tr>\n    <tr>\n     <td rowspan=\"2\">Physics</td>\n     <td>Practical</td>\n     <td>A</td>\n    </tr>\n    <tr>\n     <td>Theory</td>\n     <td>B+</td>\n    </tr>\n   </tbody>\n  </table>\n </div>\n\n <div><br></div>\n <h3>Write an equation</h3>\n <div><span data-non-editable=\"true\"\n   data-upnote-formula=\"x=\\frac{-b\\pm \\sqrt{b^2-4ac}}{2a}\"\n   data-formula-width-em=\"10.375\">x=\\frac{-b\\pm\n   \\sqrt{b^2-4ac}}{2a}</span></div>\n <div><br></div>\n <h3>Link notes &#x1f517;</h3>\n <ul><li>You can link to other notes. For example, see <a\n    href=\"nn://note/000000000000000000000000\">Explore UpNote\n    features</a>.</li><li>To link to another note, simply\n   type <code spellcheck=\"false\">[[</code> and choose the\n   note you want to refer to. You can learn more about note\n   linking <a\n    href=\"https://medium.com/upnote/bi-directional-links-in-upnote-63631bd36b2a\">here</a>.</li></ul><div><br></div>\n <h3>Unlock the full power of UpNote with Premium</h3>\n <ul><li>Upgrade once and use UpNote on all your devices.</li><li>See\n   <b>Settings &gt; Premium</b> for more details &#x2b50;.</li></ul><div><br></div>\n <h3>Thank you for trying UpNote!</h3>\n <div>If you enjoy UpNote, please consider leaving a rating\n  in the store where you installed the app. Your support\n  helps us improve UpNote for everyone.</div><div\n  class=\"callout\" data-callout-type=\"info\"><h3>Collapsible\n   section start</h3><div>Collapsible section content</div><div>jkvbasdv</div></div><div><br></div><blockquote>fbadbsdfb</blockquote><div><br></div><pre\n  spellcheck=\"false\" class=\"language-javascript\">function google() {\n&#x2003;const hello = &quot;&quot;;\n}</pre><div><br></div><div>vasdv&#xa0;<sub>sdavsd&#xa0;</sub><sup>asdvasdvasdv</sup>\n  asdvasdvasdv&#xa0;<sup>sdavasdvasdv&#xa0;</sup>v asdv\n  asdv&#xa0;</div><div><br></div><div><br></div>\n</div>"
+    },
+    "compatibilityVersion": 2,
+    "source": "upnote"
+  },
+  {
+    "id": "000000000000000000000000",
+    "title": "Daily Plan - {{date}}",
+    "dateEdited": 1781506428000,
+    "tags": [],
+    "attachments": [],
+    "notebooks": [],
+    "content": {
+      "type": "html",
+      "data": "<div class=\"shine-editor\"><h2>Daily Plan - {{date}}</h2>\n <div><br></div>\n <div class=\"callout\" data-callout-type=\"info\"><h3>Things to\n   do:</h3>\n  <ul class=\"checklist\"><li class=\"checklist--item\"><br></li><li\n    class=\"checklist--item\"><br></li></ul></div>\n <div><br></div>\n <div class=\"callout\" data-callout-type=\"info\"><h3>Reflection</h3>\n  <div>I&#x2019;m grateful for:</div>\n  <ul><li><br></li></ul><div><br></div>\n  <div>What I did well today:</div>\n  <ul><li><br></li></ul><div><br></div>\n  <div>What I&#x2019;ve learned today:</div>\n  <ul><li><br></li></ul><div><br></div>\n </div>\n <div><br></div>\n</div>"
+    },
+    "compatibilityVersion": 2,
+    "source": "upnote"
+  },
+  {
+    "id": "000000000000000000000000",
+    "title": "Explore UpNote features",
+    "dateEdited": 1781506428000,
+    "tags": [
+      "UpNote"
+    ],
+    "attachments": [],
+    "notebooks": [
+      {
+        "title": "Get Started",
+        "children": []
+      }
+    ],
+    "content": {
+      "type": "html",
+      "data": "<div class=\"shine-editor\"><h2>Explore UpNote features</h2>\n <div>There are many useful features in UpNote to help you\n  stay organized and productive.</div>\n <div><br></div>\n\n <div class=\"callout\" data-callout-type=\"info\"><h3>Add notes\n   to notebooks &#x1f4da;</h3>\n  <ul><li>Add your notes of the same topic into one or\n    multiple notebooks</li><li>Create <a\n     href=\"https://medium.com/upnote/organize-your-notes-with-nested-notebooks-dd807b0b2289\">sub\n     notebooks</a> to better organize your notes</li></ul></div>\n\n <div><br></div>\n\n <div class=\"callout\" data-callout-type=\"info\"><h3>Organize\n   with hashtags #&#xfe0f;&#x20e3;</h3>\n  <ul><li>Simply type <code spellcheck=\"false\">#</code> to\n    add hashtags anywhere in your note <a title=\"#UpNote\"\n     data-upnote-tag=\"#UpNote\" spellcheck=\"false\"\n     data-non-editable=\"true\"\n     href=\"upnote://x-callback-url/tag/view?tag=UpNote\">#UpNote</a><br></li><li>All\n    hashtags will show up on the side bar and in the\n    note&#x2019;s info panel</li><li>Hide unused tags and\n    notebooks from the side bar to keep your workspace\n    clean. Click on the Tags/Notebooks labels to view all\n    Tags and Notebooks</li></ul></div>\n\n <div><br></div>\n\n <div class=\"callout\" data-callout-type=\"info\"><h3>Find your\n   notes quickly</h3>\n  <ul><li>Pin a note to the top of the note list &#x1f4cc;</li><li>Add\n    your notes to Quick Access &#x2b50;&#xfe0f;so you can\n    refer to them anytime</li></ul></div>\n\n <div><br></div>\n\n <div class=\"callout\" data-callout-type=\"info\"><h3>Writing\n   with Markdown &#x1f4dd;</h3>\n  <ul><li>Check out this <a\n     href=\"https://medium.com/upnote/how-to-use-markdown-with-upnote-1899b82abd56\">article</a>\n    for the full Markdown syntax used in UpNote</li><li>You\n    can paste from Markdown source into UpNote by right\n    click &gt; select <code spellcheck=\"false\">Paste with\n     Markdown</code> </li></ul></div>\n\n <div><br></div>\n\n <div class=\"callout\" data-callout-type=\"info\"><h3>View your\n   note&#x2019;s info</h3>\n\n  <ul><li>Click on the <code spellcheck=\"false\">Info</code>\n    icon to show your notes&#x2019; info: date, word count,\n    backlinks, tags and table of contents</li></ul>\n </div>\n\n <div><br></div>\n <h2>For Mac, Windows and Linux apps</h2>\n <div><br></div>\n\n <div class=\"callout\" data-callout-type=\"info\"><h3>Stay\n   focused when writing &#x1f3f9;</h3>\n  <ul><li>Write without any distraction with Focus Mode. Use\n    shortcut <code spellcheck=\"false\">Cmd + Shift + F</code>\n    to quickly toggle the mode<br></li><li>Turn on <a\n     href=\"https://medium.com/upnote/typewriter-mode-in-upnote-604286eb1133\">Typewriter\n     Mode</a> when you write a long note to keep the text in\n    the middle of the screen. Use the shortcut <code\n     spellcheck=\"false\">Cmd + Shift + T</code> to toggle\n    between normal and typewriter mode<br></li></ul></div>\n\n <div><br></div>\n\n <div class=\"callout\" data-callout-type=\"info\"><h3>Keep\n   window on top &#x1f4cd;</h3>\n  <ul><li>Take note while reading or learning online\n    conveniently by sticking the app on top of your browser\n    windows</li><li>Click on the icon at the top right of\n    your notes window or use the shortcut <code\n     spellcheck=\"false\">Cmd + Shift + K</code> </li></ul></div>\n\n <div><br></div>\n\n <div class=\"callout\" data-callout-type=\"info\"><h3>Import\n   &amp; Export &#x1f4c3;</h3>\n  <ul><li><a\n     href=\"https://medium.com/upnote/import-notes-to-upnote-16282a74cd48\">Import\n     your notes</a> from Evernote or other file types\n    including Markdown, HTML, RFT/RTFD, Doc/Docx and TXT\n   </li><li><a\n     href=\"https://medium.com/upnote/export-your-notes-3d8d6f7739d7\">Export\n     your notes</a> to various formats: PDF, Text, HTML and\n    Markdown</li></ul></div>\n\n <div><br></div>\n\n <div class=\"callout\" data-callout-type=\"info\"><h3>Web\n   clipper extension &#x1f4cb;</h3>\n  <ul><li>Quickly save links and content to UpNote when you\n    browse and research on the web</li><li>Download Web\n    clipper extension for <a\n     href=\"https://chrome.google.com/webstore/detail/upnote-web-clipper/nloebbaneekjiakbhafchdlfjmildnni\">Chrome</a>,\n    <a\n     href=\"https://addons.mozilla.org/en-US/firefox/addon/upnote-web-clipper/\">Firefox</a>\n    and <a\n     href=\"https://apps.apple.com/us/app/upnote-web-clipper/id1566998257?mt=12\">Safari</a></li></ul></div>\n\n <div><br></div>\n <div>For more information and updates about UpNote, please\n  see <a href=\"https://help.getupnote.com/\">UpNote user\n   guide</a>, visit <a href=\"https://upnote.medium.com/\">our\n   blog</a> and follow <a href=\"https://x.com/upnote_app\">UpNote\n   on x.com</a>. We hope you will enjoy using UpNote!\n  &#x1f603;</div>\n</div>"
+    },
+    "compatibilityVersion": 2,
+    "source": "upnote"
+  }
+]

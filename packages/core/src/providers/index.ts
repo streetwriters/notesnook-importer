@@ -27,3 +27,4 @@ export * from "./zoho-notebook";
 export * from "./textbundle";
 export * from "./skiff-pages";
 export * from "./colornote";
+export * from "./upnote";
