@@ -253,14 +253,14 @@ const collapseMultilineParagraphs: Plugin<[], HastRoot, HastRoot> =
     return (tree: HastRoot) => {
       visit(tree, "text", (node) => {
         if (node.value.length > 1)
-          node.value = node.value.replace(/[\r\n]/gm, " "); //.trim();
+          node.value = node.value.replace(/\r\n|\n/gm, " "); //.trim();
       });
     };
   };
 
 export function textToHTML(src: string) {
   return src
-    .split(/[\r\n]/)
+    .split(/\r\n|\n/)
     .map((line) =>
       line
         ? `<p data-spacing="single">${encodeLine(line)}</p>`

@@ -84,7 +84,7 @@
       }
     ],
     "content": {
-      "data": "<pre>klkmklmk<br>;mkmk<br>#include <Servo.h><br><br><br>#include <LiquidCrystal.h><br><br><br>kmkmkl</pre>",
+      "data": "<pre>klkmklmk<br>;mkmk<br>#include <Servo.h><br><br>#include <LiquidCrystal.h><br><br>kmkmkl</pre>",
       "type": "html"
     },
     "compatibilityVersion": 2,

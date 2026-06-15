@@ -26,7 +26,7 @@ export class ENCodeblock extends BaseHandler {
   async process(element: Element): Promise<string | undefined> {
     return `<pre>${element.childNodes
       .map((n) =>
-        encodeNonAsciiHTML(textContent(n)).replace(/[\r\n]/gm, "<br/>")
+        encodeNonAsciiHTML(textContent(n)).replace(/\r\n|\n/gm, "<br/>")
       )
       .join("<br/>")}</pre>`;
   }
