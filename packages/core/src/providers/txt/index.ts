@@ -44,7 +44,6 @@ export class Text implements IFileProvider {
   ): AsyncGenerator<ProviderMessage, void, unknown> {
     const data = await file.text();
     const html = textToHTML(data);
-    console.log("Generated HTML:", html);
     yield {
       type: "note",
       note: await HTML.processHTML(file, files, settings.hasher, html)
