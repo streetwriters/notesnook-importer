@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import { render } from "dom-serializer";
-import { Document, Element } from "domhandler";
+import { Document, Element, Text } from "domhandler";
 import { findAll, findOne, removeElement, textContent } from "domutils";
 import { parseDocument } from "htmlparser2";
 import { ContentType, Note, Notebook } from "../../models/note";
@@ -38,6 +38,28 @@ type UpNotePreprocessData = {
   noteIds: Record<string, string>;
 };
 
+const HIGHLIGHT_COLORS = {
+  orange: "#FAE5CE",
+  red: "#F9DFDE",
+  yellow: "#FEF8B0",
+  green: "#DEFEBF",
+  blue: "#DBEBFB",
+  purple: "#EADDFC",
+  pink: "#FAE5F9",
+  gray: "#EAEAEA"
+};
+
+const TEXT_COLORS = {
+  orange: "#EA8D34",
+  red: "#E54739",
+  yellow: "#CDAE61",
+  green: "#5CA033",
+  blue: "#396FEF",
+  purple: "#805AF6",
+  pink: "#D362DB",
+  gray: "#757575"
+};
+
 export class UpNote implements IFileProvider<UpNotePreprocessData> {
   id: Providers = "upnote";
   type = "file" as const;
@@ -49,7 +71,10 @@ export class UpNote implements IFileProvider<UpNotePreprocessData> {
     "https://help.notesnook.com/importing-notes/import-notes-from-upnote";
 
   filter(file: File) {
-    return this.supportedExtensions.includes(file.extension);
+    return (
+      this.supportedExtensions.includes(file.extension) &&
+      !file.path?.includes("/notebooks/")
+    );
   }
 
   async preprocess(files: File[]): Promise<UpNotePreprocessData> {
@@ -65,7 +90,7 @@ export class UpNote implements IFileProvider<UpNotePreprocessData> {
 
     for (const file of files) {
       if (!file.path) continue;
-      if (!file.name.endsWith(".lnk")) continue;
+      if (!file.name.endsWith(".lnk") && !file.name.endsWith(".html")) continue;
 
       const pathParts = file.path.split(/[\\/]/);
       const notebooksIndex = pathParts.findIndex(
@@ -76,7 +101,7 @@ export class UpNote implements IFileProvider<UpNotePreprocessData> {
       const notebookParts = pathParts.slice(notebooksIndex + 1, -1);
       if (notebookParts.length === 0) continue;
 
-      const noteFilename = file.name.replace(/\.lnk$/, "");
+      const noteFilename = file.nameWithoutExtension;
       const notebook = this.buildNotebookHierarchy(notebookParts);
       if (!notebook) continue;
 
@@ -168,6 +193,10 @@ export class UpNote implements IFileProvider<UpNotePreprocessData> {
     if (preprocessData?.noteIds) {
       this.convertInternalLinks(document, preprocessData.noteIds);
     }
+    this.convertChecklists(document);
+    this.convertHighlightsAndTextColors(document);
+    this.convertCollapsibleSection(document);
+    this.convertCodeblockLanguage(document);
 
     const tags = this.extractTags(document);
     const attachments = await HTML.extractResources(
@@ -243,6 +272,140 @@ export class UpNote implements IFileProvider<UpNotePreprocessData> {
         link.attribs.href = `nn://note/${id}`;
         delete link.attribs["data-note-id"];
       }
+    }
+  }
+
+  private convertChecklists(document: Document): void {
+    const checklists = findAll(
+      (elem) =>
+        elem.type === "tag" &&
+        elem.tagName === "ul" &&
+        elem.children.some(
+          (child) =>
+            child.type === "tag" &&
+            child.tagName === "li" &&
+            child.attribs?.["data-checked"] !== undefined
+        ),
+      document.childNodes
+    );
+
+    for (const list of checklists) {
+      list.attribs.class = `checklist`;
+    }
+
+    const checklistItems = findAll(
+      (elem) =>
+        elem.type === "tag" &&
+        elem.tagName === "li" &&
+        elem.attribs?.["data-checked"] !== undefined,
+      document.childNodes
+    );
+
+    for (const item of checklistItems) {
+      const isChecked = item.attribs["data-checked"] === "true";
+      item.attribs.class = `checklist--item${isChecked ? " checked" : ""}`;
+      delete item.attribs["data-checked"];
+    }
+  }
+
+  private convertHighlightsAndTextColors(document: Document): void {
+    const highlights = findAll(
+      (elem) =>
+        elem.type === "tag" &&
+        elem.tagName === "span" &&
+        elem.attribs?.class?.includes("shine-highlight-"),
+      document.childNodes
+    );
+
+    for (const hl of highlights) {
+      const color = hl.attribs.class.replace(
+        "shine-highlight-",
+        ""
+      ) as keyof typeof HIGHLIGHT_COLORS;
+      if (!color || !HIGHLIGHT_COLORS[color]) continue;
+      const style = `background-color: ${HIGHLIGHT_COLORS[color]};`;
+      hl.attribs.style = hl.attribs.style || "";
+      hl.attribs.style += style;
+      delete hl.attribs.class;
+    }
+
+    const textColors = findAll(
+      (elem) =>
+        elem.type === "tag" &&
+        elem.tagName === "span" &&
+        elem.attribs?.class?.includes("shine-text-"),
+      document.childNodes
+    );
+
+    for (const tc of textColors) {
+      const color = tc.attribs.class.replace(
+        "shine-text-",
+        ""
+      ) as keyof typeof TEXT_COLORS;
+      if (!color || !TEXT_COLORS[color]) continue;
+      const style = `color: ${TEXT_COLORS[color]};`;
+      tc.attribs.style = tc.attribs.style || "";
+      tc.attribs.style += style;
+      delete tc.attribs.class;
+    }
+  }
+
+  private convertCollapsibleSection(document: Document): void {
+    const sections = findAll(
+      (elem) =>
+        elem.type === "tag" &&
+        elem.tagName === "div" &&
+        elem.attribs?.class?.includes("shine-collapsible-section"),
+      document.childNodes
+    );
+
+    for (const section of sections) {
+      const titleElement = findOne(
+        (elem) =>
+          elem.type === "tag" &&
+          elem.tagName === "div" &&
+          elem.attribs?.class?.includes("shine-section-title-inner"),
+        section.childNodes,
+        true
+      );
+
+      const contentElement = findOne(
+        (elem) =>
+          elem.type === "tag" &&
+          elem.tagName === "div" &&
+          elem.attribs?.class?.includes("shine-section-content-inner"),
+        section.childNodes,
+        true
+      );
+      if (!contentElement) continue;
+
+      const title = titleElement ? textContent(titleElement) : null;
+      if (!title) continue;
+
+      section.attribs = {
+        class: "callout",
+        "data-callout-type": "info"
+      };
+      section.childNodes = [
+        new Element("h3", {}, [new Text(title.trim())]),
+        ...contentElement.childNodes
+      ];
+    }
+  }
+
+  private convertCodeblockLanguage(document: Document): void {
+    const codeblocks = findAll(
+      (elem) =>
+        elem.type === "tag" &&
+        elem.tagName === "pre" &&
+        !!elem.attribs?.["data-code-language"],
+      document.childNodes
+    );
+
+    for (const codeblock of codeblocks) {
+      codeblock.attribs.class =
+        "language-" + codeblock.attribs["data-code-language"];
+      delete codeblock.attribs["data-code-language"];
     }
   }
 }
