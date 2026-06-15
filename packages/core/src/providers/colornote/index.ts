@@ -80,6 +80,12 @@ export class ColorNote implements IFileProvider {
     const password = await settings?.options?.colornote?.getPassword?.(
       file.name
     );
+    if (!password) {
+      yield error(new Error("Password is required to decrypt backup file."), {
+        file
+      });
+      return;
+    }
 
     let items: ColornoteNote[];
     try {
