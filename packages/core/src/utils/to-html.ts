@@ -317,6 +317,24 @@ const convertHardLineBreaks: Plugin<[], Root, Root> = function () {
           }
         }
       }));
+
+      const prev = parent.children[index - 1];
+      if (
+        prev &&
+        prev.type === "paragraph" &&
+        (prev as any).data?.hProperties?.["data-spacing"] === "single"
+      ) {
+        newParagraphs.unshift({
+          type: "paragraph",
+          children: [],
+          data: {
+            hProperties: {
+              "data-spacing": "single"
+            }
+          }
+        });
+      }
+
       parent.children.splice(index, 1, ...newParagraphs);
       return index + newParagraphs.length;
     });

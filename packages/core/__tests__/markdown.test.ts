@@ -246,6 +246,39 @@ line 4`,
 <p data-spacing="single">line 2</p>
 <p data-spacing="single">line 3</p>
 <p>line 4</p>`
+    },
+    {
+      name: "between two single spaced paragraphs",
+      input: `line 1  
+line 2
+
+line 3  
+line 4`,
+      expected: `<p data-spacing="single">line 1</p>
+<p data-spacing="single">line 2</p>
+<p data-spacing="single"></p>
+<p data-spacing="single">line 3</p>
+<p data-spacing="single">line 4</p>`
+    },
+    {
+      name: "no hard breaks, no empty line handling",
+      input: `line 1
+line 2
+
+line 3
+line 4`,
+      expected: `<p>line 1 line 2</p>
+<p>line 3 line 4</p>`
+    },
+    {
+      name: "single spaced followed by standard paragraph",
+      input: `line 1  
+line 2
+
+standard paragraph`,
+      expected: `<p data-spacing="single">line 1</p>
+<p data-spacing="single">line 2</p>
+<p>standard paragraph</p>`
     }
   ];
 
