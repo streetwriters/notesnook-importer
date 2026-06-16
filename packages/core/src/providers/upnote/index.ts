@@ -18,8 +18,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import { render } from "dom-serializer";
-import { Document, Element, Text } from "domhandler";
-import { findAll, findOne, removeElement, textContent } from "domutils";
+import {
+  AnyNode,
+  ChildNode,
+  Document,
+  Element,
+  ParentNode,
+  Text
+} from "domhandler";
+import {
+  findAll,
+  findOne,
+  isTag,
+  removeElement,
+  replaceElement,
+  textContent
+} from "domutils";
 import { parseDocument } from "htmlparser2";
 import { ContentType, Note, Notebook } from "../../models/note";
 import { File } from "../../utils/file";
@@ -197,6 +211,7 @@ export class UpNote implements IFileProvider<UpNotePreprocessData> {
     this.convertHighlightsAndTextColors(document);
     this.convertCollapsibleSection(document);
     this.convertCodeblockLanguage(document);
+    this.convertBrToSingleSpacedParagraphs(document);
 
     const tags = this.extractTags(document);
     const attachments = await HTML.extractResources(
@@ -407,5 +422,155 @@ export class UpNote implements IFileProvider<UpNotePreprocessData> {
         "language-" + codeblock.attribs["data-code-language"];
       delete codeblock.attribs["data-code-language"];
     }
+  }
+
+  private convertBrToSingleSpacedParagraphs(document: Document): void {
+    const brs = findAll(
+      (elem) => isTag(elem) && elem.tagName === "br",
+      document.childNodes
+    );
+
+    for (const br of brs) {
+      if (!br.parent) continue;
+
+      let paragraph = this.findClosest(br, "p");
+
+      if (!paragraph) {
+        // Find sibling nodes to wrap into a single spaced paragraph
+        const nodesToWrap = this.getInlineSiblings(br);
+
+        if (nodesToWrap.length > 0) {
+          paragraph = new Element("p", { "data-spacing": "single" }, []);
+          replaceElement(nodesToWrap[0], paragraph);
+          for (let i = 1; i < nodesToWrap.length; i++) {
+            removeElement(nodesToWrap[i]);
+          }
+          paragraph.childNodes = nodesToWrap;
+          nodesToWrap.forEach((node) => (node.parent = paragraph));
+          continue;
+        }
+
+        // Check if next sibling is a paragraph
+        const nextSibling = br.nextSibling;
+        if (nextSibling && isTag(nextSibling) && nextSibling.tagName === "p") {
+          nextSibling.attribs["data-spacing"] = "single";
+        }
+
+        // Replace br with an empty single spaced paragraph
+        const newParagraph = new Element("p", { "data-spacing": "single" }, []);
+        replaceElement(br, newParagraph);
+        continue;
+      }
+
+      // If inside a paragraph
+      if (
+        paragraph.childNodes.length === 1 ||
+        !textContent(paragraph) ||
+        textContent(paragraph).trim().length === 0
+      ) {
+        paragraph.childNodes = [];
+        continue;
+      }
+
+      this.splitOn(paragraph, br);
+
+      const nextSibling = paragraph.nextSibling;
+      if (nextSibling && isTag(nextSibling)) {
+        nextSibling.attribs["data-spacing"] = "single";
+      }
+
+      removeElement(br);
+    }
+  }
+
+  private splitOn(bound: Element, cutElement: ChildNode) {
+    let grandparent: ParentNode | null = null;
+    for (
+      let parent = cutElement.parent;
+      parent && bound !== parent;
+      parent = grandparent
+    ) {
+      if (isTag(parent)) {
+        const right = new Element(
+          parent.tagName,
+          { ...parent.attribs },
+          [],
+          parent.type
+        );
+        const children = parent.childNodes;
+        const index = children.indexOf(cutElement);
+
+        const followingNodes = children.slice(index + 1);
+        right.childNodes = followingNodes;
+        followingNodes.forEach((node) => (node.parent = right));
+
+        // Update current parent to keep only nodes up to cutElement
+        parent.childNodes = children.slice(0, index + 1);
+
+        grandparent = parent.parent;
+        if (grandparent) {
+          const parentIndex = grandparent.childNodes.indexOf(parent);
+          grandparent.childNodes.splice(parentIndex + 1, 0, right);
+          right.parent = grandparent;
+
+          // Move cutElement to be between parent and right
+          removeElement(cutElement);
+          grandparent.childNodes.splice(parentIndex + 1, 0, cutElement);
+          cutElement.parent = grandparent;
+        }
+      } else {
+        grandparent = parent?.parent || null;
+      }
+    }
+  }
+
+  private getInlineSiblings(element: ChildNode): ChildNode[] {
+    const siblings: ChildNode[] = [];
+    const parent = element.parent;
+    if (!parent) return siblings;
+
+    const children = parent.childNodes;
+    const index = children.indexOf(element);
+
+    for (let i = index - 1; i >= 0; i--) {
+      const sibling = children[i];
+      if (this.isBlockElement(sibling)) break;
+      siblings.unshift(sibling);
+    }
+    return siblings;
+  }
+
+  private isBlockElement(node: AnyNode): boolean {
+    if (!isTag(node)) return false;
+    const blockElements = [
+      "p",
+      "div",
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6",
+      "ul",
+      "ol",
+      "li",
+      "blockquote",
+      "pre",
+      "table",
+      "section",
+      "article"
+    ];
+    return blockElements.includes(node.tagName.toLowerCase());
+  }
+
+  private findClosest(node: ChildNode, tagName: string): Element | null {
+    let current = node.parent;
+    while (current) {
+      if (isTag(current) && current.tagName.toLowerCase() === tagName) {
+        return current;
+      }
+      current = current.parent;
+    }
+    return null;
   }
 }
