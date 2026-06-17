@@ -43,11 +43,7 @@ export function convertBrToSingleSpacedParagraphs(document: Document): void {
 
       // we convert the next pargraph into a single spaced paragraph
       const nextSibling = br.nextSibling;
-      if (
-        nextSibling &&
-        isTag(nextSibling) &&
-        nextSibling.tagName.toLowerCase() === "p"
-      ) {
+      if (nextSibling && isTag(nextSibling) && nextSibling.tagName === "p") {
         nextSibling.attribs["data-spacing"] = "single";
       }
 
@@ -84,7 +80,7 @@ export function convertBrToSingleSpacedParagraphs(document: Document): void {
 function findClosest(node: ChildNode, tagName: string): Element | null {
   let current = node.parent;
   while (current) {
-    if (isTag(current) && current.tagName.toLowerCase() === tagName) {
+    if (isTag(current) && current.tagName === tagName) {
       return current;
     }
     current = current.parent;
