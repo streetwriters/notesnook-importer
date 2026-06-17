@@ -183,7 +183,7 @@ export class UpNote implements IFileProvider<UpNotePreprocessData> {
         contentRoot.childNodes,
         true
       ) || contentRoot;
-    const firstTag = editorTag.childNodes.find((c) => isTag(c));
+    const firstTag = editorTag.childNodes.find((c): c is Element => isTag(c));
     if (firstTag?.tagName === "h2" && textContent(firstTag) === title) {
       removeElement(firstTag);
     }
