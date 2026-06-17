@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`convert br tags to paragraphs 1`] = `
+"<div class=\\"shine-editor\\"><p data-spacing=\\"single\\">Third
+    paragraph</p><p data-spacing=\\"single\\"></p><p data-spacing=\\"single\\"></p><p data-spacing=\\"single\\">Links test:</p><p data-spacing=\\"single\\"><a href=\\"https://google.com\\" class=\\"shine-break-all\\" spellcheck=\\"false\\">https://google.com</a></p></div>"
+`;
+
+exports[`convert br tags to paragraphs 2`] = `
+"<div><p data-spacing=\\"single\\"></p><p data-spacing=\\"single\\">Mixed formatting:</p><p data-spacing=\\"single\\">This line
+    has **bold**, *italic*, emoji &#x1f600;, link
+    <a href=\\"https://example.com\\" class=\\"shine-break-all\\" spellcheck=\\"false\\">https://example.com</a>
+    and normal text.</p></div>"
+`;

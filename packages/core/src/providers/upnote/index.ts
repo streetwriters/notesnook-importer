@@ -18,8 +18,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import { render } from "dom-serializer";
-import { Document, Element, Text } from "domhandler";
-import { findAll, findOne, removeElement, textContent } from "domutils";
+import {
+  ChildNode,
+  Document,
+  Element,
+  Text
+} from "domhandler";
+import {
+  findAll,
+  findOne,
+  removeElement,
+  textContent} from "domutils";
 import { parseDocument } from "htmlparser2";
 import { ContentType, Note, Notebook } from "../../models/note";
 import { File } from "../../utils/file";
@@ -32,6 +41,7 @@ import {
   error
 } from "../provider";
 import { Providers } from "../provider-factory";
+import { convertBrToSingleSpacedParagraphs } from "../../utils/br-to-p";
 
 type UpNotePreprocessData = {
   noteToNotebooks: Map<string, Notebook[]>;
@@ -197,6 +207,7 @@ export class UpNote implements IFileProvider<UpNotePreprocessData> {
     this.convertHighlightsAndTextColors(document);
     this.convertCollapsibleSection(document);
     this.convertCodeblockLanguage(document);
+    convertBrToSingleSpacedParagraphs(document);
 
     const tags = this.extractTags(document);
     const attachments = await HTML.extractResources(
