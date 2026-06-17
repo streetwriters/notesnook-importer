@@ -18,17 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import { render } from "dom-serializer";
-import {
-  ChildNode,
-  Document,
-  Element,
-  Text
-} from "domhandler";
-import {
-  findAll,
-  findOne,
-  removeElement,
-  textContent} from "domutils";
+import { ChildNode, Document, Element, Text } from "domhandler";
+import { findAll, findOne, removeElement, textContent } from "domutils";
 import { parseDocument } from "htmlparser2";
 import { ContentType, Note, Notebook } from "../../models/note";
 import { File } from "../../utils/file";
@@ -186,18 +177,17 @@ export class UpNote implements IFileProvider<UpNotePreprocessData> {
     const contentRoot = body || document;
     const title = file.nameWithoutExtension;
 
-    let titleElement: Element | null = null;
-    for (const child of contentRoot.childNodes) {
-      if (child.type === "tag") {
-        const childText = textContent(child).trim();
-        if (childText === title) {
-          titleElement = child as Element;
-        }
-        break;
-      }
-    }
-    if (titleElement) {
-      removeElement(titleElement);
+    const editorTag =
+      findOne(
+        (e) => e.tagName === "div" && e.attribs.class?.includes("shine-editor"),
+        contentRoot.childNodes,
+        true
+      ) || contentRoot;
+    const firstTag = editorTag.childNodes.find(
+      (c) => c.type === "tag"
+    ) as Element;
+    if (firstTag?.tagName === "h2" && textContent(firstTag) === title) {
+      removeElement(firstTag);
     }
 
     if (preprocessData?.noteIds) {
