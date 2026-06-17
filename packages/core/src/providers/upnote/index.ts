@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import { render } from "dom-serializer";
 import { ChildNode, Document, Element, Text } from "domhandler";
-import { findAll, findOne, removeElement, textContent } from "domutils";
+import { findAll, findOne, removeElement, textContent, isTag } from "domutils";
 import { parseDocument } from "htmlparser2";
 import { ContentType, Note, Notebook } from "../../models/note";
 import { File } from "../../utils/file";
@@ -183,9 +183,7 @@ export class UpNote implements IFileProvider<UpNotePreprocessData> {
         contentRoot.childNodes,
         true
       ) || contentRoot;
-    const firstTag = editorTag.childNodes.find(
-      (c) => c.type === "tag"
-    ) as Element;
+    const firstTag = editorTag.childNodes.find((c) => isTag(c));
     if (firstTag?.tagName === "h2" && textContent(firstTag) === title) {
       removeElement(firstTag);
     }
