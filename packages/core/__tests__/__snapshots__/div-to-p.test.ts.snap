@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`convert divs to paragraphs 1`] = `"<p>Hello <b>world</b></p>"`;
+
+exports[`convert divs to paragraphs 2`] = `"<p style=\\"text-align: center;\\"><span class=\\"shine-highlight-pink\\">centered text</span></p>"`;
+
+exports[`convert divs to paragraphs 3`] = `"<p style=\\"text-align: center;\\"><br></p>"`;
+
+exports[`convert divs to paragraphs 4`] = `"<hr><p style=\\"text-align: center;\\"><br><span class=\\"shine-highlight-pink\\">text after hr</span><br></p>"`;
+
+exports[`convert divs to paragraphs 5`] = `"<ul><li>item</li></ul>"`;
+
+exports[`convert divs to paragraphs 6`] = `"<p style=\\"text-align: left;\\"><span>inner</span></p>"`;
+
+exports[`convert divs to paragraphs 7`] = `"<hr><p style=\\"text-align: center;\\"></p><p style=\\"text-align: center;\\" data-spacing=\\"single\\"><span class=\\"shine-highlight-pink\\">text</span></p>"`;

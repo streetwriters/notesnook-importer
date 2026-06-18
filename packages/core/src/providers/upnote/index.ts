@@ -19,7 +19,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import { render } from "dom-serializer";
 import { ChildNode, Document, Element, Text } from "domhandler";
-import { findAll, findOne, removeElement, textContent, isTag } from "domutils";
+import {
+  findAll,
+  findOne,
+  removeElement,
+  textContent,
+  isTag,
+  appendChild
+} from "domutils";
 import { parseDocument } from "htmlparser2";
 import { ContentType, Note, Notebook } from "../../models/note";
 import { File } from "../../utils/file";
@@ -33,6 +40,7 @@ import {
 } from "../provider";
 import { Providers } from "../provider-factory";
 import { convertBrToSingleSpacedParagraphs } from "../../utils/br-to-p";
+import { convertDivsToParagraphs } from "../../utils/div-to-p";
 
 type UpNotePreprocessData = {
   noteToNotebooks: Map<string, Notebook[]>;
@@ -184,7 +192,7 @@ export class UpNote implements IFileProvider<UpNotePreprocessData> {
         true
       ) || contentRoot;
     const firstTag = editorTag.childNodes.find((c): c is Element => isTag(c));
-    if (firstTag?.tagName === "h2" && textContent(firstTag) === title) {
+    if (firstTag?.tagName === "h2" && textContent(firstTag).trim() === title) {
       removeElement(firstTag);
     }
 
@@ -195,7 +203,9 @@ export class UpNote implements IFileProvider<UpNotePreprocessData> {
     this.convertHighlightsAndTextColors(document);
     this.convertCollapsibleSection(document);
     this.convertCodeblockLanguage(document);
+    convertDivsToParagraphs(document);
     convertBrToSingleSpacedParagraphs(document);
+    this.fixAlignment(document);
 
     const tags = this.extractTags(document);
     const attachments = await HTML.extractResources(
@@ -405,6 +415,22 @@ export class UpNote implements IFileProvider<UpNotePreprocessData> {
       codeblock.attribs.class =
         "language-" + codeblock.attribs["data-code-language"];
       delete codeblock.attribs["data-code-language"];
+    }
+  }
+
+  private fixAlignment(document: Document): void {
+    const elements = findAll(
+      (elem) =>
+        elem.type === "tag" &&
+        elem.tagName !== "p" &&
+        !!elem.attribs?.["style"]?.includes("text-align:"),
+      document.childNodes
+    );
+
+    for (const element of elements) {
+      const p = new Element("p", { style: element.attribs.style }, []);
+      element.childNodes.forEach((child) => appendChild(p, child));
+      element.childNodes = [p];
     }
   }
 }

@@ -67,12 +67,18 @@ export function convertBrToSingleSpacedParagraphs(document: Document): void {
     if (paragraph) {
       splitOn(paragraph, br);
       const brIndex = paragraph.children.indexOf(br);
-      const newParagraph = new Element("p", { "data-spacing": "single" });
-      for (const child of paragraph.children.slice(brIndex + 1)) {
-        appendChild(newParagraph, child);
-      }
-      append(paragraph, newParagraph);
+      const afterBr = paragraph.children.slice(brIndex + 1);
       removeElement(br);
+      if (afterBr.length > 0) {
+        const newParagraph = new Element("p", {
+          ...paragraph.attribs,
+          "data-spacing": "single"
+        });
+        for (const child of afterBr) {
+          appendChild(newParagraph, child);
+        }
+        append(paragraph, newParagraph);
+      }
     }
   }
 }

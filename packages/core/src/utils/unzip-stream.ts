@@ -24,7 +24,7 @@ export async function unzip(zip: IFile): Promise<IFile[]> {
   const extracted: IFile[] = [];
   const reader = new ZipReader(new BlobReader(zip.data));
 
-  for (const entry of await reader.getEntries()) {
+  for (const entry of await reader.getEntries({ filenameEncoding: "utf-8" })) {
     extracted.push({
       name: path.basename(entry.filename),
       path: entry.filename,
