@@ -52,6 +52,14 @@ const cases = [
   {
     label: "full pipeline: div-to-p then br-to-p",
     test: `<div style="text-align: center;"><hr><br><span class="shine-highlight-pink">text</span><br></div>`
+  },
+  {
+    label: "inherits text-align from parent when div has no own style",
+    test: `<div style="text-align: right"><div>right-aligned text</div><ul><li>item</li></ul></div>`
+  },
+  {
+    label: "own style takes precedence over parent text-align",
+    test: `<div style="text-align: right"><div style="text-align: left">left override</div></div>`
   }
 ];
 

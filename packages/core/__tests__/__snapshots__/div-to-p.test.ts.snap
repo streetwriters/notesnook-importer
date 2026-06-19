@@ -13,3 +13,7 @@ exports[`convert divs to paragraphs 5`] = `"<ul><li>item</li></ul>"`;
 exports[`convert divs to paragraphs 6`] = `"<p style=\\"text-align: left;\\"><span>inner</span></p>"`;
 
 exports[`convert divs to paragraphs 7`] = `"<hr><p style=\\"text-align: center;\\"></p><p style=\\"text-align: center;\\" data-spacing=\\"single\\"><span class=\\"shine-highlight-pink\\">text</span></p>"`;
+
+exports[`convert divs to paragraphs 8`] = `"<p style=\\"text-align: right\\">right-aligned text</p><ul><li>item</li></ul>"`;
+
+exports[`convert divs to paragraphs 9`] = `"<p style=\\"text-align: left\\">left override</p>"`;

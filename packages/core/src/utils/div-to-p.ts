@@ -50,7 +50,7 @@ export function convertDivsToParagraphs(document: Document): void {
 
     if (children.every(isPhrasingContent)) {
       // All inline: straightforward div → <p> replacement
-      const p = new Element("p", inheritableAttribs(div.attribs));
+      const p = new Element("p", inheritableAttribs(div));
       for (const child of children) appendChild(p, child);
       replaceElement(div, p);
     } else {
@@ -62,7 +62,7 @@ export function convertDivsToParagraphs(document: Document): void {
 }
 
 function splitDivAtBlockBoundaries(div: Element): void {
-  const attribs = inheritableAttribs(div.attribs);
+  const attribs = inheritableAttribs(div);
   const children = [...div.children];
   const replacement: ChildNode[] = [];
   let inlineBuffer: ChildNode[] = [];
@@ -154,12 +154,41 @@ function isPhrasingContent(node: ChildNode): boolean {
   return phrasingContentTags.has(node.tagName);
 }
 
-/** Only copy attributes that are meaningful on a <p> element. */
-function inheritableAttribs(
-  attribs: Record<string, string>
-): Record<string, string> {
+/** Only copy attributes that are meaningful on a <p> element.
+ * If the div has no text-align of its own, inherits one from the nearest
+ * ancestor that specifies it (CSS text-align is inherited by default but
+ * ancestor divs may be unwrapped, so we need to make it explicit). */
+function inheritableAttribs(div: Element): Record<string, string> {
   const result: Record<string, string> = {};
-  if (attribs.style) result.style = attribs.style;
-  if (attribs.dir) result.dir = attribs.dir;
+  if (div.attribs.dir) result.dir = div.attribs.dir;
+
+  let style = div.attribs.style ?? "";
+  if (!hasTextAlign(style)) {
+    const inherited = findAncestorTextAlign(div);
+    if (inherited) {
+      style = style
+        ? `${style}; text-align: ${inherited}`
+        : `text-align: ${inherited}`;
+    }
+  }
+  if (style) result.style = style;
+
   return result;
+}
+
+function hasTextAlign(style: string): boolean {
+  return /text-align\s*:/i.test(style);
+}
+
+/** Walk up the ancestor chain and return the nearest explicit text-align value. */
+function findAncestorTextAlign(element: Element): string | undefined {
+  let node = element.parent;
+  while (node) {
+    if (isTag(node)) {
+      const match = node.attribs.style?.match(/text-align\s*:\s*([^;]+)/i);
+      if (match) return match[1].trim();
+    }
+    node = node.parent;
+  }
+  return undefined;
 }
