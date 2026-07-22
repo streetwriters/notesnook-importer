@@ -195,7 +195,12 @@ async function resolveDependencies(basePath, dependencies) {
       dependencies[name] = `^${packageJson.version}`;
       resolvedDependencies[name] = version;
     } catch (e) {
-      console.error("Failed to resolve dependencies", e, contents);
+      console.error(
+        "Failed to resolve dependencies",
+        e,
+        contents,
+        packageJsonPath
+      );
       throw e;
     }
   }
