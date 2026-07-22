@@ -53,6 +53,7 @@ export function buildTable(rows: Row[]): string {
       const cellElement = [`<${cell.type}>`, cell.value, `</${cell.type}>`];
       rowElement.push(...cellElement);
     }
+    rowElement.push(`</tr>`);
     table.push(...rowElement);
   }
 

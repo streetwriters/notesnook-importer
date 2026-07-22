@@ -20,15 +20,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import { ContentType, Note } from "../../models/note";
 import { File } from "../../utils/file";
 import { IFileProvider, ProviderMessage, ProviderSettings } from "../provider";
-import {
-  NoteType,
-  Spreadsheet
-} from "./types";
+import { NoteType, Spreadsheet } from "./types";
 import { buildTable, Cell, Row } from "../../utils/dom-utils";
 import { Providers } from "../provider-factory";
 import { HTML } from "../html";
 import { Markdown } from "../md";
 import { Text } from "../txt";
+import { ElementType, parseDocument } from "htmlparser2";
+import { appendChild, findAll, removeElement } from "domutils";
+import { Document, Element, isTag } from "domhandler";
 
 export class StandardNotes implements IFileProvider {
   id: Providers = "standardnotes";
@@ -41,7 +41,7 @@ export class StandardNotes implements IFileProvider {
     "https://help.notesnook.com/importing-notes/import-notes-from-standardnotes";
 
   filter(file: File) {
-    return [".txt"].includes(file.extension);
+    return [".txt", ".html", ".md", ".json"].includes(file.extension);
   }
 
   async *process(
@@ -55,13 +55,23 @@ export class StandardNotes implements IFileProvider {
     }
 
     if (file.extension === ".html") {
-      const html = new HTML();
-      yield* html.process(file, _settings, _files);
+      const data = await file.text();
+      const document = parseDocument(data);
+      this.removeEmptyLines(document);
+      this.convertCodeBlockLanguage(document);
+      this.fixNestedLists(document);
+      const note = await HTML.processHTML(
+        file,
+        _files,
+        _settings.hasher,
+        document
+      );
+      yield { type: "note", note };
     }
 
     if (file.extension === ".md") {
       const md = new Markdown();
-      yield* md.process(file, _settings, _files)
+      yield* md.process(file, _settings, _files);
     }
 
     if (file.extension !== ".json") return;
@@ -72,7 +82,7 @@ export class StandardNotes implements IFileProvider {
 
     if (Array.isArray(data)) {
       type = NoteType.Authentication;
-    } else if ('sheets' in (data)) {
+    } else if ("sheets" in data) {
       type = NoteType.Spreadsheet;
     } else {
       type = null;
@@ -81,7 +91,7 @@ export class StandardNotes implements IFileProvider {
     if (type === NoteType.Authentication) {
       const html = this.parseAuthenticationContent(text);
       const note: Note = {
-        title: file.name,
+        title: file.nameWithoutExtension,
         dateCreated: file.createdAt,
         dateEdited: file.modifiedAt,
         content: {
@@ -95,7 +105,7 @@ export class StandardNotes implements IFileProvider {
     if (type === NoteType.Spreadsheet) {
       const html = this.parseSpreadsheetContent(text);
       const note: Note = {
-        title: file.name,
+        title: file.nameWithoutExtension,
         dateCreated: file.createdAt,
         dateEdited: file.modifiedAt,
         content: {
@@ -143,10 +153,7 @@ export class StandardNotes implements IFileProvider {
         sheet.rows.map((row) => this.maxIndexItem(row.cells || []))
       );
       const lastRow = this.maxIndexItem(sheet.rows);
-      const [maxColumns, maxRows] = [
-        lastCell.index || 0,
-        lastRow.index || 0
-      ];
+      const [maxColumns, maxRows] = [lastCell.index || 0, lastRow.index || 0];
 
       const rows: Row[] = [];
       for (let i = 0; i <= maxRows; i++) {
@@ -164,4 +171,63 @@ export class StandardNotes implements IFileProvider {
     }
     return html;
   }
+
+  private removeEmptyLines(document: Document): void {
+    const emptyParagraphs = findAll(
+      (e) => isEmptyParagraph(e),
+      document.childNodes
+    );
+    for (const p of emptyParagraphs) {
+      if (
+        !!p.nextSibling &&
+        isTag(p.nextSibling) &&
+        isEmptyParagraph(p.nextSibling)
+      ) {
+        p.attribs["data-spacing"] = "single";
+      } else {
+        removeElement(p);
+      }
+    }
+  }
+
+  private convertCodeBlockLanguage(document: Document): void {
+    const codeBlocks = findAll(
+      (e) => isTag(e) && e.tagName === "pre",
+      document.childNodes
+    );
+    for (const pre of codeBlocks) {
+      pre.attribs.class +=
+        " language-" + (pre.attribs["data-language"] || "text");
+    }
+  }
+
+  private fixNestedLists(document: Document): void {
+    const nestedLists = findAll(
+      (e) =>
+        isTag(e) &&
+        e.tagName === "li" &&
+        e.attribs["class"]?.includes("Lexical__nestedListItem"),
+      document.childNodes
+    );
+    for (const list of nestedLists) {
+      if (
+        !!list.previousSibling &&
+        isTag(list.previousSibling) &&
+        list.previousSibling.tagName === "li" &&
+        list.firstChild
+      ) {
+        appendChild(list.previousSibling, list.firstChild);
+        removeElement(list);
+      }
+    }
+  }
+}
+
+function isEmptyParagraph(e: Element): boolean {
+  return (
+    e.tagName === "p" &&
+    e.childNodes.length === 1 &&
+    e.firstChild?.type === ElementType.Tag &&
+    e.firstChild.tagName === "br"
+  );
 }

@@ -40,13 +40,13 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@types/varint": "^6.0.3",
     "@node-rs/xxhash": "^1.0.1",
     "@types/kendo-ui": "^2022.1.0",
     "@types/mdast": "^4.0.0",
     "@types/node": "^18.11.9",
     "@types/sinon": "^10.0.11",
     "@types/spark-md5": "^3.0.2",
+    "@types/varint": "^6.0.3",
     "assert-no-diff": "^3.0.6",
     "disparity": "^3.2.0",
     "fdir": "^5.1.0",

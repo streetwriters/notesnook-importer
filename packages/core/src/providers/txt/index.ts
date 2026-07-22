@@ -22,6 +22,7 @@ import { File } from "../../utils/file";
 import { textToHTML } from "../../utils/to-html";
 import { HTML } from "../html";
 import { Providers } from "../provider-factory";
+import { parseDocument } from "htmlparser2";
 
 export class Text implements IFileProvider {
   id: Providers = "txt";
@@ -46,7 +47,12 @@ export class Text implements IFileProvider {
     const html = textToHTML(data);
     yield {
       type: "note",
-      note: await HTML.processHTML(file, files, settings.hasher, html)
+      note: await HTML.processHTML(
+        file,
+        files,
+        settings.hasher,
+        parseDocument(html)
+      )
     };
   }
 }

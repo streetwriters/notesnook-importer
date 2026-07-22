@@ -32,6 +32,7 @@ import { z } from "zod";
 import { ChaCha20Poly1305 } from "@stablelib/chacha20poly1305";
 import { Providers } from "../provider-factory";
 import varint from "varint";
+import { parseDocument } from "htmlparser2";
 
 const CacheElementMetadata = z.object({
   cacheID: z.string(),
@@ -68,7 +69,7 @@ export class SkiffPages implements IFileProvider {
       file,
       files,
       settings.hasher,
-      html,
+      parseDocument(html),
       async (element) => {
         const encoded = getAttributeValue(element, "src");
         if (!encoded) return;

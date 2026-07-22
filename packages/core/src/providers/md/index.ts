@@ -23,6 +23,7 @@ import { markdowntoHTML } from "../../utils/to-html";
 import { HTML } from "../html";
 import { parseFrontmatter } from "../../utils/frontmatter";
 import { Providers } from "../provider-factory";
+import { parseDocument } from "htmlparser2";
 
 export type MarkdownSettings = ProviderSettings & {
   filenameAsTitle?: boolean;
@@ -50,7 +51,12 @@ export class Markdown implements IFileProvider<MarkdownSettings> {
     const text = await file.text();
     const { content, frontmatter } = parseFrontmatter(text);
     const html = markdowntoHTML(content);
-    const note = await HTML.processHTML(file, files, settings.hasher, html);
+    const note = await HTML.processHTML(
+      file,
+      files,
+      settings.hasher,
+      parseDocument(html)
+    );
     note.title = settings.filenameAsTitle
       ? file.nameWithoutExtension
       : note.title;

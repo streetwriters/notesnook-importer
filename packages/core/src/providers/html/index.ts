@@ -70,7 +70,12 @@ export class HTML implements IFileProvider {
     try {
       yield {
         type: "note",
-        note: await HTML.processHTML(file, files, settings.hasher, data)
+        note: await HTML.processHTML(
+          file,
+          files,
+          settings.hasher,
+          parseDocument(data)
+        )
       };
     } catch (e) {
       yield error(e, { file });
@@ -81,11 +86,9 @@ export class HTML implements IFileProvider {
     file: File,
     files: File[],
     hasher: IHasher,
-    html: string,
+    document: Document,
     processResource?: ResourceHandler
   ): Promise<Note> {
-    const document = parseDocument(html);
-
     const body = findOne(
       (e) => e.tagName === "body",
       document.childNodes,
