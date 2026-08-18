@@ -1,0 +1,34 @@
+{
+  "name": "@notesnook-importer/applenotes",
+  "private": false,
+  "version": "1.0.0",
+  "description": "Apple Notes parser and crypto for Notesnook Importer.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "vitest run",
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "author": "Abdullah Atta <abdullahatta@streetwriters.co>",
+  "license": "GPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetwriters/notesnook-importer.git",
+    "directory": "packages/applenotes"
+  },
+  "dependencies": {
+    "@notesnook-importer/core": "file:../core",
+    "entities": "^4.4.0",
+    "fflate": "^0.7.4",
+    "protobufjs": "^8.7.2"
+  },
+  "devDependencies": {
+    "@node-rs/xxhash": "^1.0.1",
+    "@types/node": "^18.11.9",
+    "assert-no-diff": "^3.0.6",
+    "disparity": "^3.2.0",
+    "html-format": "^1.1.2",
+    "typescript": "^4.8.2",
+    "vitest": "^0.29.2"
+  }
+}

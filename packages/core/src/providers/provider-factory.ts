@@ -32,6 +32,7 @@ import { SkiffPages } from "./skiff-pages";
 import { Fusebase } from "./fusebase";
 import { ColorNote } from "./colornote";
 import { UpNote } from "./upnote";
+import { AppleNotes } from "./applenotes";
 import { SamsungNotes } from "./samsung-notes";
 
 const providerMap = {
@@ -49,6 +50,7 @@ const providerMap = {
   fusebase: Fusebase,
   colornote: ColorNote,
   upnote: UpNote,
+  applenotes: AppleNotes,
   samsungnotes: SamsungNotes,
 
   // Dummies

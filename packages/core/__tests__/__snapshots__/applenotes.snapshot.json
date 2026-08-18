@@ -1,0 +1,108 @@
+[
+  {
+    "id": "000000000000000000000000",
+    "title": "Welcome to Apple Notes",
+    "dateCreated": 1677307200000,
+    "dateEdited": 1677307300000,
+    "notebooks": [
+      {
+        "title": "Personal",
+        "children": []
+      }
+    ],
+    "attachments": [],
+    "content": {
+      "type": "html",
+      "data": "<p>This is the body with <strong>bold</strong> and <em>italic</em>\n text and a checklist:</p><ul class=\"checklist\"><li\n  class=\"checklist--item\">Task one</li><li\n  class=\"checklist--item checked\">Task two</li></ul>"
+    }
+  },
+  {
+    "id": "000000000000000000000000",
+    "title": "Links and media",
+    "dateCreated": 1677307200000,
+    "dateEdited": 1677307300000,
+    "notebooks": [
+      {
+        "title": "Personal",
+        "children": [
+          {
+            "title": "Projects",
+            "children": []
+          }
+        ]
+      }
+    ],
+    "attachments": [
+      {
+        "filename": "IMG_0001.JPG",
+        "size": 70,
+        "hash": "98d481949df003b4",
+        "hashType": "xxh64",
+        "mime": "image/jpeg"
+      }
+    ],
+    "content": {
+      "type": "html",
+      "data": "<p>Check the <a href=\"nn://note/000000000000000000000000\">welcome\n  note</a> and this URL: https://example.com</p><p><img\n  class=\"attachment\" data-filename=\"IMG_0001.JPG\"\n  data-size=\"70\" data-hash=\"98d481949df003b4\"\n  data-mime=\"image/jpeg\" alt=\"IMG_0001.JPG\" /></p>"
+    }
+  },
+  {
+    "id": "000000000000000000000000",
+    "title": "Lists",
+    "dateCreated": 1677307200000,
+    "dateEdited": 1677307300000,
+    "notebooks": [
+      {
+        "title": "Personal",
+        "children": []
+      }
+    ],
+    "attachments": [],
+    "content": {
+      "type": "html",
+      "data": "<p>Grocery list</p><ul><li>Milk</li><li>Bread</li><li>Eggs</li></ul><p>Steps:</p><ol><li>First</li><li>Second</li></ol>"
+    }
+  },
+  {
+    "id": "000000000000000000000000",
+    "title": "Wrapped body",
+    "dateCreated": 1677307200000,
+    "dateEdited": 1677307300000,
+    "notebooks": [
+      {
+        "title": "Work",
+        "children": []
+      }
+    ],
+    "attachments": [],
+    "content": {
+      "type": "html",
+      "data": "<p>This note body is wrapped in a NoteStoreProto.</p>"
+    }
+  },
+  {
+    "id": "000000000000000000000000",
+    "title": "Voice memo",
+    "dateCreated": 1677307200000,
+    "dateEdited": 1677307300000,
+    "notebooks": [
+      {
+        "title": "Work",
+        "children": []
+      }
+    ],
+    "attachments": [
+      {
+        "filename": "recording.m4a",
+        "size": 32,
+        "hash": "c9ac4af1766a2aa8",
+        "hashType": "xxh64",
+        "mime": "audio/mp4"
+      }
+    ],
+    "content": {
+      "type": "html",
+      "data": "<p><audio class=\"attachment\" data-filename=\"recording.m4a\"\n  data-size=\"32\" data-hash=\"c9ac4af1766a2aa8\"\n  data-mime=\"audio/mp4\"></audio></p>"
+    }
+  }
+]

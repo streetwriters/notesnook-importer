@@ -17,16 +17,21 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-export * from "./evernote";
-export * from "./html";
-export * from "./joplin";
-export * from "./keep";
-export * from "./md";
-export * from "./simplenote";
-export * from "./zoho-notebook";
-export * from "./textbundle";
-export * from "./skiff-pages";
-export * from "./colornote";
-export * from "./upnote";
-export * from "./applenotes";
-export * from "./samsung-notes";
+import { Root } from "protobufjs";
+import { descriptor } from "./src/descriptor";
+
+export * from "./src/crypto";
+export * from "./src/models";
+export * from "./src/convert-note";
+export * from "./src/convert-scan";
+export * from "./src/convert-table";
+export { descriptor } from "./src/descriptor";
+
+// Re-export protobufjs Type for consumers that decode protobuf messages.
+export type { Type } from "protobufjs";
+
+let protobufRoot: Root | undefined;
+export function getProtobufRoot(): Root {
+  if (!protobufRoot) protobufRoot = Root.fromJSON(descriptor);
+  return protobufRoot;
+}
