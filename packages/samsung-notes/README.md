@@ -65,8 +65,6 @@ The following parts of the `.sdocx` format are **not** imported:
 - **Locked/encrypted notes** — page data is encrypted and is not decrypted
 - **`.spi` painting/cache payloads** — proprietary raster encoding; `.spi`
   files are preserved as opaque attachments only
-- **Internal note links** — only the link target text is preserved; page-to-page
-  links are not resolved
 - **Stroke pressure** — pressure values are parsed but not used to vary SVG
   stroke width (strokes render with uniform width)
 - **Pen materials** — fountain pen/brush textures are not rendered; only
