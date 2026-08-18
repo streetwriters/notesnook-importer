@@ -23,7 +23,8 @@ import {
   IFileProvider,
   ProviderMessage,
   ProviderSettings,
-  error
+  error,
+  log
 } from "../provider";
 import { path } from "../../utils/path";
 import { ZNotebook } from "./types";
@@ -31,7 +32,12 @@ import { Znel } from "@notesnook-importer/znel";
 import { ElementHandler } from "./elementhandlers";
 import { Providers } from "../provider-factory";
 
-export class ZohoNotebook implements IFileProvider {
+type ZohoPreprocessData = {
+  znelCount: number;
+  skippedFiles: string[];
+};
+
+export class ZohoNotebook implements IFileProvider<ZohoPreprocessData> {
   id: Providers = "zohonotebook";
   type = "file" as const;
   supportedExtensions = [".zip"];
@@ -41,16 +47,50 @@ export class ZohoNotebook implements IFileProvider {
   helpLink =
     "https://help.notesnook.com/importing-notes/import-notes-from-zoho-notebook";
 
+  private warningsLogged = false;
+
   filter(file: File) {
     return [".znel"].includes(file.extension);
+  }
+
+  async preprocess(
+    files: File[]
+  ): Promise<ZohoPreprocessData> {
+    const znelCount = files.filter((f) => f.extension === ".znel").length;
+    const skippedFiles = files
+      .filter((f) => f.extension !== ".znel")
+      .map((f) => f.name);
+    return { znelCount, skippedFiles };
   }
 
   async *process(
     file: File,
     settings: ProviderSettings,
-    files: File[]
+    files: File[],
+    preprocessData?: ZohoPreprocessData
   ): AsyncGenerator<ProviderMessage, void, unknown> {
+    if (preprocessData && !this.warningsLogged) {
+      this.warningsLogged = true;
+      if (preprocessData.znelCount === 0) {
+        yield log(
+          `No .znel files found in the ZIP archive. This does not appear to be a valid Zoho Notebook export.`
+        );
+        return;
+      }
+      if (preprocessData.skippedFiles.length > 0) {
+        yield log(
+          `Skipped ${preprocessData.skippedFiles.length} unsupported file(s): ${preprocessData.skippedFiles.join(", ")}`
+        );
+      }
+    }
+
     const notebook = await this.getNotebook(file, files);
+    if (!notebook) {
+      yield log(
+        `Could not find notebook metadata (meta.json) for "${file.name}". The note will be imported without a notebook.`
+      );
+    }
+
     const znel = new Znel(await file.text());
     const note: Note = {
       title: znel.metadata.title,
@@ -69,7 +109,7 @@ export class ZohoNotebook implements IFileProvider {
         type: ContentType.HTML
       };
     } catch (e) {
-      yield error(e, { note });
+      yield error(e, { note, file });
     }
 
     yield { type: "note", note };
