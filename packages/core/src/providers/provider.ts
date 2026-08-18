@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import { Note } from "../models/note";
 import { File } from "../utils/file";
 import { IHasher } from "../utils/hasher";
+import { SqliteAdapter } from "../utils/sqlite-adapter";
 import { IStorage } from "@notesnook-importer/storage";
 import { Providers } from "./provider-factory";
 
@@ -77,7 +78,19 @@ export interface ProviderSettings {
   reporter: (current: number, total?: number) => void;
   options?: {
     colornote?: ColorNoteOptions;
+    applenotes?: AppleNotesOptions;
   };
+}
+
+export interface AppleNotesOptions {
+  adapter?: SqliteAdapter;
+  /**
+   * Called for password-protected notes to get the note password. Returning
+   * `undefined` (or not providing this) skips the note.
+   */
+  getPassword?: (
+    noteTitle: string
+  ) => Promise<string | undefined> | string | undefined;
 }
 
 export interface ColorNoteOptions {
