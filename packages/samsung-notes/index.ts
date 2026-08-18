@@ -17,15 +17,19 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-export * from "./evernote";
-export * from "./html";
-export * from "./joplin";
-export * from "./keep";
-export * from "./md";
-export * from "./simplenote";
-export * from "./zoho-notebook";
-export * from "./textbundle";
-export * from "./skiff-pages";
-export * from "./colornote";
-export * from "./upnote";
-export * from "./samsung-notes";
+import { parse, ParsedSdocx } from "./src/sdocx";
+import { toHTML, IElementHandler } from "./src/to-html";
+import { SamsungNote, VoiceRecording } from "./src/note";
+import { SamsungPage } from "./src/page";
+import { MediaEntry } from "./src/media";
+
+export type {
+  ParsedSdocx,
+  SamsungNote,
+  SamsungPage,
+  MediaEntry,
+  VoiceRecording,
+  IElementHandler
+};
+
+export { parse, toHTML };
