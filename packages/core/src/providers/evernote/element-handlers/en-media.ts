@@ -32,7 +32,8 @@ export class ENMedia extends BaseHandler {
     if (!hash) return;
 
     const resource = this.enNote.resources?.find((res) => res?.hash == hash);
-    if (!resource || !resource.data) return;
+    if (!resource) return;
+    if (!resource.data) return;
 
     const dataHash = await this.hasher.hash(resource.data);
 
@@ -55,16 +56,18 @@ export class ENMedia extends BaseHandler {
     const { width: finalWidth, height: finalHeight } =
       calculateMissingDimension(width, height, naturalWidth, naturalHeight);
 
+    const mime =
+      resource.mime ||
+      detectFileType(resource.data)?.mime ||
+      "application/octet-stream";
+
     const attachment: Attachment = {
       data: resource.data,
       filename: resource?.filename || dataHash,
       size: resource.data.length,
       hash: dataHash,
-      hashType: this.hasher.type,
-      mime:
-        resource.mime ||
-        detectFileType(resource.data)?.mime ||
-        "application/octet-stream",
+      hashType: this.hasher?.type || "unknown",
+      mime,
       width: finalWidth,
       height: finalHeight
     };
