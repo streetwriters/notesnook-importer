@@ -54,9 +54,14 @@ export class Evernote implements IFileProvider {
       children: []
     };
 
-    for await (const chunk of parse(
-      file.stream.pipeThrough(new TextDecoderStream())
-    )) {
+    const bytes = await file.bytes();
+    if (!bytes) throw new Error("Could not read file");
+
+    const encoding = detectEnexEncoding(bytes);
+    const decoder = new TextDecoder(encoding);
+    const content = decoder.decode(bytes);
+
+    for await (const chunk of parse(content)) {
       for (const enNote of chunk) {
         yield log(`Found ${enNote.title}...`);
 
@@ -66,6 +71,7 @@ export class Evernote implements IFileProvider {
           tags: enNote.tags,
           dateCreated: enNote.created?.getTime(),
           dateEdited: enNote.updated?.getTime(),
+          sourceURL: enNote.sourceURL,
           attachments: [],
           notebooks: [notebook]
         };
@@ -83,8 +89,12 @@ export class Evernote implements IFileProvider {
               elementHandler,
               enNote
             );
+            let content = html.trim();
+            if (enNote.sourceURL) {
+              content += `\n<hr>\n<p><em>Source: <a href="${enNote.sourceURL}">${enNote.sourceURL}</a></em></p>`;
+            }
             note.content = {
-              data: html.trim(),
+              data: content,
               type: ContentType.HTML
             };
           } catch (e) {
@@ -96,4 +106,34 @@ export class Evernote implements IFileProvider {
       }
     }
   }
+}
+
+const ENCODING_DECLARATION_REGEX =
+  /<\?xml[^?]*encoding\s*=\s*["']([^"']+)["']/i;
+const ENEX_ENCODING_MAP: Record<string, string> = {
+  "utf-8": "utf-8",
+  "utf8": "utf-8",
+  "iso-8859-1": "iso-8859-1",
+  "iso8859-1": "iso-8859-1",
+  "latin1": "iso-8859-1",
+  "windows-1252": "windows-1252",
+  "cp1252": "windows-1252"
+};
+
+/**
+ * Detects the XML encoding declared in an ENEX file's XML declaration.
+ * Falls back to "utf-8" if no encoding is declared or if the encoding
+ * is not recognized.
+ *
+ * The first ~512 bytes are decoded as ASCII (which is a superset of
+ * the bytes used in XML declarations) to extract the encoding attribute
+ * without needing the correct decoder upfront.
+ */
+function detectEnexEncoding(bytes: Uint8Array): string {
+  const head = new TextDecoder("ascii").decode(bytes.slice(0, 512));
+  const match = ENCODING_DECLARATION_REGEX.exec(head);
+  if (!match) return "utf-8";
+
+  const declared = match[1].trim().toLowerCase();
+  return ENEX_ENCODING_MAP[declared] ?? "utf-8";
 }
