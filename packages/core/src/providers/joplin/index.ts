@@ -108,7 +108,9 @@ export class Joplin implements IFileProvider<JoplinData> {
       (note) => file.nameWithoutExtension === note.id
     );
     if (!note) return;
-    if (!note.id || !note.body) return;
+    if (!note.id) return;
+    // Don't skip empty-body notes - import them with empty content
+    // (Joplin allows notes with titles but no body)
 
     const tags = this.resolveTags(note.id, data.tags, data.noteTags);
     const parentFolder = data.folders.find((a) => a.id === note.parent_id);

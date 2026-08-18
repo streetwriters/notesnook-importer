@@ -45,6 +45,7 @@ export type Note = {
   notebooks?: Notebook[];
   attachments?: Attachment[];
   reminder?: Reminder;
+  sourceURL?: string;
 
   compatibilityVersion?: number;
   source?: Providers;

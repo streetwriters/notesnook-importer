@@ -91,7 +91,45 @@ export async function processContent(
     true,
     1
   );
-  if (!noteElement) throw new Error("Could not find a valid en-note tag.");
+  if (!noteElement) {
+    // ENML always wraps content in <en-note>. If not found, the XML
+    // parser may have been confused by the inner XML declaration and
+    // DOCTYPE that Evernote includes inside the CDATA block.
+    // Strip both and retry.
+    const stripped = content
+      .replace(/<\?xml[^?]*\?>/i, "")
+      .replace(/<!DOCTYPE[^>]*>/i, "");
+    const retryDoc = parseDocument(stripped, { xmlMode: true });
+    const [retryElement] = getElementsByTagName(
+      "en-note",
+      retryDoc,
+      true,
+      1
+    );
+    if (retryElement) {
+      // Found it after stripping preamble — use the retry result
+      if (retryElement.childNodes.length === 0) return "";
+      return render(retryElement.childNodes, {
+        decodeEntities: true,
+        encodeEntities: false
+      });
+    }
+    // Last resort: try regex extraction between <en-note> and </en-note>
+    const match = content.match(/<en-note[^>]*>([\s\S]*?)<\/en-note>/i);
+    if (match) {
+      const innerDoc = parseDocument(match[1], { xmlMode: true });
+      return render(innerDoc.childNodes, {
+        decodeEntities: true,
+        encodeEntities: false
+      });
+    }
+    return "";
+  }
+
+  // Self-closing <en-note/> has no children — treat as empty note.
+  if (noteElement.childNodes.length === 0) {
+    return "";
+  }
 
   // convert all div tags to paragraphs
   visit(noteElement, (child) => {
