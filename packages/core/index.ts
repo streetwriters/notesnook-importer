@@ -123,10 +123,15 @@ async function transformFiles(
       }
     } catch (e) {
       console.error(e);
+      const fileContext = file.path
+        ? `file "${file.path}"`
+        : `file "${file.name}"`;
+      const context = `${fileContext} with ${provider.name}`;
       if (isQuotaExceeded(e)) {
-        errors.push(new Error(`You are out of storage space.`));
+        errors.push(new Error(`You are out of storage space. (processing ${context})`));
       } else {
-        errors.push(<Error>e);
+        const message = e instanceof Error ? e.message : String(e);
+        errors.push(new Error(`Failed to process ${context}: ${message}`));
       }
     }
   }
