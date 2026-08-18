@@ -17,17 +17,25 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-export * from "./evernote";
-export * from "./html";
-export * from "./joplin";
-export * from "./keep";
-export * from "./md";
-export * from "./onenote";
-export * from "./simplenote";
-export * from "./zoho-notebook";
-export * from "./textbundle";
-export * from "./skiff-pages";
-export * from "./colornote";
-export * from "./upnote";
-export * from "./applenotes";
-export * from "./samsung-notes";
+export function getFromArray<T extends { id: number | string }>(
+  array: T[],
+  id: number | string,
+  def: T
+): T {
+  const element = array.find((e) => e.id === id);
+  if (!element) array.push(def);
+  return element || def;
+}
+
+export function reverse<T>(
+  from: number,
+  to: number,
+  buffer: Array<T> | Uint8Array
+) {
+  let total = from + to;
+  for (let i = from; i < Math.floor(total / 2); i++) {
+    const temp = buffer[i];
+    buffer[i] = buffer[total - 1 - i];
+    buffer[total - 1 - i] = temp;
+  }
+}

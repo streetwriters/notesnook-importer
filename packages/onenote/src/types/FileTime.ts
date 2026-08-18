@@ -17,17 +17,16 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-export * from "./evernote";
-export * from "./html";
-export * from "./joplin";
-export * from "./keep";
-export * from "./md";
-export * from "./onenote";
-export * from "./simplenote";
-export * from "./zoho-notebook";
-export * from "./textbundle";
-export * from "./skiff-pages";
-export * from "./colornote";
-export * from "./upnote";
-export * from "./applenotes";
-export * from "./samsung-notes";
+/**
+ * The FILETIME structure is a 64-bit value that represents the number of 100-nanosecond intervals that have elapsed since January 1, 1601, Coordinated Universal Time (UTC).
+ */
+export type FileTime = {
+  /**
+   *  A 32-bit unsigned integer that contains the low-order bits of the file time.
+   */
+  dwLowDateTime: number;
+  /**
+   * A 32-bit unsigned integer that contains the high-order bits of the file time.
+   */
+  dwHighDateTime: number;
+};

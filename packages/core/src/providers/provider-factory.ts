@@ -34,6 +34,7 @@ import { ColorNote } from "./colornote";
 import { UpNote } from "./upnote";
 import { AppleNotes } from "./applenotes";
 import { SamsungNotes } from "./samsung-notes";
+import { OneNote } from "./onenote";
 
 const providerMap = {
   evernote: Evernote,
@@ -42,6 +43,7 @@ const providerMap = {
   html: HTML,
   keep: GoogleKeep,
   simplenote: Simplenote,
+  onenote: OneNote,
   standardnotes: StandardNotes,
   zohonotebook: ZohoNotebook,
   joplin: Joplin,

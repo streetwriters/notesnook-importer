@@ -17,17 +17,9 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-export * from "./evernote";
-export * from "./html";
-export * from "./joplin";
-export * from "./keep";
-export * from "./md";
-export * from "./onenote";
-export * from "./simplenote";
-export * from "./zoho-notebook";
-export * from "./textbundle";
-export * from "./skiff-pages";
-export * from "./colornote";
-export * from "./upnote";
-export * from "./applenotes";
-export * from "./samsung-notes";
+import { FileTime } from "../../types/FileTime";
+
+/**
+ * The TopologyCreationTimeStamp simple type is a FILETIME data type, as specified in [MS-DTYP], that specifies when a set of content was created. MUST be set.
+ */
+export type TopologyCreationTimeStamp = FileTime;

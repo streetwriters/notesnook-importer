@@ -17,17 +17,16 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-export * from "./evernote";
-export * from "./html";
-export * from "./joplin";
-export * from "./keep";
-export * from "./md";
-export * from "./onenote";
-export * from "./simplenote";
-export * from "./zoho-notebook";
-export * from "./textbundle";
-export * from "./skiff-pages";
-export * from "./colornote";
-export * from "./upnote";
-export * from "./applenotes";
-export * from "./samsung-notes";
+import { OneNoteReader } from "../../reader";
+
+/**
+ * The data for a {@link FileNode} structure (section 2.4.3) that specifies the beginning of a global identification table (section 2.1.3). The value of the FileNode.FileNodeID field MUST be 0x021.
+ */
+export type GlobalIdTableStartFNDX = {};
+
+export function GlobalIdTableStartFNDX(
+  reader: OneNoteReader
+): GlobalIdTableStartFNDX {
+  const reserved = reader.deserializeByte();
+  return {};
+}
