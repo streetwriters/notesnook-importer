@@ -1,0 +1,28 @@
+{
+  "name": "@notesnook-importer/samsung-notes",
+  "private": false,
+  "version": "1.0.0",
+  "description": "A fully tested type-safe Samsung Notes .sdocx parser used in Notesnook Importer.",
+  "main": "dist/index.js",
+  "devDependencies": {
+    "@types/node": "^16.11.10",
+    "fdir": "^5.1.0",
+    "typescript": "^4.8.2",
+    "vitest": "^0.29.2"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "author": "Abdullah Atta <abdullahatta@streetwriters.co>",
+  "license": "GPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetwriters/notesnook-importer.git",
+    "directory": "packages/samsung-notes"
+  },
+  "dependencies": {
+    "fflate": "^0.7.4"
+  }
+}

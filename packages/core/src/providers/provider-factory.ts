@@ -32,6 +32,7 @@ import { SkiffPages } from "./skiff-pages";
 import { Fusebase } from "./fusebase";
 import { ColorNote } from "./colornote";
 import { UpNote } from "./upnote";
+import { SamsungNotes } from "./samsung-notes";
 
 const providerMap = {
   evernote: Evernote,
@@ -40,7 +41,6 @@ const providerMap = {
   html: HTML,
   keep: GoogleKeep,
   simplenote: Simplenote,
-  // onenote: OneNote,
   standardnotes: StandardNotes,
   zohonotebook: ZohoNotebook,
   joplin: Joplin,
@@ -49,6 +49,7 @@ const providerMap = {
   fusebase: Fusebase,
   colornote: ColorNote,
   upnote: UpNote,
+  samsungnotes: SamsungNotes,
 
   // Dummies
   obsidian: Obsidian
