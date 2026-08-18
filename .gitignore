@@ -7,12 +7,3 @@ nx-cloud.env
 output.enex
 out.enex
 .nx
-
-# Local Apple Notes/Journal database copies used for manual testing
-group.com.apple.notes
-packages/core/__tests__/real-db.test.ts
-
-# BEGIN oh-my-opencode-slim worktrees
-.slim/worktrees/
-.slim/worktrees.json
-# END oh-my-opencode-slim worktrees
