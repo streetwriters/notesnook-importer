@@ -98,7 +98,7 @@ export class HTML implements IFileProvider {
     const titleElement = findOne(
       (e) => ["title", "h1", "h2"].includes(e.tagName),
       document.childNodes,
-      true
+      false
     );
     if (titleElement) removeElement(titleElement);
 
