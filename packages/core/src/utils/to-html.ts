@@ -253,7 +253,7 @@ const collapseMultilineParagraphs: Plugin<[], HastRoot, HastRoot> =
     return (tree: HastRoot) => {
       visit(tree, "text", (node) => {
         if (node.value.length > 1)
-          node.value = node.value.replace(/\r\n|\n/gm, " "); //.trim();
+          node.value = node.value.replace(/\r\n|\n/gm, " ").replace(/  +/g, " ");
       });
     };
   };
