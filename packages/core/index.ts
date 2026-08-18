@@ -160,6 +160,8 @@ export * from "./src/utils/archiver";
 export * from "./src/providers/provider-factory";
 export * from "./src/providers/provider";
 export * from "./src/utils/file";
+export * from "./src/utils/sqlite-adapter";
+export * from "./src/utils/sql-js";
 export * from "./src/models";
 export * from "./src/providers";
 

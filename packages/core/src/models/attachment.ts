@@ -68,11 +68,15 @@ export function attachmentToHTML(
   url?: string,
   title?: string
 ): string {
-  const tag: "img" | "span" | "iframe" = attachment.mime.startsWith("image/")
+  const tag: "img" | "span" | "iframe" | "audio" = attachment.mime.startsWith(
+    "image/"
+  )
     ? "img"
     : attachment.mime.includes("vnd.notesnook.web-clip")
-    ? "iframe"
-    : "span";
+      ? "iframe"
+      : attachment.mime.startsWith("audio/")
+        ? "audio"
+        : "span";
 
   const attributes: string[] = [`class="attachment"`];
   for (const attr in attributeMap) {
@@ -96,5 +100,7 @@ export function attachmentToHTML(
       <em>&nbsp;</em>
       <span class="filename">${attachment.filename}</span>
     </span>`;
+    case "audio":
+      return `<audio ${attributes.join(" ")}></audio>`;
   }
 }

@@ -25,6 +25,9 @@ export async function unzip(zip: IFile): Promise<IFile[]> {
   const reader = new ZipReader(new BlobReader(zip.data));
 
   for (const entry of await reader.getEntries({ filenameEncoding: "utf-8" })) {
+    // Skip directory entries (they have no content and would otherwise
+    // produce zero-byte files that shadow the real file in matching).
+    if (entry.filename.endsWith("/")) continue;
     extracted.push({
       name: path.basename(entry.filename),
       path: entry.filename,

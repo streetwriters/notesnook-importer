@@ -40,6 +40,10 @@ export class File {
     return this.file.name;
   }
 
+  get size(): number {
+    return this.file.size;
+  }
+
   get nameWithoutExtension(): string {
     return path.basename(this.file.name, path.extname(this.file.name));
   }
