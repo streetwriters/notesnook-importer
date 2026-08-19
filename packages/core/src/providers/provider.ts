@@ -79,6 +79,7 @@ export interface ProviderSettings {
   options?: {
     colornote?: ColorNoteOptions;
     applenotes?: AppleNotesOptions;
+    onenote?: OneNoteOptions;
   };
 }
 
@@ -94,6 +95,13 @@ export interface AppleNotesOptions {
 }
 
 export interface ColorNoteOptions {
+  getPassword?: (
+    filename: string
+  ) => Promise<string | undefined> | string | undefined;
+}
+
+export interface OneNoteOptions {
+  /** Called when an encrypted section is encountered. Return the password or undefined to skip. */
   getPassword?: (
     filename: string
   ) => Promise<string | undefined> | string | undefined;

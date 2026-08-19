@@ -17,17 +17,20 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-export * from "./evernote";
-export * from "./html";
-export * from "./joplin";
-export * from "./keep";
-export * from "./md";
-export * from "./onenote";
-export * from "./simplenote";
-export * from "./zoho-notebook";
-export * from "./textbundle";
-export * from "./skiff-pages";
-export * from "./colornote";
-export * from "./upnote";
-export * from "./applenotes";
-export * from "./samsung-notes";
+import { OneNoteReader } from "../reader";
+import { FileNodeList } from "./file-node-list";
+import { OneStoreHeader } from "./header";
+
+export class OneStore {
+  readonly reader: OneNoteReader;
+  readonly header: OneStoreHeader;
+  readonly fileNodeList: FileNodeList;
+  constructor(buffer: Uint8Array) {
+    this.reader = new OneNoteReader(buffer);
+    this.header = new OneStoreHeader(this.reader);
+    this.fileNodeList = new FileNodeList(
+      this.reader,
+      this.header.fcrFileNodeListRoot
+    );
+  }
+}

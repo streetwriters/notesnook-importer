@@ -17,17 +17,14 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-export * from "./evernote";
-export * from "./html";
-export * from "./joplin";
-export * from "./keep";
-export * from "./md";
-export * from "./onenote";
-export * from "./simplenote";
-export * from "./zoho-notebook";
-export * from "./textbundle";
-export * from "./skiff-pages";
-export * from "./colornote";
-export * from "./upnote";
-export * from "./applenotes";
-export * from "./samsung-notes";
+import { GuidInAtom } from "./GuidInAtom";
+
+/**
+ * The NotebookManagementEntityGuid structure specifies a GUID, as defined in [MS-DTYP], for an object. The GUID can be used to construct a hyperlink to a page (section 1.3.2). It MUST NOT be used to construct a hyperlink to a section (section 1.3.1). This value MUST be set.
+ */
+export type NotebookManagementEntityGuid = {
+  /**
+   * A GuidInAtom element (section 2.2.12) that specifies the identifier of the object.
+   */
+  guid: GuidInAtom;
+};

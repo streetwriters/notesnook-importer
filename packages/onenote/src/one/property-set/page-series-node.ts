@@ -17,17 +17,15 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-export * from "./evernote";
-export * from "./html";
-export * from "./joplin";
-export * from "./keep";
-export * from "./md";
-export * from "./onenote";
-export * from "./simplenote";
-export * from "./zoho-notebook";
-export * from "./textbundle";
-export * from "./skiff-pages";
-export * from "./colornote";
-export * from "./upnote";
-export * from "./applenotes";
-export * from "./samsung-notes";
+import { GUID } from "../../utils/guid";
+import { NotebookManagementEntityGuid } from "./NotebookManagementEntityGuid";
+
+/**
+ * The jcidPageSeriesNode structure specifies the properties of a series of pages (section 1.3.2). The value of the JCID element, as specified in [MS-ONESTORE], for this property set is "0x00060008".
+ */
+type PageSeriesNode = {
+  /**
+   * A NotebookManagementEntityGuid element (section 2.2.58) that specifies the identifier of the page series.
+   */
+  guid: NotebookManagementEntityGuid;
+};

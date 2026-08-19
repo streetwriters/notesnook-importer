@@ -17,17 +17,9 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-export * from "./evernote";
-export * from "./html";
-export * from "./joplin";
-export * from "./keep";
-export * from "./md";
-export * from "./onenote";
-export * from "./simplenote";
-export * from "./zoho-notebook";
-export * from "./textbundle";
-export * from "./skiff-pages";
-export * from "./colornote";
-export * from "./upnote";
-export * from "./applenotes";
-export * from "./samsung-notes";
+import { ObjectID } from "./ObjectID";
+
+/**
+ * The ElementChildNodesOfSection structure is an array of ObjectID structures (section 2.1.6) that reference a page series that is contained in a section (section 1.3.1). By default, a section does not contain a page series. Each ObjectID structure in the array MUST reference a jcidPageSeriesNode structure.
+ */
+export type ElementChildNodesOfSection = ObjectID[];

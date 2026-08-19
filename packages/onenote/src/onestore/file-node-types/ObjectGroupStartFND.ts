@@ -17,17 +17,23 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-export * from "./evernote";
-export * from "./html";
-export * from "./joplin";
-export * from "./keep";
-export * from "./md";
-export * from "./onenote";
-export * from "./simplenote";
-export * from "./zoho-notebook";
-export * from "./textbundle";
-export * from "./skiff-pages";
-export * from "./colornote";
-export * from "./upnote";
-export * from "./applenotes";
-export * from "./samsung-notes";
+import { OneNoteReader } from "../../reader";
+import { ExtendedGUID } from "../../utils/guid";
+
+/**
+ * The data for a {@link FileNode} structure (section 2.4.3) that specifies the beginning of an object group (section 2.1.13).
+ */
+export type ObjectGroupStartFND = {
+  /**
+   * An ExtendedGUID (section 2.2.1) that specifies the identity of the object group.
+   */
+  oid: ExtendedGUID;
+};
+
+export function ObjectGroupStartFND(
+  reader: OneNoteReader
+): ObjectGroupStartFND {
+  return {
+    oid: reader.deserializeExtendedGUID(),
+  };
+}
