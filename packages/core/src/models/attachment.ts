@@ -17,16 +17,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-export type Attachment = {
-  hash: string;
-  hashType: string;
-  filename: string;
-  size: number;
-  mime: string;
-  data?: Uint8Array;
-  width?: number;
-  height?: number;
-};
+import type { Attachment } from "@notesnook-importer/types";
+export type { Attachment } from "@notesnook-importer/types";
 
 type Attribute = {
   key: string;

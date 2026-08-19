@@ -15,6 +15,7 @@
     "@notesnook-importer/onenote": "file:../onenote",
     "@notesnook-importer/samsung-notes": "file:../samsung-notes",
     "@notesnook-importer/storage": "file:../storage",
+    "@notesnook-importer/types": "file:../types",
     "@notesnook-importer/znel": "file:../znel",
     "@stablelib/chacha20poly1305": "^1.0.1",
     "@streamparser/json": "^0.0.10",

@@ -18,8 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import { Message } from "protobufjs";
-import { SqlDatabase } from "@notesnook-importer/core";
-import { Attachment } from "@notesnook-importer/core";
+import { SqlDatabase, Attachment } from "@notesnook-importer/types";
 
 export interface ANAccount {
   name: string;

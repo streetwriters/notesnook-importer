@@ -1,0 +1,20 @@
+{
+  "name": "@notesnook-importer/types",
+  "private": false,
+  "version": "1.0.0",
+  "description": "Shared type definitions for Notesnook Importer packages.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "license": "GPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetwriters/notesnook-importer.git",
+    "directory": "packages/types"
+  },
+  "devDependencies": {
+    "typescript": "^4.8.2"
+  }
+}
