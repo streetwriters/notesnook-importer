@@ -56,6 +56,12 @@ export class OneNoteReader {
     this.#reader.seek(pos);
   }
 
+  trySeek(pos: number): boolean {
+    if (pos < 0 || this.buffer.byteLength < pos) return false;
+    this.#reader.seek(pos);
+    return true;
+  }
+
   deserializeGUID(): GUID {
     return GUID.fromBuffer(this.#reader.readBuffer(16));
   }

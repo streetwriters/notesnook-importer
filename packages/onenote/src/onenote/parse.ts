@@ -134,6 +134,8 @@ const INK_SPACE_BLOB = 0x00020026;
 const INK_END_OF_LINE_BLOB = 0x00020027;
 const HYPERLINK_MARKER = "\ufddfHYPERLINK \"";
 
+const warnedMissingStyles = new Set<string>();
+
 function parseRichText(id: string, space: ObjectSpace): RichText {
   const props = propsOf(space, id);
   const data = parseRichTextNode(props);
@@ -147,7 +149,10 @@ function parseRichText(id: string, space: ObjectSpace): RichText {
   const styleData = data.textRunFormatting.map((styleId) => {
     const object = space.getObject(styleId);
     if (!object) {
-      console.warn(`missing style for text run formatting: ${styleId}`);
+      if (!warnedMissingStyles.has(styleId)) {
+        warnedMissingStyles.add(styleId);
+        console.warn(`missing style for text run formatting: ${styleId}`);
+      }
       return fallbackStyleData();
     }
     return parseParagraphStyleObject(new ObjectProps(object, object.mapping));

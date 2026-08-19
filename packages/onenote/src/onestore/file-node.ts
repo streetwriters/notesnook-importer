@@ -95,7 +95,8 @@ export class FileNode<TID extends FileNodeID = FileNodeID> {
       // Unknown node types can appear in files written by newer OneNote
       // versions. Skip their (declared) data so the stream stays aligned.
       const dataSize = this.size - 4;
-      if (dataSize > 0) reader.seek(reader.position + dataSize);
+      if (dataSize > 0)
+        reader.trySeek(reader.position + dataSize);
     }
 
     const currentOffset = reader.position;

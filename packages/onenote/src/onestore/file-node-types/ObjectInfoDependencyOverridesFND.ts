@@ -92,7 +92,15 @@ function ObjectInfoDependencyOverrideData(
   ref?: FileChunkReference<unknown, unknown>
 ) {
   const currentOffset = reader.position;
-  if (ref) reader.seek(ref.stp);
+  if (ref && !reader.trySeek(ref.stp)) {
+    return {
+      c8BitOverrides: 0,
+      c32BitOverrides: 0,
+      crc: 0,
+      Overrides1: [],
+      Overrides2: [],
+    };
+  }
 
   const result: ObjectInfoDependencyOverrideData = {
     c8BitOverrides: reader.deserializeInt(),

@@ -115,7 +115,7 @@ export class Joplin implements IFileProvider<JoplinData> {
     const tags = this.resolveTags(note.id, data.tags, data.noteTags);
     const parentFolder = data.folders.find((a) => a.id === note.parent_id);
     const notebooks: Notebook[] = [];
-    const html = markdowntoHTML(note.body);
+    const html = note.body ? markdowntoHTML(note.body) : "<p></p>";
     const document = parseDocument(html);
 
     const title =
