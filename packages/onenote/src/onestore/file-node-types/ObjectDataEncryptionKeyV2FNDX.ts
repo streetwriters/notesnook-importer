@@ -38,15 +38,12 @@ export type ObjectDataEncryptionKeyV2FNDX = {
 };
 
 export function ObjectDataEncryptionKeyV2FNDX(
-  _reader: OneNoteReader,
-  _header: FileNode
+  reader: OneNoteReader,
+  header: FileNode
 ): ObjectDataEncryptionKeyV2FNDX {
-  // Per [MS-ONESTORE] 2.5.19, this structure contains no data; the FileNode
-  // header carries the reference to the encryption data.
+  // The chunk reference points to a blob with header 0xFB6BA385DAD1A067,
+  // followed by the encryption XML, followed by footer 0x2649294F8E198B3C.
   return {
-    ref: {
-      stp: 0,
-      cb: 0
-    } as unknown as FileChunkReference<unknown, unknown>
+    ref: reader.readFileChunkReference(header.stpFormat, header.cbFormat)
   };
 }

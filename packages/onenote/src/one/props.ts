@@ -473,7 +473,8 @@ export class ObjectProps {
         mapping: this.mapping,
         fileData: this.object.fileData,
         fileDataReference: this.object.fileDataReference,
-        fileExtension: this.object.fileExtension
+        fileExtension: this.object.fileExtension,
+        odcs: 0
       },
       this.mapping
     );

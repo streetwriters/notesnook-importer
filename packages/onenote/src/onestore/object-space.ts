@@ -24,6 +24,8 @@ import { FileNode } from "./file-node";
 import { FileNodeID } from "./file-node-types";
 import { FileNodeList } from "./file-node-list";
 import { ObjectSpaceObjectPropSet } from "./file-node-types/shared/ObjectSpaceObjectPropSet";
+import { decode } from "../utils/reader";
+import { parseEncryptionXml, decryptObjectData, type EncryptionInfo } from "../crypto";
 
 export function extendedGuidToKey(id: ExtendedGUID): string {
   return id.toString();
@@ -57,6 +59,10 @@ export type OneNoteObject = {
   fileData?: Uint8Array;
   fileDataReference?: string;
   fileExtension?: string;
+  /** Object Data Container State — 0 = not encrypted, 1+ = encrypted. */
+  odcs: number;
+  /** When `odcs != 0`, this holds the raw encrypted property set bytes. */
+  encryptedData?: Uint8Array;
 };
 
 type Revision = {
@@ -67,6 +73,7 @@ type Revision = {
   idMap: IdMapping;
   roots: Map<RootRole, string>;
   objects: Map<string, OneNoteObject>;
+  encryptionRef?: { stp: number; cb: number };
 };
 
 function cloneIdMap(map: IdMapping): IdMapping {
@@ -146,6 +153,14 @@ function readPropertySet(
   return ObjectSpaceObjectPropSet(reader);
 }
 
+function readPropertySetAt(
+  reader: OneNoteReader,
+  ref: { stp: number; cb: number }
+): Uint8Array {
+  reader.seek(ref.stp);
+  return reader.deserializeBytes(ref.cb);
+}
+
 function parseObjectDeclaration(
   node: FileNode,
   reader: OneNoteReader,
@@ -162,13 +177,29 @@ function parseObjectDeclaration(
       throw new Error(
         `Missing mapping for object ID (index: ${declaration.body.oid.guidIndex}).`
       );
+    const odcs = declaration.body.odcs;
+    if (odcs !== 0) {
+      // Encrypted object — store raw data for later decryption.
+      return {
+        key: extendedGuidToKey(id),
+        object: {
+          contextId,
+          jcid: declaration.body.jcid,
+          propSet: emptyPropertySet(),
+          mapping,
+          odcs,
+          encryptedData: readPropertySetAt(reader, declaration.BlobRef)
+        }
+      };
+    }
     return {
       key: extendedGuidToKey(id),
       object: {
         contextId,
         jcid: declaration.body.jcid,
         propSet: readPropertySet(reader, declaration.BlobRef),
-        mapping
+        mapping,
+        odcs
       }
     };
   } else if (
@@ -181,13 +212,28 @@ function parseObjectDeclaration(
       throw new Error(
         `Missing mapping for object ID (index: ${declaration.body.oid.guidIndex}).`
       );
+    const odcs = declaration.body.odcs;
+    if (odcs !== 0) {
+      return {
+        key: extendedGuidToKey(id),
+        object: {
+          contextId,
+          jcid: declaration.body.jcid,
+          propSet: emptyPropertySet(),
+          mapping,
+          odcs,
+          encryptedData: readPropertySetAt(reader, declaration.BlobRef)
+        }
+      };
+    }
     return {
       key: extendedGuidToKey(id),
       object: {
         contextId,
         jcid: declaration.body.jcid,
         propSet: readPropertySet(reader, declaration.BlobRef),
-        mapping
+        mapping,
+        odcs
       }
     };
   } else if (
@@ -207,6 +253,7 @@ function parseObjectDeclaration(
         jcid: declaration.jcid,
         propSet: emptyPropertySet(),
         mapping,
+        odcs: 0,
         fileDataReference: declaration.FileDataReference.StringData,
         fileExtension: declaration.Extension.StringData
       }
@@ -227,7 +274,8 @@ function parseObjectDeclaration(
         contextId,
         jcid: jcidFromId(declaration.body.jci | 0x20000),
         propSet: readPropertySet(reader, declaration.ObjectRef),
-        mapping
+        mapping,
+        odcs: 0
       }
     };
   }
@@ -299,6 +347,7 @@ function parseRevision(
   const roots = new Map<RootRole, string>();
   const objects = new Map<string, OneNoteObject>();
   let lastGlobalIdTable: IdMapping | undefined;
+  let encryptionRef: { stp: number; cb: number } | undefined;
 
   let i = index + 1;
   for (; i < nodes.length; ++i) {
@@ -312,7 +361,8 @@ function parseRevision(
           context,
           idMap,
           roots,
-          objects
+          objects,
+          encryptionRef
         },
         nextIndex: i + 1
       };
@@ -371,10 +421,18 @@ function parseRevision(
     } else if (
       node.is(FileNodeID.DataSignatureGroupDefinitionFND) ||
       node.is(FileNodeID.ObjectInfoDependencyOverridesFND) ||
-      node.is(FileNodeID.ObjectDataEncryptionKeyV2FNDX) ||
       FileNodeID[node.FileNodeID] === undefined
     ) {
       // Ignored (unknown node types can appear in newer files).
+    } else if (
+      node.is(FileNodeID.ObjectDataEncryptionKeyV2FNDX)
+    ) {
+      // Store the ref to the encryption blob. The blob contains:
+      // 8-byte header magic, then encryption XML (UTF-16LE), then 8-byte footer magic.
+      encryptionRef = {
+        stp: node.data.ref.stp,
+        cb: node.data.ref.cb
+      };
     } else {
       throw new Error(
         `Unexpected node (0x${node.FileNodeID.toString(16)}) while parsing revision.`
@@ -428,17 +486,46 @@ function parseObjectGroupList(
 
 export class ObjectSpace {
   readonly id: string;
+  readonly encryptionXml: string | undefined;
   private readonly roots: Map<RootRole, string>;
   private readonly objects: Map<string, OneNoteObject>;
 
   constructor(
     id: string,
     roots: Map<RootRole, string>,
-    objects: Map<string, OneNoteObject>
+    objects: Map<string, OneNoteObject>,
+    encryptionXml?: string
   ) {
     this.id = id;
     this.roots = roots;
     this.objects = objects;
+    this.encryptionXml = encryptionXml;
+  }
+
+  /** Whether this object space is encrypted (password-protected). */
+  get isEncrypted(): boolean {
+    return this.encryptionXml !== undefined;
+  }
+
+  /** Decrypt all encrypted objects in this space using the given data key. */
+  async decryptObjects(dataKey: Uint8Array, reader: OneNoteReader) {
+    const encryptedObjects = [...this.objects.entries()].filter(
+      ([, obj]) => obj.odcs !== 0 && obj.encryptedData
+    );
+    if (encryptedObjects.length === 0) return;
+
+    for (const [key, obj] of encryptedObjects) {
+      try {
+        const decrypted = await decryptObjectData(obj.encryptedData!, dataKey);
+        const tempReader = new (reader.constructor as new (
+          buf: Uint8Array
+        ) => OneNoteReader)(decrypted);
+        obj.propSet = ObjectSpaceObjectPropSet(tempReader);
+        obj.encryptedData = undefined;
+      } catch (e) {
+        console.warn(`Failed to decrypt object ${key}:`, e);
+      }
+    }
   }
 
   getObject(id: string): OneNoteObject | undefined {
@@ -651,22 +738,46 @@ function parseObjectSpace(
         : revision.parentId;
   }
 
+  let encryptionRef: { stp: number; cb: number } | undefined;
+
   for (const revision of chain.reverse()) {
     for (const [role, id] of revision.roots) roots.set(role, id);
     for (const [id, object] of revision.objects) objects.set(id, object);
+    if (revision.encryptionRef && !encryptionRef) {
+      encryptionRef = revision.encryptionRef;
+    }
+  }
+
+  // If the object space is encrypted, read the encryption XML blob.
+  let encryptionXml: string | undefined;
+  if (encryptionRef) {
+    reader.seek(encryptionRef.stp);
+    const blob = reader.deserializeBytes(encryptionRef.cb);
+    // The blob has: 8-byte header magic (0xFB6BA385DAD1A067),
+    // then UTF-16LE XML, then 8-byte footer magic (0x2649294F8E198B3C).
+    // Skip the 8-byte header and 8-byte footer.
+    if (blob.length > 16) {
+      const xmlBytes = blob.slice(8, blob.length - 8);
+      encryptionXml = decode(xmlBytes, "utf16le");
+    }
   }
 
   // Resolve file data references.
   for (const object of objects.values()) {
     if (object.fileDataReference) {
       if (object.fileDataReference.startsWith("<ifndf>")) {
-        const guid = object.fileDataReference.slice("<ifndf>".length);
+        let guid = object.fileDataReference.slice("<ifndf>".length);
+        // Strip curly braces if present — the file data store keys
+        // don't include them but the references may.
+        if (guid.startsWith("{") && guid.endsWith("}")) {
+          guid = guid.slice(1, -1);
+        }
         object.fileData = fileDataByGuid.get(guid);
       }
     }
   }
 
-  return new ObjectSpace(gosid, roots, objects);
+  return new ObjectSpace(gosid, roots, objects, encryptionXml);
 }
 
 function labelKey(context: string | undefined, role: number): string {

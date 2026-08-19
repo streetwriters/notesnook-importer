@@ -21,14 +21,37 @@ import { OneStore } from "../onestore";
 import { OneStoreFileType } from "../onestore/header";
 import { ObjectSpaceStore } from "../onestore/object-space";
 import { GUID } from "../utils/guid";
+import { FileNodeID } from "../onestore/file-node-types";
 import { parseNotebookToc, parseSection } from "./parse";
+import {
+  parseEncryptionXml,
+  verifyPassword,
+  decryptDataKey
+} from "../crypto";
+import type { Color, Notebook, Section, SectionEntry } from "./types";
 
 export { parseNotebookToc };
-import { Notebook, Section, SectionEntry } from "./types";
 
 export * from "./types";
 
 export type OneNoteFileType = "section" | "notebook" | "unknown";
+
+/**
+ * Thrown when a section is encrypted and cannot be imported without a password.
+ */
+export class OneNoteEncryptedError extends Error {
+  constructor(
+    public readonly filename: string,
+    public readonly encryptionXml: string,
+    message?: string
+  ) {
+    super(
+      message ||
+        `The section "${filename}" is password-protected. Provide the password to import it.`
+    );
+    this.name = "OneNoteEncryptedError";
+  }
+}
 
 const SECTION_FILE_TYPE_GUID = "7B5C52E4-D88C-4DA7-AEB1-5378D02996D3";
 const TOC_FILE_TYPE_GUID = "43FF2FA1-EFD9-4C76-9EE2-10EA5722765F";
@@ -57,14 +80,72 @@ export function sniffOneNoteFileType(data: Uint8Array): OneNoteFileType {
  *
  * @param data the raw bytes of the .one file
  * @param filename the name of the file, used as fallback for the display name
+ * @param password optional password for encrypted sections
  */
-export function parseOneNoteSection(data: Uint8Array, filename: string): Section {
+export async function parseOneNoteSection(
+  data: Uint8Array,
+  filename: string,
+  password?: string
+): Promise<Section> {
   const store = new OneStore(data);
   if (store.header.fileType !== OneStoreFileType.STORE) {
     throw new Error(`Not a valid .one file: ${filename}`);
   }
+
+  // Pre-check: scan the root file node list for encryption markers. If
+  // the file is encrypted and no password was provided, fail early rather
+  // than letting the parser crash on garbage property set data.
+  const hasEncryption = containsEncryptionMarker(store);
+  if (hasEncryption && !password) {
+    throw new OneNoteEncryptedError(filename, "");
+  }
+
   const spaceStore = ObjectSpaceStore.parse(store);
+
+  // Handle encryption: decrypt the root object space if a password is provided.
+  const rootSpace = spaceStore.dataRoot;
+  if (rootSpace.isEncrypted) {
+    if (!password) {
+      throw new OneNoteEncryptedError(filename, rootSpace.encryptionXml!);
+    }
+    const encryptionInfo = parseEncryptionXml(rootSpace.encryptionXml!);
+    const valid = await verifyPassword(password, encryptionInfo);
+    if (!valid) {
+      throw new OneNoteEncryptedError(
+        filename,
+        rootSpace.encryptionXml!,
+        "Incorrect password."
+      );
+    }
+    const dataKey = await decryptDataKey(password, encryptionInfo);
+    await rootSpace.decryptObjects(dataKey, store.reader);
+  }
+
   return parseSection(spaceStore, filename);
+}
+
+/**
+ * Scans the entire file node tree for ObjectDataEncryptionKeyV2FNDX markers
+ * without fully parsing the object space. This is used as a cheap pre-check
+ * to detect encrypted files before the parser encounters garbage data.
+ */
+function containsEncryptionMarker(store: OneStore): boolean {
+  return walkForEncryption(store.fileNodeList);
+}
+
+function walkForEncryption(list: {
+  fragments: { rgFileNodes: { FileNodeID: number; children: any[] }[] }[];
+}): boolean {
+  for (const fragment of list.fragments) {
+    for (const node of fragment.rgFileNodes) {
+      if (node.FileNodeID === FileNodeID.ObjectDataEncryptionKeyV2FNDX)
+        return true;
+      for (const child of node.children) {
+        if (walkForEncryption(child)) return true;
+      }
+    }
+  }
+  return false;
 }
 
 export type ResolveFile = (name: string) => Uint8Array | undefined;
@@ -94,10 +175,11 @@ export function parseOneNoteNotebookToc(data: Uint8Array): {
  * its (sanitized) name; returns undefined when a file cannot be resolved in
  * which case the entry is skipped
  */
-export function parseOneNoteNotebook(
+export async function parseOneNoteNotebook(
   data: Uint8Array,
-  resolveFile: ResolveFile
-): Notebook {
+  resolveFile: ResolveFile,
+  password?: string
+): Promise<Notebook> {
   const store = new OneStore(data);
   if (store.header.fileType !== OneStoreFileType.TABLE_OF_CONTENTS) {
     throw new Error("Not a valid .onetoc2 file");
@@ -112,7 +194,7 @@ export function parseOneNoteNotebook(
     try {
       sections.push({
         type: "section",
-        section: parseOneNoteSection(sectionData, name)
+        section: await parseOneNoteSection(sectionData, name, password)
       });
     } catch (e) {
       // A single bad section shouldn't take down the whole notebook.

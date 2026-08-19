@@ -93,13 +93,45 @@ The importer accepts individual `.one` files, a notebook (a `.onetoc2` file toge
 
 - `.onepkg` packages are extracted entirely in memory (CAB format; uncompressed, MSZIP, LZX and LZXD compression) and imported like a regular notebook folder.
 
+### Encrypted sections
+
+Password-protected (encrypted) sections are fully supported. The importer implements [MS-OFFCRYPTO] Agile Encryption (AES-256-CBC with SHA-512 key derivation), the same scheme used by OneNote 2016 and later.
+
+**How it works:**
+
+1. When the importer encounters an encrypted section, it throws an `OneNoteEncryptedError` if no password was provided.
+2. If a password is supplied, the importer verifies it against the encryption metadata, derives the data key, and decrypts all encrypted objects in-place before parsing the page content.
+3. A wrong password produces an explicit "Incorrect password" error.
+
+**Providing a password:**
+
+- **Provider API** — pass `options.onenote.getPassword` in the provider settings. The callback receives the section filename and should return the password (or `undefined` to skip the section):
+
+  ```ts
+  settings.options = {
+    onenote: {
+      getPassword: async (filename) => {
+        // prompt the user, look up a vault, etc.
+        return passwords[filename];
+      }
+    }
+  };
+  ```
+
+- **Direct API** — pass the password as the third argument to `parseOneNoteSection` or `parseOneNoteNotebook`:
+
+  ```ts
+  const section = await parseOneNoteSection(bytes, "My Section", "s3cret");
+  const notebook = await parseOneNoteNotebook(tocBytes, resolveFile, "s3cret");
+  ```
+
 ---
 
 ## What is *not* supported
 
 - **FSSHTTPB/OneDrive packaging format** — files downloaded via the OneDrive web UI in the "package" format are detected and skipped.
 - **OneNote 2007 (or earlier) legacy format** and **alternative packaging**.
-- **Encrypted/password-protected sections** — sections containing encryption data are skipped with a warning (their content cannot be read).
+- **Encrypted/password-protected sections without a password** — if no password is provided, encrypted sections are skipped with a warning. When a password *is* provided, encrypted sections are decrypted and imported normally (see [Encrypted sections](#encrypted-sections) below).
 - **Math/equation formatting** — equations are imported as their plain text representation.
 - **Ink handwriting recognition (OCR) text** — recognized text is parsed but not added to the imported note.
 - **Audio/video recordings** — recorded media is imported as an attachment only when its data is embedded in the file; references to external `onefiles` are skipped.

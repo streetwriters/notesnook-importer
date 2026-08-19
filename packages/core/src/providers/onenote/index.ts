@@ -23,13 +23,14 @@ import {
   parseOneNoteNotebookToc,
   parseOneNoteSection,
   renderPage,
-  sniffOneNoteFileType
+  sniffOneNoteFileType,
+  OneNoteEncryptedError
 } from "@notesnook-importer/onenote";
 import type { Page, Section } from "@notesnook-importer/onenote";
 import { ContentType, Note, Notebook } from "../../models/note";
 import { Attachment, attachmentToHTML } from "../../models/attachment";
 import { File } from "../../utils/file";
-import { detectFileType } from "../../utils/file-type";
+import { detectFileType, mimeFromExtension } from "../../utils/file-type";
 import { IHasher } from "../../utils/hasher";
 import {
   IFileProvider,
@@ -39,6 +40,10 @@ import {
   log
 } from "../provider";
 import { Providers } from "../provider-factory";
+
+function isOneNoteEncryptedError(e: unknown): e is typeof OneNoteEncryptedError["prototype"] {
+  return e instanceof OneNoteEncryptedError;
+}
 
 const ONENOTE_EXTENSIONS = [".one", ".onetoc2", ".onepkg"];
 
@@ -231,7 +236,14 @@ export class OneNote implements IFileProvider<NotebookContext> {
     }
 
     try {
-      const section = parseOneNoteSection(bytes, file.nameWithoutExtension);
+      const password = settings.options?.onenote?.getPassword
+        ? await settings.options.onenote.getPassword(file.nameWithoutExtension)
+        : undefined;
+      const section = await parseOneNoteSection(
+        bytes,
+        file.nameWithoutExtension,
+        password
+      );
       yield log(`Importing section ${section.displayName}...`);
       yield* this.importSectionNotes(
         section,
@@ -239,6 +251,12 @@ export class OneNote implements IFileProvider<NotebookContext> {
         settings
       );
     } catch (e) {
+      if (isOneNoteEncryptedError(e)) {
+        yield log(
+          `Skipping ${file.name}: section is password-protected and no password was provided.`
+        );
+        return;
+      }
       yield error(e, { file });
     }
   }
@@ -269,7 +287,7 @@ export class OneNote implements IFileProvider<NotebookContext> {
           continue;
         }
         try {
-          const section = parseOneNoteSection(
+          const section = await parseOneNoteSection(
             sectionData,
             pathBasename(sanitized).replace(/\.one$/i, "")
           );
@@ -330,11 +348,15 @@ export class OneNote implements IFileProvider<NotebookContext> {
     const title = page.titleText || fallbackTitle();
 
     const attachments: Attachment[] = [];
-    const content = await renderPage(page, {
+    const result = await renderPage(page, {
       resolveResource: async (data, filename, extension, meta) => {
         const dataHash = await hasher.hash(data);
-        const fileType = detectFileType(data);
-        const mime = fileType?.mime || "application/octet-stream";
+        const detected = detectFileType(data);
+        const extMime = extension
+          ? mimeFromExtension(extension)
+          : undefined;
+        const mime =
+          extMime || detected?.mime || "application/octet-stream";
         const attachment: Attachment = {
           data,
           filename: filename || dataHash,
@@ -349,6 +371,28 @@ export class OneNote implements IFileProvider<NotebookContext> {
         return attachmentToHTML(attachment);
       }
     });
+
+    let content = result.html;
+
+    // Attach the SVG snapshot as a read-only visual reference in a callout.
+    if (result.svgSnapshot) {
+      const svgData = new TextEncoder().encode(result.svgSnapshot);
+      const svgHash = await hasher.hash(svgData);
+      const svgAttachment: Attachment = {
+        data: svgData,
+        filename: `${svgHash}.svg`,
+        size: svgData.byteLength,
+        hash: svgHash,
+        hashType: hasher.type,
+        mime: "image/svg+xml"
+      };
+      attachments.push(svgAttachment);
+      const svgRef = attachmentToHTML(svgAttachment);
+      content = content.replace(
+        "</body>",
+        `<div class="callout" data-callout-type="info"><h3>Original layout (view only)</h3>${svgRef}</div>\n</body>`
+      );
+    }
 
     const text = stripHtml(content);
     if (!text && attachments.length === 0) return undefined;

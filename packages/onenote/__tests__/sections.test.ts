@@ -48,12 +48,12 @@ function getPages(section: Section) {
 }
 
 describe("onenote sections", () => {
-  it.each(getSamples())("should parse %s", (file) => {
+  it.each(getSamples())("should parse %s", async (file) => {
     const name = path.basename(file);
     const buffer = new Uint8Array(fs.readFileSync(file));
     if (UNSUPPORTED_SECTIONS.has(name)) return;
 
-    const section = parseOneNoteSection(buffer, name);
+    const section = await parseOneNoteSection(buffer, name);
     expect(section.displayName).toBeTruthy();
     const pages = getPages(section);
     expect(pages.length).toBeGreaterThan(0);
@@ -67,11 +67,11 @@ describe("onenote sections", () => {
     const buffer = new Uint8Array(
       fs.readFileSync(path.join(DATA_DIR, KNOWN_SECTION))
     );
-    const section = parseOneNoteSection(buffer, KNOWN_SECTION);
+    const section = await parseOneNoteSection(buffer, KNOWN_SECTION);
     const page = getPages(section)[0];
 
-    const html = await renderPage(page, {
-      resolveResource: (data) =>
+    const { html } = await renderPage(page, {
+      resolveResource: (data: Uint8Array) =>
         `<img src="data:application/octet-stream;base64,${Buffer.from(
           data
         ).toString("base64")}" />`
@@ -89,14 +89,14 @@ describe("onenote sections", () => {
     const buffer = new Uint8Array(
       fs.readFileSync(path.join(DATA_DIR, "Quick Notes.one"))
     );
-    const section = parseOneNoteSection(buffer, "Quick Notes.one");
+    const section = await parseOneNoteSection(buffer, "Quick Notes.one");
     const pages = getPages(section);
     const inkPage = pages.find((page) =>
       page.contents.some((content) => content.type === "ink")
     );
     expect(inkPage).toBeTruthy();
 
-    const html = await renderPage(inkPage!);
+    const { html } = await renderPage(inkPage!);
     expect(html).toContain("<path ");
     expect(html).toContain("viewBox");
   });

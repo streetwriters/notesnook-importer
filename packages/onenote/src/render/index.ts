@@ -28,6 +28,7 @@ import {
   OutlineElement,
   OutlineItem,
   Page,
+  PageContent,
   RichText,
   Table,
   TableCell
@@ -88,6 +89,13 @@ export type RenderOptions = {
   resolveResource?: ResourceResolver;
 };
 
+export type RenderResult = {
+  /** Linearized HTML content with data-onenote-* position attributes. */
+  html: string;
+  /** SVG snapshot preserving the original visual layout (only for pages with ink). */
+  svgSnapshot?: string;
+};
+
 type NoteTagStyle = StyleSet;
 
 class PageRenderer {
@@ -98,19 +106,20 @@ class PageRenderer {
 
   constructor(private readonly options: RenderOptions) {}
 
-  async renderPage(page: Page): Promise<string> {
+  async renderPage(page: Page): Promise<RenderResult> {
     const titleText = page.titleText || "Untitled Page";
+
+    // Sort page contents spatially: top-to-bottom, then left-to-right.
+    const sorted = sortPageContents(page);
 
     let content = "";
 
+    // Render title (always first, at its absolute position).
     if (page.title) {
       const title = page.title;
-      const styles = new StyleSet();
-      styles.set("position", "absolute");
-      styles.set("top", px(title.offsetVertical + 0.5));
-      styles.set("left", px(title.offsetHorizontal + 1.0));
-
-      let titleField = `<div class="title" style="${styles}">`;
+      const x = title.offsetHorizontal;
+      const y = title.offsetVertical;
+      let titleField = `<div class="title" data-onenote-x="${x}" data-onenote-y="${y}">`;
       for (const outline of title.contents) {
         titleField += await this.renderOutline(outline);
       }
@@ -118,12 +127,28 @@ class PageRenderer {
       content += titleField;
     }
 
-    const pageContent = (
-      await Promise.all(page.contents.map((c) => this.renderPageContent(c)))
-    ).join("");
-    content += pageContent;
+    // Render each content element with position metadata.
+    for (const item of sorted) {
+      const pos = getContentPosition(item);
+      const attrs = pos
+        ? ` data-onenote-x="${pos.x}" data-onenote-y="${pos.y}" data-onenote-w="${pos.w}" data-onenote-h="${pos.h}"`
+        : "";
+      const rendered = await this.renderPageContent(item);
+      if (rendered) {
+        content += `<div${attrs}>${rendered}</div>`;
+      }
+    }
 
-    return renderPageTemplate(titleText, content, this.globalStyles);
+    // Generate SVG snapshot only when the page has ink elements.
+    const hasInk = page.contents.some(
+      (c) => c.type === "ink" || (c.type === "outline" && outlineHasInk(c.outline))
+    );
+    const svgSnapshot = hasInk ? renderSvgSnapshot(page) : undefined;
+
+    return {
+      html: renderPageTemplate(titleText, content, this.globalStyles),
+      svgSnapshot
+    };
   }
 
   private genClass(prefix: string): string {
@@ -177,6 +202,18 @@ class PageRenderer {
   // -----------------------------------------------------------------------
 
   private renderRichText(text: RichText): string {
+    // Skip OneNote's auto-generated page metadata paragraphs — the title is
+    // already rendered via the positioned title overlay and dates are stored as
+    // note metadata (createdAt / updatedAt).
+    const styleId = text.paragraphStyle.styleId;
+    if (
+      styleId &&
+      !this.inList &&
+      (styleId === "PageDateTime" || styleId === "PageTitle")
+    ) {
+      return "";
+    }
+
     let content = "";
     let style = this.parseParagraphStyles(text);
 
@@ -192,14 +229,8 @@ class PageRenderer {
       content = `<a href="${content}">${content}</a>`;
     }
 
-    const tag = text.paragraphStyle.styleId;
-    if (
-      tag &&
-      !this.inList &&
-      tag !== "PageDateTime" &&
-      tag !== "PageTitle"
-    ) {
-      return `<${tag}${style.length > 0 ? ` style="${style}"` : ""}>${content}</${tag}>`;
+    if (styleId && !this.inList) {
+      return `<${styleId}${style.length > 0 ? ` style="${style}"` : ""}>${content}</${styleId}>`;
     } else if (style.length > 0) {
       return `<span style="${style}">${content}</span>`;
     }
@@ -325,7 +356,7 @@ class PageRenderer {
     if (style.superscript) styles.set("vertical-align", "super");
     if (style.subscript) styles.set("vertical-align", "sub");
     if (style.strikethrough) styles.set("text-decoration", "line-through");
-    if (style.font) styles.set("font-family", style.font);
+    if (style.font) styles.set("font-family", `${style.font},sans-serif`);
     if (style.fontSize)
       styles.set("font-size", `${style.fontSize / 2.0}pt`);
     if (style.fontColor?.type === "manual") {
@@ -383,14 +414,13 @@ class PageRenderer {
       }
 
       if (definition.shape !== 0) {
-        const icon = this.noteTagIcon(definition.shape, noteTag.itemStatus);
-        const iconClasses = ["note-tag-icon"];
-        if (icon.style.length > 0) {
-          const className = this.genClass("icon");
-          iconClasses.push(className);
-          this.globalStyles.set(`.${className} > svg`, icon.style);
+        // Skip checkbox note tags (shapes 1-12) — the checklist <li> structure
+        // handles the visual representation.
+        if (definition.shape >= 1 && definition.shape <= 12) continue;
+        const emoji = noteTagEmoji(definition.shape);
+        if (emoji) {
+          markup += emoji + " ";
         }
-        markup += `<span class="${iconClasses.join(" ")}">${icon.icon}</span>`;
       }
     }
 
@@ -690,7 +720,19 @@ class PageRenderer {
   }
 
   private isList(element: OutlineElement): boolean {
-    return element.listContents.length > 0;
+    return element.listContents.length > 0 || this.isChecklistItem(element);
+  }
+
+  private isChecklistItem(element: OutlineElement): boolean {
+    return element.contents.some(c => {
+      if (c.type !== "richText") return false;
+      return c.richText.noteTags.some(t => {
+        if (!t.definition) return false;
+        const s = t.definition.shape;
+        // Shapes 1-12 are checkbox variants (plain, with star, with !, with arrow)
+        return s >= 1 && s <= 12;
+      });
+    });
   }
 
   // -----------------------------------------------------------------------
@@ -703,19 +745,37 @@ class PageRenderer {
   ): Promise<string> {
     let contents = "";
     let inList = false;
+    let inChecklist = false;
     let listEnd: string | undefined;
 
     for (const { element, parentLevel, currentLevel } of elements) {
-      if (!inList && this.isList(element)) {
+      const isListItem = this.isList(element);
+      const isCheckItem = this.isChecklistItem(element);
+
+      // Close checklist if we're leaving it.
+      if (inChecklist && !isCheckItem) {
+        contents += "</ul>";
+        inChecklist = false;
+      }
+
+      // Close regular list if we're leaving it.
+      if (inList && !isListItem && !isCheckItem) {
+        contents += listEnd ?? "";
+        inList = false;
+      }
+
+      // Open checklist if entering one.
+      if (!inChecklist && isCheckItem) {
+        contents += '<ul class="checklist">';
+        inChecklist = true;
+      }
+
+      // Open regular list if entering one (but not checklist).
+      if (!inList && !inChecklist && isListItem) {
         const tags = this.listTags(element);
         contents += tags[0];
         listEnd = tags[1];
         inList = true;
-      }
-
-      if (inList && !this.isList(element)) {
-        contents += listEnd ?? "";
-        inList = false;
       }
 
       contents += await this.renderOutlineElement(
@@ -726,9 +786,8 @@ class PageRenderer {
       );
     }
 
-    if (inList) {
-      contents += listEnd ?? "";
-    }
+    if (inChecklist) contents += "</ul>";
+    if (inList) contents += listEnd ?? "";
 
     return contents;
   }
@@ -782,7 +841,7 @@ class PageRenderer {
     containerStyle.set("left", px(-bulletSpacing));
 
     if (listFont) markerStyle.set("font-family", listFont);
-    if (list.font) markerStyle.set("font-family", list.font);
+    if (list.font) markerStyle.set("font-family", `${list.font},sans-serif`);
     if (list.fontColor?.type === "manual") {
       markerStyle.set(
         "color",
@@ -825,7 +884,7 @@ class PageRenderer {
     } else {
       return { listFont, listFormat, fontSize };
     }
-    return { listFont: "Calibri", listFormat, fontSize };
+    return { listFont: "Calibri,sans-serif", listFormat, fontSize };
   }
 
   private isNumberedList(list: List): boolean {
@@ -924,8 +983,8 @@ class PageRenderer {
         image.imageFilename ?? "",
         image.extension,
         {
-          width: image.pictureWidth,
-          height: image.pictureHeight,
+          width: image.pictureWidth ? Math.round(image.pictureWidth * 48) : undefined,
+          height: image.pictureHeight ? Math.round(image.pictureHeight * 48) : undefined,
           altText: image.altText
         }
       );
@@ -937,7 +996,14 @@ class PageRenderer {
   private async renderEmbeddedFile(file: EmbeddedFile): Promise<string> {
     let content = "";
     if (file.data && this.options.resolveResource) {
-      content = await this.options.resolveResource(file.data, file.filename);
+      const ext = file.filename.includes(".")
+        ? `.${file.filename.split(".").pop()}`
+        : undefined;
+      content = await this.options.resolveResource(
+        file.data,
+        file.filename,
+        ext
+      );
     }
     return this.renderWithNoteTags(file.noteTags, content);
   }
@@ -951,8 +1017,18 @@ class PageRenderer {
     displayBoundingBox: Ink["boundingBox"],
     embedded: boolean
   ): string {
-    const strokes =
-      ink.content.type === "strokes" ? ink.content.strokes : [];
+    // Handle ink groups recursively.
+    if (ink.content.type === "group") {
+      const parts: string[] = [];
+      for (const child of ink.content.children) {
+        const childBb = child.boundingBox;
+        const rendered = this.renderInk(child, childBb, embedded);
+        if (rendered) parts.push(rendered);
+      }
+      return parts.join("");
+    }
+
+    const strokes = ink.content.strokes;
     if (strokes.length === 0) return "";
 
     const attrs = new AttributeSet();
@@ -1160,6 +1236,483 @@ function defaultParagraphStyling(): RichText["textRunFormatting"][number] {
   };
 }
 
+// ---------------------------------------------------------------------------
+// Spatial sorting & position helpers
+// ---------------------------------------------------------------------------
+
+type Position = { x: number; y: number; w: number; h: number };
+
+function getContentPosition(item: PageContent): Position | undefined {
+  switch (item.type) {
+    case "outline": {
+      const o = item.outline;
+      return {
+        x: o.offsetHorizontal ?? 0,
+        y: o.offsetVertical ?? 0,
+        w: o.layoutMaxWidth ?? 0,
+        h: o.layoutMaxHeight ?? 0
+      };
+    }
+    case "image": {
+      const img = item.image;
+      return {
+        x: img.offsetHorizontal ?? 0,
+        y: img.offsetVertical ?? 0,
+        w: img.pictureWidth ?? 0,
+        h: img.pictureHeight ?? 0
+      };
+    }
+    case "embeddedFile": {
+      const f = item.embeddedFile;
+      return {
+        x: f.offsetHorizontal ?? 0,
+        y: f.offsetVertical ?? 0,
+        w: f.layoutMaxWidth ?? 0,
+        h: f.layoutMaxHeight ?? 0
+      };
+    }
+    case "ink": {
+      const ink = item.ink;
+      return {
+        x: ink.offsetHorizontal ?? 0,
+        y: ink.offsetVertical ?? 0,
+        w: ink.boundingBox?.width ?? 0,
+        h: ink.boundingBox?.height ?? 0
+      };
+    }
+    case "unknown":
+      return undefined;
+  }
+}
+
+/**
+ * Sort page contents spatially: top-to-bottom, left-to-right.
+ * Elements at the same vertical position are sorted by horizontal position.
+ */
+function sortPageContents(page: Page): PageContent[] {
+  return [...page.contents].sort((a, b) => {
+    const pa = getContentPosition(a);
+    const pb = getContentPosition(b);
+    if (!pa && !pb) return 0;
+    if (!pa) return 1;
+    if (!pb) return -1;
+    const dy = pa.y - pb.y;
+    if (Math.abs(dy) > 0.1) return dy;
+    return pa.x - pb.x;
+  });
+}
+
+// ---------------------------------------------------------------------------
+// SVG snapshot renderer
+// ---------------------------------------------------------------------------
+
+const SVG_SCALE = 48.0; // pixels per half-inch (same as px())
+const SVG_LINE_HEIGHT = 16; // default line height in px
+
+function outlineHasInk(outline: Outline): boolean {
+  for (const item of outline.items) {
+    if (item.type === "element") {
+      for (const c of item.element.contents) {
+        if (c.type === "ink") return true;
+        if (c.type === "richText" && c.richText.embeddedObjects.some(e => e.type === "ink")) return true;
+      }
+      if (item.element.children.length > 0 && outlineHasInk({ ...outline, items: item.element.children })) return true;
+    } else if (item.type === "group") {
+      for (const sub of item.group.outlines) {
+        if (sub.type === "element") {
+          for (const c of sub.element.contents) {
+            if (c.type === "ink") return true;
+          }
+        }
+      }
+    }
+  }
+  return false;
+}
+
+function renderSvgSnapshot(page: Page): string {
+  // Calculate page bounds from ALL content including ink.
+  let maxX = 600;
+  let maxY = 800;
+  const allItems: { pos: Position; content: PageContent }[] = [];
+
+  for (const item of page.contents) {
+    const pos = getContentPosition(item);
+    if (pos) {
+      allItems.push({ pos, content: item });
+
+      // For ink, compute actual pixel bounds from stroke data.
+      if (item.type === "ink") {
+        const pxRight = inkPixelRight(item.ink);
+        const pxBottom = inkPixelBottom(item.ink);
+        if (pxRight > maxX) maxX = pxRight + 20;
+        if (pxBottom > maxY) maxY = pxBottom + 20;
+      } else {
+        const right = (pos.x + pos.w) * SVG_SCALE;
+        const bottom = (pos.y + pos.h) * SVG_SCALE;
+        if (right > maxX) maxX = right + 20;
+        if (bottom > maxY) maxY = bottom + 20;
+      }
+    }
+  }
+
+  // Add title bounds.
+  if (page.title) {
+    const titleBottom = (page.title.offsetVertical + 2) * SVG_SCALE;
+    if (titleBottom > maxY) maxY = titleBottom + 20;
+  }
+
+  const width = Math.ceil(maxX);
+  const height = Math.ceil(maxY);
+
+  let svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 ${width} ${height}" style="max-width:100%;height:auto;background:#fff;font-family:Calibri,sans-serif;">\n`;
+
+  // White background.
+  svg += `  <rect width="100%" height="100%" fill="#fff"/>\n`;
+
+  // Render title.
+  if (page.title) {
+    const tx = page.title.offsetHorizontal * SVG_SCALE;
+    const ty = page.title.offsetVertical * SVG_SCALE;
+    const titleText = page.titleText || "";
+    svg += `  <text x="${tx}" y="${ty + 20}" font-size="20" font-weight="bold" font-family="Calibri,sans-serif" fill="#333">${escSvg(titleText)}</text>\n`;
+    svg += `  <line x1="${tx}" y1="${ty + 24}" x2="${tx + Math.min(titleText.length * 10, 400)}" y2="${ty + 24}" stroke="#ccc" stroke-width="0.5"/>\n`;
+  }
+
+  // Render each positioned element.
+  for (const { pos, content } of allItems) {
+    const x = pos.x * SVG_SCALE;
+    const y = pos.y * SVG_SCALE;
+    const w = Math.max(pos.w * SVG_SCALE, 50);
+    const h = Math.max(pos.h * SVG_SCALE, 20);
+
+    switch (content.type) {
+      case "outline":
+        svg += renderSvgOutline(content.outline, x, y, w, h);
+        break;
+      case "image":
+        svg += renderSvgImage(content.image, x, y, w, h);
+        break;
+      case "embeddedFile":
+        svg += renderSvgEmbeddedFile(content.embeddedFile, x, y, w, h);
+        break;
+      case "ink":
+        svg += renderSvgInk(content.ink, x, y);
+        break;
+    }
+  }
+
+  svg += `</svg>`;
+  return svg;
+}
+
+function renderSvgOutline(outline: Outline, x: number, y: number, _w: number, _h: number): string {
+  let svg = "";
+  let lineY = y + SVG_LINE_HEIGHT;
+
+  function renderItems(items: OutlineItem[], indent: number): void {
+    for (const item of items) {
+      if (item.type === "element") {
+        const el = item.element;
+        const isList = el.listContents.length > 0;
+
+        // Render list bullet/number if this is a list item (but not checkbox).
+        if (isList && !isCheckbox(el)) {
+          const list = el.listContents[0];
+          const bullet = list.listFormat[0] === "\ufffd"
+            ? (el.listContents[0].listRestart ?? 1) + "."
+            : (list.listFormat[0] || "\u2022");
+          svg += `  <text x="${x + indent - 12}" y="${lineY}" font-size="11" font-family="Calibri,sans-serif" fill="#555">${escSvg(bullet)}</text>\n`;
+        }
+
+        // Render checkbox prefix for task items.
+        if (isCheckbox(el)) {
+          const completed = el.contents.some(c =>
+            c.type === "richText" && c.richText.noteTags.some(t => t.itemStatus.completed)
+          );
+          const check = completed ? "\u2611" : "\u2610";
+          svg += `  <text x="${x + indent - 14}" y="${lineY}" font-size="12" font-family="Calibri,sans-serif" fill="#4673b7">${check}</text>\n`;
+        }
+
+        // Render content elements.
+        for (const c of el.contents) {
+          if (c.type === "richText") {
+            const rt = c.richText;
+            if (rt.text.trim()) {
+              svg += renderSvgRichText(rt, x + indent, lineY);
+              lineY += SVG_LINE_HEIGHT;
+            } else {
+              lineY += SVG_LINE_HEIGHT * 0.6;
+            }
+          } else if (c.type === "table") {
+            svg += renderSvgTable(c.table, x + indent, lineY);
+            lineY += estimateTableHeight(c.table) + 4;
+          } else if (c.type === "image") {
+            const imgW = c.image.pictureWidth ? c.image.pictureWidth * SVG_SCALE : 80;
+            const imgH = c.image.pictureHeight ? c.image.pictureHeight * SVG_SCALE : 60;
+            svg += renderSvgImage(c.image, x + indent, lineY, imgW, imgH);
+            lineY += imgH + 4;
+          } else if (c.type === "ink") {
+            svg += renderSvgInk(c.ink, x + indent, lineY);
+            lineY += 40;
+          }
+        }
+
+        // Recurse into children.
+        if (el.children.length > 0) {
+          renderItems(el.children, indent + 20);
+        }
+      } else if (item.type === "group") {
+        renderItems(item.group.outlines, indent + 20);
+      }
+    }
+  }
+
+  renderItems(outline.items, 0);
+  return svg;
+}
+
+function isCheckbox(el: OutlineElement): boolean {
+  return el.contents.some(c => {
+    if (c.type !== "richText") return false;
+    return c.richText.noteTags.some(t => {
+      if (!t.definition) return false;
+      const s = t.definition.shape;
+      return s >= 1 && s <= 12;
+    });
+  });
+}
+
+function noteTagEmoji(shape: number): string {
+  switch (shape) {
+    case 1: case 2: case 3: return "\u2610"; // checkbox
+    case 4: case 5: case 6: return "\u2610\u2B50"; // checkbox + star
+    case 7: case 8: case 9: return "\u2610\u2757"; // checkbox + !
+    case 10: case 11: case 12: return "\u2610\u27A1"; // checkbox + arrow
+    case 13: return "\u2B50"; // star
+    case 15: return "\u2753"; // question mark
+    case 17: return "\u2757"; // error
+    case 20: return "\u260E"; // phone
+    case 21: return "\u26A1"; // light bulb → lightning
+    case 23: return "\u2302"; // home
+    case 24: return "\u263A"; // bubble → smiley
+    case 26: return "\u2605"; // award → filled star
+    case 28: case 30: case 32: return "\u2610\u0031"; // numbered checkbox
+    case 35: return "\u2713"; // checkmark
+    case 36: return "\u25CB"; // circle
+    case 48: case 50: case 52: return "\u2610"; // green numbered
+    case 55: return "\u2713"; // green checkmark
+    case 56: return "\u25CB"; // green circle
+    case 69: case 71: case 73: return "\u2610"; // yellow numbered
+    case 76: return "\u2713"; // yellow checkmark
+    case 77: return "\u25CB"; // yellow circle
+    case 89: case 90: case 91: case 92: case 93: return "\u2691"; // flag
+    case 94: case 95: case 96: return "\u263A"; // person
+    case 97: case 98: case 99: return "\u2691"; // flag
+    case 100: case 101: case 102: case 103: case 104: case 105: return "\u25A0"; // square
+    case 106: return "\u2709"; // email
+    case 118: return "\u260E"; // contact
+    case 121: return "\u266B"; // music
+    case 122: return "\u25B6"; // film
+    case 125: return "\u2795"; // link → chain
+    case 131: return "\u26BF"; // lock
+    case 132: return "\u2606"; // book → star outline
+    case 134: return "\u270E"; // paper → pencil
+    case 136: return "\u270E"; // pen
+    default: return "";
+  }
+}
+
+function renderSvgRichText(rt: RichText, x: number, y: number): string {
+  const ps = rt.paragraphStyle;
+  const fs = ps.fontSize ? ps.fontSize / 2 : 11;
+  let fill = "#333";
+
+  if (ps.fontColor?.type === "manual") {
+    fill = `rgb(${ps.fontColor.r},${ps.fontColor.g},${ps.fontColor.b})`;
+  }
+
+  const font = ps.font ? `${escSvg(ps.font)},Calibri,sans-serif` : "Calibri,sans-serif";
+  let attrs = `x="${x}" y="${y}" font-size="${fs}" font-family="${font}" fill="${fill}"`;
+  if (ps.bold) attrs += ' font-weight="bold"';
+  if (ps.italic) attrs += ' font-style="italic"';
+  if (ps.underline) attrs += ' text-decoration="underline"';
+
+  // Text background highlight.
+  let highlight = "";
+  if (ps.highlight?.type === "manual") {
+    const hc = ps.highlight;
+    highlight = `  <rect x="${x - 1}" y="${y - fs + 2}" width="${rt.text.length * fs * 0.6 + 2}" height="${fs + 2}" fill="rgb(${hc.r},${hc.g},${hc.b})" opacity="0.3" rx="1"/>\n`;
+  }
+
+  // Note tag prefix (non-checkbox tags).
+  let tagPrefix = "";
+  if (rt.noteTags.length > 0) {
+    for (const tag of rt.noteTags) {
+      if (!tag.definition) continue;
+      const s = tag.definition.shape;
+      // Skip checkboxes — they're rendered via the checklist structure.
+      if (s >= 1 && s <= 12) continue;
+      const emoji = noteTagEmoji(s);
+      if (emoji) tagPrefix += emoji + " ";
+    }
+  }
+
+  const textContent = tagPrefix + escSvg(rt.text);
+  return highlight + `  <text ${attrs}>${textContent}</text>\n`;
+}
+
+function renderSvgTable(table: Table, x: number, y: number): string {
+  let svg = "";
+  const colWidths = [...table.colWidths];
+  while (colWidths.length < table.cols) colWidths.push(60);
+  const rowHeight = 22;
+  const border = table.bordersVisible ? ' stroke="#A3A3A3" stroke-width="0.5"' : ' stroke="none"';
+  const borderFill = table.bordersVisible ? ' stroke="#A3A3A3" stroke-width="0.5"' : "";
+
+  let cellY = y;
+  for (const row of table.contents) {
+    let cellX = x;
+    for (let ci = 0; ci < row.contents.length; ci++) {
+      const cell = row.contents[ci];
+      const cw = (colWidths[ci] || 60) * SVG_SCALE * 0.12;
+
+      // Cell background.
+      const bgFill = cell.backgroundColor
+        ? `rgb(${cell.backgroundColor.r},${cell.backgroundColor.g},${cell.backgroundColor.b})`
+        : "#fff";
+      svg += `  <rect x="${cellX}" y="${cellY}" width="${cw}" height="${rowHeight}" fill="${bgFill}"${borderFill}/>\n`;
+
+      // Cell text.
+      let textX = cellX + 4;
+      let textY = cellY + 14;
+      for (const el of cell.contents) {
+        for (const c of el.contents) {
+          if (c.type === "richText" && c.richText.text.trim()) {
+            const fs = c.richText.paragraphStyle.fontSize
+              ? c.richText.paragraphStyle.fontSize / 2
+              : 10;
+            const bold = c.richText.paragraphStyle.bold ? ' font-weight="bold"' : "";
+            svg += `  <text x="${textX}" y="${textY}" font-size="${fs}" font-family="Calibri,sans-serif"${bold} fill="#333">${escSvg(c.richText.text)}</text>\n`;
+            textY += fs + 4;
+          }
+        }
+      }
+
+      cellX += cw;
+    }
+    cellY += rowHeight;
+  }
+
+  return svg;
+}
+
+function estimateTableHeight(table: Table): number {
+  return table.contents.length * 22;
+}
+
+function renderSvgEmbeddedFile(file: EmbeddedFile, x: number, y: number, w: number, h: number): string {
+  const hw = Math.max(w, 120);
+  const hh = Math.max(h, 28);
+  let svg = `  <rect x="${x}" y="${y}" width="${hw}" height="${hh}" fill="#f0f0f0" stroke="#ccc" rx="3"/>\n`;
+  svg += `  <text x="${x + 8}" y="${y + 16}" font-size="11" font-family="Calibri,sans-serif" fill="#666">\u{1F4CE} ${escSvg(file.filename)}</text>\n`;
+  return svg;
+}
+
+function renderSvgImage(image: Image, x: number, y: number, w: number, h: number): string {
+  if (image.data && image.data.length > 0) {
+    const ext = image.extension?.replace(".", "").toLowerCase();
+    const mime = ext === "jpg" ? "image/jpeg" : ext ? `image/${ext}` : "image/png";
+    const b64 = Buffer.from(image.data).toString("base64");
+    return `  <image x="${x}" y="${y}" width="${w}" height="${h}" href="data:${mime};base64,${b64}" preserveAspectRatio="xMidYMid meet"/>\n`;
+  }
+  // Placeholder for missing images.
+  return `  <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#f8f8f8" stroke="#ddd" rx="2"/>\n` +
+    `  <text x="${x + w / 2 - 8}" y="${y + h / 2 + 4}" font-size="16" fill="#ccc" text-anchor="middle">\u{1F5BC}</text>\n`;
+}
+
+function inkPixelRight(ink: Ink): number {
+  if (ink.content.type === "group") {
+    return Math.max(...ink.content.children.map(c => inkPixelRight(c)), 0);
+  }
+  if (ink.content.strokes.length === 0) return 0;
+  const xBoundary = getBoundary(ink.content.strokes, (p) => p.x);
+  const offsetH = ink.offsetHorizontal ?? 0;
+  return offsetH * SVG_SCALE + (xBoundary.min + xBoundary.max) / SVG_SCALING_FACTOR + 100;
+}
+
+function inkPixelBottom(ink: Ink): number {
+  if (ink.content.type === "group") {
+    return Math.max(...ink.content.children.map(c => inkPixelBottom(c)), 0);
+  }
+  if (ink.content.strokes.length === 0) return 0;
+  const yBoundary = getBoundary(ink.content.strokes, (p) => p.y);
+  const offsetV = ink.offsetVertical ?? 0;
+  return offsetV * SVG_SCALE + (yBoundary.min + yBoundary.max) / SVG_SCALING_FACTOR + 100;
+}
+
+function renderSvgInk(ink: Ink, offsetX: number, offsetY: number): string {
+  // Handle ink groups recursively.
+  if (ink.content.type === "group") {
+    let svg = "";
+    for (const child of ink.content.children) {
+      svg += renderSvgInk(child, offsetX, offsetY);
+    }
+    return svg;
+  }
+
+  const strokes = ink.content.strokes;
+  if (strokes.length === 0) return "";
+
+  // Compute bounding box from actual path data (same approach as HTML renderer).
+  const xBoundary = getBoundary(strokes, (p) => p.x);
+  const yBoundary = getBoundary(strokes, (p) => p.y);
+  const strokeStrength = Math.max(strokes[0].width, strokes[0].height, 140.0);
+
+  const xMin = xBoundary.min - strokeStrength / 2.0;
+  const yMin = yBoundary.min - strokeStrength / 2.0;
+  const viewW = xBoundary.max + strokeStrength + SVG_SCALING_FACTOR;
+  const viewH = yBoundary.max + strokeStrength + SVG_SCALING_FACTOR;
+
+  // Convert EMU dimensions to pixels for the outer SVG size.
+  const pxW = Math.round(viewW / SVG_SCALING_FACTOR);
+  const pxH = Math.round(viewH / SVG_SCALING_FACTOR);
+
+  // Position on the page canvas (offsetX/Y already in pixels).
+  const pxX = Math.round(offsetX + xMin / SVG_SCALING_FACTOR);
+  const pxY = Math.round(offsetY + yMin / SVG_SCALING_FACTOR);
+
+  // Build path data in EMU coordinates.
+  let pathData = "";
+  for (const stroke of strokes) {
+    if (stroke.path.length === 0) continue;
+    const start = stroke.path[0];
+    const rest = stroke.path.slice(1).map((p) => `${Math.floor(p.x)} ${Math.round(p.y)}`);
+    if (rest.length === 0) rest.push("0 0");
+    pathData += `M ${Math.floor(start.x)} ${Math.round(start.y)} l ${rest.join(" ")} `;
+  }
+
+  // Style from first stroke.
+  const firstStroke = strokes[0];
+  const color = firstStroke.color !== undefined ? strokeColor(firstStroke.color) : "#333";
+  const strokeW = Math.round(firstStroke.width);
+  const opacity = ((255 - (firstStroke.transparency ?? 0)) / 256.0).toFixed(2);
+  const linejoin = (firstStroke.penTip ?? 0) === 0 ? "round" : "bevel";
+  const linecap = (firstStroke.penTip ?? 0) === 0 ? "round" : "square";
+
+  return `<svg x="${pxX}" y="${pxY}" width="${pxW}" height="${pxH}" viewBox="${Math.round(xMin)} ${Math.round(yMin)} ${Math.round(viewW)} ${Math.round(viewH)}" style="overflow:visible">` +
+    `<path d="${pathData.trim()}" stroke="${color}" stroke-width="${strokeW}" fill="none" opacity="${opacity}" stroke-linejoin="${linejoin}" stroke-linecap="${linecap}"/>` +
+    `</svg>\n`;
+}
+
+function escSvg(text: string): string {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
 function renderPageTemplate(
   name: string,
   content: string,
@@ -1170,18 +1723,21 @@ function renderPageTemplate(
     .map(([selector, style]) => `${selector} { ${style} }`)
     .join("\n");
 
-  return `<!DOCTYPE html>
+    return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>${name}</title>
     <style>
-    * { margin: 0; padding: 0; font-weight: normal; }
+    * { margin: 0; padding: 0; font-weight: normal; font-family: Calibri, sans-serif; }
+    body { font-size: 11px; }
     table, tr, td { border-color: #A3A3A3; }
     ul, ol { padding: 0; }
     .title .outline-element { display: inline; }
     .title .outline-element:nth-child(2) { margin-left: 10px !important; }
-    .container-outline { font-family: Calibri, sans-serif; font-size: 6pt; }
+    .container-outline { font-size: 11px; }
+    ul.checklist { list-style: none; padding-left: 0; }
+    ul.checklist li { display: flex; align-items: baseline; gap: 6px; }
     .ink-text, .ink-space { display: inline-block; position: relative; vertical-align: bottom; }
     .ink-text { top: 0; left: 0; }
     .note-tag-icon { position: relative; }
@@ -1202,7 +1758,7 @@ ${content}
 export function renderPage(
   page: Page,
   options: RenderOptions = {}
-): Promise<string> {
+): Promise<RenderResult> {
   return new PageRenderer(options).renderPage(page);
 }
 

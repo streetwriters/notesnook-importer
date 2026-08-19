@@ -23,7 +23,8 @@ import path from "path";
 import {
   parseOneNoteSection,
   parseOneNoteNotebook,
-  sniffOneNoteFileType
+  sniffOneNoteFileType,
+  OneNoteEncryptedError
 } from "../src/onenote";
 import { extractOnepkg, isOnepkg } from "../src/vendor/cabinet";
 
@@ -32,12 +33,12 @@ const DATA_DIR = path.join(__dirname, "data");
 describe("onenote parser", () => {
   it.each(["Sample1.one", "testOneNote1.one"])(
     "should parse section %s",
-    (name) => {
+    async (name) => {
       const buffer = new Uint8Array(
         fs.readFileSync(path.join(DATA_DIR, name))
       );
       expect(sniffOneNoteFileType(buffer)).toBe("section");
-      const section = parseOneNoteSection(buffer, name);
+      const section = await parseOneNoteSection(buffer, name);
       expect(section.displayName).toBeTruthy();
       const pages = section.pageSeries.flatMap((series) => series.pages);
       expect(pages.length).toBeGreaterThan(0);
@@ -60,9 +61,7 @@ describe("onenote parser", () => {
     );
     expect(toc).toBeTruthy();
     expect(sniffOneNoteFileType(toc!.data)).toBe("notebook");
-    const notebook = parseOneNoteNotebook(toc!.data, (name) => {
-      // The file names in the notebook TOC are Windows paths; resolve both
-      // flat and nested entries.
+    const notebook = await parseOneNoteNotebook(toc!.data, (name) => {
       return files.find(
         (file) =>
           file.name === name ||
@@ -71,5 +70,14 @@ describe("onenote parser", () => {
       )?.data;
     });
     expect(notebook.entries.length).toBeGreaterThan(0);
+  });
+
+  it("should throw OneNoteEncryptedError for encrypted sections without password", async () => {
+    const buffer = new Uint8Array(
+      fs.readFileSync(path.join(DATA_DIR, "notebook", "New section.one"))
+    );
+    await expect(
+      parseOneNoteSection(buffer, "New section.one")
+    ).rejects.toThrow(OneNoteEncryptedError);
   });
 });

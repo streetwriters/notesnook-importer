@@ -39,6 +39,11 @@ export type ObjectDeclaration2Body = {
    * A bit that specifies whether this object contains references to object spaces (section 2.1.4) or contexts (section 2.1.11).
    */
   fHasOsidReferences: boolean;
+  /**
+   * Object Data Container State — 0 means the object's data is not
+   * encrypted; 1 means it is encrypted with the current encryption key.
+   */
+  odcs: number;
 };
 
 export function ObjectDeclaration2Body(
@@ -52,5 +57,6 @@ export function ObjectDeclaration2Body(
     jcid,
     fHasOidReferences: (data & 0x1) !== 0,
     fHasOsidReferences: (data & 0x2) !== 0,
+    odcs: (data >> 2) & 0xf
   };
 }

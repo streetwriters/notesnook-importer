@@ -17,15 +17,14 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-export {
-  parseOneNoteSection,
-  parseOneNoteNotebook,
-  parseOneNoteNotebookToc,
-  sniffOneNoteFileType
-} from "./src/onenote";
+export { parseOneNoteSection, parseOneNoteNotebook, parseOneNoteNotebookToc, sniffOneNoteFileType, OneNoteEncryptedError } from "./src/onenote";
+export type { ResolveFile } from "./src/onenote";
 export { renderPage } from "./src/render";
-export type { RenderOptions, ResourceResolver } from "./src/render";
+export type { RenderOptions, ResourceResolver, RenderResult } from "./src/render";
 export { extractOnepkg, isOnepkg } from "./src/vendor/cabinet";
+export { parseEncryptionXml, verifyPassword, decryptDataKey } from "./src/crypto";
+export type { EncryptionInfo } from "./src/crypto";
+export { ObjectSpaceStore, ObjectSpace } from "./src/onestore/object-space";
 export type {
   Notebook,
   Section,
