@@ -1,15 +1,295 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`parse 2026-08-05 09-55_260815_084320.sdocx 1`] = `"<div style=\\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\\"><div style=\\"position:absolute;left:0px;top:0px;width:720px;height:404px;\\"><div data-testid=\\"media\\" data-filename=\\"0@pdf_1787029208151.pdf\\"></div></div></div><div style=\\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\\"><div style=\\"position:absolute;left:0px;top:0px;width:720px;height:404px;\\"><div data-testid=\\"media\\" data-filename=\\"0@pdf_1787029208151.pdf\\"></div></div></div><div style=\\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\\"><div style=\\"position:absolute;left:0px;top:0px;width:720px;height:404px;\\"><div data-testid=\\"media\\" data-filename=\\"0@pdf_1787029208151.pdf\\"></div></div></div><div style=\\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\\"><div style=\\"position:absolute;left:0px;top:0px;width:720px;height:404px;\\"><div data-testid=\\"media\\" data-filename=\\"0@pdf_1787029208151.pdf\\"></div></div></div><div style=\\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\\"><div style=\\"position:absolute;left:0px;top:0px;width:720px;height:404px;\\"><div data-testid=\\"media\\" data-filename=\\"0@pdf_1787029208151.pdf\\"></div></div></div><div style=\\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\\"><div style=\\"position:absolute;left:0px;top:0px;width:720px;height:404px;\\"><div data-testid=\\"media\\" data-filename=\\"0@pdf_1787029208151.pdf\\"></div></div></div><div style=\\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\\"><div style=\\"position:absolute;left:0px;top:0px;width:720px;height:404px;\\"><div data-testid=\\"media\\" data-filename=\\"0@pdf_1787029208151.pdf\\"></div></div></div><div style=\\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\\"><div style=\\"position:absolute;left:0px;top:0px;width:720px;height:404px;\\"><div data-testid=\\"media\\" data-filename=\\"0@pdf_1787029208151.pdf\\"></div></div></div><div style=\\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\\"><div style=\\"position:absolute;left:0px;top:0px;width:720px;height:404px;\\"><div data-testid=\\"media\\" data-filename=\\"0@pdf_1787029208151.pdf\\"></div></div></div><div style=\\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\\"><div style=\\"position:absolute;left:0px;top:0px;width:720px;height:404px;\\"><div data-testid=\\"media\\" data-filename=\\"0@pdf_1787029208151.pdf\\"></div></div></div><div style=\\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\\"><div style=\\"position:absolute;left:0px;top:0px;width:720px;height:404px;\\"><div data-testid=\\"media\\" data-filename=\\"0@pdf_1787029208151.pdf\\"></div></div></div><div style=\\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\\"><div style=\\"position:absolute;left:0px;top:0px;width:720px;height:404px;\\"><div data-testid=\\"media\\" data-filename=\\"0@pdf_1787029208151.pdf\\"></div></div></div><div style=\\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\\"><div style=\\"position:absolute;left:0px;top:0px;width:720px;height:404px;\\"><div data-testid=\\"media\\" data-filename=\\"0@pdf_1787029208151.pdf\\"></div></div></div><div style=\\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\\"><div style=\\"position:absolute;left:0px;top:0px;width:720px;height:404px;\\"><div data-testid=\\"media\\" data-filename=\\"0@pdf_1787029208151.pdf\\"></div></div></div><div style=\\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\\"><div style=\\"position:absolute;left:0px;top:0px;width:720px;height:404px;\\"><div data-testid=\\"media\\" data-filename=\\"0@pdf_1787029208151.pdf\\"></div></div></div>"`;
-
-exports[`parse AttachedFile.sdocx 1`] = `"<p><span style=\\"font-size:17px;color:#252525;\\">Jdjdnd.xx</span></p><p><span style=\\"font-size:17px;color:#252525;\\">Djdjd</span></p><div style=\\"margin-top:16px;\\"><div data-testid=\\"media\\" data-filename=\\"10@My File.txt\\"></div></div>"`;
-
-exports[`parse Helo_260815_092722.sdocx 1`] = `"<ul style=\\"list-style:none;padding:0;\\"><li style=\\"list-style:none;\\"><input type=\\"checkbox\\" disabled=\\"disabled\\" /><span style=\\"font-size:17px;color:#252525;\\">You</span></li><li style=\\"list-style:none;\\"><input type=\\"checkbox\\" disabled=\\"disabled\\" /><span style=\\"font-size:17px;color:#252525;\\">Bfjf</span></li><li style=\\"list-style:none;\\"><input type=\\"checkbox\\" disabled=\\"disabled\\" /><span style=\\"font-size:17px;color:#252525;\\">fhff</span></li></ul><p><br /></p><p><br /></p><p><span style=\\"font-size:17px;color:#252525;\\">Rurur</span><span style=\\"font-size:17px;color:#2febd2;\\">urururirjr</span><span style=\\"font-size:17px;color:#252525;\\">rnhrjr.</span></p><p><br /></p><p><span style=\\"color:#252525;font-size:19px;\\">Urururur</span></p><p><b><span style=\\"color:#252525;font-size:19px;\\">Jrurjrur</span></b></p><p><i><b><span style=\\"color:#252525;font-size:19px;\\">Rnrjjr</span></b></i></p><p><u><i><b><span style=\\"color:#252525;font-size:19px;\\">Dbfhhfh</span></b></i></u></p><p><s><u><i><b><span style=\\"color:#252525;font-size:19px;\\">Urururur</span></b></i></u></s></p><ul style=\\"list-style-type:decimal;padding-left:24px;\\"><li><s><u><i><b><span style=\\"color:#252525;font-size:19px;\\">Jrjtjfu</span></b></i></u></s></li><li><s><u><i><b><span style=\\"color:#252525;font-size:19px;\\">Fjfjf</span></b></i></u></s></li><li><span style=\\"color:#252525;font-size:19px;\\">Djfjf</span></li><li><span style=\\"color:#252525;font-size:19px;\\">Fjfjf</span></li><li><span style=\\"color:#252525;font-size:19px;\\">Hf</span></li></ul><p><br /></p><ul style=\\"list-style-type:disc;padding-left:24px;\\"><li><span style=\\"color:#252525;font-size:19px;\\">Dnjfjf</span></li><li><span style=\\"color:#252525;font-size:19px;\\">Fhfjf</span></li><li><span style=\\"color:#252525;font-size:19px;\\">Fhfhf</span></li><li><span style=\\"color:#252525;font-size:19px;\\">Fhfh</span></li></ul><p><br /></p><p style=\\"text-align:center;\\"><span style=\\"color:#252525;font-size:19px;\\">Utut</span></p><p style=\\"text-align:center;\\"><span style=\\"color:#252525;font-size:19px;\\">Fhfhf</span></p><p><br /></p><p style=\\"text-align:right;\\"><span style=\\"color:#252525;font-size:19px;\\">Jrjjfjf</span></p><p><span style=\\"color:#252525;font-size:19px;\\">Rjrjr</span></p><p><span style=\\"color:#252525;font-size:19px;\\">Duf</span></p><p style=\\"margin-left:24px;\\"><span style=\\"color:#252525;font-size:19px;\\">Rurujr</span></p><p style=\\"margin-left:48px;\\"><span style=\\"color:#252525;font-size:19px;\\">Fnfnjf</span></p><p style=\\"margin-left:72px;\\"><span style=\\"color:#252525;font-size:19px;\\">Dnfnjfjf</span></p><p><span style=\\"color:#252525;font-size:19px;\\">Djjdjf</span></p><p><span style=\\"color:#252525;font-size:19px;\\">Fhf</span></p><p><br /></p><p><span style=\\"font-size:19px;color:#252525;\\">That's just HTML, I have zero idea if Notes parses HTML, why not try it and report back ?</span></p><p><a href=\\"https://www.w3schools.com/html/html_links.asp\\"><span style=\\"font-size:19px;color:#252525;\\">https://www.w3schools.com/html/html_links.asp</span></a></p><p><span style=\\"font-size:19px;color:#252525;\\">Edit: I did a test and it doesn't seem to.</span></p><p><br /></p><p><span style=\\"font-size:19px;color:#252525;\\">Jj</span></p><p><br /></p><p><span style=\\"font-size:19px;color:#252525;\\">7</span></p><div style=\\"position:relative;width:720px;height:1018px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\\"><div style=\\"position:absolute;left:217px;top:638.68px;width:502.12px;overflow:hidden;\\"><p><span style=\\"font-size:17px;color:#252525;\\">Rhururrjjrjr</span></p></div></div>"`;
-
-exports[`parse Note with voice_260815_091808.sdocx 1`] = `"<p><span style=\\"font-size:17px;color:#252525;\\">This note has voice recording.</span></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><div style=\\"margin-top:16px;\\"><div data-testid=\\"media\\" data-filename=\\"0@6a7fe86f_917b2.m4a\\"></div></div>"`;
-
-exports[`parse Notes_251018_172615.sdocx 1`] = `"<p><span style=\\"font-size:17px;color:#252525;\\">Hello world</span></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><span style=\\"font-size:17px;color:#252525;\\">Ffggtyyyyyyyyyy</span></p><p><br /></p><div style=\\"position:relative;width:720px;height:1018px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\\"><div data-testid=\\"media\\" data-filename=\\"strokes.svg\\"></div></div>"`;
-
-exports[`parse Notes_260804_125813.sdocx 1`] = `"<p><span style=\\"font-size:17px;color:#252525;\\">Djkddk</span></p><p><span style=\\"font-size:17px;color:#252525;\\">Djdjdjd</span></p><p><span style=\\"font-size:17px;color:#252525;\\">Dif</span></p>"`;
-
-exports[`parse Notes_260804_125818.sdocx 1`] = `"<p><span style=\\"font-size:17px;color:#252525;\\">Jdjdnd.xx</span></p><p><span style=\\"font-size:17px;color:#252525;\\">Djdjd</span></p>"`;
+[
+  {
+    "title": "Test note with pdf",
+    "dateCreated": 1787029218391,
+    "dateEdited": 1787029306007.347,
+    "tags": [],
+    "attachments": [
+      {
+        "filename": "0@pdf_1787029208151.pdf",
+        "size": 2064875,
+        "hash": "14c7ab1f1fbc0ec4",
+        "hashType": "xxh64",
+        "mime": "application/pdf",
+        "width": 720,
+        "height": 404
+      },
+      {
+        "filename": "0@pdf_1787029208151.pdf",
+        "size": 2064875,
+        "hash": "14c7ab1f1fbc0ec4",
+        "hashType": "xxh64",
+        "mime": "application/pdf",
+        "width": 720,
+        "height": 404
+      },
+      {
+        "filename": "0@pdf_1787029208151.pdf",
+        "size": 2064875,
+        "hash": "14c7ab1f1fbc0ec4",
+        "hashType": "xxh64",
+        "mime": "application/pdf",
+        "width": 720,
+        "height": 404
+      },
+      {
+        "filename": "0@pdf_1787029208151.pdf",
+        "size": 2064875,
+        "hash": "14c7ab1f1fbc0ec4",
+        "hashType": "xxh64",
+        "mime": "application/pdf",
+        "width": 720,
+        "height": 404
+      },
+      {
+        "filename": "0@pdf_1787029208151.pdf",
+        "size": 2064875,
+        "hash": "14c7ab1f1fbc0ec4",
+        "hashType": "xxh64",
+        "mime": "application/pdf",
+        "width": 720,
+        "height": 404
+      },
+      {
+        "filename": "0@pdf_1787029208151.pdf",
+        "size": 2064875,
+        "hash": "14c7ab1f1fbc0ec4",
+        "hashType": "xxh64",
+        "mime": "application/pdf",
+        "width": 720,
+        "height": 404
+      },
+      {
+        "filename": "0@pdf_1787029208151.pdf",
+        "size": 2064875,
+        "hash": "14c7ab1f1fbc0ec4",
+        "hashType": "xxh64",
+        "mime": "application/pdf",
+        "width": 720,
+        "height": 404
+      },
+      {
+        "filename": "0@pdf_1787029208151.pdf",
+        "size": 2064875,
+        "hash": "14c7ab1f1fbc0ec4",
+        "hashType": "xxh64",
+        "mime": "application/pdf",
+        "width": 720,
+        "height": 404
+      },
+      {
+        "filename": "0@pdf_1787029208151.pdf",
+        "size": 2064875,
+        "hash": "14c7ab1f1fbc0ec4",
+        "hashType": "xxh64",
+        "mime": "application/pdf",
+        "width": 720,
+        "height": 404
+      },
+      {
+        "filename": "0@pdf_1787029208151.pdf",
+        "size": 2064875,
+        "hash": "14c7ab1f1fbc0ec4",
+        "hashType": "xxh64",
+        "mime": "application/pdf",
+        "width": 720,
+        "height": 404
+      },
+      {
+        "filename": "0@pdf_1787029208151.pdf",
+        "size": 2064875,
+        "hash": "14c7ab1f1fbc0ec4",
+        "hashType": "xxh64",
+        "mime": "application/pdf",
+        "width": 720,
+        "height": 404
+      },
+      {
+        "filename": "0@pdf_1787029208151.pdf",
+        "size": 2064875,
+        "hash": "14c7ab1f1fbc0ec4",
+        "hashType": "xxh64",
+        "mime": "application/pdf",
+        "width": 720,
+        "height": 404
+      },
+      {
+        "filename": "0@pdf_1787029208151.pdf",
+        "size": 2064875,
+        "hash": "14c7ab1f1fbc0ec4",
+        "hashType": "xxh64",
+        "mime": "application/pdf",
+        "width": 720,
+        "height": 404
+      },
+      {
+        "filename": "0@pdf_1787029208151.pdf",
+        "size": 2064875,
+        "hash": "14c7ab1f1fbc0ec4",
+        "hashType": "xxh64",
+        "mime": "application/pdf",
+        "width": 720,
+        "height": 404
+      },
+      {
+        "filename": "0@pdf_1787029208151.pdf",
+        "size": 2064875,
+        "hash": "14c7ab1f1fbc0ec4",
+        "hashType": "xxh64",
+        "mime": "application/pdf",
+        "width": 720,
+        "height": 404
+      }
+    ],
+    "notebooks": [
+      {
+        "title": "Samsung Notes",
+        "children": []
+      }
+    ],
+    "content": {
+      "data": "<div\n style=\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\"><div\n  style=\"position:absolute;left:0px;top:0px;width:720px;height:404px;\"><span\n   class=\"attachment\"\n   data-filename=\"0@pdf_1787029208151.pdf\"\n   data-size=\"2064875\" data-hash=\"14c7ab1f1fbc0ec4\"\n   data-mime=\"application/pdf\" width=\"720\" height=\"404\"\n   contenteditable=\"false\" title=\"0@pdf_1787029208151.pdf\">\n   <em>&nbsp;</em>\n   <span class=\"filename\">0@pdf_1787029208151.pdf</span>\n  </span></div></div><div\n style=\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\"><div\n  style=\"position:absolute;left:0px;top:0px;width:720px;height:404px;\"><span\n   class=\"attachment\"\n   data-filename=\"0@pdf_1787029208151.pdf\"\n   data-size=\"2064875\" data-hash=\"14c7ab1f1fbc0ec4\"\n   data-mime=\"application/pdf\" width=\"720\" height=\"404\"\n   contenteditable=\"false\" title=\"0@pdf_1787029208151.pdf\">\n   <em>&nbsp;</em>\n   <span class=\"filename\">0@pdf_1787029208151.pdf</span>\n  </span></div></div><div\n style=\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\"><div\n  style=\"position:absolute;left:0px;top:0px;width:720px;height:404px;\"><span\n   class=\"attachment\"\n   data-filename=\"0@pdf_1787029208151.pdf\"\n   data-size=\"2064875\" data-hash=\"14c7ab1f1fbc0ec4\"\n   data-mime=\"application/pdf\" width=\"720\" height=\"404\"\n   contenteditable=\"false\" title=\"0@pdf_1787029208151.pdf\">\n   <em>&nbsp;</em>\n   <span class=\"filename\">0@pdf_1787029208151.pdf</span>\n  </span></div></div><div\n style=\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\"><div\n  style=\"position:absolute;left:0px;top:0px;width:720px;height:404px;\"><span\n   class=\"attachment\"\n   data-filename=\"0@pdf_1787029208151.pdf\"\n   data-size=\"2064875\" data-hash=\"14c7ab1f1fbc0ec4\"\n   data-mime=\"application/pdf\" width=\"720\" height=\"404\"\n   contenteditable=\"false\" title=\"0@pdf_1787029208151.pdf\">\n   <em>&nbsp;</em>\n   <span class=\"filename\">0@pdf_1787029208151.pdf</span>\n  </span></div></div><div\n style=\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\"><div\n  style=\"position:absolute;left:0px;top:0px;width:720px;height:404px;\"><span\n   class=\"attachment\"\n   data-filename=\"0@pdf_1787029208151.pdf\"\n   data-size=\"2064875\" data-hash=\"14c7ab1f1fbc0ec4\"\n   data-mime=\"application/pdf\" width=\"720\" height=\"404\"\n   contenteditable=\"false\" title=\"0@pdf_1787029208151.pdf\">\n   <em>&nbsp;</em>\n   <span class=\"filename\">0@pdf_1787029208151.pdf</span>\n  </span></div></div><div\n style=\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\"><div\n  style=\"position:absolute;left:0px;top:0px;width:720px;height:404px;\"><span\n   class=\"attachment\"\n   data-filename=\"0@pdf_1787029208151.pdf\"\n   data-size=\"2064875\" data-hash=\"14c7ab1f1fbc0ec4\"\n   data-mime=\"application/pdf\" width=\"720\" height=\"404\"\n   contenteditable=\"false\" title=\"0@pdf_1787029208151.pdf\">\n   <em>&nbsp;</em>\n   <span class=\"filename\">0@pdf_1787029208151.pdf</span>\n  </span></div></div><div\n style=\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\"><div\n  style=\"position:absolute;left:0px;top:0px;width:720px;height:404px;\"><span\n   class=\"attachment\"\n   data-filename=\"0@pdf_1787029208151.pdf\"\n   data-size=\"2064875\" data-hash=\"14c7ab1f1fbc0ec4\"\n   data-mime=\"application/pdf\" width=\"720\" height=\"404\"\n   contenteditable=\"false\" title=\"0@pdf_1787029208151.pdf\">\n   <em>&nbsp;</em>\n   <span class=\"filename\">0@pdf_1787029208151.pdf</span>\n  </span></div></div><div\n style=\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\"><div\n  style=\"position:absolute;left:0px;top:0px;width:720px;height:404px;\"><span\n   class=\"attachment\"\n   data-filename=\"0@pdf_1787029208151.pdf\"\n   data-size=\"2064875\" data-hash=\"14c7ab1f1fbc0ec4\"\n   data-mime=\"application/pdf\" width=\"720\" height=\"404\"\n   contenteditable=\"false\" title=\"0@pdf_1787029208151.pdf\">\n   <em>&nbsp;</em>\n   <span class=\"filename\">0@pdf_1787029208151.pdf</span>\n  </span></div></div><div\n style=\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\"><div\n  style=\"position:absolute;left:0px;top:0px;width:720px;height:404px;\"><span\n   class=\"attachment\"\n   data-filename=\"0@pdf_1787029208151.pdf\"\n   data-size=\"2064875\" data-hash=\"14c7ab1f1fbc0ec4\"\n   data-mime=\"application/pdf\" width=\"720\" height=\"404\"\n   contenteditable=\"false\" title=\"0@pdf_1787029208151.pdf\">\n   <em>&nbsp;</em>\n   <span class=\"filename\">0@pdf_1787029208151.pdf</span>\n  </span></div></div><div\n style=\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\"><div\n  style=\"position:absolute;left:0px;top:0px;width:720px;height:404px;\"><span\n   class=\"attachment\"\n   data-filename=\"0@pdf_1787029208151.pdf\"\n   data-size=\"2064875\" data-hash=\"14c7ab1f1fbc0ec4\"\n   data-mime=\"application/pdf\" width=\"720\" height=\"404\"\n   contenteditable=\"false\" title=\"0@pdf_1787029208151.pdf\">\n   <em>&nbsp;</em>\n   <span class=\"filename\">0@pdf_1787029208151.pdf</span>\n  </span></div></div><div\n style=\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\"><div\n  style=\"position:absolute;left:0px;top:0px;width:720px;height:404px;\"><span\n   class=\"attachment\"\n   data-filename=\"0@pdf_1787029208151.pdf\"\n   data-size=\"2064875\" data-hash=\"14c7ab1f1fbc0ec4\"\n   data-mime=\"application/pdf\" width=\"720\" height=\"404\"\n   contenteditable=\"false\" title=\"0@pdf_1787029208151.pdf\">\n   <em>&nbsp;</em>\n   <span class=\"filename\">0@pdf_1787029208151.pdf</span>\n  </span></div></div><div\n style=\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\"><div\n  style=\"position:absolute;left:0px;top:0px;width:720px;height:404px;\"><span\n   class=\"attachment\"\n   data-filename=\"0@pdf_1787029208151.pdf\"\n   data-size=\"2064875\" data-hash=\"14c7ab1f1fbc0ec4\"\n   data-mime=\"application/pdf\" width=\"720\" height=\"404\"\n   contenteditable=\"false\" title=\"0@pdf_1787029208151.pdf\">\n   <em>&nbsp;</em>\n   <span class=\"filename\">0@pdf_1787029208151.pdf</span>\n  </span></div></div><div\n style=\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\"><div\n  style=\"position:absolute;left:0px;top:0px;width:720px;height:404px;\"><span\n   class=\"attachment\"\n   data-filename=\"0@pdf_1787029208151.pdf\"\n   data-size=\"2064875\" data-hash=\"14c7ab1f1fbc0ec4\"\n   data-mime=\"application/pdf\" width=\"720\" height=\"404\"\n   contenteditable=\"false\" title=\"0@pdf_1787029208151.pdf\">\n   <em>&nbsp;</em>\n   <span class=\"filename\">0@pdf_1787029208151.pdf</span>\n  </span></div></div><div\n style=\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\"><div\n  style=\"position:absolute;left:0px;top:0px;width:720px;height:404px;\"><span\n   class=\"attachment\"\n   data-filename=\"0@pdf_1787029208151.pdf\"\n   data-size=\"2064875\" data-hash=\"14c7ab1f1fbc0ec4\"\n   data-mime=\"application/pdf\" width=\"720\" height=\"404\"\n   contenteditable=\"false\" title=\"0@pdf_1787029208151.pdf\">\n   <em>&nbsp;</em>\n   <span class=\"filename\">0@pdf_1787029208151.pdf</span>\n  </span></div></div><div\n style=\"position:relative;width:720px;height:404px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\"><div\n  style=\"position:absolute;left:0px;top:0px;width:720px;height:404px;\"><span\n   class=\"attachment\"\n   data-filename=\"0@pdf_1787029208151.pdf\"\n   data-size=\"2064875\" data-hash=\"14c7ab1f1fbc0ec4\"\n   data-mime=\"application/pdf\" width=\"720\" height=\"404\"\n   contenteditable=\"false\" title=\"0@pdf_1787029208151.pdf\">\n   <em>&nbsp;</em>\n   <span class=\"filename\">0@pdf_1787029208151.pdf</span>\n  </span></div></div>",
+      "type": "html"
+    },
+    "compatibilityVersion": 2,
+    "source": "samsungnotes"
+  },
+  {
+    "title": "Jdjdnd.xx",
+    "dateCreated": 1785830298356.903,
+    "dateEdited": 1785830298809.648,
+    "tags": [],
+    "attachments": [
+      {
+        "filename": "10@My File.txt",
+        "size": 16,
+        "hash": "b882ada14f3a8def",
+        "hashType": "xxh64",
+        "mime": "application/octet-stream"
+      }
+    ],
+    "notebooks": [
+      {
+        "title": "Samsung Notes",
+        "children": []
+      }
+    ],
+    "content": {
+      "data": "<p><span style=\"font-size:17px;color:#252525;\">Jdjdnd.xx</span></p><p><span\n  style=\"font-size:17px;color:#252525;\">Djdjd</span></p><div\n style=\"margin-top:16px;\"><span class=\"attachment\"\n  data-filename=\"10@My File.txt\" data-size=\"16\"\n  data-hash=\"b882ada14f3a8def\"\n  data-mime=\"application/octet-stream\"\n  contenteditable=\"false\" title=\"10@My File.txt\">\n  <em>&nbsp;</em>\n  <span class=\"filename\">10@My File.txt</span>\n </span></div>",
+      "type": "html"
+    },
+    "compatibilityVersion": 2,
+    "source": "samsungnotes"
+  },
+  {
+    "title": "Helo",
+    "dateCreated": 1786767546885.589,
+    "dateEdited": 1786768042938.865,
+    "tags": [],
+    "attachments": [],
+    "notebooks": [
+      {
+        "title": "Samsung Notes",
+        "children": []
+      }
+    ],
+    "content": {
+      "data": "<ul style=\"list-style:none;padding:0;\"><li\n  style=\"list-style:none;\"><input type=\"checkbox\"\n   disabled=\"disabled\" /><span\n   style=\"font-size:17px;color:#252525;\">You</span></li><li\n  style=\"list-style:none;\"><input type=\"checkbox\"\n   disabled=\"disabled\" /><span\n   style=\"font-size:17px;color:#252525;\">Bfjf</span></li><li\n  style=\"list-style:none;\"><input type=\"checkbox\"\n   disabled=\"disabled\" /><span\n   style=\"font-size:17px;color:#252525;\">fhff</span></li></ul><p><br /></p><p><br /></p><p><span\n  style=\"font-size:17px;color:#252525;\">Rurur</span><span\n  style=\"font-size:17px;color:#2febd2;\">urururirjr</span><span\n  style=\"font-size:17px;color:#252525;\">rnhrjr.</span></p><p><br /></p><p><span\n  style=\"color:#252525;font-size:19px;\">Urururur</span></p><p><b><span\n   style=\"color:#252525;font-size:19px;\">Jrurjrur</span></b></p><p><i><b><span\n    style=\"color:#252525;font-size:19px;\">Rnrjjr</span></b></i></p><p><u><i><b><span\n     style=\"color:#252525;font-size:19px;\">Dbfhhfh</span></b></i></u></p><p><s><u><i><b><span\n      style=\"color:#252525;font-size:19px;\">Urururur</span></b></i></u></s></p><ul\n style=\"list-style-type:decimal;padding-left:24px;\"><li><s><u><i><b><span\n       style=\"color:#252525;font-size:19px;\">Jrjtjfu</span></b></i></u></s></li><li><s><u><i><b><span\n       style=\"color:#252525;font-size:19px;\">Fjfjf</span></b></i></u></s></li><li><span\n   style=\"color:#252525;font-size:19px;\">Djfjf</span></li><li><span\n   style=\"color:#252525;font-size:19px;\">Fjfjf</span></li><li><span\n   style=\"color:#252525;font-size:19px;\">Hf</span></li></ul><p><br /></p><ul\n style=\"list-style-type:disc;padding-left:24px;\"><li><span\n   style=\"color:#252525;font-size:19px;\">Dnjfjf</span></li><li><span\n   style=\"color:#252525;font-size:19px;\">Fhfjf</span></li><li><span\n   style=\"color:#252525;font-size:19px;\">Fhfhf</span></li><li><span\n   style=\"color:#252525;font-size:19px;\">Fhfh</span></li></ul><p><br /></p><p\n style=\"text-align:center;\"><span\n  style=\"color:#252525;font-size:19px;\">Utut</span></p><p\n style=\"text-align:center;\"><span\n  style=\"color:#252525;font-size:19px;\">Fhfhf</span></p><p><br /></p><p\n style=\"text-align:right;\"><span\n  style=\"color:#252525;font-size:19px;\">Jrjjfjf</span></p><p><span\n  style=\"color:#252525;font-size:19px;\">Rjrjr</span></p><p><span\n  style=\"color:#252525;font-size:19px;\">Duf</span></p><p\n style=\"margin-left:24px;\"><span\n  style=\"color:#252525;font-size:19px;\">Rurujr</span></p><p\n style=\"margin-left:48px;\"><span\n  style=\"color:#252525;font-size:19px;\">Fnfnjf</span></p><p\n style=\"margin-left:72px;\"><span\n  style=\"color:#252525;font-size:19px;\">Dnfnjfjf</span></p><p><span\n  style=\"color:#252525;font-size:19px;\">Djjdjf</span></p><p><span\n  style=\"color:#252525;font-size:19px;\">Fhf</span></p><p><br /></p><p><span\n  style=\"font-size:19px;color:#252525;\">That's just HTML, I\n  have zero idea if Notes parses HTML, why not try it and\n  report back ?</span></p><p><a\n  href=\"https://www.w3schools.com/html/html_links.asp\"><span\n   style=\"font-size:19px;color:#252525;\">https://www.w3schools.com/html/html_links.asp</span></a></p><p><span\n  style=\"font-size:19px;color:#252525;\">Edit: I did a test\n  and it doesn't seem to.</span></p><p><br /></p><p><span\n  style=\"font-size:19px;color:#252525;\">Jj</span></p><p><br /></p><p><span\n  style=\"font-size:19px;color:#252525;\">7</span></p><div\n style=\"position:relative;width:720px;height:1018px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\"><div\n  style=\"position:absolute;left:217px;top:638.68px;width:502.12px;overflow:hidden;\"><p><span\n    style=\"font-size:17px;color:#252525;\">Rhururrjjrjr</span></p></div></div>",
+      "type": "html"
+    },
+    "compatibilityVersion": 2,
+    "source": "samsungnotes"
+  },
+  {
+    "title": "Note with voice",
+    "dateCreated": 1786767488407.817,
+    "dateEdited": 1786767488956.176,
+    "tags": [],
+    "attachments": [
+      {
+        "filename": "0@6a7fe86f_917b2.m4a",
+        "size": 112089,
+        "hash": "e8c66d7aec054daa",
+        "hashType": "xxh64",
+        "mime": "audio/mp4"
+      }
+    ],
+    "notebooks": [
+      {
+        "title": "Samsung Notes",
+        "children": []
+      }
+    ],
+    "content": {
+      "data": "<p><span style=\"font-size:17px;color:#252525;\">This note has\n  voice recording.</span></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><div\n style=\"margin-top:16px;\"><audio class=\"attachment\"\n  data-filename=\"0@6a7fe86f_917b2.m4a\" data-size=\"112089\"\n  data-hash=\"e8c66d7aec054daa\" data-mime=\"audio/mp4\"></audio></div>",
+      "type": "html"
+    },
+    "compatibilityVersion": 2,
+    "source": "samsungnotes"
+  },
+  {
+    "title": "Hello world",
+    "dateCreated": 1760759084153.271,
+    "dateEdited": 1785830284826.81,
+    "tags": [],
+    "attachments": [
+      {
+        "filename": "strokes.svg",
+        "size": 10508,
+        "hash": "a826b5f835c433f7",
+        "hashType": "xxh64",
+        "mime": "image/svg+xml"
+      }
+    ],
+    "notebooks": [
+      {
+        "title": "Samsung Notes",
+        "children": []
+      }
+    ],
+    "content": {
+      "data": "<p><span style=\"font-size:17px;color:#252525;\">Hello world</span></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><span\n  style=\"font-size:17px;color:#252525;\">Ffggtyyyyyyyyyy</span></p><p><br /></p><div\n style=\"position:relative;width:720px;height:1018px;max-width:100%;background-color:#fcfcfc;overflow:hidden;margin:16px 0;\"><img\n  class=\"attachment\" data-filename=\"strokes.svg\"\n  data-size=\"10508\" data-hash=\"a826b5f835c433f7\"\n  data-mime=\"image/svg+xml\" alt=\"strokes.svg\" /></div>",
+      "type": "html"
+    },
+    "compatibilityVersion": 2,
+    "source": "samsungnotes"
+  },
+  {
+    "title": "Djkddk",
+    "dateCreated": 1785830293095.595,
+    "dateEdited": 1785830293562.567,
+    "tags": [],
+    "attachments": [],
+    "notebooks": [
+      {
+        "title": "Samsung Notes",
+        "children": []
+      }
+    ],
+    "content": {
+      "data": "<p><span style=\"font-size:17px;color:#252525;\">Djkddk</span></p><p><span\n  style=\"font-size:17px;color:#252525;\">Djdjdjd</span></p><p><span\n  style=\"font-size:17px;color:#252525;\">Dif</span></p>",
+      "type": "html"
+    },
+    "compatibilityVersion": 2,
+    "source": "samsungnotes"
+  },
+  {
+    "title": "Jdjdnd.xx",
+    "dateCreated": 1785830298356.903,
+    "dateEdited": 1785830298809.648,
+    "tags": [],
+    "attachments": [],
+    "notebooks": [
+      {
+        "title": "Samsung Notes",
+        "children": []
+      }
+    ],
+    "content": {
+      "data": "<p><span style=\"font-size:17px;color:#252525;\">Jdjdnd.xx</span></p><p><span\n  style=\"font-size:17px;color:#252525;\">Djdjd</span></p>",
+      "type": "html"
+    },
+    "compatibilityVersion": 2,
+    "source": "samsungnotes"
+  }
+]

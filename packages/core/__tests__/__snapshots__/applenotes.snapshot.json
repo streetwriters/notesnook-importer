@@ -14,7 +14,9 @@
     "content": {
       "type": "html",
       "data": "<p>This is the body with <strong>bold</strong> and <em>italic</em>\n text and a checklist:</p><ul class=\"checklist\"><li\n  class=\"checklist--item\">Task one</li><li\n  class=\"checklist--item checked\">Task two</li></ul>"
-    }
+    },
+    "compatibilityVersion": 2,
+    "source": "applenotes"
   },
   {
     "id": "000000000000000000000000",
@@ -44,7 +46,9 @@
     "content": {
       "type": "html",
       "data": "<p>Check the <a href=\"nn://note/000000000000000000000000\">welcome\n  note</a> and this URL: https://example.com</p><p><img\n  class=\"attachment\" data-filename=\"IMG_0001.JPG\"\n  data-size=\"70\" data-hash=\"98d481949df003b4\"\n  data-mime=\"image/jpeg\" alt=\"IMG_0001.JPG\" /></p>"
-    }
+    },
+    "compatibilityVersion": 2,
+    "source": "applenotes"
   },
   {
     "id": "000000000000000000000000",
@@ -61,7 +65,9 @@
     "content": {
       "type": "html",
       "data": "<p>Grocery list</p><ul><li>Milk</li><li>Bread</li><li>Eggs</li></ul><p>Steps:</p><ol><li>First</li><li>Second</li></ol>"
-    }
+    },
+    "compatibilityVersion": 2,
+    "source": "applenotes"
   },
   {
     "id": "000000000000000000000000",
@@ -78,7 +84,9 @@
     "content": {
       "type": "html",
       "data": "<p>This note body is wrapped in a NoteStoreProto.</p>"
-    }
+    },
+    "compatibilityVersion": 2,
+    "source": "applenotes"
   },
   {
     "id": "000000000000000000000000",
@@ -103,6 +111,8 @@
     "content": {
       "type": "html",
       "data": "<p><audio class=\"attachment\" data-filename=\"recording.m4a\"\n  data-size=\"32\" data-hash=\"c9ac4af1766a2aa8\"\n  data-mime=\"audio/mp4\"></audio></p>"
-    }
+    },
+    "compatibilityVersion": 2,
+    "source": "applenotes"
   }
 ]
