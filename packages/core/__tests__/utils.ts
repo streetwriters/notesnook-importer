@@ -71,22 +71,28 @@ export async function matchArraySnapshot(filename: string, actual: string[]) {
   if (!existsSync(snapshotPath))
     throw new Error(`Could not find a snapshot at ${snapshotPath}.`);
 
-  const expected = JSON.parse(
-    await readFile(snapshotPath, "utf-8")
-  ) as string[];
-  if (!Array.isArray(expected))
-    throw new Error("Snapshot is not an array of notes.");
+  try {
+    const expected = JSON.parse(
+      await readFile(snapshotPath, "utf-8")
+    ) as string[];
+    if (!Array.isArray(expected))
+      throw new Error("Snapshot is not an array of notes.");
 
-  if (expected.length !== actual.length)
+    if (expected.length !== actual.length)
+      throw new Error(
+        `Expected ${expected.length} notes but got ${actual.length} notes. Did you forget to update the snapshot? (${filename})`
+      );
+
+    for (const str of expected) {
+      if (actual.includes(str)) continue;
+      throw new Error(`Could not find "${str}" (${filename}).`);
+    }
+    return true;
+  } catch (err) {
     throw new Error(
-      `Expected ${expected.length} notes but got ${actual.length} notes. Did you forget to update the snapshot? (${filename})`
+      `Error reading snapshot file: ${(err as Error).message} (${filename}) (${snapshotPath})`
     );
-
-  for (const str of expected) {
-    if (actual.includes(str)) continue;
-    throw new Error(`Could not find "${str}" (${filename}).`);
   }
-  return true;
 }
 
 export async function matchNotesSnapshot(filename: string, actual: Note[]) {
