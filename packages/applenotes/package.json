@@ -1,7 +1,7 @@
 {
   "name": "@notesnook-importer/applenotes",
   "private": false,
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Apple Notes parser and crypto for Notesnook Importer.",
   "main": "dist/index.js",
   "scripts": {

@@ -1,7 +1,7 @@
 {
   "name": "@notesnook-importer/onenote",
   "private": false,
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A fully tested type-safe Microsoft OneNote .one/.onetoc2/.onepkg parser used in Notesnook Importer.",
   "main": "dist/index.js",
   "devDependencies": {

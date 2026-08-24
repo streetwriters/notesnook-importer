@@ -106,6 +106,7 @@ async function performTasks(title, { dependencies, concurrency }, action) {
 async function bumpVersion(cwd, outputs) {
   const bumpCmd = `npm version ${args.version} --no-git-tag-version`;
   await execute(bumpCmd, cwd, outputs);
+  await sleep(1000);
 }
 
 async function resolveLocalPackages(cwd) {
@@ -228,4 +229,8 @@ function execute(cmd, cwd, outputs) {
       }
     )
   );
+}
+
+async function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
