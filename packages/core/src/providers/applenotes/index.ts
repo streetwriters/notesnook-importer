@@ -251,7 +251,7 @@ export class AppleNotes implements IFileProvider<never> {
 
     const decoded: DecodedNote[] = [];
 
-    for (const row of rows) {
+    outer: for (const row of rows) {
       if (!row.zdata) continue;
 
       let body: string | Uint8Array = row.zdata;
@@ -276,7 +276,7 @@ export class AppleNotes implements IFileProvider<never> {
                 `Skipping password protected note "${row.ZTITLE1}" (no password provided).`
               )
             );
-            break;
+            continue outer;
           }
 
           try {
