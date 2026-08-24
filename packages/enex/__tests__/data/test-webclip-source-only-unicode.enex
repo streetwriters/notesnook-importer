@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-export SYSTEM "http://xml.evernote.com/pub/evernote-export4.dtd">
+<en-export export-date="20260820T040738Z" application="Evernote" version="11.27.5">
+  <note>
+    <title>Old web.clip note without clipping markers</title>
+    <created>20230829T074438Z</created>
+    <updated>20230829T074438Z</updated>
+    <note-attributes>
+      <source>web.clip7</source>
+      <source-url>https://example.com/old-article</source-url>
+      <source-application>webclipper.evernote</source-application>
+    </note-attributes>
+    <content>
+      <![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd"><en-note>
+  <div><br/></div>
+  <div style="font-size: 16px; display: block; min-width: 100%; position: relative;">
+    <h1 style="font-weight:800;font-size:40px;">The old article’s heading</h1>
+    <p style="line-height:1.7em;">This old clip doesn’t have any --en-clipped-content markers but its source is web.clip7 — so it’s handled like a clipped page.</p>
+    <p style="line-height:1.7em;">Unicode check: don’t — “quoted” — … done.</p>
+  </div>
+</en-note>      ]]>
+    </content>
+  </note>
+</en-export>

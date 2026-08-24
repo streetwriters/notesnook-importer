@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-export SYSTEM "http://xml.evernote.com/pub/evernote-export4.dtd">
+<en-export export-date="20260820T040738Z" application="Evernote" version="11.27.5">
+  <note>
+    <title>Don’t burnout — a note with “smart” punctuation</title>
+    <created>20230829T074438Z</created>
+    <updated>20230829T074438Z</updated>
+    <note-attributes>
+      <source>web.clip7</source>
+      <source-url>https://example.com/articles/dont-burnout</source-url>
+      <source-application>webclipper.evernote</source-application>
+    </note-attributes>
+    <content>
+      <![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd"><en-note>
+  <div style="--en-clipped-content:fullPage; --en-clipped-source-url:https://example.com/articles/dont-burnout; --en-clipped-content-title:Don’t burnout;">
+    <div><br/></div>
+    <div style="min-height: 200px; font-size: 16px; display: block; min-width: 100%; position: relative;">
+      <div style="background:rgb(30, 18, 18);">
+        <a href="https://example.com/" style="color:inherit;text-decoration:none;"><span style="font-family:icomoon;">&#57344;</span>Example.com</a>
+      </div>
+      <h1 style="font-weight:800;font-size:40px;">Here’s the truth about burnout</h1>
+      <p style="line-height:1.7em;font-size:1.8em;">don’t burnout — that’s where the right framework comes in.</p>
+      <p style="line-height:1.7em;font-size:1.8em;">Let’s go: promoted faster — with the financial rewards to match. It’s “easy” when you know how… really.</p>
+      <div style="position:relative;">
+        <en-media type="image/png" hash="2cd8bde463f5d82aae0f0cec061d6b8f" width="1" height="1" style="border:0px;" />
+      </div>
+      <p style="line-height:1.7em;font-size:1.8em;">You can’t pour from an empty cup — take the break you’ve earned.</p>
+    </div>
+  </div>
+</en-note>      ]]>
+    </content>
+    <resource>
+      <data>iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==</data>
+      <mime>image/png</mime>
+      <width>1</width>
+      <height>1</height>
+    </resource>
+  </note>
+</en-export>

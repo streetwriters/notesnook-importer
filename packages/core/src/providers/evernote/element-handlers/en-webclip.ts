@@ -25,12 +25,29 @@ import { ENMedia } from "./en-media";
 import { Attachment, attachmentToHTML } from "../../../models";
 import { sanitizeFilename } from "../../../utils/filename";
 import { getAttributeValue } from "domutils";
+import { encodeHTML5 } from "entities";
 
 export class ENWebClip extends BaseHandler {
   static buildFooter(url?: string, title?: string): string {
     if (!url && !title) return "";
 
     return `<hr></hr><p>Clipped from: <a href="${url}">${title || url}</a></p>`;
+  }
+
+  /**
+   * Builds a standalone HTML document for the .clip attachment.
+   *
+   * The document explicitly declares its encoding via <meta charset>.
+   * Without it, any consumer that renders the clip in a context where
+   * the character encoding is not already known (file:// pages on
+   * Windows, data: URLs or responses without charset information)
+   * falls back to legacy encodings such as windows-1252 and UTF-8
+   * sequences like U+2019 (’) get displayed as mojibake (â€™).
+   */
+  static buildClipDocument(html: string, title?: string): string {
+    return `<!DOCTYPE html><html><head><meta charset="utf-8"><title>${encodeHTML5(
+      title || ""
+    )}</title></head><body>${html}</body></html>`;
   }
 
   async process(element: Element): Promise<string | undefined> {
@@ -103,12 +120,15 @@ export class ENWebClip extends BaseHandler {
         }
 
         const data = new TextEncoder().encode(
-          render(element.childNodes, {
-            xmlMode: false,
-            decodeEntities: true,
-            encodeEntities: false,
-            selfClosingTags: true
-          })
+          ENWebClip.buildClipDocument(
+            render(element.childNodes, {
+              xmlMode: false,
+              decodeEntities: true,
+              encodeEntities: false,
+              selfClosingTags: true
+            }),
+            clipSourceTitle || clipSourceUrl
+          )
         );
         const dataHash = await this.hasher.hash(data);
         const title = clipSourceTitle || clipSourceUrl || dataHash;
