@@ -128,10 +128,13 @@ async function transformFiles(
         : `file "${file.name}"`;
       const context = `${fileContext} with ${provider.name}`;
       if (isQuotaExceeded(e)) {
-        errors.push(new Error(`You are out of storage space. (processing ${context})`));
+        errors.push(
+          new Error(`You are out of storage space. (processing ${context})`)
+        );
       } else {
         const message = e instanceof Error ? e.message : String(e);
         errors.push(new Error(`Failed to process ${context}: ${message}`));
+        console.error(e);
       }
     }
   }

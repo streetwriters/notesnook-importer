@@ -258,44 +258,43 @@ export class AppleNotes implements IFileProvider<never> {
       let notePassword: string | undefined;
 
       if (row.ZISPASSWORDPROTECTED) {
-        const password = await settings.options?.applenotes?.getPassword?.(
-          row.ZTITLE1 || "Encrypted note"
-        );
-        if (!password) {
+        const cryptoData = await this.getCryptoData(db, row.Z_PK, row.zdata);
+        if (!cryptoData) {
           settings.log?.(
-            log(
-              `Skipping password protected note "${row.ZTITLE1}" (no password provided).`
-            )
+            log(`Could not find encryption metadata for note "${row.ZTITLE1}".`)
           );
           continue;
         }
 
-          const cryptoData = await this.getCryptoData(db, row.Z_PK, row.zdata);
-          if (!cryptoData) {
+        while (typeof body === "string") {
+          const password = await settings.options?.applenotes?.getPassword?.(
+            row.ZTITLE1 || "Encrypted note"
+          );
+          if (!password) {
             settings.log?.(
               log(
-                `Could not find encryption metadata for note "${row.ZTITLE1}".`
+                `Skipping password protected note "${row.ZTITLE1}" (no password provided).`
               )
             );
-            continue;
+            break;
           }
 
           try {
             body = await decryptAppleNotes(password, cryptoData);
+            // Locked notes encrypt their attachments too — the password is
+            // needed to decrypt the media files.
+            notePassword = password;
           } catch (e) {
             settings.log?.(
               log(
                 `Could not decrypt note "${row.ZTITLE1}": ${
-                  e instanceof Error ? e.message : String(e)
+                  (e instanceof Error ? e.message : String(e)) ||
+                  "Wrong password."
                 }`
               )
             );
-            continue;
           }
-
-          // Locked notes encrypt their attachments too — the password is
-          // needed to decrypt the media files.
-          notePassword = password;
+        }
       }
 
       const decodedBody = this.decodeData(body, "ciofecaforensics.Document");
@@ -422,10 +421,7 @@ export class AppleNotes implements IFileProvider<never> {
     return cols.map((col) => col.name.toLowerCase());
   }
 
-  private async rawColumns(
-    db: SqlDatabase,
-    table: string
-  ): Promise<string[]> {
+  private async rawColumns(db: SqlDatabase, table: string): Promise<string[]> {
     const cols = await db.all<{ name: string }>(`PRAGMA table_info(${table})`);
     return cols.map((col) => col.name);
   }
@@ -812,11 +808,15 @@ class AppleNotesContext implements ANContext {
     // ZMERGEABLEPREFERREDVIEWSIZE (a WallClockMergeableValue protobuf).
     let displayWidth: number | undefined;
     try {
-      const pvsRow = await this.database.get<{ ZMERGEABLEPREFERREDVIEWSIZE: Uint8Array }>(
+      const pvsRow = await this.database.get<{
+        ZMERGEABLEPREFERREDVIEWSIZE: Uint8Array;
+      }>(
         "SELECT zmergeablepreferredviewsize FROM ziccloudsyncingobject WHERE zmedia = ?",
         [id]
       );
-      displayWidth = decodePreferredViewSize(pvsRow?.ZMERGEABLEPREFERREDVIEWSIZE);
+      displayWidth = decodePreferredViewSize(
+        pvsRow?.ZMERGEABLEPREFERREDVIEWSIZE
+      );
     } catch {
       // Column may not exist in older databases.
     }
@@ -877,9 +877,7 @@ class AppleNotesContext implements ANContext {
     // picker), fall back to matching the file name.
     const filename = sourcePath.split("/").pop();
     return filename
-      ? this.files.find(
-          (file) => file.name === filename && isReal(file)
-        )
+      ? this.files.find((file) => file.name === filename && isReal(file))
       : undefined;
   }
 }
@@ -920,13 +918,13 @@ function decodePreferredViewSize(
 
   // field 1: fixed64 timestamp (tag + 8 bytes)
   const [tag1, after1] = readVarint(blob, i);
-  if ((tag1 >> 3) !== 1 || (tag1 & 7) !== 1) return undefined;
+  if (tag1 >> 3 !== 1 || (tag1 & 7) !== 1) return undefined;
   i = after1 + 8;
   if (i >= blob.length) return undefined;
 
   // field 2: length-delimited BoxedValue
   const [tag2, after2] = readVarint(blob, i);
-  if ((tag2 >> 3) !== 2 || (tag2 & 7) !== 2) return undefined;
+  if (tag2 >> 3 !== 2 || (tag2 & 7) !== 2) return undefined;
   i = after2;
   const [len, afterLen] = readVarint(blob, i);
   i = afterLen;
@@ -936,7 +934,7 @@ function decodePreferredViewSize(
   // BoxedValue: read field 1 (integer_value, varint)
   if (i >= end) return undefined;
   const [btag, bpos] = readVarint(blob, i);
-  if ((btag >> 3) !== 1 || (btag & 7) !== 0) return undefined;
+  if (btag >> 3 !== 1 || (btag & 7) !== 0) return undefined;
   const [value] = readVarint(blob, bpos);
 
   // Apple Notes image sizes: 0 = large (full width), 2 = small
@@ -959,9 +957,7 @@ function parseModernNoteBody(zdata: Uint8Array): AppleNotesCryptoData | null {
   if (zdata.length < 8) return null;
   if (String.fromCharCode(...zdata.slice(0, 8)) !== "bplist00") return null;
 
-  const unpacked = unpackKeyedArchive(zdata) as
-    | { root?: unknown }
-    | null;
+  const unpacked = unpackKeyedArchive(zdata) as { root?: unknown } | null;
   if (!unpacked) return null;
 
   const root = unpacked.root as
@@ -987,9 +983,10 @@ function parseModernNoteBody(zdata: Uint8Array): AppleNotesCryptoData | null {
     return null;
   }
 
-  const unauthData = decodeBplist(unauth) as
-    | { passphraseSalt?: unknown; passphraseIterationCount?: unknown }
-    | null;
+  const unauthData = decodeBplist(unauth) as {
+    passphraseSalt?: unknown;
+    passphraseIterationCount?: unknown;
+  } | null;
   if (
     !unauthData ||
     !(unauthData.passphraseSalt instanceof Uint8Array) ||
@@ -1039,7 +1036,11 @@ function extractCloudKitCrypto(
 
   const toBytes = (v: unknown): Uint8Array | undefined => {
     if (v instanceof Uint8Array) return v;
-    if (v && typeof v === "object" && (v as any)["NS.data"] instanceof Uint8Array) {
+    if (
+      v &&
+      typeof v === "object" &&
+      (v as any)["NS.data"] instanceof Uint8Array
+    ) {
       return (v as any)["NS.data"];
     }
     return undefined;
