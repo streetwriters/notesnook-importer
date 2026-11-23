@@ -22,6 +22,7 @@ import { ColornoteNote } from "./types";
 
 const FIXED_SALT = "ColorNote Fixed Salt";
 const HEADER_OFFSET = 28;
+const AES_BLOCK_SIZE = 16;
 
 function hexToBytes(hex: string) {
   const bytes = new Uint8Array(hex.length / 2);
@@ -53,8 +54,23 @@ function deriveKeyIv(password: string) {
   return { key, iv };
 }
 
+async function decompressIfNeeded(bytes: Uint8Array) {
+  // ColorNote v9 stores the plaintext as a zlib stream (RFC 1950).
+  const isZlib =
+    bytes.length > 2 &&
+    bytes[0] === 0x78 &&
+    (bytes[1] === 0x01 || bytes[1] === 0x9c || bytes[1] === 0xda);
+  if (!isZlib) return bytes;
+
+  const stream = new DecompressionStream("deflate");
+  const writer = stream.writable.getWriter();
+  await writer.write(bytes);
+  await writer.close();
+  return new Uint8Array(await new Response(stream.readable).arrayBuffer());
+}
+
 async function decrypt(encryptedData: Uint8Array, password: string = "0000") {
-  if (encryptedData.length < 44) {
+  if (encryptedData.length < HEADER_OFFSET + AES_BLOCK_SIZE) {
     throw new Error("Data is too small to be a valid ColorNote payload.");
   }
 
@@ -70,17 +86,32 @@ async function decrypt(encryptedData: Uint8Array, password: string = "0000") {
     ["decrypt"]
   );
 
-  try {
-    const decryptedBytes = await crypto.subtle.decrypt(
-      { name: "AES-CBC", iv: iv.buffer as ArrayBuffer },
-      cryptoKey,
-      payload
-    );
-
-    return new TextDecoder("utf-8", { fatal: false }).decode(decryptedBytes);
-  } catch {
-    throw new Error("Decryption failed. Incorrect password or corrupted file.");
+  // Older backups derive the IV from the password; newer ones use a zero IV.
+  // In CBC mode the padding check does not validate the IV, so a successful
+  // decrypt is not enough: we must also check that the result is usable.
+  const candidates = [iv, new Uint8Array(AES_BLOCK_SIZE)];
+  for (const candidate of candidates) {
+    try {
+      const decryptedBytes = await crypto.subtle.decrypt(
+        { name: "AES-CBC", iv: candidate.buffer as ArrayBuffer },
+        cryptoKey,
+        payload
+      );
+      const bytes = new Uint8Array(decryptedBytes);
+      const isZlib =
+        bytes.length > 2 &&
+        bytes[0] === 0x78 &&
+        (bytes[1] === 0x01 || bytes[1] === 0x9c || bytes[1] === 0xda);
+      const text = new TextDecoder("utf-8", { fatal: false }).decode(
+        await decompressIfNeeded(bytes)
+      );
+      if (isZlib || text.includes('"_id"')) return text;
+    } catch {
+      // try the next IV variant
+    }
   }
+
+  throw new Error("Decryption failed. Incorrect password or corrupted file.");
 }
 
 function extractJsonObjects(rawText: string) {
